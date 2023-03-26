@@ -1,4 +1,5 @@
 import 'package:aklo_cafe/module/home/model/coffee_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -25,4 +26,25 @@ class DashBoardController extends GetxController {
       bgColor: const Color(0xff257881),
     )
   ];
+
+  final totalSold = 0.obs;
+  final db = FirebaseFirestore.instance.collection('data');
+
+  @override
+  void onReady() {
+    debugPrint('Ready');
+    Stream<int>? a =
+        db.doc('y7KJKGeMDPzUA63yiHO9').snapshots().map<int>((event) {
+      Map<String, dynamic>? data = event.data();
+      return data?['total'];
+    });
+    totalSold.bindStream(a);
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+  //  totalSold.toUnsigned(width)
+    super.onClose();
+  }
 }

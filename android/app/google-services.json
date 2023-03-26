@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "327791600118",
+    "project_id": "aklo-cafe",
+    "storage_bucket": "aklo-cafe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:327791600118:android:c91a2940ac70c4764ca7d7",
+        "android_client_info": {
+          "package_name": "com.aklocafe.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "327791600118-uttcobeat1lprlj3ln7vtvkba9r07jvf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPoK6e3Tqytn94OACk6ZzgEaLAw0sKm04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "327791600118-uttcobeat1lprlj3ln7vtvkba9r07jvf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

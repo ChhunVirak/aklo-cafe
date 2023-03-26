@@ -1,4 +1,4 @@
-package com.example.aklo_cafe
+package com.aklocafe.app
 
 import io.flutter.embedding.android.FlutterActivity
 

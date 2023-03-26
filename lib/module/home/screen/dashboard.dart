@@ -82,18 +82,20 @@ class DashBoard extends GetView<DashBoardController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text.rich(
-                      TextSpan(
-                        text: 'Today orders : ',
-                        style: AppStyle.medium
-                            .copyWith(color: AppColors.txtLightColor),
-                        children: [
-                          TextSpan(
-                            text: '23 Units',
-                            style: AppStyle.large
-                                .copyWith(color: AppColors.txtLightColor),
-                          ),
-                        ],
+                    Obx(
+                      () => Text.rich(
+                        TextSpan(
+                          text: 'Today orders : ',
+                          style: AppStyle.medium
+                              .copyWith(color: AppColors.txtLightColor),
+                          children: [
+                            TextSpan(
+                              text: controller.totalSold.value.toString(),
+                              style: AppStyle.large
+                                  .copyWith(color: AppColors.txtLightColor),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Text.rich(
@@ -113,16 +115,6 @@ class DashBoard extends GetView<DashBoardController> {
                     ),
                   ],
                 ),
-              ),
-            ),
-            Form(
-              key: _form,
-              child: TextFormField(
-                onChanged: (v) {},
-                inputFormatters: [
-                  NumberTextInputFormatter(
-                      mask: '### ### ### ###', separator: ' '),
-                ],
               ),
             ),
             GridView.builder(
