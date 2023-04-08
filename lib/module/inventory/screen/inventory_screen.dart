@@ -1,17 +1,60 @@
+import 'package:aklo_cafe/module/inventory/inventory.dart';
+import 'package:aklo_cafe/module/inventory/screen/category.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/resources.dart';
+import '../../../util/snackbar/app_snackbar.dart';
 import '../../home/components/menu_card.dart';
-import '../controller/coffee_controller.dart';
 
 class Inventory extends GetView<InventoryController> {
   const Inventory({super.key});
+  void _handleNavigate(BuildContext context, String menu) {
+    if (context.mounted) {
+      switch (menu) {
+        case 'Drink':
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AllCoffeeScreen(),
+            ),
+          );
+          break;
+        case 'Update':
+          break;
+        case 'Category':
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const CategoryScreen(),
+            ),
+          );
+          break;
+        case 'Add':
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddDrinkScreen(),
+            ),
+          );
+          break;
+        default:
+          showErrorSnackBar(
+            title: 'Oppps',
+            description: 'Sorry this feature is not available yet.',
+          );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text(
+          Strings.inventory,
+        ),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: Sizes.padding),
         child: Column(
@@ -32,7 +75,7 @@ class Inventory extends GetView<InventoryController> {
                 final bgColor = controller.listInventoryMenu[index].bgColor;
                 return MenuCard(
                   onTap: () {
-                    // _handleNavigate(context, name);
+                    _handleNavigate(context, name);
                   },
                   title: name,
                   icon: icon,

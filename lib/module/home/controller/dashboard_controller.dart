@@ -32,19 +32,19 @@ class DashBoardController extends GetxController {
 
   @override
   void onReady() {
-    debugPrint('Ready');
-    Stream<int>? a =
-        db.doc('y7KJKGeMDPzUA63yiHO9').snapshots().map<int>((event) {
-      Map<String, dynamic>? data = event.data();
-      return data?['total'];
-    });
-    totalSold.bindStream(a);
+    // debugPrint('Ready');
+    // Stream<int>? a =
+    //     db.doc('y7KJKGeMDPzUA63yiHO9').snapshots().map<int>((event) {
+    //   Map<String, dynamic>? data = event.data();
+    //   return data?['total'];
+    // });
+    // totalSold.bindStream(a);
     super.onReady();
   }
 
   @override
   void onClose() {
-  //  totalSold.toUnsigned(width)
+    //  totalSold.toUnsigned(width)
     super.onClose();
   }
 }

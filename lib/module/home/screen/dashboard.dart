@@ -1,15 +1,17 @@
 import 'package:aklo_cafe/module/home/controller/dashboard_controller.dart';
-import 'package:aklo_cafe/module/inventory/screen/inventory.dart';
+import 'package:aklo_cafe/module/inventory/screen/inventory_screen.dart';
+import 'package:aklo_cafe/util/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../../util/snackbar/app_snackbar.dart';
+import '../../order/screen/orders_screen.dart';
 import '../components/menu_card.dart';
 
 import 'package:aklo_cafe/constant/resources.dart';
 
 class DashBoard extends GetView<DashBoardController> {
-  DashBoard({super.key});
+  const DashBoard({super.key});
 
   void _handleNavigate(BuildContext context, String menu) {
     if (context.mounted) {
@@ -18,18 +20,18 @@ class DashBoard extends GetView<DashBoardController> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const Inventory(),
+              builder: (context) => const OrderScreen(),
             ),
           );
           break;
-        case 'Histories':
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const Inventory(),
-            ),
-          );
-          break;
+        // case 'Histories':
+        //   Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => const Inventory(),
+        //     ),
+        //   );
+        //   break;
         case 'Inventory':
           Navigator.push(
             context,
@@ -38,27 +40,89 @@ class DashBoard extends GetView<DashBoardController> {
             ),
           );
           break;
-        case 'Users':
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const Inventory(),
-            ),
+        // case 'Users':
+        //   Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => const Inventory(),
+        //     ),
+        //   );
+        //   break;
+        default:
+          showErrorSnackBar(
+            title: 'Oppps',
+            description: 'Sorry this feature is not available yet.',
           );
-          break;
       }
     }
   }
 
-  final _form = GlobalKey<FormState>();
+  void _showQrWebSite(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        ),
+      ),
+      builder: (_) => Column(
+        children: [
+          Sizes.defaultPadding.sh,
+          const Text(
+            'Scan to order',
+            style: AppStyle.large,
+          ),
+          Sizes.textPadding.sh,
+          Center(
+            child: Image.network(
+              'https://hosttools.com/wp-content/uploads/QR-Code-.png.webp',
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _form.currentState?.validate();
+          _showQrWebSite(context);
         },
+        backgroundColor: AppColors.mainColor,
+        child: const Icon(
+          Icons.qr_code_rounded,
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        fixedColor: Colors.black,
+        onTap: (value) {
+          if (value == 1) {
+            showErrorSnackBar(
+              title: 'Oppps',
+              description: 'Sorry this feature is not available yet.',
+            );
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.dashboard,
+            ),
+            label: 'Dashboard',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.settings,
+            ),
+            label: 'Setting',
+          ),
+        ],
       ),
       appBar: AppBar(
         title: const Text(Strings.appName),
@@ -75,12 +139,12 @@ class DashBoard extends GetView<DashBoardController> {
                 // ),
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: AppColors.lightColor,
+                  color: const Color.fromARGB(255, 6, 114, 9),
                   borderRadius: Sizes.boxRadius,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Obx(
                       () => Text.rich(
@@ -145,48 +209,5 @@ class DashBoard extends GetView<DashBoardController> {
         ),
       ),
     );
-  }
-}
-
-class NumberTextInputFormatter extends TextInputFormatter {
-  final String mask;
-  final String separator;
-
-  NumberTextInputFormatter({
-    required this.mask,
-    required this.separator,
-  }) {
-    // assert(mask != null);
-    // assert(separator != null);
-  }
-
-  //11111111111
-
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.isNotEmpty) {
-      if (newValue.text.length > oldValue.text.length) {
-        if (newValue.text.length > mask.length) return oldValue;
-        if (newValue.text.length < mask.length &&
-            mask[newValue.text.length - 1] == separator) {
-          return TextEditingValue(
-            text:
-                '${oldValue.text}$separator${newValue.text.substring(newValue.text.length - 1)}',
-            selection: TextSelection.collapsed(
-              offset: newValue.selection.end + 1,
-            ),
-          );
-        }
-      } else {
-        debugPrint('Old ${oldValue.selection.end}');
-        debugPrint('New ${newValue.selection.end}');
-        if (newValue.text.length < mask.length &&
-            mask[newValue.selection.end] == separator) {
-          // return oldValue.copyWith(text: );
-        }
-      }
-    }
-    return newValue;
   }
 }
