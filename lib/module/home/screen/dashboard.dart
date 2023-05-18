@@ -1,18 +1,29 @@
 import 'package:aklo_cafe/module/home/controller/dashboard_controller.dart';
-import 'package:aklo_cafe/module/inventory/screen/inventory_screen.dart';
+import 'package:aklo_cafe/util/alerts/app_modal_bottomsheet.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../util/snackbar/app_snackbar.dart';
+import '../../../config/router/app_pages.dart';
+import '../../../generated/l10n.dart';
+import '../../../util/alerts/app_snackbar.dart';
+import '../../auth/controller/auth_controller.dart';
+import '../../auth/screen/users_screen.dart';
 import '../../order/screen/orders_screen.dart';
 import '../components/menu_card.dart';
 
 import 'package:aklo_cafe/constant/resources.dart';
 
-class DashBoard extends GetView<DashBoardController> {
+import 'setting_screen.dart';
+
+class DashBoard extends StatefulWidget {
   const DashBoard({super.key});
 
+  @override
+  State<DashBoard> createState() => _DashBoardState();
+}
+
+class _DashBoardState extends State<DashBoard> {
   void _handleNavigate(BuildContext context, String menu) {
     if (context.mounted) {
       switch (menu) {
@@ -33,21 +44,16 @@ class DashBoard extends GetView<DashBoardController> {
         //   );
         //   break;
         case 'Inventory':
+          Get.toNamed(Routes.INVENTORY);
+          break;
+        case 'Users':
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const Inventory(),
+              builder: (context) => const UsersScreen(),
             ),
           );
           break;
-        // case 'Users':
-        //   Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => const Inventory(),
-        //     ),
-        //   );
-        //   break;
         default:
           showErrorSnackBar(
             title: 'Oppps',
@@ -58,18 +64,12 @@ class DashBoard extends GetView<DashBoardController> {
   }
 
   void _showQrWebSite(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-        ),
-      ),
-      builder: (_) => Column(
+    showCustomModalBottomSheet(
+      Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Sizes.defaultPadding.sh,
-          const Text(
+          Text(
             'Scan to order',
             style: AppStyle.large,
           ),
@@ -84,6 +84,10 @@ class DashBoard extends GetView<DashBoardController> {
     );
   }
 
+  int _currentIndex = 0;
+
+  final authController = Get.put(AuthController());
+  final controller = Get.put(DashBoardController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,121 +96,134 @@ class DashBoard extends GetView<DashBoardController> {
         onPressed: () {
           _showQrWebSite(context);
         },
-        backgroundColor: AppColors.mainColor,
         child: const Icon(
           Icons.qr_code_rounded,
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
         elevation: 0,
         backgroundColor: Colors.transparent,
         fixedColor: Colors.black,
         onTap: (value) {
-          if (value == 1) {
-            showErrorSnackBar(
-              title: 'Oppps',
-              description: 'Sorry this feature is not available yet.',
-            );
+          if (_currentIndex != value) {
+            setState(() {
+              _currentIndex = value;
+            });
           }
+
+          // authController.signOut();
+          // if (value == 1) {
+          // showErrorSnackBar(
+          //   title: 'Oppps',
+          //   description: 'Sorry this feature is not available yet.',
+          // );
+          // }
         },
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.dashboard,
             ),
-            label: 'Dashboard',
+            label: S.current.dashboard,
           ),
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.settings,
             ),
-            label: 'Setting',
+            label: S.current.setting,
           ),
         ],
       ),
       appBar: AppBar(
         title: const Text(Strings.appName),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            AspectRatio(
-              aspectRatio: 1.3 / 1,
-              child: Container(
-                // margin: const EdgeInsets.symmetric(
-                //   horizontal: Sizes.padding,
-                // ),
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 6, 114, 9),
-                  borderRadius: Sizes.boxRadius,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Obx(
-                      () => Text.rich(
-                        TextSpan(
-                          text: 'Today orders : ',
-                          style: AppStyle.medium
-                              .copyWith(color: AppColors.txtLightColor),
-                          children: [
+      body: DefaultTabController(
+        length: 2,
+        child: [
+          SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                AspectRatio(
+                  aspectRatio: 1.3 / 1,
+                  child: Container(
+                    // margin: const EdgeInsets.symmetric(
+                    //   horizontal: Sizes.padding,
+                    // ),
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 6, 114, 9),
+                      borderRadius: Sizes.boxBorderRadius,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Obx(
+                          () => Text.rich(
                             TextSpan(
-                              text: controller.totalSold.value.toString(),
-                              style: AppStyle.large
+                              text: 'Today orders : ',
+                              style: AppStyle.medium
                                   .copyWith(color: AppColors.txtLightColor),
+                              children: [
+                                TextSpan(
+                                  text: controller.totalSold.value.toString(),
+                                  style: AppStyle.large
+                                      .copyWith(color: AppColors.txtLightColor),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Text.rich(
-                      TextSpan(
-                        text: 'Available Coffee : ',
-                        style: AppStyle.medium
-                            .copyWith(color: AppColors.txtLightColor),
-                        children: [
-                          TextSpan(
-                            text: '78 units',
-                            style: AppStyle.large
-                                .copyWith(color: AppColors.txtLightColor),
                           ),
-                        ],
-                      ),
-                      textAlign: TextAlign.end,
+                        ),
+                        Text.rich(
+                          TextSpan(
+                            text: 'Available Coffee : ',
+                            style: AppStyle.medium
+                                .copyWith(color: AppColors.txtLightColor),
+                            children: [
+                              TextSpan(
+                                text: '78 units',
+                                style: AppStyle.large
+                                    .copyWith(color: AppColors.txtLightColor),
+                              ),
+                            ],
+                          ),
+                          textAlign: TextAlign.end,
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-            GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(vertical: Sizes.padding),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: Sizes.padding,
-                crossAxisSpacing: Sizes.padding,
-              ),
-              itemCount: controller.listDashBoard.length,
-              itemBuilder: (_, index) {
-                final name = controller.listDashBoard[index].title;
-                final icon = controller.listDashBoard[index].iconData;
-                final bgColor = controller.listDashBoard[index].bgColor;
-                return MenuCard(
-                  onTap: () {
-                    _handleNavigate(context, name);
+                GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(vertical: Sizes.padding),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: Sizes.padding,
+                    crossAxisSpacing: Sizes.padding,
+                  ),
+                  itemCount: controller.listDashBoard.length,
+                  itemBuilder: (_, index) {
+                    final name = controller.listDashBoard[index].title;
+                    final icon = controller.listDashBoard[index].iconData;
+                    final bgColor = controller.listDashBoard[index].bgColor;
+                    return MenuCard(
+                      onTap: () {
+                        _handleNavigate(context, name);
+                      },
+                      title: name,
+                      icon: icon,
+                      bgColor: bgColor,
+                    );
                   },
-                  title: name,
-                  icon: icon,
-                  bgColor: bgColor,
-                );
-              },
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          const SettingScreen()
+        ].elementAt(_currentIndex),
       ),
     );
   }

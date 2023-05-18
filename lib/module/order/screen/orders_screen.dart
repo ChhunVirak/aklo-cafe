@@ -45,7 +45,7 @@ class _OrderScreenState extends State<OrderScreen> {
             padding: const EdgeInsets.all(Sizes.defaultPadding),
             decoration: BoxDecoration(
               color: AppColors.backgroundColor,
-              borderRadius: Sizes.boxRadius,
+              borderRadius: Sizes.boxBorderRadius,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -57,7 +57,7 @@ class _OrderScreenState extends State<OrderScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Chorn Kihong',
                             style: AppStyle.medium,
                           ),
@@ -122,7 +122,7 @@ class _OrderScreenState extends State<OrderScreen> {
                   ],
                 ),
                 10.sh,
-                const Text(
+                Text(
                   'Total : 4\$',
                   style: AppStyle.medium,
                 )

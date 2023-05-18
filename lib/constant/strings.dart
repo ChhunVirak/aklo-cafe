@@ -1,6 +1,14 @@
 class Strings {
   Strings._();
+  static const String cafeName = 'Aklo Cafe';
+  static const String cafeDescription = 'System Management in your Hand';
   static const String appName = 'Aklo Cafe Management';
+
+  ///Auth
+  static const String email = 'Email';
+  static const String emailValidateMessage = 'Email is required.';
+  static const String password = 'Password';
+  static const String passwordValidateMessage = 'Password is required.';
 
   ///Order
   static const String orderTitle = 'All Orders';

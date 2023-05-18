@@ -2,13 +2,15 @@ import 'package:aklo_cafe/constant/resources.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  final Function() onPressed;
+  final Function()? onPressed;
   final String name;
+  final Color? backgroundColor;
 
   const CustomButton({
     super.key,
     required this.onPressed,
     required this.name,
+    this.backgroundColor,
   });
 
   @override
@@ -16,14 +18,13 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.maxFinite, 50),
-        backgroundColor: AppColors.secondaryColor,
+        backgroundColor: backgroundColor ?? AppColors.secondaryColor,
       ),
       onPressed: onPressed,
       child: Text(
         name,
-        style: AppStyle.large.copyWith(
-          color: AppColors.txtLightColor,
-        ),
+        style: AppStyle.medium.copyWith(
+            color: AppColors.txtLightColor, fontVariations: [Sizes.weightL]),
       ),
     );
   }

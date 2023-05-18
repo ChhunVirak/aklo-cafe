@@ -1,18 +1,19 @@
 import 'package:aklo_cafe/module/inventory/inventory.dart';
+import 'package:aklo_cafe/module/inventory/screen/add_category.dart';
 import 'package:aklo_cafe/module/inventory/screen/category.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/resources.dart';
-import '../../../util/snackbar/app_snackbar.dart';
+import '../../../util/alerts/app_snackbar.dart';
 import '../../home/components/menu_card.dart';
 
 class Inventory extends GetView<InventoryController> {
   const Inventory({super.key});
-  void _handleNavigate(BuildContext context, String menu) {
+  void _handleNavigate(BuildContext context, int index) {
     if (context.mounted) {
-      switch (menu) {
-        case 'Drink':
+      switch (index) {
+        case 0:
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -20,9 +21,15 @@ class Inventory extends GetView<InventoryController> {
             ),
           );
           break;
-        case 'Update':
+        case 1:
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddDrinkScreen(),
+            ),
+          );
           break;
-        case 'Category':
+        case 2:
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -30,11 +37,11 @@ class Inventory extends GetView<InventoryController> {
             ),
           );
           break;
-        case 'Add':
+        case 3:
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const AddDrinkScreen(),
+              builder: (context) => const AddCategory(),
             ),
           );
           break;
@@ -75,7 +82,7 @@ class Inventory extends GetView<InventoryController> {
                 final bgColor = controller.listInventoryMenu[index].bgColor;
                 return MenuCard(
                   onTap: () {
-                    _handleNavigate(context, name);
+                    _handleNavigate(context, index);
                   },
                   title: name,
                   icon: icon,

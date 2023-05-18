@@ -1,0 +1,18 @@
+{
+  "@@locale": "en",
+  "languages": "Languages",
+  "languagesDes": "Choose Preference Languages",
+  "email": "Email",
+  "emailValidateMessage": "Email is required.",
+  "password": "Password",
+  "passwordValidateMessage": "Password is required.",
+  "login": "Login",
+  "inventory": "Inventory",
+  "allCoffeeTitle": "All Drinks",
+  "addDrink": "Add New Drink",
+  "addCategory": "Add New Category",
+  "category": "All Categories",
+  "dashboard": "Dashboard",
+  "setting": "Setting",
+  "signout": "Sign Out"
+}

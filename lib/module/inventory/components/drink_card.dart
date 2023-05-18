@@ -29,16 +29,25 @@ class DrinkCard extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: AppColors.backgroundColor,
-                borderRadius: Sizes.boxRadius,
+                borderRadius: Sizes.boxBorderRadius,
                 image: image != null
                     ? DecorationImage(
                         image: NetworkImage(image!),
+                        fit: BoxFit.cover,
                       )
                     : null,
               ),
+              alignment: Alignment.center,
+              child: image == null ? const Text('No Image') : null,
             ),
           ),
           5.sh,
+          Text(
+            name ?? '',
+            style: AppStyle.medium,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Row(
@@ -46,20 +55,9 @@ class DrinkCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        name ?? '',
-                        style: AppStyle.medium,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Text(
-                        '${qty?.toString() ?? '0'} Units',
-                        style: AppStyle.small,
-                      ),
-                    ],
+                  child: Text(
+                    '${qty?.toString() ?? '0'} Units',
+                    style: AppStyle.small,
                   ),
                 ),
                 5.sw,

@@ -1,35 +1,39 @@
 import 'dart:ui';
 
-import 'package:aklo_cafe/constant/resources.dart';
-
+import 'package:aklo_cafe/config/languages/lang_font_controller.dart';
+import 'package:aklo_cafe/constant/textstyle/khmer_textstlye.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'textstyle/english_textstlye.dart';
 
 class AppStyle {
   AppStyle._();
+  static get _controller => Get.put(LangsAndFontConfigs());
 
-  static const large = TextStyle(
-    fontFamily: 'Nunito',
-    color: AppColors.txtDarkColor,
-    fontSize: Sizes.fL,
-    fontWeight: Sizes.wM,
-    fontVariations: [FontVariation('wght', 700)],
-  );
+  static FontVariation get weightL => _controller.isEnglish
+      ? EnglishFontStyle().weightL
+      : KhmerFontStyle().weightL;
 
-  static const medium = TextStyle(
-    fontFamily: 'Nunito',
-    color: AppColors.txtDarkColor,
-    fontSize: Sizes.fM,
-    fontWeight: Sizes.wL,
-    fontVariations: [FontVariation('wght', 500)],
-  );
+  static FontVariation get weightM => _controller.isEnglish
+      ? EnglishFontStyle().weightM
+      : KhmerFontStyle().weightM;
 
-  static const small = TextStyle(
-    fontFamily: 'Nunito',
-    color: AppColors.txtDarkColor,
-    fontSize: Sizes.fS,
-    fontWeight: Sizes.wL,
-    fontVariations: [FontVariation('wght', 400)],
-  );
+  static FontVariation get weightS => _controller.isEnglish
+      ? EnglishFontStyle().weightS
+      : KhmerFontStyle().weightS;
+
+  static TextStyle get large => _controller.isEnglish
+      ? EnglishFontStyle().styleL()
+      : KhmerFontStyle().styleL();
+
+  static TextStyle get medium => _controller.isEnglish
+      ? EnglishFontStyle().styleM()
+      : KhmerFontStyle().styleM();
+
+  static TextStyle get small => _controller.isEnglish
+      ? EnglishFontStyle().styleS()
+      : KhmerFontStyle().styleS();
 
   static const boxShadow = BoxShadow(
     color: Color.fromARGB(40, 52, 42, 33),

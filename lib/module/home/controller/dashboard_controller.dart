@@ -28,6 +28,11 @@ class DashBoardController extends GetxController {
   ];
 
   final totalSold = 0.obs;
+  final s = DashBoardModel(
+    title: 'Users',
+    iconData: CupertinoIcons.person_2_fill,
+    bgColor: const Color(0xff257881),
+  ).obs;
   final db = FirebaseFirestore.instance.collection('data');
 
   @override
@@ -39,12 +44,8 @@ class DashBoardController extends GetxController {
     //   return data?['total'];
     // });
     // totalSold.bindStream(a);
-    super.onReady();
-  }
+    // totalSold.reactive;
 
-  @override
-  void onClose() {
-    //  totalSold.toUnsigned(width)
-    super.onClose();
+    super.onReady();
   }
 }

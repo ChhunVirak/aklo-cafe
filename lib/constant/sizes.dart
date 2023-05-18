@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:aklo_cafe/util/extensions/fontweight_extension.dart';
 import 'package:flutter/material.dart';
 
 class Sizes {
@@ -10,10 +13,11 @@ class Sizes {
   static const double tablePadding = 5.0;
 
   ///Radius
-  static BorderRadius boxRadius = BorderRadius.circular(10);
+  static BorderRadius boxBorderRadius = BorderRadius.circular(10);
+  static Radius bottomSheetRadius = const Radius.circular(20);
 
   ///Text Size
-  static const double fL = 20.0;
+  static const double fL = 17.0;
   static const double fM = 16.0;
   static const double fS = 14.0;
 
@@ -22,4 +26,12 @@ class Sizes {
   static const FontWeight wM = FontWeight.w100;
   static const FontWeight wS = FontWeight.w400;
   static const FontWeight bold = FontWeight.bold;
+
+  static final FontVariation weightB = FontWeight.bold.variants;
+  static final FontVariation weightL = FontWeight.w600.variants;
+  static final FontVariation weightM = FontWeight.w500.variants;
+  static final FontVariation weightS = FontWeight.w400.variants;
+
+  //Icon
+  static const double listTileIconSize = 40.0;
 }

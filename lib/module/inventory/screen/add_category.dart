@@ -39,11 +39,24 @@ class _AddCategoryState extends State<AddCategory> {
                     key: _form,
                     child: Column(
                       children: [
-                        ImagePickerBox(
-                          onSelectImage: (value) {
-                            controller.categoryFile = File(value!);
-                          },
-                        ),
+                        GetBuilder(
+                            init: controller,
+                            initState: (_) {
+                              ///Clear Image
+                              controller.categoryFile = null;
+                            },
+                            builder: (context) {
+                              return ImagePickerBox(
+                                onSelectImage: (value) async {
+                                  if (value != null) {
+                                    controller.categoryFile = File(value);
+
+                                    debugPrint('Image Compressed');
+                                  }
+                                },
+                              );
+                            }),
+
                         CustomTextField(
                           controller: controller.categoryNameTxtcontroller,
                           label: 'Category Name',
@@ -57,8 +70,9 @@ class _AddCategoryState extends State<AddCategory> {
                           },
                         ),
 
-                        const CustomTextField(
-                          // controller: controller.unitPriceTxTcontroller,
+                        CustomTextField(
+                          controller:
+                              controller.categoryDescriptionTxtcontroller,
                           label: 'Description',
                           textInputAction: TextInputAction.done,
                         ),
@@ -72,19 +86,12 @@ class _AddCategoryState extends State<AddCategory> {
             ),
             CustomButton(
               onPressed: () async {
+                // controller.uploadFile('',controller.categoryFile);
                 final noError = _form.currentState?.validate();
                 if (noError == true) {
-                  controller.deleteImage('dasd', 'asda');
-                  // controller.uploadImage();
-                  // final success = await controller.addCategory();
-                  // if (success == true && context.mounted) {
-                  //   controller.clear();
-                  //   showSuccessSnackBar(
-                  //     title: 'Success',
-                  //     description: 'New Category has been added successfully.',
-                  //   );
-                  //   Navigator.pop(context);
-                  // }
+                  // controller.deleteImage('dasd', 'asda');
+
+                  await controller.addCategory();
                 }
               },
               name: 'Add',

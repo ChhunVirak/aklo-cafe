@@ -23,7 +23,7 @@ class MenuCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: bgColor,
-          borderRadius: Sizes.boxRadius,
+          borderRadius: Sizes.boxBorderRadius,
           boxShadow: const [
             AppStyle.boxShadow,
           ],

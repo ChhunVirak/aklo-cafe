@@ -1,10 +1,10 @@
 import 'package:aklo_cafe/constant/resources.dart';
 import 'package:aklo_cafe/module/inventory/controller/inventory_controller.dart';
 import 'package:aklo_cafe/module/inventory/model/category_model.dart';
-import 'package:aklo_cafe/module/inventory/screen/add_category.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../util/widgets/app_circular_loading.dart';
 import '../components/drink_card.dart';
 
 class CategoryScreen extends GetView<InventoryController> {
@@ -22,7 +22,7 @@ class CategoryScreen extends GetView<InventoryController> {
           debugPrint('Snapshot => ${snapshot.connectionState}');
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CustomCircularLoading(),
             );
           }
           if (snapshot.connectionState == ConnectionState.active &&
@@ -41,12 +41,11 @@ class CategoryScreen extends GetView<InventoryController> {
               itemCount: listData?.length ?? 0,
               itemBuilder: (_, index) {
                 final name = listData?[index].name;
-                // final img = listData[index].image;
+                final img = listData?[index].image;
 
                 return DrinkCard(
                   name: name,
-                  image:
-                      'https://firebasestorage.googleapis.com/v0/b/aklo-cafe.appspot.com/o/category?alt=media&token=0cc4c904-3f5f-4b2a-8c4e-60e0b774f1fa',
+                  image: img,
                   unitPrice: 0,
                   // qty: qty,
                 );
@@ -57,19 +56,6 @@ class CategoryScreen extends GetView<InventoryController> {
             child: Text('Something went wrong'),
           );
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.mainColor,
-        onPressed: () {
-          controller.clearFormAddCategory();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const AddCategory(),
-            ),
-          );
-        },
-        child: const Icon(Icons.add_rounded),
       ),
     );
   }

@@ -22,22 +22,34 @@ class _ImagePickerBoxState extends State<ImagePickerBox> {
 
   File? _image;
 
+  ///Set image quality here
+  final _imgQuality = 10;
+
   Future<void> _onSelectImage() async {
-    final imageFile = await _imagePicker.pickImage(source: ImageSource.gallery);
+    final imageFile = await _imagePicker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: _imgQuality,
+    );
+
     widget.onSelectImage?.call(imageFile?.path);
     debugPrint('Success ${imageFile?.path}');
     if (imageFile != null) {
       _image = File(imageFile.path);
+
       setState(() {});
     }
   }
 
   Future<void> _onOpenCamera() async {
-    final imageFile = await _imagePicker.pickImage(source: ImageSource.camera);
+    final imageFile = await _imagePicker.pickImage(
+      source: ImageSource.camera,
+      imageQuality: _imgQuality,
+    );
     widget.onSelectImage?.call(imageFile?.path);
     debugPrint('Success ${imageFile?.path}');
     if (imageFile != null) {
       _image = File(imageFile.path);
+
       setState(() {});
     }
   }
@@ -63,7 +75,7 @@ class _ImagePickerBoxState extends State<ImagePickerBox> {
                       },
                       icon: const Icon(Icons.image),
                     ),
-                    const Text(
+                    Text(
                       'Gallery',
                       style: AppStyle.medium,
                     ),
@@ -79,7 +91,7 @@ class _ImagePickerBoxState extends State<ImagePickerBox> {
                       },
                       icon: const Icon(Icons.camera),
                     ),
-                    const Text(
+                    Text(
                       'Camera',
                       style: AppStyle.medium,
                     ),

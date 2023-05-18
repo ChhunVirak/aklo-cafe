@@ -1,32 +1,53 @@
 import 'dart:io';
 
+import 'package:aklo_cafe/constant/firebase_storage_path.dart';
+import 'package:aklo_cafe/core/firebase_core/model/file_model.dart';
 import 'package:aklo_cafe/module/inventory/model/drink_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../util/snackbar/app_snackbar.dart';
+import '../../../config/router/app_pages.dart';
+import '../../../util/alerts/app_dialog.dart';
+import '../../../util/alerts/app_snackbar.dart';
 import '../../home/model/coffee_model.dart';
 import '../model/category_model.dart';
 
 import 'package:path/path.dart' as path;
 
-class InventoryController extends GetxController {
-  @override
-  void onClose() {
-    debugPrint('Success Closed 1');
-    super.onClose();
-  }
+class FirebaseHelper {
+  static final _ref = FirebaseStorage.instance.ref();
 
-  @override
-  void dispose() {
-    debugPrint('Success Closed');
-    super.dispose();
+  Future<void> deleteFile(String folder, String file) async {
+    final location = path.join(folder, file);
+    try {
+      await _ref.child(location).delete();
+    } catch (_) {
+      debugPrint('Delete Fail : $_');
+    }
+  }
+}
+
+class InventoryController extends GetxController
+//  implements InventoryBaseRepo
+{
+  //Firebase Collection
+  final drinkDb = FirebaseFirestore.instance.collection('drink');
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> drinkofCategory(String c) {
+    const field = 'category';
+    if (c == 'All' || c == '') {
+      return drinkDb.limit(10).snapshots();
+    } else {
+      return drinkDb.where(field, isEqualTo: c).limit(10).snapshots();
+    }
   }
 
   //Firebase Collection
   final categoryDb = FirebaseFirestore.instance.collection('category');
+
+  final currentCategory = 'All'.obs;
 
   final listInventoryMenu = <DashBoardModel>[
     DashBoardModel(
@@ -35,7 +56,7 @@ class InventoryController extends GetxController {
       bgColor: const Color(0xffd51c4e),
     ),
     DashBoardModel(
-      title: 'Add',
+      title: 'Add Drink',
       iconData: CupertinoIcons.add_circled_solid,
       bgColor: const Color(0xfff56313),
     ),
@@ -44,13 +65,11 @@ class InventoryController extends GetxController {
       iconData: CupertinoIcons.square_list_fill,
       bgColor: const Color(0xff1b67ca),
     ),
-  ];
-
-  ///Category
-  final categories = [
-    'Ice Coffee',
-    'Frappe',
-    'Tea',
+    DashBoardModel(
+      title: 'Add Category',
+      iconData: CupertinoIcons.square_list_fill,
+      bgColor: const Color(0xfff56313),
+    ),
   ];
 
   final db = FirebaseFirestore.instance;
@@ -60,14 +79,14 @@ class InventoryController extends GetxController {
   final unitPriceTxTcontroller = TextEditingController();
   final amountTxTcontroller = TextEditingController();
 
-  void clear() {
+  void clearFormAddProduct() {
     drinkNameTxTcontroller.clear();
     drinkCategoryTxTcontroller.clear();
     unitPriceTxTcontroller.clear();
     amountTxTcontroller.clear();
   }
 
-  Future<bool> addDrink() async {
+  Future<void> addDrink() async {
     try {
       final newDrink = DrinkModel(
         name: drinkNameTxTcontroller.text,
@@ -84,59 +103,74 @@ class InventoryController extends GetxController {
           'id': result.id,
         },
       );
-      return true;
     } catch (_) {
       debugPrint('Error $_');
       showErrorSnackBar(
         title: 'Error',
         description: 'Drink add fail',
       );
-      return false;
     }
     // return null;
   }
 
   final categoryNameTxtcontroller = TextEditingController();
+  final categoryDescriptionTxtcontroller = TextEditingController();
 
   void clearFormAddCategory() {
     categoryNameTxtcontroller.clear();
+    categoryDescriptionTxtcontroller.clear();
   }
 
   File? categoryFile;
-  Future<bool> addCategory() async {
+  Future addCategory() async {
+    showLoadingDialog();
+
     try {
       final newCategory = CategoryModel(
         name: categoryNameTxtcontroller.text,
       );
 
-      await uploadFile(categoryFile);
-
       final result = await categoryDb.add(
         newCategory.toMap(),
       );
+
+      final imageUrl = await uploadFile(result.id, categoryFile);
+
       await categoryDb.doc(result.id).update(
         {
           'id': result.id,
+          'image': imageUrl,
+          'firebaseFile': FirebaseStorageFileModel(
+                  folder: FireBaseStoragePath.category, fileName: result.id)
+              .toMap()
         },
       );
-      return true;
+      clearFormAddCategory();
+      Get.until((route) => Get.currentRoute == Routes.INVENTORY);
+
+      showSuccessSnackBar(
+        title: 'Success',
+        description: 'New Category has been added successfully.',
+      );
     } catch (_) {
       debugPrint('Error $_');
       showErrorSnackBar(
         title: 'Error',
         description: 'Drink add fail',
       );
-      return false;
     }
     // return null;
   }
 
   final ref = FirebaseStorage.instance.ref();
 
-  Future<UploadTask?> uploadFile(File? file) async {
+  Future<String?> uploadFile(String id, File? file) async {
     if (file != null) {
       try {
-        return ref.child('category/01').putFile(file);
+        final upload = await ref
+            .child('${FireBaseStoragePath.category}/$id')
+            .putFile(file);
+        return await upload.ref.getDownloadURL();
       } catch (_) {
         debugPrint('Upload Fail : $_');
       }
@@ -146,7 +180,7 @@ class InventoryController extends GetxController {
     return null;
   }
 
-  Future<void> deleteImage(String folder, String file) async {
+  Future<void> deleteFile(String folder, String file) async {
     final location = path.join(folder, file);
     try {
       await ref.child(location).delete();
