@@ -18,33 +18,37 @@ class MenuCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: Sizes.boxBorderRadius,
-          boxShadow: const [
-            AppStyle.boxShadow,
-          ],
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Icon(
-                icon,
-                color: AppColors.txtLightColor,
-                size: 50,
+    return Material(
+      clipBehavior: Clip.antiAlias,
+      borderRadius: Sizes.boxBorderRadius,
+      child: InkWell(
+        onTap: onTap,
+        child: Ink(
+          decoration: BoxDecoration(
+            // color: Colors.white,
+            color: bgColor,
+            boxShadow: const [
+              AppStyle.boxShadow,
+            ],
+          ),
+          // clipBehavior: Clip.antiAlias,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Icon(
+                  icon,
+                  color: AppColors.txtLightColor,
+                  size: 50,
+                ),
               ),
-            ),
-            5.sh,
-            Text(
-              title ?? '',
-              style: AppStyle.medium.copyWith(color: AppColors.txtLightColor),
-            ),
-          ],
+              5.sh,
+              Text(
+                title ?? '',
+                style: AppStyle.medium.copyWith(color: AppColors.txtLightColor),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:aklo_cafe/module/home/controller/dashboard_controller.dart';
 import 'package:aklo_cafe/util/alerts/app_modal_bottomsheet.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -64,13 +65,17 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   void _showQrWebSite(BuildContext context) {
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitDown,
+    //   DeviceOrientation.portraitUp,
+    // ]);
     showCustomModalBottomSheet(
       Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Sizes.defaultPadding.sh,
           Text(
-            'Scan to order',
+            S.current.scan,
             style: AppStyle.large,
           ),
           Sizes.textPadding.sh,
@@ -101,6 +106,7 @@ class _DashBoardState extends State<DashBoard> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -138,93 +144,112 @@ class _DashBoardState extends State<DashBoard> {
       appBar: AppBar(
         title: const Text(Strings.appName),
       ),
-      body: DefaultTabController(
-        length: 2,
-        child: [
-          SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: [
-                AspectRatio(
-                  aspectRatio: 1.3 / 1,
-                  child: Container(
-                    // margin: const EdgeInsets.symmetric(
-                    //   horizontal: Sizes.padding,
-                    // ),
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 6, 114, 9),
-                      borderRadius: Sizes.boxBorderRadius,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Obx(
-                          () => Text.rich(
-                            TextSpan(
-                              text: 'Today orders : ',
-                              style: AppStyle.medium
-                                  .copyWith(color: AppColors.txtLightColor),
-                              children: [
-                                TextSpan(
-                                  text: controller.totalSold.value.toString(),
-                                  style: AppStyle.large
-                                      .copyWith(color: AppColors.txtLightColor),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Text.rich(
+      body: [
+        SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              AspectRatio(
+                aspectRatio: 1.3 / 1,
+                child: Container(
+                  // margin: const EdgeInsets.symmetric(
+                  //   horizontal: Sizes.padding,
+                  // ),
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 6, 114, 9),
+                    borderRadius: Sizes.boxBorderRadius,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Obx(
+                        () => Text.rich(
                           TextSpan(
-                            text: 'Available Coffee : ',
+                            text: 'Today orders : ',
                             style: AppStyle.medium
                                 .copyWith(color: AppColors.txtLightColor),
                             children: [
                               TextSpan(
-                                text: '78 units',
+                                text: controller.totalSold.value.toString(),
                                 style: AppStyle.large
                                     .copyWith(color: AppColors.txtLightColor),
                               ),
                             ],
                           ),
-                          textAlign: TextAlign.end,
                         ),
-                      ],
-                    ),
+                      ),
+                      Text.rich(
+                        TextSpan(
+                          text: 'Available Coffee : ',
+                          style: AppStyle.medium
+                              .copyWith(color: AppColors.txtLightColor),
+                          children: [
+                            TextSpan(
+                              text: '78 units',
+                              style: AppStyle.large
+                                  .copyWith(color: AppColors.txtLightColor),
+                            ),
+                          ],
+                        ),
+                        textAlign: TextAlign.end,
+                      ),
+                    ],
                   ),
                 ),
-                GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(vertical: Sizes.padding),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: Sizes.padding,
-                    crossAxisSpacing: Sizes.padding,
+              ),
+              GridView.count(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(vertical: Sizes.padding),
+                // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                //   crossAxisCount: 2,
+                mainAxisSpacing: Sizes.padding,
+                crossAxisSpacing: Sizes.padding,
+                // ),
+                crossAxisCount: 2,
+                // itemCount: controller.listDashBoard.length,
+                children: [
+                  MenuCard(
+                    onTap: () {
+                      _handleNavigate(context, 'Orders');
+                    },
+                    title: S.current.orders,
+                    icon: CupertinoIcons.bag_fill,
+                    bgColor: const Color(0xffd51c4e),
                   ),
-                  itemCount: controller.listDashBoard.length,
-                  itemBuilder: (_, index) {
-                    final name = controller.listDashBoard[index].title;
-                    final icon = controller.listDashBoard[index].iconData;
-                    final bgColor = controller.listDashBoard[index].bgColor;
-                    return MenuCard(
-                      onTap: () {
-                        _handleNavigate(context, name);
-                      },
-                      title: name,
-                      icon: icon,
-                      bgColor: bgColor,
-                    );
-                  },
-                ),
-              ],
-            ),
+                  MenuCard(
+                    onTap: () {
+                      _handleNavigate(context, 'Histories');
+                    },
+                    title: S.current.histories,
+                    icon: CupertinoIcons.bag_fill,
+                    bgColor: const Color(0xfff56313),
+                  ),
+                  MenuCard(
+                    onTap: () {
+                      _handleNavigate(context, 'Inventory');
+                    },
+                    title: S.current.inventory,
+                    icon: CupertinoIcons.bag_fill,
+                    bgColor: const Color(0xff1b67ca),
+                  ),
+                  MenuCard(
+                    onTap: () {
+                      _handleNavigate(context, 'Users');
+                    },
+                    title: S.current.users,
+                    icon: CupertinoIcons.bag_fill,
+                    bgColor: const Color(0xff257881),
+                  ),
+                ],
+              ),
+            ],
           ),
-          const SettingScreen()
-        ].elementAt(_currentIndex),
-      ),
+        ),
+        const SettingScreen()
+      ].elementAt(_currentIndex),
     );
   }
 }

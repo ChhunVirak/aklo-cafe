@@ -120,11 +120,41 @@ class S {
     );
   }
 
+  /// `Orders`
+  String get orders {
+    return Intl.message(
+      'Orders',
+      name: 'orders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Histories`
+  String get histories {
+    return Intl.message(
+      'Histories',
+      name: 'histories',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Inventory`
   String get inventory {
     return Intl.message(
       'Inventory',
       name: 'inventory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Users`
+  String get users {
+    return Intl.message(
+      'Users',
+      name: 'users',
       desc: '',
       args: [],
     );
@@ -195,6 +225,16 @@ class S {
     return Intl.message(
       'Sign Out',
       name: 'signout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan to Order`
+  String get scan {
+    return Intl.message(
+      'Scan to Order',
+      name: 'scan',
       desc: '',
       args: [],
     );

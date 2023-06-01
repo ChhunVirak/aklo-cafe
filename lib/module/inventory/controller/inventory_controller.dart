@@ -103,6 +103,11 @@ class InventoryController extends GetxController
           'id': result.id,
         },
       );
+      Get.until((route) => Get.currentRoute == Routes.INVENTORY);
+      showSuccessSnackBar(
+        title: 'Success',
+        description: 'New drink has been added successfully.',
+      );
     } catch (_) {
       debugPrint('Error $_');
       showErrorSnackBar(

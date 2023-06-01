@@ -26,7 +26,16 @@ class LangsKk extends Langs {
   String get login => 'ចូល';
 
   @override
+  String get orders => 'ការកម្ម៉ង់ទាំងអស់';
+
+  @override
+  String get histories => 'ប្រវត្តិ';
+
+  @override
   String get inventory => 'ស្តុក';
+
+  @override
+  String get users => 'អ្នកប្រើប្រាស់';
 
   @override
   String get allCoffeeTitle => 'ភេសជ្ជៈទាំងអស់';
@@ -48,4 +57,7 @@ class LangsKk extends Langs {
 
   @override
   String get signout => 'ចាកចេញ';
+
+  @override
+  String get scan => 'ស្គែនដើម្បីកម្មង់';
 }

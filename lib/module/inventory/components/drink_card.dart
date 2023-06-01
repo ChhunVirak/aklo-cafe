@@ -54,34 +54,36 @@ class DrinkCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Expanded(
-                  child: Text(
-                    '${qty?.toString() ?? '0'} Units',
-                    style: AppStyle.small,
+                if (qty != null)
+                  Expanded(
+                    child: Text(
+                      '${qty?.toString() ?? '0'} Units',
+                      style: AppStyle.small,
+                    ),
                   ),
-                ),
                 5.sw,
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: NumberFormat('#.00').format(unitPrice),
-                        style: AppStyle.large.copyWith(
-                          fontSize: 14,
-                        ),
-                      ),
-                      WidgetSpan(
-                        alignment: PlaceholderAlignment.top,
-                        child: Text(
-                          '\$',
+                if (unitPrice != null)
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: NumberFormat('#.00').format(unitPrice),
                           style: AppStyle.large.copyWith(
-                            fontSize: 10,
+                            fontSize: 14,
                           ),
                         ),
-                      ),
-                    ],
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.top,
+                          child: Text(
+                            '\$',
+                            style: AppStyle.large.copyWith(
+                              fontSize: 10,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
               ],
             ),
           ),

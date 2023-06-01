@@ -41,63 +41,68 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                       final listData = snapshot.data?.docs
                           .map((e) => CategoryModel.fromMap(e.data()))
                           .toList();
-                      return SingleChildScrollView(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: Sizes.defaultPadding),
-                        scrollDirection: Axis.horizontal,
-                        child: Obx(
-                          () => Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    right: Sizes.textPadding),
-                                child: ActionChip(
-                                  backgroundColor: _chipBgColor(
-                                      controller.currentCategory.value ==
-                                          'All'),
-                                  labelStyle: AppStyle.medium.copyWith(
-                                      color: controller.currentCategory.value ==
-                                              'All'
-                                          ? AppColors.txtLightColor
-                                          : null),
-                                  onPressed: () {
-                                    controller.currentCategory.value = 'All';
-                                  },
-                                  label: const Text('All'),
-                                  shape: const StadiumBorder(),
+                      return SizedBox(
+                        width: context.width,
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: Sizes.defaultPadding),
+                          scrollDirection: Axis.horizontal,
+                          child: Obx(
+                            () => Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: Sizes.textPadding),
+                                  child: ActionChip(
+                                    backgroundColor: _chipBgColor(
+                                        controller.currentCategory.value ==
+                                            'All'),
+                                    labelStyle: AppStyle.medium.copyWith(
+                                        color:
+                                            controller.currentCategory.value ==
+                                                    'All'
+                                                ? AppColors.txtLightColor
+                                                : null),
+                                    onPressed: () {
+                                      controller.currentCategory.value = 'All';
+                                    },
+                                    label: const Text('All'),
+                                    shape: const StadiumBorder(),
+                                  ),
                                 ),
-                              ),
-                              ...listData
-                                      ?.map(
-                                        (e) => Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: Sizes.textPadding),
-                                          child: ActionChip(
-                                            backgroundColor: _chipBgColor(
+                                ...listData
+                                        ?.map(
+                                          (e) => Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: Sizes.textPadding),
+                                            child: ActionChip(
+                                              backgroundColor: _chipBgColor(
+                                                  controller.currentCategory
+                                                          .value ==
+                                                      e.name),
+                                              onPressed: () {
                                                 controller.currentCategory
-                                                        .value ==
-                                                    e.name),
-                                            onPressed: () {
-                                              controller.currentCategory.value =
-                                                  e.name;
-                                            },
-                                            label: Text(e.name),
-                                            labelStyle: AppStyle.medium
-                                                .copyWith(
-                                                    color: controller
-                                                                .currentCategory
-                                                                .value ==
-                                                            e.name
-                                                        ? AppColors
-                                                            .txtLightColor
-                                                        : null),
-                                            shape: const StadiumBorder(),
+                                                    .value = e.name;
+                                              },
+                                              label: Text(e.name),
+                                              labelStyle: AppStyle.medium
+                                                  .copyWith(
+                                                      color: controller
+                                                                  .currentCategory
+                                                                  .value ==
+                                                              e.name
+                                                          ? AppColors
+                                                              .txtLightColor
+                                                          : null),
+                                              shape: const StadiumBorder(),
+                                            ),
                                           ),
-                                        ),
-                                      )
-                                      .toList() ??
-                                  const []
-                            ],
+                                        )
+                                        .toList() ??
+                                    const []
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -135,6 +140,7 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                               .toList();
                           return GridView.builder(
                             padding: const EdgeInsets.all(Sizes.padding),
+                            physics: const BouncingScrollPhysics(),
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                               childAspectRatio: 1 / 1.4,

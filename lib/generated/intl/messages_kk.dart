@@ -31,14 +31,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("អ៊ីម៉ែល"),
         "emailValidateMessage":
             MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលអ៊ីម៉ែល"),
+        "histories": MessageLookupByLibrary.simpleMessage("ប្រវត្តិ"),
         "inventory": MessageLookupByLibrary.simpleMessage("ស្តុក"),
         "languages": MessageLookupByLibrary.simpleMessage("ភាសា"),
         "languagesDes": MessageLookupByLibrary.simpleMessage("រើសភាសា"),
         "login": MessageLookupByLibrary.simpleMessage("ចូល"),
+        "orders": MessageLookupByLibrary.simpleMessage("ការកម្ម៉ង់ទាំងអស់"),
         "password": MessageLookupByLibrary.simpleMessage("លេខសំងាត់"),
         "passwordValidateMessage":
             MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលលេខសំងាត់"),
+        "scan": MessageLookupByLibrary.simpleMessage("ស្គែនដើម្បីកម្មង់"),
         "setting": MessageLookupByLibrary.simpleMessage("ការកំណត់"),
-        "signout": MessageLookupByLibrary.simpleMessage("ចាកចេញ")
+        "signout": MessageLookupByLibrary.simpleMessage("ចាកចេញ"),
+        "users": MessageLookupByLibrary.simpleMessage("អ្នកប្រើប្រាស់")
       };
 }

@@ -94,9 +94,10 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.clearFormAddProduct();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    controller.clearFormAddProduct();
+    _form.currentState?.reset();
+    // });
     super.initState();
   }
 
@@ -232,7 +233,7 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
               onPressed: () async {
                 final noError = _form.currentState?.validate();
                 if (noError == true) {
-                  final success = await controller.addDrink();
+                  await controller.addDrink();
                   // if (success == true && context.mounted) {
                   //   controller.clearFormAddProduct();
                   //   showSuccessSnackBar(

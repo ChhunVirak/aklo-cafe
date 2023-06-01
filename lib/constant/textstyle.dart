@@ -36,8 +36,9 @@ class AppStyle {
       : KhmerFontStyle().styleS();
 
   static const boxShadow = BoxShadow(
-    color: Color.fromARGB(40, 52, 42, 33),
-    spreadRadius: 0.1,
+    color: Colors.grey,
+    offset: Offset(1, 1),
+    spreadRadius: 1,
     blurRadius: 8,
   );
 }

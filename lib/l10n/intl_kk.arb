@@ -7,12 +7,16 @@
   "password": "លេខសំងាត់",
   "passwordValidateMessage": "សូមបញ្ចូលលេខសំងាត់",
   "login": "ចូល",
+  "orders": "ការកម្ម៉ង់ទាំងអស់",
+  "histories": "ប្រវត្តិ",
   "inventory": "ស្តុក",
+  "users": "អ្នកប្រើប្រាស់",
   "allCoffeeTitle": "ភេសជ្ជៈទាំងអស់",
   "addDrink": "បន្ថែមភេសជ្ជៈ",
   "addCategory": "បន្ថែមស្តុក",
   "category": "ស្តុកទាំងអស់",
   "dashboard": "ផ្ទាំងគ្រប់គ្រង",
   "setting": "ការកំណត់",
-  "signout": "ចាកចេញ"
+  "signout": "ចាកចេញ",
+  "scan": "ស្គែនដើម្បីកម្មង់"
 }

@@ -26,7 +26,16 @@ class LangsEn extends Langs {
   String get login => 'Login';
 
   @override
+  String get orders => 'Orders';
+
+  @override
+  String get histories => 'Histories';
+
+  @override
   String get inventory => 'Inventory';
+
+  @override
+  String get users => 'Users';
 
   @override
   String get allCoffeeTitle => 'All Drinks';
@@ -48,4 +57,7 @@ class LangsEn extends Langs {
 
   @override
   String get signout => 'Sign Out';
+
+  @override
+  String get scan => 'Scan to Order';
 }

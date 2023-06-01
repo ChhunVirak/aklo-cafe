@@ -30,15 +30,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailValidateMessage":
             MessageLookupByLibrary.simpleMessage("Email is required."),
+        "histories": MessageLookupByLibrary.simpleMessage("Histories"),
         "inventory": MessageLookupByLibrary.simpleMessage("Inventory"),
         "languages": MessageLookupByLibrary.simpleMessage("Languages"),
         "languagesDes":
             MessageLookupByLibrary.simpleMessage("Choose Preference Languages"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "orders": MessageLookupByLibrary.simpleMessage("Orders"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordValidateMessage":
             MessageLookupByLibrary.simpleMessage("Password is required."),
+        "scan": MessageLookupByLibrary.simpleMessage("Scan to Order"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
-        "signout": MessageLookupByLibrary.simpleMessage("Sign Out")
+        "signout": MessageLookupByLibrary.simpleMessage("Sign Out"),
+        "users": MessageLookupByLibrary.simpleMessage("Users")
       };
 }

@@ -4,14 +4,16 @@ class AppSetting {
   AppSetting._();
   static final instance = AppSetting._();
 
-  void _setDeviceOrientation() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
+  Future<void> _setDeviceOrientation() async {
+    await SystemChrome.setPreferredOrientations([
+      // DeviceOrientation.portraitUp,
+      // DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
     ]);
   }
 
-  void init() {
-    _setDeviceOrientation();
+  Future<void> init() async {
+    await _setDeviceOrientation();
   }
 }

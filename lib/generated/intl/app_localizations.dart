@@ -135,11 +135,29 @@ abstract class Langs {
   /// **'Login'**
   String get login;
 
+  /// No description provided for @orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get orders;
+
+  /// No description provided for @histories.
+  ///
+  /// In en, this message translates to:
+  /// **'Histories'**
+  String get histories;
+
   /// No description provided for @inventory.
   ///
   /// In en, this message translates to:
   /// **'Inventory'**
   String get inventory;
+
+  /// No description provided for @users.
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get users;
 
   /// No description provided for @allCoffeeTitle.
   ///
@@ -182,6 +200,12 @@ abstract class Langs {
   /// In en, this message translates to:
   /// **'Sign Out'**
   String get signout;
+
+  /// No description provided for @scan.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan to Order'**
+  String get scan;
 }
 
 class _LangsDelegate extends LocalizationsDelegate<Langs> {

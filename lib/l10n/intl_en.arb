@@ -7,12 +7,16 @@
   "password": "Password",
   "passwordValidateMessage": "Password is required.",
   "login": "Login",
+  "orders": "Orders",
+  "histories": "Histories",
   "inventory": "Inventory",
+  "users": "Users",
   "allCoffeeTitle": "All Drinks",
   "addDrink": "Add New Drink",
   "addCategory": "Add New Category",
   "category": "All Categories",
   "dashboard": "Dashboard",
   "setting": "Setting",
-  "signout": "Sign Out"
+  "signout": "Sign Out",
+  "scan": "Scan to Order"
 }

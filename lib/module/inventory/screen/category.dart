@@ -46,7 +46,7 @@ class CategoryScreen extends GetView<InventoryController> {
                 return DrinkCard(
                   name: name,
                   image: img,
-                  unitPrice: 0,
+                  // unitPrice: 0,
                   // qty: qty,
                 );
               },

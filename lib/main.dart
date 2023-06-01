@@ -1,8 +1,8 @@
 import 'package:aklo_cafe/firebase_options.dart';
-import 'package:aklo_cafe/config/app_setting.dart';
 import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'binding/app_binding.dart';
@@ -15,8 +15,14 @@ import 'constant/resources.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  AppSetting.instance.init();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+    // DeviceOrientation.landscapeLeft,
+    // DeviceOrientation.landscapeRight,
+  ]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // await AppSetting.instance.init();
   runApp(
     const MainApp(),
   );
@@ -28,6 +34,12 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fontController = Get.put(LangsAndFontConfigs());
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    //   // DeviceOrientation.landscapeLeft,
+    //   // DeviceOrientation.landscapeRight,
+    // ]);
     return GetBuilder<LangsAndFontConfigs>(
       init: fontController,
       builder: (_) => GetMaterialApp(
