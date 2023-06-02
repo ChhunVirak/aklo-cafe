@@ -11,7 +11,7 @@ class Strings {
   static const String passwordValidateMessage = 'Password is required.';
 
   ///Order
-  static const String orderTitle = 'All Orders';
+  static const String orderTitle = 'All Orders'; // =>
 
   ///Inventory
   static const String inventory = 'Inventory';

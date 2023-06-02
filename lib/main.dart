@@ -13,8 +13,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'constant/resources.dart';
 
+import 'package:flutter_web_plugins/url_strategy.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  usePathUrlStrategy();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -34,18 +37,12 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fontController = Get.put(LangsAndFontConfigs());
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitUp,
-    //   DeviceOrientation.portraitDown,
-    //   // DeviceOrientation.landscapeLeft,
-    //   // DeviceOrientation.landscapeRight,
-    // ]);
+
     return GetBuilder<LangsAndFontConfigs>(
       init: fontController,
       builder: (_) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Aklo Cafe',
-
         initialBinding: AppBinding(),
         locale: const Locale('en'),
         localizationsDelegates: const [
@@ -55,8 +52,10 @@ class MainApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: S.delegate.supportedLocales,
-        initialRoute: AppPages.INITIAL,
-        getPages: AppPages.routes,
+        initialRoute: AppPages.INITIAL_CLIENT,
+        getPages: AppPages.routesClient,
+        unknownRoute: AppPages.routesClient.first,
+        // onUnknownRoute: (settings) => GetPageRoute(),
         theme: ThemeData(
             useMaterial3: true,
             // fontFamily: 'Battambang',
@@ -94,11 +93,7 @@ class MainApp extends StatelessWidget {
             )
             // listTileTheme: ListTileThemeData()
             ),
-
-        // home: const DashBoard(),
       ),
     );
   }
 }
-
-class Me extends NavigatorObserver {}

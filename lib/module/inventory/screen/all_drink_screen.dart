@@ -142,9 +142,9 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                             padding: const EdgeInsets.all(Sizes.padding),
                             physics: const BouncingScrollPhysics(),
                             gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                SliverGridDelegateWithFixedCrossAxisCount(
                               childAspectRatio: 1 / 1.4,
-                              crossAxisCount: 2,
+                              crossAxisCount: context.isPhone ? 2 : 3,
                               mainAxisSpacing: Sizes.padding,
                               crossAxisSpacing: Sizes.padding,
                             ),
