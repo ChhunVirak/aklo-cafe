@@ -1,6 +1,4 @@
 import 'package:aklo_cafe/module/home/controller/dashboard_controller.dart';
-import 'package:aklo_cafe/util/alerts/app_modal_bottomsheet.dart';
-import 'package:aklo_cafe/util/extensions/widget_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -69,24 +67,24 @@ class _DashBoardState extends State<DashBoard> {
     //   DeviceOrientation.portraitDown,
     //   DeviceOrientation.portraitUp,
     // ]);
-    showCustomModalBottomSheet(
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Sizes.defaultPadding.sh,
-          Text(
-            S.current.scan,
-            style: AppStyle.large,
-          ),
-          Sizes.textPadding.sh,
-          Center(
-            child: Image.network(
-              'https://hosttools.com/wp-content/uploads/QR-Code-.png.webp',
-            ),
-          ),
-        ],
-      ),
-    );
+    Get.toNamed(Routes.CLIENT_ORDER);
+    // showCustomModalBottomSheet(
+    //   Column(
+    //     children: [
+    //       Sizes.defaultPadding.sh,
+    //       Text(
+    //         S.current.scan,
+    //         style: AppStyle.large,
+    //       ),
+    //       Sizes.textPadding.sh,
+    //       Expanded(
+    //         child: Image.network(
+    //           'https://www.bleepstatic.com/images/news/u/1164866/2022/Apr-2022/qr-code-moving/qr-code-moving.gif',
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 
   int _currentIndex = 0;

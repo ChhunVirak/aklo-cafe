@@ -15,9 +15,12 @@ import 'constant/resources.dart';
 
 import 'package:flutter_web_plugins/url_strategy.dart';
 
+import 'core/firebase_core/notification_core/firebase_notification_helper.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
+
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -25,6 +28,7 @@ Future<void> main() async {
     // DeviceOrientation.landscapeRight,
   ]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  NotificationHelper.instance.init();
   // await AppSetting.instance.init();
   runApp(
     const MainApp(),
@@ -52,8 +56,10 @@ class MainApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: S.delegate.supportedLocales,
-        initialRoute: AppPages.INITIAL_CLIENT,
-        getPages: AppPages.routesClient,
+        initialRoute: AppPages.getInitialRoute,
+        getPages:
+            GetPlatform.isWeb ?
+             AppPages.routesClient : AppPages.routesAdmin,
         unknownRoute: AppPages.routesClient.first,
         // onUnknownRoute: (settings) => GetPageRoute(),
         theme: ThemeData(

@@ -1,10 +1,14 @@
 import 'package:aklo_cafe/constant/resources.dart';
 import 'package:aklo_cafe/module/inventory/controller/inventory_controller.dart';
 import 'package:aklo_cafe/module/inventory/model/category_model.dart';
+import 'package:aklo_cafe/util/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../util/alerts/app_dialog.dart';
+import '../../../util/alerts/app_snackbar.dart';
 import '../../../util/widgets/app_circular_loading.dart';
+import '../../../util/widgets/custom_button.dart';
 import '../components/drink_card.dart';
 
 class CategoryScreen extends GetView<InventoryController> {
@@ -25,8 +29,7 @@ class CategoryScreen extends GetView<InventoryController> {
               child: CustomCircularLoading(),
             );
           }
-          if (snapshot.connectionState == ConnectionState.active &&
-              snapshot.hasData) {
+          if (snapshot.hasData) {
             final listData = snapshot.data?.docs
                 .map((e) => CategoryModel.fromMap(e.data()))
                 .toList();
@@ -43,11 +46,81 @@ class CategoryScreen extends GetView<InventoryController> {
                 final name = listData?[index].name;
                 final img = listData?[index].image;
 
-                return DrinkCard(
-                  name: name,
-                  image: img,
-                  // unitPrice: 0,
-                  // qty: qty,
+                return GestureDetector(
+                  onTap: () {
+                    Get.bottomSheet(
+                      BottomSheet(
+                        onClosing: () {},
+                        builder: (context) {
+                          return Container(
+                            padding: const EdgeInsets.all(Sizes.defaultPadding),
+                            // color: Colors.white,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                CustomButton(
+                                  onPressed: () {
+                                    Get.back();
+
+                                    //TODO : initial Data to Edit
+                                    // controller
+                                    //     .initialDrinkForEdit(
+                                    //         listData?[index]);
+                                    // Get.toNamed(
+                                    //   Routes.EDIT_DRINK,
+                                    //   parameters: {'isAdd': '0'},
+                                    // );
+                                  },
+                                  name: 'Edit',
+                                ),
+                                Sizes.defaultPadding.sh,
+                                CustomButton(
+                                  onPressed: () {
+                                    showCustomDialog(
+                                      title: 'Confirm!',
+                                      description:
+                                          'Are you sure want to delete $name',
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () async {
+                                            await controller.drinkDb
+                                                .doc(listData?[index].id)
+                                                .delete();
+                                            Get.back();
+                                            Get.back();
+                                            showErrorSnackBar(
+                                                title: 'Success',
+                                                description:
+                                                    'Delete successfully');
+                                          },
+                                          child: const Text('Yes'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('No'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                  backgroundColor: Colors.red,
+                                  name: 'Delete',
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                      isScrollControlled: true,
+                    );
+                  },
+                  child: DrinkCard(
+                    name: name,
+                    image: img,
+                    // unitPrice: 0,
+                    // qty: qty,
+                  ),
                 );
               },
             );

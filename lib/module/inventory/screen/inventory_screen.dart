@@ -22,6 +22,7 @@ class Inventory extends GetView<InventoryController> {
           );
           break;
         case 1:
+          controller.clearFormAddProduct();
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -38,6 +39,7 @@ class Inventory extends GetView<InventoryController> {
           );
           break;
         case 3:
+          controller.clearFormAddCategory();
           Navigator.push(
             context,
             MaterialPageRoute(

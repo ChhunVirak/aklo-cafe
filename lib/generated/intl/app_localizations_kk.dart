@@ -59,5 +59,20 @@ class LangsKk extends Langs {
   String get signout => 'ចាកចេញ';
 
   @override
-  String get scan => 'ស្គែនដើម្បីកម្មង់';
+  String get scan => 'ស្គែនទៅកាន់ មីនុយអេឡិចត្រូនិច';
+
+  @override
+  String get drinkNameValidateMessage => 'ឈ្មោះភេសជ្ជៈមិនអាចទទេបានទេ';
+
+  @override
+  String get drinkCategoryValidateMessage => 'ប្រភេទភេសជ្ជៈមិនអាចទទេបានទេ';
+
+  @override
+  String get drinkUnitPriceValidateMessage => 'តម្លៃឯកតាភេសជ្ជៈមិនអាចទទេបានទេ';
+
+  @override
+  String get drinkTotalAmountValidateMessage => 'បរិមាណភេសជ្ជៈមិនអាចទទេបានទេ';
+
+  @override
+  String get categoryNameAmountValidateMessage => 'ឈ្មោះប្រភេទមិនអាចទទេបានទេ។';
 }

@@ -30,6 +30,10 @@ class AppPages {
 
   static final routesAdmin = <GetPage>[
     GetPage(
+      name: _Paths.CLIENT_ORDER,
+      page: () => const ClientOrderScreen(),
+    ),
+    GetPage(
       name: _Paths.LOGIN,
       page: () => const LoginScreen(),
     ),
@@ -45,10 +49,28 @@ class AppPages {
           name: _Paths.INVENTORY,
           binding: InventoryBinding(),
           page: () => const Inventory(),
+          children: [
+            GetPage(
+              name: _Paths.ALL_DRINKS,
+              page: () => const AllCoffeeScreen(),
+              children: [
+                GetPage(
+                  name: _Paths.ADD_DRINK,
+                  page: () => AddDrinkScreen(
+                    id: Get.parameters['id'],
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
         GetPage(
           name: _Paths.USERS,
           page: () => const UsersScreen(),
+        ),
+        GetPage(
+          name: _Paths.ADD_DRINK,
+          page: () => const AddDrinkScreen(),
         ),
       ],
     ),

@@ -6,6 +6,7 @@ import 'package:aklo_cafe/util/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../generated/l10n.dart';
 import '../../../util/widgets/custom_image_picker_box.dart';
 import '../../../util/widgets/custom_textfield.dart';
 
@@ -64,7 +65,8 @@ class _AddCategoryState extends State<AddCategory> {
                           textInputAction: TextInputAction.next,
                           validator: (v) {
                             if (v == '') {
-                              return Strings.categoryNameAmountValidateMessage;
+                              return S
+                                  .current.categoryNameAmountValidateMessage;
                             }
                             return null;
                           },

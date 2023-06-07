@@ -26,7 +26,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "addDrink": MessageLookupByLibrary.simpleMessage("Add New Drink"),
         "allCoffeeTitle": MessageLookupByLibrary.simpleMessage("All Drinks"),
         "category": MessageLookupByLibrary.simpleMessage("All Categories"),
+        "categoryNameAmountValidateMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Field category name can\'t be empty."),
         "dashboard": MessageLookupByLibrary.simpleMessage("Dashboard"),
+        "drinkCategoryValidateMessage": MessageLookupByLibrary.simpleMessage(
+            "Field drink category can\'t be empty."),
+        "drinkNameValidateMessage": MessageLookupByLibrary.simpleMessage(
+            "Field drink name can\'t be empty."),
+        "drinkTotalAmountValidateMessage": MessageLookupByLibrary.simpleMessage(
+            "Field drink amount can\'t be empty."),
+        "drinkUnitPriceValidateMessage": MessageLookupByLibrary.simpleMessage(
+            "Field drink unit price can\'t be empty."),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailValidateMessage":
             MessageLookupByLibrary.simpleMessage("Email is required."),
@@ -40,7 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordValidateMessage":
             MessageLookupByLibrary.simpleMessage("Password is required."),
-        "scan": MessageLookupByLibrary.simpleMessage("Scan to Order"),
+        "scan": MessageLookupByLibrary.simpleMessage("Scan to E-Menu"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "signout": MessageLookupByLibrary.simpleMessage("Sign Out"),
         "users": MessageLookupByLibrary.simpleMessage("Users")

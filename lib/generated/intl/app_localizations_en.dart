@@ -59,5 +59,20 @@ class LangsEn extends Langs {
   String get signout => 'Sign Out';
 
   @override
-  String get scan => 'Scan to Order';
+  String get scan => 'Scan to E-Menu';
+
+  @override
+  String get drinkNameValidateMessage => 'Field drink name can\'t be empty.';
+
+  @override
+  String get drinkCategoryValidateMessage => 'Field drink category can\'t be empty.';
+
+  @override
+  String get drinkUnitPriceValidateMessage => 'Field drink unit price can\'t be empty.';
+
+  @override
+  String get drinkTotalAmountValidateMessage => 'Field drink amount can\'t be empty.';
+
+  @override
+  String get categoryNameAmountValidateMessage => 'Field category name can\'t be empty.';
 }

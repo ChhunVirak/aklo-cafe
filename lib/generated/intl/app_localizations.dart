@@ -204,8 +204,38 @@ abstract class Langs {
   /// No description provided for @scan.
   ///
   /// In en, this message translates to:
-  /// **'Scan to Order'**
+  /// **'Scan to E-Menu'**
   String get scan;
+
+  /// No description provided for @drinkNameValidateMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Field drink name can\'t be empty.'**
+  String get drinkNameValidateMessage;
+
+  /// No description provided for @drinkCategoryValidateMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Field drink category can\'t be empty.'**
+  String get drinkCategoryValidateMessage;
+
+  /// No description provided for @drinkUnitPriceValidateMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Field drink unit price can\'t be empty.'**
+  String get drinkUnitPriceValidateMessage;
+
+  /// No description provided for @drinkTotalAmountValidateMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Field drink amount can\'t be empty.'**
+  String get drinkTotalAmountValidateMessage;
+
+  /// No description provided for @categoryNameAmountValidateMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Field category name can\'t be empty.'**
+  String get categoryNameAmountValidateMessage;
 }
 
 class _LangsDelegate extends LocalizationsDelegate<Langs> {

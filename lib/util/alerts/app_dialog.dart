@@ -20,6 +20,7 @@ void showCustomDialog({
         top: Sizes.textPadding,
         left: Sizes.defaultPadding,
       ),
+      // actionsAlignment: MainAxisAlignment.spaceBetween,
       contentPadding: const EdgeInsets.only(
           left: Sizes.defaultPadding, right: Sizes.defaultPadding),
       actionsPadding: const EdgeInsets.only(

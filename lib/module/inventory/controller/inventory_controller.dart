@@ -29,9 +29,7 @@ class FirebaseHelper {
   }
 }
 
-class InventoryController extends GetxController
-//  implements InventoryBaseRepo
-{
+class InventoryController extends GetxController {
   //Firebase Collection
   final drinkDb = FirebaseFirestore.instance.collection('drink');
 
@@ -86,6 +84,15 @@ class InventoryController extends GetxController
     amountTxTcontroller.clear();
   }
 
+  void initialDrinkForEdit(DrinkModel? drinkModel) {
+    if (drinkModel != null) {
+      drinkNameTxTcontroller.text = drinkModel.name;
+      drinkCategoryTxTcontroller.text = drinkModel.category;
+      unitPriceTxTcontroller.text = drinkModel.unitPrice.toString();
+      amountTxTcontroller.text = drinkModel.amount.toString();
+    }
+  }
+
   Future<void> addDrink() async {
     try {
       final newDrink = DrinkModel(
@@ -116,6 +123,39 @@ class InventoryController extends GetxController
       );
     }
     // return null;
+  }
+
+  Future<void> updateDrink(String? id) async {
+    if (id != null) {
+      try {
+        final newDrink = DrinkModel(
+          name: drinkNameTxTcontroller.text,
+          category: drinkCategoryTxTcontroller.text,
+          unitPrice: num.tryParse(unitPriceTxTcontroller.text) ?? 0,
+          amount: int.tryParse(amountTxTcontroller.text) ?? 0,
+          createdDate: DateTime.now(),
+        ).toMap()
+          ..removeWhere(
+            (key, value) => value == null,
+          );
+
+        await db.collection('drink').doc(id).update(
+              newDrink,
+            );
+
+        Get.until((route) => Get.currentRoute == Routes.INVENTORY);
+        showSuccessSnackBar(
+          title: 'Success',
+          description: 'New drink has been update successfully.',
+        );
+      } catch (_) {
+        debugPrint('Error $_');
+        showErrorSnackBar(
+          title: 'Error',
+          description: 'Drink add fail $_',
+        );
+      }
+    }
   }
 
   final categoryNameTxtcontroller = TextEditingController();

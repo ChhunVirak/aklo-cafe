@@ -1,9 +1,15 @@
 import 'package:aklo_cafe/constant/resources.dart';
 import 'package:aklo_cafe/module/inventory/controller/inventory_controller.dart';
 import 'package:aklo_cafe/module/inventory/model/drink_model.dart';
+import 'package:aklo_cafe/util/alerts/app_dialog.dart';
+import 'package:aklo_cafe/util/alerts/app_snackbar.dart';
+import 'package:aklo_cafe/util/extensions/responsive/responsive_extension.dart';
+import 'package:aklo_cafe/util/extensions/widget_extension.dart';
+import 'package:aklo_cafe/util/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../config/router/app_pages.dart';
 import '../../../util/widgets/app_circular_loading.dart';
 import '../components/drink_card.dart';
 import '../model/category_model.dart';
@@ -36,8 +42,7 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                         child: CustomCircularLoading(),
                       );
                     }
-                    if (snapshot.connectionState == ConnectionState.active &&
-                        snapshot.hasData) {
+                    if (snapshot.hasData) {
                       final listData = snapshot.data?.docs
                           .map((e) => CategoryModel.fromMap(e.data()))
                           .toList();
@@ -45,7 +50,8 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                         width: context.width,
                         child: SingleChildScrollView(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: Sizes.defaultPadding),
+                              horizontal: Sizes.defaultPadding,
+                              vertical: Sizes.tablePadding),
                           scrollDirection: Axis.horizontal,
                           child: Obx(
                             () => Row(
@@ -132,9 +138,13 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                             ),
                           );
                         }
-                        if (snapshot.connectionState ==
-                                ConnectionState.active &&
-                            snapshot.hasData) {
+
+                        if (!snapshot.hasData) {
+                          return const Center(
+                            child: Text('No Drinks'),
+                          );
+                        }
+                        if (snapshot.hasData) {
                           final listData = snapshot.data?.docs
                               .map((e) => DrinkModel.fromMap(e.data()))
                               .toList();
@@ -144,7 +154,8 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                               childAspectRatio: 1 / 1.4,
-                              crossAxisCount: context.isPhone ? 2 : 3,
+                              crossAxisCount: context.responsive<int>(2,
+                                  sm: 2, md: 3, lg: 4, xl: 5),
                               mainAxisSpacing: Sizes.padding,
                               crossAxisSpacing: Sizes.padding,
                             ),
@@ -154,17 +165,107 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                               // final img = listData[index].image;
                               final unitPrice = listData?[index].unitPrice;
                               final qty = listData?[index].amount;
+                              final id = listData?[index].id;
 
-                              return DrinkCard(
-                                name: name,
-                                image:
-                                    'https://cdn.shopify.com/s/files/1/0298/4581/5429/products/ReusableCup_grande.png?v=1578631807',
-                                unitPrice: unitPrice,
-                                qty: qty,
+                              return GestureDetector(
+                                onTap: () {
+                                  if (!GetPlatform.isWeb) {
+                                    Get.bottomSheet(
+                                      BottomSheet(
+                                        onClosing: () {},
+                                        builder: (context) {
+                                          return Container(
+                                            padding: const EdgeInsets.all(
+                                                Sizes.defaultPadding),
+                                            // color: Colors.white,
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                CustomButton(
+                                                  onPressed: () {
+                                                    Get.back();
+
+                                                    //TODO : initial Data to Edit
+                                                    controller
+                                                        .initialDrinkForEdit(
+                                                            listData?[index]);
+                                                    final param =
+                                                        <String, String>{}
+                                                          ..addIf(
+                                                            id != null,
+                                                            'id',
+                                                            id!,
+                                                          );
+
+                                                    Get.toNamed(
+                                                      Routes.EDIT_DRINK,
+                                                      parameters: param,
+                                                    );
+                                                  },
+                                                  name: 'Edit',
+                                                ),
+                                                Sizes.defaultPadding.sh,
+                                                CustomButton(
+                                                  onPressed: () {
+                                                    showCustomDialog(
+                                                      title: 'Confirm!',
+                                                      description:
+                                                          'Are you sure want to delete $name',
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () async {
+                                                            await controller
+                                                                .drinkDb
+                                                                .doc(listData?[
+                                                                        index]
+                                                                    .id)
+                                                                .delete();
+                                                            Get.back();
+                                                            Get.back();
+                                                            showErrorSnackBar(
+                                                                title:
+                                                                    'Success',
+                                                                description:
+                                                                    'Delete successfully');
+                                                          },
+                                                          child:
+                                                              const Text('Yes'),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child:
+                                                              const Text('No'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                  backgroundColor: Colors.red,
+                                                  name: 'Delete',
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      isScrollControlled: true,
+                                    );
+                                  }
+                                },
+                                child: DrinkCard(
+                                  name: name,
+                                  image:
+                                      'https://cdn.shopify.com/s/files/1/0298/4581/5429/products/ReusableCup_grande.png?v=1578631807',
+                                  unitPrice: unitPrice,
+                                  qty: qty,
+                                ),
                               );
                             },
                           );
                         }
+
                         return const Center(
                           child: Text('Something went wrong'),
                         );

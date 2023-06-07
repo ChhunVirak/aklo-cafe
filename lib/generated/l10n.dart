@@ -230,11 +230,61 @@ class S {
     );
   }
 
-  /// `Scan to Order`
+  /// `Scan to E-Menu`
   String get scan {
     return Intl.message(
-      'Scan to Order',
+      'Scan to E-Menu',
       name: 'scan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Field drink name can't be empty.`
+  String get drinkNameValidateMessage {
+    return Intl.message(
+      'Field drink name can\'t be empty.',
+      name: 'drinkNameValidateMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Field drink category can't be empty.`
+  String get drinkCategoryValidateMessage {
+    return Intl.message(
+      'Field drink category can\'t be empty.',
+      name: 'drinkCategoryValidateMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Field drink unit price can't be empty.`
+  String get drinkUnitPriceValidateMessage {
+    return Intl.message(
+      'Field drink unit price can\'t be empty.',
+      name: 'drinkUnitPriceValidateMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Field drink amount can't be empty.`
+  String get drinkTotalAmountValidateMessage {
+    return Intl.message(
+      'Field drink amount can\'t be empty.',
+      name: 'drinkTotalAmountValidateMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Field category name can't be empty.`
+  String get categoryNameAmountValidateMessage {
+    return Intl.message(
+      'Field category name can\'t be empty.',
+      name: 'categoryNameAmountValidateMessage',
       desc: '',
       args: [],
     );

@@ -21,14 +21,14 @@ class Strings {
   static const String category = 'All Categories';
 
   ///validate
-  static const String drinkNameValidateMessage =
-      'Field drink name can\'t be empty.';
-  static const String drinkCategoryValidateMessage =
-      'Field drink category can\'t be empty.';
-  static const String drinkUnitPriceValidateMessage =
-      'Field drink unit price can\'t be empty.';
-  static const String drinkTotalAmountValidateMessage =
-      'Field drink amount can\'t be empty.';
-  static const String categoryNameAmountValidateMessage =
-      'Field category name can\'t be empty.';
+  // static const String drinkNameValidateMessage =
+  //     'Field drink name can\'t be empty.';
+  // static const String drinkCategoryValidateMessage =
+  //     'Field drink category can\'t be empty.';
+  // static const String drinkUnitPriceValidateMessage =
+  //     'Field drink unit price can\'t be empty.';
+  // static const String drinkTotalAmountValidateMessage =
+  //     'Field drink amount can\'t be empty.';
+  // static const String categoryNameAmountValidateMessage =
+  //     'Field category name can\'t be empty.';
 }

@@ -27,7 +27,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "allCoffeeTitle":
             MessageLookupByLibrary.simpleMessage("ភេសជ្ជៈទាំងអស់"),
         "category": MessageLookupByLibrary.simpleMessage("ស្តុកទាំងអស់"),
+        "categoryNameAmountValidateMessage":
+            MessageLookupByLibrary.simpleMessage("ឈ្មោះប្រភេទមិនអាចទទេបានទេ។"),
         "dashboard": MessageLookupByLibrary.simpleMessage("ផ្ទាំងគ្រប់គ្រង"),
+        "drinkCategoryValidateMessage":
+            MessageLookupByLibrary.simpleMessage("ប្រភេទភេសជ្ជៈមិនអាចទទេបានទេ"),
+        "drinkNameValidateMessage":
+            MessageLookupByLibrary.simpleMessage("ឈ្មោះភេសជ្ជៈមិនអាចទទេបានទេ"),
+        "drinkTotalAmountValidateMessage":
+            MessageLookupByLibrary.simpleMessage("បរិមាណភេសជ្ជៈមិនអាចទទេបានទេ"),
+        "drinkUnitPriceValidateMessage": MessageLookupByLibrary.simpleMessage(
+            "តម្លៃឯកតាភេសជ្ជៈមិនអាចទទេបានទេ"),
         "email": MessageLookupByLibrary.simpleMessage("អ៊ីម៉ែល"),
         "emailValidateMessage":
             MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលអ៊ីម៉ែល"),
@@ -40,7 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("លេខសំងាត់"),
         "passwordValidateMessage":
             MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលលេខសំងាត់"),
-        "scan": MessageLookupByLibrary.simpleMessage("ស្គែនដើម្បីកម្មង់"),
+        "scan": MessageLookupByLibrary.simpleMessage(
+            "ស្គែនទៅកាន់ មីនុយអេឡិចត្រូនិច"),
         "setting": MessageLookupByLibrary.simpleMessage("ការកំណត់"),
         "signout": MessageLookupByLibrary.simpleMessage("ចាកចេញ"),
         "users": MessageLookupByLibrary.simpleMessage("អ្នកប្រើប្រាស់")

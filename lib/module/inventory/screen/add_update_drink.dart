@@ -7,10 +7,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../generated/l10n.dart';
 import '../../../util/widgets/custom_textfield.dart';
 
 class AddDrinkScreen extends StatefulWidget {
-  const AddDrinkScreen({super.key});
+  final String? id;
+  const AddDrinkScreen({
+    super.key,
+    this.id,
+  });
 
   @override
   State<AddDrinkScreen> createState() => _AddDrinkScreenState();
@@ -18,88 +23,81 @@ class AddDrinkScreen extends StatefulWidget {
 
 class _AddDrinkScreenState extends State<AddDrinkScreen> {
   final controller = Get.find<InventoryController>();
-  void _showCategories(BuildContext context) {
-    showCustomModalBottomSheet(
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: double.maxFinite,
-            padding: const EdgeInsets.all(Sizes.defaultPadding),
-            // decoration: const BoxDecoration(
-            //   color: AppColors.secondaryColor,
-            //   borderRadius: BorderRadius.only(
-            //     topLeft: Radius.circular(30),
-            //     topRight: Radius.circular(30),
-            //   ),
-            // ),
-            alignment: Alignment.center,
-            child: Text(
-              'Drink Categories',
-              style: AppStyle.large.copyWith(),
+  Future<void> _showCategories(BuildContext context) async {
+    await showCustomModalBottomSheet(
+      ColoredBox(
+        color: Colors.white,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: double.maxFinite,
+              padding: const EdgeInsets.all(Sizes.defaultPadding),
+              // decoration: const BoxDecoration(
+              color: AppColors.secondaryColor,
+              //   borderRadius: BorderRadius.only(
+              //     topLeft: Radius.circular(30),
+              //     topRight: Radius.circular(30),
+              //   ),
+              // ),
+              alignment: Alignment.center,
+              child: Text(
+                'Drink Categories',
+                style: AppStyle.large.copyWith(color: AppColors.txtLightColor),
+              ),
             ),
-          ),
-          // const Divider(
-          //   height: 0,
-          //   color: AppColors.txtDarkColor,
-          // ),
-          Expanded(
-              child: StreamBuilder(
-            stream: controller.categoryDb.snapshots(),
-            builder: (_, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CupertinoActivityIndicator(),
-                );
-              }
-              if (snapshot.connectionState == ConnectionState.active &&
-                  snapshot.hasData) {
-                final cetegoryList = snapshot.data?.docs
-                        .map((e) => CategoryModel.fromMap(e.data()))
-                        .toList() ??
-                    [];
-                return ListView.separated(
-                  itemCount: cetegoryList.length,
-                  itemBuilder: (_, index) => InkWell(
-                    onTap: () {
-                      controller.drinkCategoryTxTcontroller.text =
-                          cetegoryList[index].name;
-                      Navigator.pop(context);
-                    },
-                    child: Ink(
-                      padding: const EdgeInsets.all(Sizes.defaultPadding),
-                      decoration: const BoxDecoration(color: Colors.white),
-                      child: Text(
-                        cetegoryList[index].name,
-                        style: AppStyle.medium,
+            // const Divider(
+            //   height: 0,
+            //   color: AppColors.txtDarkColor,
+            // ),
+            Expanded(
+                child: StreamBuilder(
+              stream: controller.categoryDb.snapshots(),
+              builder: (_, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CupertinoActivityIndicator(),
+                  );
+                }
+                if (snapshot.hasData) {
+                  final cetegoryList = snapshot.data?.docs
+                          .map((e) => CategoryModel.fromMap(e.data()))
+                          .toList() ??
+                      [];
+                  return ListView.separated(
+                    itemCount: cetegoryList.length,
+                    itemBuilder: (_, index) => InkWell(
+                      onTap: () {
+                        controller.drinkCategoryTxTcontroller.text =
+                            cetegoryList[index].name;
+                        Navigator.pop(context);
+                      },
+                      child: Ink(
+                        padding: const EdgeInsets.all(Sizes.defaultPadding),
+                        decoration: const BoxDecoration(color: Colors.white),
+                        child: Text(
+                          cetegoryList[index].name,
+                          style: AppStyle.medium,
+                        ),
                       ),
                     ),
-                  ),
-                  separatorBuilder: (_, __) => const Divider(
-                    thickness: 0.5,
-                    color: AppColors.txtDarkColor,
-                    height: 0,
-                  ),
-                );
-              }
-              return const Text('Empty');
-            },
-          )),
-        ],
+                    separatorBuilder: (_, __) => const Divider(
+                      thickness: 0.5,
+                      color: AppColors.txtDarkColor,
+                      height: 0,
+                    ),
+                  );
+                }
+                return const Text('Empty');
+              },
+            )),
+          ],
+        ),
       ),
     );
   }
 
-  final _form = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    controller.clearFormAddProduct();
-    _form.currentState?.reset();
-    // });
-    super.initState();
-  }
+  static final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
   double sugar = 0;
   double ice = 0;
@@ -132,36 +130,46 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                         textInputAction: TextInputAction.next,
                         validator: (v) {
                           if (v == '') {
-                            return Strings.drinkNameValidateMessage;
+                            return S.current.drinkNameValidateMessage;
                           }
                           return null;
                         },
                       ),
-                      CustomTextField(
-                        onTap: () {
-                          _showCategories(context);
+                      Focus(
+                        onFocusChange: (_) {
+                          debugPrint('statement $_');
+                          if (_) {
+                            _showCategories(context);
+                          }
                         },
-                        enable: false,
-                        controller: controller.drinkCategoryTxTcontroller,
-                        label: 'Category',
-                        require: true,
-                        textInputAction: TextInputAction.next,
-                        suffixIcon: FocusScope(
-                          canRequestFocus: false,
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.expand_more_rounded,
-                              size: 25,
+                        child: CustomTextField(
+                          onTap: () {
+                            _showCategories(context).then((value) {
+                              FocusScope.of(context).nextFocus();
+                            });
+                          },
+                          enable: false,
+                          controller: controller.drinkCategoryTxTcontroller,
+                          label: 'Category',
+                          require: true,
+                          textInputAction: TextInputAction.next,
+                          suffixIcon: FocusScope(
+                            canRequestFocus: false,
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.expand_more_rounded,
+                                size: 25,
+                              ),
                             ),
                           ),
+                          validator: (v) {
+                            if (v == '') {
+                              return S.current.drinkCategoryValidateMessage;
+                            }
+                            return null;
+                          },
                         ),
-                        validator: (v) {
-                          if (v == '') {
-                            return Strings.drinkCategoryValidateMessage;
-                          }
-                          return null;
-                        },
                       ),
                       CustomTextField(
                         controller: controller.unitPriceTxTcontroller,
@@ -172,7 +180,7 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                         textInputAction: TextInputAction.next,
                         validator: (v) {
                           if (v == '') {
-                            return Strings.drinkUnitPriceValidateMessage;
+                            return S.current.drinkUnitPriceValidateMessage;
                           }
 
                           return null;
@@ -186,11 +194,13 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                         textInputType: TextInputType.number,
                         validator: (v) {
                           if (v == '') {
-                            return Strings.drinkTotalAmountValidateMessage;
+                            return S.current.drinkTotalAmountValidateMessage;
                           }
                           return null;
                         },
                       ),
+
+                      /*
                       Text(
                         'Sugar Level : ${levelCal(sugar)}%',
                         style: AppStyle.medium,
@@ -223,6 +233,7 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                           });
                         },
                       ),
+                      */
                       // const Spacer(),
                     ],
                   ),
@@ -233,18 +244,14 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
               onPressed: () async {
                 final noError = _form.currentState?.validate();
                 if (noError == true) {
-                  await controller.addDrink();
-                  // if (success == true && context.mounted) {
-                  //   controller.clearFormAddProduct();
-                  //   showSuccessSnackBar(
-                  //     title: 'Success',
-                  //     description: 'New drink has been added successfully.',
-                  //   );
-                  //   Navigator.pop(context);
-                  // }
+                  if (widget.id == null) {
+                    await controller.addDrink();
+                  } else {
+                    await controller.updateDrink(widget.id);
+                  }
                 }
               },
-              name: 'Add',
+              name: widget.id == null ? 'Add' : 'Update',
             ),
           ],
         ),

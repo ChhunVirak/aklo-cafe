@@ -18,5 +18,10 @@
   "dashboard": "Dashboard",
   "setting": "Setting",
   "signout": "Sign Out",
-  "scan": "Scan to Order"
+  "scan": "Scan to E-Menu",
+  "drinkNameValidateMessage": "Field drink name can't be empty.",
+  "drinkCategoryValidateMessage": "Field drink category can't be empty.",
+  "drinkUnitPriceValidateMessage": "Field drink unit price can't be empty.",
+  "drinkTotalAmountValidateMessage": "Field drink amount can't be empty.",
+  "categoryNameAmountValidateMessage": "Field category name can't be empty."
 }
