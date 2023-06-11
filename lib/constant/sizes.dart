@@ -15,6 +15,10 @@ class Sizes {
   ///Radius
   static BorderRadius boxBorderRadius = BorderRadius.circular(10);
   static Radius bottomSheetRadius = const Radius.circular(20);
+  static BorderRadius bottomSheetBorder = BorderRadius.only(
+    topLeft: bottomSheetRadius,
+    topRight: bottomSheetRadius,
+  );
 
   ///Text Size
   static const double fL = 17.0;

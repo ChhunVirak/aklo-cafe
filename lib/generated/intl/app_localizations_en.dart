@@ -62,6 +62,24 @@ class LangsEn extends Langs {
   String get scan => 'Scan to E-Menu';
 
   @override
+  String get drinkName => 'Drink Name';
+
+  @override
+  String get categoryName => 'Category';
+
+  @override
+  String get unitPrice => 'Unit Price';
+
+  @override
+  String get amount => 'Amounts';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get update => 'Update';
+
+  @override
   String get drinkNameValidateMessage => 'Field drink name can\'t be empty.';
 
   @override
@@ -75,4 +93,28 @@ class LangsEn extends Langs {
 
   @override
   String get categoryNameAmountValidateMessage => 'Field category name can\'t be empty.';
+
+  @override
+  String get category_name_en => 'Category English Name';
+
+  @override
+  String get category_name_kh => 'Category Khmer Name';
+
+  @override
+  String get category_desc => 'Description';
+
+  @override
+  String get category_name_en_ValidateMessage => 'Field Category English Name can\'t be empty.';
+
+  @override
+  String get category_name_kh_ValidateMessage => 'Field Category Khmer Name can\'t be empty.';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get success => 'Success';
+
+  @override
+  String get delete_success => 'Delete Successfully';
 }

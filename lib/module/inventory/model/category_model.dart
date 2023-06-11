@@ -5,12 +5,14 @@ import 'package:aklo_cafe/core/firebase_core/model/file_model.dart';
 
 class CategoryModel {
   final String? id;
-  final String name;
+  final String nameEn;
+  final String nameKh;
   final String? image;
   final FirebaseStorageFileModel? firebaseFile;
   CategoryModel({
     this.id,
-    required this.name,
+    this.nameEn = '',
+    this.nameKh = '',
     this.image,
     this.firebaseFile,
   });
@@ -18,7 +20,8 @@ class CategoryModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'name': name,
+      'nameEn': nameEn,
+      'nameKh': nameKh,
       'image': image,
       'firebaseFile': firebaseFile?.toMap(),
     };
@@ -27,7 +30,8 @@ class CategoryModel {
   factory CategoryModel.fromMap(Map<String, dynamic> map) {
     return CategoryModel(
       id: map['id'] != null ? map['id'] as String : null,
-      name: map['name'] as String,
+      nameEn: map['nameEn'] != null ? map['nameEn'] as String : '',
+      nameKh: map['nameKh'] != null ? map['nameKh'] as String : '',
       image: map['image'] != null ? map['image'] as String : null,
       firebaseFile: map['firebaseFile'] != null
           ? FirebaseStorageFileModel.fromMap(

@@ -1,7 +1,9 @@
+import 'package:aklo_cafe/config/languages/lang_font_controller.dart';
 import 'package:aklo_cafe/constant/resources.dart';
 import 'package:aklo_cafe/module/inventory/controller/inventory_controller.dart';
 import 'package:aklo_cafe/module/inventory/model/drink_model.dart';
 import 'package:aklo_cafe/util/alerts/app_dialog.dart';
+import 'package:aklo_cafe/util/alerts/app_modal_bottomsheet.dart';
 import 'package:aklo_cafe/util/alerts/app_snackbar.dart';
 import 'package:aklo_cafe/util/extensions/responsive/responsive_extension.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
@@ -10,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../config/router/app_pages.dart';
+import '../../../generated/l10n.dart';
 import '../../../util/widgets/app_circular_loading.dart';
 import '../components/drink_card.dart';
 import '../model/category_model.dart';
@@ -34,6 +37,7 @@ class AllCoffeeScreen extends GetView<InventoryController> {
           builder: (_) {
             return Column(
               children: [
+                ///Tabar
                 StreamBuilder(
                   stream: controller.categoryDb.snapshots(),
                   builder: (_, snapshot) {
@@ -73,7 +77,7 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                     onPressed: () {
                                       controller.currentCategory.value = 'All';
                                     },
-                                    label: const Text('All'),
+                                    label: Text(S.current.all),
                                     shape: const StadiumBorder(),
                                   ),
                                 ),
@@ -86,22 +90,24 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                               backgroundColor: _chipBgColor(
                                                   controller.currentCategory
                                                           .value ==
-                                                      e.name),
+                                                      e.nameEn),
                                               onPressed: () {
                                                 controller.currentCategory
-                                                    .value = e.name;
+                                                    .value = e.nameEn;
                                               },
-                                              label: Text(e.name),
+                                              label: Text(Get.locale ==
+                                                      Langs.english.locale
+                                                  ? e.nameEn
+                                                  : e.nameKh),
                                               labelStyle: AppStyle.medium
                                                   .copyWith(
                                                       color: controller
                                                                   .currentCategory
                                                                   .value ==
-                                                              e.name
+                                                              e.nameEn
                                                           ? AppColors
                                                               .txtLightColor
                                                           : null),
-                                              shape: const StadiumBorder(),
                                             ),
                                           ),
                                         )
@@ -139,11 +145,6 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                           );
                         }
 
-                        if (!snapshot.hasData) {
-                          return const Center(
-                            child: Text('No Drinks'),
-                          );
-                        }
                         if (snapshot.hasData) {
                           final listData = snapshot.data?.docs
                               .map((e) => DrinkModel.fromMap(e.data()))
@@ -151,14 +152,7 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                           return GridView.builder(
                             padding: const EdgeInsets.all(Sizes.padding),
                             physics: const BouncingScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              childAspectRatio: 1 / 1.4,
-                              crossAxisCount: context.responsive<int>(2,
-                                  sm: 2, md: 3, lg: 4, xl: 5),
-                              mainAxisSpacing: Sizes.padding,
-                              crossAxisSpacing: Sizes.padding,
-                            ),
+                            gridDelegate: _deligate(context),
                             itemCount: listData?.length ?? 0,
                             itemBuilder: (_, index) {
                               final name = listData?[index].name;
@@ -169,88 +163,80 @@ class AllCoffeeScreen extends GetView<InventoryController> {
 
                               return GestureDetector(
                                 onTap: () {
-                                  if (!GetPlatform.isWeb) {
-                                    Get.bottomSheet(
-                                      BottomSheet(
-                                        onClosing: () {},
-                                        builder: (context) {
-                                          return Container(
-                                            padding: const EdgeInsets.all(
-                                                Sizes.defaultPadding),
-                                            // color: Colors.white,
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                CustomButton(
-                                                  onPressed: () {
-                                                    Get.back();
+                                  if (GetPlatform.isWeb) {
+                                    ///Client Order
+                                    debugPrint('Hello');
+                                  } else {
+                                    showCustomModalBottomSheet(
+                                      Container(
+                                        padding: const EdgeInsets.all(
+                                            Sizes.defaultPadding),
+                                        // color: Colors.white,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            CustomButton(
+                                              onPressed: () {
+                                                //TODO : initial Data to Edit
+                                                controller.initialDrinkForEdit(
+                                                    listData?[index]);
+                                                final param = <String, String>{}
+                                                  ..addIf(
+                                                    id != null,
+                                                    'id',
+                                                    id!,
+                                                  );
 
-                                                    //TODO : initial Data to Edit
-                                                    controller
-                                                        .initialDrinkForEdit(
-                                                            listData?[index]);
-                                                    final param =
-                                                        <String, String>{}
-                                                          ..addIf(
-                                                            id != null,
-                                                            'id',
-                                                            id!,
-                                                          );
+                                                Get.back();
 
-                                                    Get.toNamed(
-                                                      Routes.EDIT_DRINK,
-                                                      parameters: param,
-                                                    );
-                                                  },
-                                                  name: 'Edit',
-                                                ),
-                                                Sizes.defaultPadding.sh,
-                                                CustomButton(
-                                                  onPressed: () {
-                                                    showCustomDialog(
-                                                      title: 'Confirm!',
-                                                      description:
-                                                          'Are you sure want to delete $name',
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () async {
-                                                            await controller
-                                                                .drinkDb
-                                                                .doc(listData?[
-                                                                        index]
-                                                                    .id)
-                                                                .delete();
-                                                            Get.back();
-                                                            Get.back();
-                                                            showErrorSnackBar(
-                                                                title:
-                                                                    'Success',
-                                                                description:
-                                                                    'Delete successfully');
-                                                          },
-                                                          child:
-                                                              const Text('Yes'),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          child:
-                                                              const Text('No'),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                  backgroundColor: Colors.red,
-                                                  name: 'Delete',
-                                                ),
-                                              ],
+                                                Get.toNamed(
+                                                  Routes.EDIT_DRINK,
+                                                  parameters: param,
+                                                );
+                                              },
+                                              name: 'Edit',
                                             ),
-                                          );
-                                        },
+                                            Sizes.defaultPadding.sh,
+                                            CustomButton(
+                                              onPressed: () {
+                                                showCustomDialog(
+                                                  title: 'Confirm!',
+                                                  description:
+                                                      'Are you sure want to delete $name',
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () async {
+                                                        await controller.drinkDb
+                                                            .doc(
+                                                                listData?[index]
+                                                                    .id)
+                                                            .delete();
+                                                        Get.back();
+                                                        Get.back();
+                                                        showErrorSnackBar(
+                                                            title: S.current
+                                                                .success,
+                                                            description: S
+                                                                .current
+                                                                .delete_success);
+                                                      },
+                                                      child: const Text('Yes'),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: const Text('No'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                              backgroundColor: Colors.red,
+                                              name: 'Delete',
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      isScrollControlled: true,
                                     );
                                   }
                                 },
@@ -278,4 +264,12 @@ class AllCoffeeScreen extends GetView<InventoryController> {
           }),
     );
   }
+
+  SliverGridDelegate _deligate(BuildContext context) =>
+      SliverGridDelegateWithFixedCrossAxisCount(
+        childAspectRatio: 1 / 1.4,
+        crossAxisCount: context.responsive<int>(2, sm: 2, md: 3, lg: 4, xl: 5),
+        mainAxisSpacing: Sizes.padding,
+        crossAxisSpacing: Sizes.padding,
+      );
 }

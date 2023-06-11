@@ -22,16 +22,34 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "add": MessageLookupByLibrary.simpleMessage("Add"),
         "addCategory": MessageLookupByLibrary.simpleMessage("Add New Category"),
         "addDrink": MessageLookupByLibrary.simpleMessage("Add New Drink"),
+        "all": MessageLookupByLibrary.simpleMessage("All"),
         "allCoffeeTitle": MessageLookupByLibrary.simpleMessage("All Drinks"),
+        "amount": MessageLookupByLibrary.simpleMessage("Amounts"),
         "category": MessageLookupByLibrary.simpleMessage("All Categories"),
+        "categoryName": MessageLookupByLibrary.simpleMessage("Category"),
         "categoryNameAmountValidateMessage":
             MessageLookupByLibrary.simpleMessage(
                 "Field category name can\'t be empty."),
+        "category_desc": MessageLookupByLibrary.simpleMessage("Description"),
+        "category_name_en":
+            MessageLookupByLibrary.simpleMessage("Category English Name"),
+        "category_name_en_ValidateMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Field Category English Name can\'t be empty."),
+        "category_name_kh":
+            MessageLookupByLibrary.simpleMessage("Category Khmer Name"),
+        "category_name_kh_ValidateMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Field Category Khmer Name can\'t be empty."),
         "dashboard": MessageLookupByLibrary.simpleMessage("Dashboard"),
+        "delete_success":
+            MessageLookupByLibrary.simpleMessage("Delete Successfully"),
         "drinkCategoryValidateMessage": MessageLookupByLibrary.simpleMessage(
             "Field drink category can\'t be empty."),
+        "drinkName": MessageLookupByLibrary.simpleMessage("Drink Name"),
         "drinkNameValidateMessage": MessageLookupByLibrary.simpleMessage(
             "Field drink name can\'t be empty."),
         "drinkTotalAmountValidateMessage": MessageLookupByLibrary.simpleMessage(
@@ -54,6 +72,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "scan": MessageLookupByLibrary.simpleMessage("Scan to E-Menu"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "signout": MessageLookupByLibrary.simpleMessage("Sign Out"),
+        "success": MessageLookupByLibrary.simpleMessage("Success"),
+        "unitPrice": MessageLookupByLibrary.simpleMessage("Unit Price"),
+        "update": MessageLookupByLibrary.simpleMessage("Update"),
         "users": MessageLookupByLibrary.simpleMessage("Users")
       };
 }

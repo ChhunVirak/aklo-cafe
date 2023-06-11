@@ -7,10 +7,10 @@ import '../module/inventory/controller/inventory_controller.dart';
 class AppBinding extends Bindings {
   @override
   void dependencies() {
-    if (!GetPlatform.isWeb) {
-      Get.put(AuthController());
-      Get.put(DashBoardController());
-      Get.lazyPut(() => InventoryController());
-    }
+    // if (!GetPlatform.isWeb) {
+    Get.put(AuthController());
+    Get.put(DashBoardController());
+    Get.lazyPut(() => InventoryController());
+    // }
   }
 }

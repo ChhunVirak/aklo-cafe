@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:aklo_cafe/constant/firebase_storage_path.dart';
 import 'package:aklo_cafe/core/firebase_core/model/file_model.dart';
+import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:aklo_cafe/module/inventory/model/drink_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -64,7 +65,7 @@ class InventoryController extends GetxController {
       bgColor: const Color(0xff1b67ca),
     ),
     DashBoardModel(
-      title: 'Add Category',
+      title: S.current.addCategory,
       iconData: CupertinoIcons.square_list_fill,
       bgColor: const Color(0xfff56313),
     ),
@@ -142,10 +143,16 @@ class InventoryController extends GetxController {
         await db.collection('drink').doc(id).update(
               newDrink,
             );
+        debugPrint('Current Route ${Get.currentRoute}');
+        debugPrint('Current Route 2 ${Routes.ALL_DRINK}');
 
-        Get.until((route) => Get.currentRoute == Routes.INVENTORY);
+        Get.until((route) {
+          debugPrint('Route : ${route.runtimeType}');
+          GetPageRoute<dynamic> r = route;
+          return true;
+        });
         showSuccessSnackBar(
-          title: 'Success',
+          title: S.current.success,
           description: 'New drink has been update successfully.',
         );
       } catch (_) {
@@ -158,11 +165,13 @@ class InventoryController extends GetxController {
     }
   }
 
-  final categoryNameTxtcontroller = TextEditingController();
+  final categoryEnglishNameTxtcontroller = TextEditingController();
+  final categoryKhmerNameTxtcontroller = TextEditingController();
   final categoryDescriptionTxtcontroller = TextEditingController();
 
   void clearFormAddCategory() {
-    categoryNameTxtcontroller.clear();
+    categoryEnglishNameTxtcontroller.clear();
+    categoryKhmerNameTxtcontroller.clear();
     categoryDescriptionTxtcontroller.clear();
   }
 
@@ -172,12 +181,11 @@ class InventoryController extends GetxController {
 
     try {
       final newCategory = CategoryModel(
-        name: categoryNameTxtcontroller.text,
+        nameEn: categoryEnglishNameTxtcontroller.text,
+        nameKh: categoryKhmerNameTxtcontroller.text,
       );
 
-      final result = await categoryDb.add(
-        newCategory.toMap(),
-      );
+      final result = await categoryDb.add(newCategory.toMap());
 
       final imageUrl = await uploadFile(result.id, categoryFile);
 

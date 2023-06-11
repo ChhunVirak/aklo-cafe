@@ -6,6 +6,7 @@ class CustomTextField extends StatelessWidget {
   final bool require;
   final bool? enable;
   final bool? obscureText;
+  final int? maxLines;
   final EdgeInsets? padding;
   final Widget? suffixIcon;
   final TextInputType? textInputType;
@@ -28,6 +29,7 @@ class CustomTextField extends StatelessWidget {
     this.enable,
     this.onTap,
     this.onFieldSubmitted,
+    this.maxLines,
   });
 
   OutlineInputBorder get _border =>
@@ -51,6 +53,7 @@ class CustomTextField extends StatelessWidget {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator,
           onFieldSubmitted: onFieldSubmitted,
+          maxLines: maxLines,
           style: AppStyle.medium.copyWith(
             letterSpacing: 0.6,
           ),
@@ -58,6 +61,7 @@ class CustomTextField extends StatelessWidget {
             FocusScope.of(context).unfocus();
           },
           decoration: InputDecoration(
+            alignLabelWithHint: true,
             labelStyle: AppStyle.medium,
             // hintStyle: AppStyle.medium,
             errorStyle: AppStyle.small.copyWith(

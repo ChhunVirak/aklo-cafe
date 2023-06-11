@@ -240,6 +240,66 @@ class S {
     );
   }
 
+  /// `Drink Name`
+  String get drinkName {
+    return Intl.message(
+      'Drink Name',
+      name: 'drinkName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category`
+  String get categoryName {
+    return Intl.message(
+      'Category',
+      name: 'categoryName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unit Price`
+  String get unitPrice {
+    return Intl.message(
+      'Unit Price',
+      name: 'unitPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amounts`
+  String get amount {
+    return Intl.message(
+      'Amounts',
+      name: 'amount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add`
+  String get add {
+    return Intl.message(
+      'Add',
+      name: 'add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update`
+  String get update {
+    return Intl.message(
+      'Update',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Field drink name can't be empty.`
   String get drinkNameValidateMessage {
     return Intl.message(
@@ -285,6 +345,86 @@ class S {
     return Intl.message(
       'Field category name can\'t be empty.',
       name: 'categoryNameAmountValidateMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category English Name`
+  String get category_name_en {
+    return Intl.message(
+      'Category English Name',
+      name: 'category_name_en',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category Khmer Name`
+  String get category_name_kh {
+    return Intl.message(
+      'Category Khmer Name',
+      name: 'category_name_kh',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get category_desc {
+    return Intl.message(
+      'Description',
+      name: 'category_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Field Category English Name can't be empty.`
+  String get category_name_en_ValidateMessage {
+    return Intl.message(
+      'Field Category English Name can\'t be empty.',
+      name: 'category_name_en_ValidateMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Field Category Khmer Name can't be empty.`
+  String get category_name_kh_ValidateMessage {
+    return Intl.message(
+      'Field Category Khmer Name can\'t be empty.',
+      name: 'category_name_kh_ValidateMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get all {
+    return Intl.message(
+      'All',
+      name: 'all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success`
+  String get success {
+    return Intl.message(
+      'Success',
+      name: 'success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Successfully`
+  String get delete_success {
+    return Intl.message(
+      'Delete Successfully',
+      name: 'delete_success',
       desc: '',
       args: [],
     );

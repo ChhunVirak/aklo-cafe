@@ -62,6 +62,24 @@ class LangsKk extends Langs {
   String get scan => 'ស្គែនទៅកាន់ មីនុយអេឡិចត្រូនិច';
 
   @override
+  String get drinkName => 'ឈ្មោះភេសជ្ជៈ';
+
+  @override
+  String get categoryName => 'ប្រភេទភេសជ្ជៈ';
+
+  @override
+  String get unitPrice => 'តម្លៃឯកតាភេសជ្ជៈ';
+
+  @override
+  String get amount => 'បរិមាណភេសជ្ជៈ';
+
+  @override
+  String get add => 'បន្ថែម';
+
+  @override
+  String get update => 'កែប្រែ';
+
+  @override
   String get drinkNameValidateMessage => 'ឈ្មោះភេសជ្ជៈមិនអាចទទេបានទេ';
 
   @override
@@ -74,5 +92,29 @@ class LangsKk extends Langs {
   String get drinkTotalAmountValidateMessage => 'បរិមាណភេសជ្ជៈមិនអាចទទេបានទេ';
 
   @override
-  String get categoryNameAmountValidateMessage => 'ឈ្មោះប្រភេទមិនអាចទទេបានទេ។';
+  String get categoryNameAmountValidateMessage => 'ឈ្មោះប្រភេទមិនអាចទទេបានទេ';
+
+  @override
+  String get category_name_en => 'ឈ្មោះប្រភេទភេសជ្ជៈជាភាសាអង់គ្លេស';
+
+  @override
+  String get category_name_kh => 'ឈ្មោះប្រភេទភេសជ្ជៈជាភាសាខ្មែរ';
+
+  @override
+  String get category_desc => 'ពិពណ៌នា';
+
+  @override
+  String get category_name_en_ValidateMessage => 'ឈ្មោះប្រភេទភេសជ្ជៈជាភាសាអង់គ្លេសមិនអាចទទេបានទេ';
+
+  @override
+  String get category_name_kh_ValidateMessage => 'ឈ្មោះប្រភេទភេសជ្ជៈជាភាសាខ្មែរមិនអាចទទេបានទេ';
+
+  @override
+  String get all => 'ទាំងអស់';
+
+  @override
+  String get success => 'ជោគជ័យ';
+
+  @override
+  String get delete_success => 'លុបបានជោគជ័យ';
 }

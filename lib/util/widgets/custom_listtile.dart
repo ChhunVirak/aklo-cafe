@@ -20,15 +20,14 @@ class CustomListtile extends StatelessWidget {
   });
 
   Widget? get leadingIcon => leading != null
-      ? SizedBox(
-          height: double.maxFinite,
-          child: leading?.icon != null
-              ? Icon(
-                  leading?.icon,
-                  size: Sizes.listTileIconSize,
-                )
-              : leading?.widget,
-        )
+      ? leading?.icon != null
+          ? Icon(
+              leading?.icon,
+            )
+          : SizedBox(
+              height: double.maxFinite,
+              child: leading?.widget,
+            )
       : null;
 
   @override

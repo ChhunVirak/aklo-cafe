@@ -207,6 +207,42 @@ abstract class Langs {
   /// **'Scan to E-Menu'**
   String get scan;
 
+  /// No description provided for @drinkName.
+  ///
+  /// In en, this message translates to:
+  /// **'Drink Name'**
+  String get drinkName;
+
+  /// No description provided for @categoryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get categoryName;
+
+  /// No description provided for @unitPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit Price'**
+  String get unitPrice;
+
+  /// No description provided for @amount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amounts'**
+  String get amount;
+
+  /// No description provided for @add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get update;
+
   /// No description provided for @drinkNameValidateMessage.
   ///
   /// In en, this message translates to:
@@ -236,6 +272,54 @@ abstract class Langs {
   /// In en, this message translates to:
   /// **'Field category name can\'t be empty.'**
   String get categoryNameAmountValidateMessage;
+
+  /// No description provided for @category_name_en.
+  ///
+  /// In en, this message translates to:
+  /// **'Category English Name'**
+  String get category_name_en;
+
+  /// No description provided for @category_name_kh.
+  ///
+  /// In en, this message translates to:
+  /// **'Category Khmer Name'**
+  String get category_name_kh;
+
+  /// No description provided for @category_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get category_desc;
+
+  /// No description provided for @category_name_en_ValidateMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Field Category English Name can\'t be empty.'**
+  String get category_name_en_ValidateMessage;
+
+  /// No description provided for @category_name_kh_ValidateMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Field Category Khmer Name can\'t be empty.'**
+  String get category_name_kh_ValidateMessage;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @success.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get success;
+
+  /// No description provided for @delete_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Successfully'**
+  String get delete_success;
 }
 
 class _LangsDelegate extends LocalizationsDelegate<Langs> {

@@ -9,6 +9,7 @@ import 'textstyle/english_textstlye.dart';
 
 class AppStyle {
   AppStyle._();
+  static get fontFamily => EnglishFontStyle().fontFamily;
   static get _controller => Get.put(LangsAndFontConfigs());
 
   static FontVariation get weightL => _controller.isEnglish

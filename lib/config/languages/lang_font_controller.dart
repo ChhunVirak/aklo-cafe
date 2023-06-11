@@ -54,7 +54,7 @@ class LangsAndFontConfigs extends GetxController {
     if (_currentLocale.countryCode != currentLanguage) {
       if (currentLanguage == Langs.english.countryCode) {
         changeLanguage(Langs.english);
-      } else {
+      } else if (currentLanguage == Langs.khmer.countryCode) {
         changeLanguage(Langs.khmer);
       }
     }

@@ -16,6 +16,29 @@ class AuthController extends GetxController {
   final passwordTxtController = TextEditingController();
   RxBool hidePasword = true.obs;
 
+  String? get userToken => _fAuth.currentUser?.uid;
+
+  ///Store Device token to firebase
+  Future<void> storeDeviceToken(String? token) async {
+    final data = await mobileTokenDB.get();
+    if (data.docs.isEmpty) {
+      await mobileTokenDB.add({'device-token': token});
+      return; //end function after token not found
+    }
+
+    final id = data.docs.first.id;
+    await mobileTokenDB.doc(id).update({'device-token': token});
+  }
+
+  ///Get current Admin Device token from firebase
+  Future<String?> getDeviceToken() async {
+    final data = await mobileTokenDB.get();
+    if (data.docs.isNotEmpty) {
+      return data.docs.first['device-token'];
+    }
+    return null;
+  }
+
   @override
   void onInit() {
     _fAuth.userChanges().listen(_userChange);
@@ -24,7 +47,13 @@ class AuthController extends GetxController {
 
   void _userChange(User? user) {
     debugPrint('USER :  $user');
+    if (GetPlatform.isWeb) return; //end function
     if (user != null) {
+      // if (Get.currentRoute != Routes.LOGIN ||
+      //     Get.currentRoute != Routes.SPLASH) {
+      //   return;
+      // }
+      //if user already login no change
       Get.offAllNamed(Routes.DASHBOARD);
     } else {
       Get.offAllNamed(Routes.LOGIN);
@@ -79,4 +108,6 @@ class AuthController extends GetxController {
 
   final userdb =
       FirebaseFirestore.instance.collection(FireBaseStoragePath.users);
+  final mobileTokenDB =
+      FirebaseFirestore.instance.collection(FireBaseStoragePath.mobileToken);
 }

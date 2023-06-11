@@ -1,8 +1,11 @@
+import 'package:aklo_cafe/module/auth/controller/auth_controller.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 
-const _notificationIcon = 'mipmap/ic_launcher';
+const _notificationIcon = '@drawable/ic_notification';
 
 class NotificationHelper {
   NotificationHelper._();
@@ -21,15 +24,14 @@ class NotificationHelper {
       const AndroidInitializationSettings(_notificationIcon);
 
   void init() {
-    _messaging.sendMessage();
     _requestNotificationPermission();
     _initLocalNotificationSetting();
+    _deviceTokenChange();
+    getDeviceToken().then((value) {
+      debugPrint('Token : $value');
+      // Get.put<AuthController>(AuthController()).storeDeviceToken(value);
+    });
     _onListenting();
-    getDeviceToken().then(
-      (value) {
-        debugPrint('TOKEN => $value');
-      },
-    );
   }
 
   Future<void> _initLocalNotificationSetting() async {
@@ -66,36 +68,45 @@ class NotificationHelper {
     );
   }
 
-  final NotificationDetails _androidNotificationDetail =
-      const NotificationDetails(
-    android: AndroidNotificationDetails(
-      'android_notification_plugin',
-      'channel_name',
-      // playSound: true,
-      importance: Importance.max,
-      priority: Priority.high,
-    ),
-  );
+  final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
+  Future<AndroidDeviceInfo> get android async =>
+      await _deviceInfoPlugin.androidInfo;
 
+  ///Show local notification
   Future<void> showNotification(
     String? title,
-    String? body,
-  ) async {
+    String? body, {
+    Color? color,
+  }) async {
+    _id++;
+
+    NotificationDetails androidNotificationDetail = const NotificationDetails(
+      android: AndroidNotificationDetails(
+          'android_notification_plugin', 'channel_name',
+          playSound: true,
+          importance: Importance.max,
+          priority: Priority.high,
+          icon: '',
+          color: Color(0xff4B250F)),
+    );
+
     await _flutterLocalNotificationsPlugin.show(
-      _id++,
+      _id,
       title,
       body,
-      _androidNotificationDetail,
-      payload: 'item x',
+      androidNotificationDetail,
+      payload: 'order_detail',
     );
   }
 
   Future<String?> getDeviceToken() async => await _messaging.getToken();
 
-  // ignore: unused_element
+  ///device token can refresh
   void _deviceTokenChange() {
-    _messaging.onTokenRefresh.listen((token) {
-      ///TODO : Call function store token here
-    });
+    _messaging.onTokenRefresh.listen(
+      (token) {
+        Get.find<AuthController>().storeDeviceToken(token);
+      },
+    );
   }
 }

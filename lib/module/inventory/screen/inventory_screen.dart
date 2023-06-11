@@ -1,7 +1,9 @@
+import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:aklo_cafe/module/inventory/inventory.dart';
 import 'package:aklo_cafe/module/inventory/screen/add_category.dart';
 import 'package:aklo_cafe/module/inventory/screen/category.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/resources.dart';
@@ -64,37 +66,50 @@ class Inventory extends GetView<InventoryController> {
           Strings.inventory,
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: Sizes.padding),
-        child: Column(
-          children: [
-            GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(vertical: Sizes.padding),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: Sizes.padding,
-                crossAxisSpacing: Sizes.padding,
-              ),
-              itemCount: controller.listInventoryMenu.length,
-              itemBuilder: (_, index) {
-                final name = controller.listInventoryMenu[index].title;
-                final icon = controller.listInventoryMenu[index].iconData;
-                final bgColor = controller.listInventoryMenu[index].bgColor;
-                return MenuCard(
-                  onTap: () {
-                    _handleNavigate(context, index);
-                  },
-                  title: name,
-                  icon: icon,
-                  bgColor: bgColor,
-                );
-              },
-            ),
-          ],
-        ),
+      body: GridView.count(
+        physics: const NeverScrollableScrollPhysics(),
+        // shrinkWrap: true,
+        padding: const EdgeInsets.all(Sizes.padding),
+        crossAxisCount: 2,
+        mainAxisSpacing: Sizes.padding,
+        crossAxisSpacing: Sizes.padding,
+        children: [
+          MenuCard(
+            onTap: () {
+              _handleNavigate(context, 0);
+            },
+            title: S.current.allCoffeeTitle,
+            icon: PhosphorIcons.list_bold,
+            bgColor: Colors.blue,
+          ),
+          MenuCard(
+            onTap: () {
+              _handleNavigate(context, 1);
+            },
+            title: S.current.addDrink,
+            icon: PhosphorIcons.list_plus_bold,
+            bgColor: Colors.green,
+          ),
+          MenuCard(
+            onTap: () {
+              _handleNavigate(context, 2);
+            },
+            title: S.current.category,
+            icon: PhosphorIcons.list_bold,
+            bgColor: Colors.deepPurple,
+          ),
+          MenuCard(
+            onTap: () {
+              _handleNavigate(context, 3);
+            },
+            title: S.current.addCategory,
+            icon: PhosphorIcons.list_plus_bold,
+            bgColor: Colors.red,
+          ),
+        ],
       ),
     );
   }
+
+  Widget w() => const Text('hello');
 }

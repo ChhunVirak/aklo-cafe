@@ -1,10 +1,10 @@
+import 'package:aklo_cafe/constant/resources.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 Future<void> showCustomModalBottomSheet(Widget child) async {
-  await showModalBottomSheet(
-    context: Get.overlayContext!,
-    builder: (_) => Stack(
+  await Get.bottomSheet(
+    Stack(
       alignment: Alignment.bottomCenter,
       children: [
         GestureDetector(
@@ -18,12 +18,17 @@ Future<void> showCustomModalBottomSheet(Widget child) async {
           ),
         ),
         Container(
-          color: Colors.white,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: Sizes.bottomSheetBorder,
+          ),
           width: double.infinity,
-          height: Get.height * 0.5,
+          constraints: BoxConstraints(maxHeight: Get.height * 0.5),
           child: child,
         ),
       ],
     ),
+    backgroundColor: Colors.transparent,
+    isScrollControlled: true,
   );
 }

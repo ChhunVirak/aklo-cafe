@@ -1,6 +1,8 @@
 import 'package:aklo_cafe/firebase_options.dart';
 import 'package:aklo_cafe/generated/l10n.dart';
+import 'package:aklo_cafe/module/auth/controller/auth_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -44,6 +46,16 @@ class MainApp extends StatelessWidget {
 
     return GetBuilder<LangsAndFontConfigs>(
       init: fontController,
+      initState: (state) async {
+        await NotificationHelper.instance.android.then((v) {
+          debugPrint('Operating Systemm Version :${v.version.sdkInt}');
+        });
+        if (!kIsWeb) {
+          final tk = await NotificationHelper.instance.getDeviceToken();
+          debugPrint('Token=>  : $tk');
+          Get.put(AuthController()).storeDeviceToken(tk);
+        }
+      },
       builder: (_) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Aklo Cafe',
@@ -58,13 +70,12 @@ class MainApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         initialRoute: AppPages.getInitialRoute,
         getPages:
-            GetPlatform.isWeb ?
-             AppPages.routesClient : AppPages.routesAdmin,
+            GetPlatform.isWeb ? AppPages.routesClient : AppPages.routesAdmin,
         unknownRoute: AppPages.routesClient.first,
         // onUnknownRoute: (settings) => GetPageRoute(),
         theme: ThemeData(
             useMaterial3: true,
-            // fontFamily: 'Battambang',
+            fontFamily: AppStyle.fontFamily,
 
             // fontFamily: Get.put(LangsAndFontConfigs()).fontfamily,
             scaffoldBackgroundColor: AppColors.txtLightColor,
@@ -96,6 +107,9 @@ class MainApp extends StatelessWidget {
               surfaceTintColor: Colors.transparent,
               modalBackgroundColor: AppColors.backgroundColor,
               backgroundColor: AppColors.backgroundColor,
+            ),
+            chipTheme: const ChipThemeData(
+              shape: StadiumBorder(),
             )
             // listTileTheme: ListTileThemeData()
             ),

@@ -1,6 +1,6 @@
 import 'package:aklo_cafe/module/home/controller/dashboard_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 
 import '../../../config/router/app_pages.dart';
@@ -100,7 +100,7 @@ class _DashBoardState extends State<DashBoard> {
           _showQrWebSite(context);
         },
         child: const Icon(
-          Icons.qr_code_rounded,
+          PhosphorIcons.qr_code_bold,
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -127,13 +127,13 @@ class _DashBoardState extends State<DashBoard> {
         items: [
           BottomNavigationBarItem(
             icon: const Icon(
-              Icons.dashboard,
+              PhosphorIcons.house_line_fill,
             ),
             label: S.current.dashboard,
           ),
           BottomNavigationBarItem(
             icon: const Icon(
-              Icons.settings,
+              PhosphorIcons.gear_six_fill,
             ),
             label: S.current.setting,
           ),
@@ -150,12 +150,9 @@ class _DashBoardState extends State<DashBoard> {
               AspectRatio(
                 aspectRatio: 1.3 / 1,
                 child: Container(
-                  // margin: const EdgeInsets.symmetric(
-                  //   horizontal: Sizes.padding,
-                  // ),
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 6, 114, 9),
+                    color: Colors.grey,
                     borderRadius: Sizes.boxBorderRadius,
                   ),
                   child: Column(
@@ -214,7 +211,7 @@ class _DashBoardState extends State<DashBoard> {
                       _handleNavigate(context, 'Orders');
                     },
                     title: S.current.orders,
-                    icon: CupertinoIcons.bag_fill,
+                    icon: PhosphorIcons.list_numbers_fill,
                     bgColor: const Color(0xffd51c4e),
                   ),
                   MenuCard(
@@ -222,7 +219,7 @@ class _DashBoardState extends State<DashBoard> {
                       _handleNavigate(context, 'Histories');
                     },
                     title: S.current.histories,
-                    icon: CupertinoIcons.bag_fill,
+                    icon: PhosphorIcons.chart_bar_fill,
                     bgColor: const Color(0xfff56313),
                   ),
                   MenuCard(
@@ -230,7 +227,7 @@ class _DashBoardState extends State<DashBoard> {
                       _handleNavigate(context, 'Inventory');
                     },
                     title: S.current.inventory,
-                    icon: CupertinoIcons.bag_fill,
+                    icon: PhosphorIcons.database_fill,
                     bgColor: const Color(0xff1b67ca),
                   ),
                   MenuCard(
@@ -238,7 +235,7 @@ class _DashBoardState extends State<DashBoard> {
                       _handleNavigate(context, 'Users');
                     },
                     title: S.current.users,
-                    icon: CupertinoIcons.bag_fill,
+                    icon: PhosphorIcons.users_three_fill,
                     bgColor: const Color(0xff257881),
                   ),
                 ],

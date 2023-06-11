@@ -1,3 +1,4 @@
+import 'package:aklo_cafe/config/languages/lang_font_controller.dart';
 import 'package:aklo_cafe/constant/resources.dart';
 import 'package:aklo_cafe/module/inventory/controller/inventory_controller.dart';
 import 'package:aklo_cafe/module/inventory/model/category_model.dart';
@@ -43,8 +44,11 @@ class CategoryScreen extends GetView<InventoryController> {
               ),
               itemCount: listData?.length ?? 0,
               itemBuilder: (_, index) {
-                final name = listData?[index].name;
                 final img = listData?[index].image;
+
+                final name = Get.locale == Langs.english.locale
+                    ? (listData?[index].nameEn)
+                    : (listData?[index].nameKh);
 
                 return GestureDetector(
                   onTap: () {

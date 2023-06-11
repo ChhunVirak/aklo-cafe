@@ -1,3 +1,4 @@
+import 'package:aklo_cafe/config/languages/lang_font_controller.dart';
 import 'package:aklo_cafe/constant/resources.dart';
 import 'package:aklo_cafe/module/inventory/controller/inventory_controller.dart';
 import 'package:aklo_cafe/module/inventory/model/category_model.dart';
@@ -69,14 +70,16 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                     itemBuilder: (_, index) => InkWell(
                       onTap: () {
                         controller.drinkCategoryTxTcontroller.text =
-                            cetegoryList[index].name;
+                            cetegoryList[index].nameEn;
                         Navigator.pop(context);
                       },
                       child: Ink(
                         padding: const EdgeInsets.all(Sizes.defaultPadding),
                         decoration: const BoxDecoration(color: Colors.white),
                         child: Text(
-                          cetegoryList[index].name,
+                          Get.locale == Langs.english.locale
+                              ? cetegoryList[index].nameEn
+                              : cetegoryList[index].nameKh,
                           style: AppStyle.medium,
                         ),
                       ),
@@ -125,7 +128,7 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                     children: [
                       CustomTextField(
                         controller: controller.drinkNameTxTcontroller,
-                        label: 'Drink Name',
+                        label: S.current.drinkName,
                         require: true,
                         textInputAction: TextInputAction.next,
                         validator: (v) {
@@ -135,45 +138,37 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                           return null;
                         },
                       ),
-                      Focus(
-                        onFocusChange: (_) {
-                          debugPrint('statement $_');
-                          if (_) {
-                            _showCategories(context);
-                          }
+                      CustomTextField(
+                        onTap: () {
+                          _showCategories(context).then((value) {
+                            FocusScope.of(context).nextFocus();
+                          });
                         },
-                        child: CustomTextField(
-                          onTap: () {
-                            _showCategories(context).then((value) {
-                              FocusScope.of(context).nextFocus();
-                            });
-                          },
-                          enable: false,
-                          controller: controller.drinkCategoryTxTcontroller,
-                          label: 'Category',
-                          require: true,
-                          textInputAction: TextInputAction.next,
-                          suffixIcon: FocusScope(
-                            canRequestFocus: false,
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.expand_more_rounded,
-                                size: 25,
-                              ),
+                        enable: false,
+                        controller: controller.drinkCategoryTxTcontroller,
+                        label: S.current.categoryName,
+                        require: true,
+                        textInputAction: TextInputAction.next,
+                        suffixIcon: FocusScope(
+                          canRequestFocus: false,
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.expand_more_rounded,
+                              size: 25,
                             ),
                           ),
-                          validator: (v) {
-                            if (v == '') {
-                              return S.current.drinkCategoryValidateMessage;
-                            }
-                            return null;
-                          },
                         ),
+                        validator: (v) {
+                          if (v == '') {
+                            return S.current.drinkCategoryValidateMessage;
+                          }
+                          return null;
+                        },
                       ),
                       CustomTextField(
                         controller: controller.unitPriceTxTcontroller,
-                        label: 'Unit Price',
+                        label: S.current.unitPrice,
                         require: true,
                         textInputType: const TextInputType.numberWithOptions(
                             decimal: true),
@@ -189,7 +184,7 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                       ),
                       CustomTextField(
                         controller: controller.amountTxTcontroller,
-                        label: 'Amount',
+                        label: S.current.amount,
                         require: true,
                         textInputType: TextInputType.number,
                         validator: (v) {
@@ -251,7 +246,7 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                   }
                 }
               },
-              name: widget.id == null ? 'Add' : 'Update',
+              name: widget.id == null ? S.current.add : S.current.update,
             ),
           ],
         ),

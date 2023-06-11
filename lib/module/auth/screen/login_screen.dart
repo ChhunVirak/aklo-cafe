@@ -75,7 +75,11 @@ class LoginScreen extends StatelessWidget {
                               controller: controller.passwordTxtController,
                               textInputAction: TextInputAction.done,
                               onFieldSubmitted: (_) {
-                                controller.onLogin();
+                                final validated =
+                                    formKey.currentState?.validate();
+                                if (validated != null && validated == true) {
+                                  controller.onLogin();
+                                }
                               },
                               obscureText: controller.hidePasword.value,
                               suffixIcon: IconButton(

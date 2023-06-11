@@ -1,5 +1,5 @@
 import 'package:aklo_cafe/constant/resources.dart';
-import 'package:aklo_cafe/core/firebase_core/notification_core/firebase_notification_helper.dart';
+import 'package:aklo_cafe/core/firebase_core/notification_core/firebase_admin_notification.dart';
 import 'package:aklo_cafe/util/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,8 +35,10 @@ class ClientOrderScreen extends StatelessWidget {
                   constraints: BoxConstraints(maxWidth: context.width * 0.4),
                   child: CustomButton(
                     onPressed: () {
-                      NotificationHelper.instance
-                          .showNotification('New Order', 'body');
+                      AdminNotificationManager.instance.sentNotification(
+                          'New Order #32432', 'ខ្ញុំត្រូវការកាហ្វេ');
+                      // NotificationHelper.instance.showNotification(
+                      //     'New Order #3432', 'Please Make it');
                     },
                     backgroundColor: Colors.green,
                     name: 'Check Out',

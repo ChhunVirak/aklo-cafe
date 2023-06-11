@@ -3,6 +3,7 @@ import 'package:aklo_cafe/constant/textstyle/khmer_textstlye.dart';
 import 'package:aklo_cafe/module/auth/controller/auth_controller.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/resources.dart';
@@ -24,7 +25,7 @@ class SettingScreen extends StatelessWidget {
         CustomListtile(
           title: S.current.languages,
           subtitle: S.current.languagesDes,
-          leading: TileIcon.iconData(Icons.language),
+          leading: TileIcon.iconData(PhosphorIcons.translate),
           onTap: () {
             showCustomModalBottomSheet(
               Material(
@@ -85,7 +86,7 @@ class SettingScreen extends StatelessWidget {
         CustomListtile(
           title: S.current.signout,
           subtitle: '${S.current.signout} of virak',
-          leading: TileIcon.iconData(Icons.no_accounts_rounded),
+          leading: TileIcon.iconData(PhosphorIcons.sign_out),
           onTap: () {
             showCustomDialog(
               title: 'Alert',

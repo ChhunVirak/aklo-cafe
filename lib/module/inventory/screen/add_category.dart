@@ -46,7 +46,7 @@ class _AddCategoryState extends State<AddCategory> {
                               ///Clear Image
                               controller.categoryFile = null;
                             },
-                            builder: (context) {
+                            builder: (_) {
                               return ImagePickerBox(
                                 onSelectImage: (value) async {
                                   if (value != null) {
@@ -59,14 +59,26 @@ class _AddCategoryState extends State<AddCategory> {
                             }),
 
                         CustomTextField(
-                          controller: controller.categoryNameTxtcontroller,
-                          label: 'Category Name',
+                          controller:
+                              controller.categoryEnglishNameTxtcontroller,
+                          label: S.current.category_name_en,
                           require: true,
                           textInputAction: TextInputAction.next,
                           validator: (v) {
                             if (v == '') {
-                              return S
-                                  .current.categoryNameAmountValidateMessage;
+                              return S.current.category_name_en_ValidateMessage;
+                            }
+                            return null;
+                          },
+                        ),
+                        CustomTextField(
+                          controller: controller.categoryKhmerNameTxtcontroller,
+                          label: S.current.category_name_kh,
+                          require: true,
+                          textInputAction: TextInputAction.next,
+                          validator: (v) {
+                            if (v == '') {
+                              return S.current.category_name_kh_ValidateMessage;
                             }
                             return null;
                           },
@@ -75,7 +87,8 @@ class _AddCategoryState extends State<AddCategory> {
                         CustomTextField(
                           controller:
                               controller.categoryDescriptionTxtcontroller,
-                          label: 'Description',
+                          label: S.current.category_desc,
+                          maxLines: 5,
                           textInputAction: TextInputAction.done,
                         ),
 

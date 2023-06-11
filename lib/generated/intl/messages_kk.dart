@@ -22,16 +22,33 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "add": MessageLookupByLibrary.simpleMessage("បន្ថែម"),
         "addCategory": MessageLookupByLibrary.simpleMessage("បន្ថែមស្តុក"),
         "addDrink": MessageLookupByLibrary.simpleMessage("បន្ថែមភេសជ្ជៈ"),
+        "all": MessageLookupByLibrary.simpleMessage("ទាំងអស់"),
         "allCoffeeTitle":
             MessageLookupByLibrary.simpleMessage("ភេសជ្ជៈទាំងអស់"),
+        "amount": MessageLookupByLibrary.simpleMessage("បរិមាណភេសជ្ជៈ"),
         "category": MessageLookupByLibrary.simpleMessage("ស្តុកទាំងអស់"),
+        "categoryName": MessageLookupByLibrary.simpleMessage("ប្រភេទភេសជ្ជៈ"),
         "categoryNameAmountValidateMessage":
-            MessageLookupByLibrary.simpleMessage("ឈ្មោះប្រភេទមិនអាចទទេបានទេ។"),
+            MessageLookupByLibrary.simpleMessage("ឈ្មោះប្រភេទមិនអាចទទេបានទេ"),
+        "category_desc": MessageLookupByLibrary.simpleMessage("ពិពណ៌នា"),
+        "category_name_en": MessageLookupByLibrary.simpleMessage(
+            "ឈ្មោះប្រភេទភេសជ្ជៈជាភាសាអង់គ្លេស"),
+        "category_name_en_ValidateMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "ឈ្មោះប្រភេទភេសជ្ជៈជាភាសាអង់គ្លេសមិនអាចទទេបានទេ"),
+        "category_name_kh": MessageLookupByLibrary.simpleMessage(
+            "ឈ្មោះប្រភេទភេសជ្ជៈជាភាសាខ្មែរ"),
+        "category_name_kh_ValidateMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "ឈ្មោះប្រភេទភេសជ្ជៈជាភាសាខ្មែរមិនអាចទទេបានទេ"),
         "dashboard": MessageLookupByLibrary.simpleMessage("ផ្ទាំងគ្រប់គ្រង"),
+        "delete_success": MessageLookupByLibrary.simpleMessage("លុបបានជោគជ័យ"),
         "drinkCategoryValidateMessage":
             MessageLookupByLibrary.simpleMessage("ប្រភេទភេសជ្ជៈមិនអាចទទេបានទេ"),
+        "drinkName": MessageLookupByLibrary.simpleMessage("ឈ្មោះភេសជ្ជៈ"),
         "drinkNameValidateMessage":
             MessageLookupByLibrary.simpleMessage("ឈ្មោះភេសជ្ជៈមិនអាចទទេបានទេ"),
         "drinkTotalAmountValidateMessage":
@@ -54,6 +71,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "ស្គែនទៅកាន់ មីនុយអេឡិចត្រូនិច"),
         "setting": MessageLookupByLibrary.simpleMessage("ការកំណត់"),
         "signout": MessageLookupByLibrary.simpleMessage("ចាកចេញ"),
+        "success": MessageLookupByLibrary.simpleMessage("ជោគជ័យ"),
+        "unitPrice": MessageLookupByLibrary.simpleMessage("តម្លៃឯកតាភេសជ្ជៈ"),
+        "update": MessageLookupByLibrary.simpleMessage("កែប្រែ"),
         "users": MessageLookupByLibrary.simpleMessage("អ្នកប្រើប្រាស់")
       };
 }
