@@ -9,8 +9,8 @@ class AppBinding extends Bindings {
   void dependencies() {
     // if (!GetPlatform.isWeb) {
     Get.put(AuthController());
-    Get.put(DashBoardController());
-    Get.lazyPut(() => InventoryController());
+    Get.put(DashBoardController(), permanent: true);
+    Get.put(() => InventoryController(), permanent: true);
     // }
   }
 }

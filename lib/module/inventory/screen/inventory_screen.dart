@@ -1,3 +1,4 @@
+import 'package:aklo_cafe/config/router/app_pages.dart';
 import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:aklo_cafe/module/inventory/inventory.dart';
 import 'package:aklo_cafe/module/inventory/screen/add_category.dart';
@@ -84,7 +85,7 @@ class Inventory extends GetView<InventoryController> {
           ),
           MenuCard(
             onTap: () {
-              _handleNavigate(context, 1);
+              Get.toNamed(Routes.EDIT_DRINK);
             },
             title: S.current.addDrink,
             icon: PhosphorIcons.list_plus_bold,

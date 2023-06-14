@@ -1,53 +1,61 @@
 import 'package:aklo_cafe/constant/resources.dart';
-import 'package:aklo_cafe/core/firebase_core/notification_core/firebase_admin_notification.dart';
-import 'package:aklo_cafe/util/widgets/custom_button.dart';
+import 'package:aklo_cafe/module/client/controller/client_order_controller.dart';
+import 'package:aklo_cafe/module/client/screen/check_out_screen.dart';
+import 'package:aklo_cafe/util/alerts/app_snackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 
 import '../../inventory/inventory.dart';
 
-class ClientOrderScreen extends StatelessWidget {
+class ClientOrderScreen extends StatefulWidget {
   const ClientOrderScreen({super.key});
+
+  @override
+  State<ClientOrderScreen> createState() => _ClientOrderScreenState();
+}
+
+class _ClientOrderScreenState extends State<ClientOrderScreen> {
+  final controller = Get.put(ClientOrderController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const Expanded(
-            child: AllCoffeeScreen(),
-          ),
-          Container(
-            height: 70,
-            color: AppColors.deepBackgroundColor,
-            padding: const EdgeInsets.symmetric(
-              horizontal: Sizes.defaultPadding,
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'Total : 4.5\$',
-                    style: AppStyle.large,
+      body: Obx(
+        () => Column(
+          children: [
+            const Expanded(child: AllCoffeeScreen()),
+            Container(
+              padding: const EdgeInsets.all(20),
+              // height: context.height * 0.2,
+              decoration:
+                  const BoxDecoration(color: AppColors.deepBackgroundColor),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Total ${controller.total.toStringAsFixed(2)}\$',
+                      style: AppStyle.medium,
+                    ),
                   ),
-                ),
-                ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: context.width * 0.4),
-                  child: CustomButton(
+                  ElevatedButton.icon(
                     onPressed: () {
-                      AdminNotificationManager.instance.sentNotification(
-                          'New Order #32432', 'ខ្ញុំត្រូវការកាហ្វេ');
-                      // NotificationHelper.instance.showNotification(
-                      //     'New Order #3432', 'Please Make it');
+                      if (controller.total <= 0) {
+                        showErrorSnackBar(
+                            title: "Please add drink",
+                            description: 'a drink is required to make order');
+                        return;
+                      }
+                      Get.to(const CheckOutScreen());
                     },
-                    backgroundColor: Colors.green,
-                    name: 'Check Out',
+                    icon: const Icon(PhosphorIcons.shopping_cart),
+                    label: const Text('Check Out'),
                   ),
-                )
-              ],
+                ],
+              ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

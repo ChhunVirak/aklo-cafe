@@ -143,16 +143,17 @@ class _DashBoardState extends State<DashBoard> {
         title: const Text(Strings.appName),
       ),
       body: [
-        SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+        Padding(
+          padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              AspectRatio(
-                aspectRatio: 1.3 / 1,
+              Expanded(
+                // aspectRatio: 1.3 / 1,
                 child: Container(
+                  width: double.infinity,
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.grey,
+                    color: Colors.green,
                     borderRadius: Sizes.boxBorderRadius,
                   ),
                   child: Column(
@@ -162,7 +163,7 @@ class _DashBoardState extends State<DashBoard> {
                       Obx(
                         () => Text.rich(
                           TextSpan(
-                            text: 'Today orders : ',
+                            text: 'Today or ders : ',
                             style: AppStyle.medium
                                 .copyWith(color: AppColors.txtLightColor),
                             children: [

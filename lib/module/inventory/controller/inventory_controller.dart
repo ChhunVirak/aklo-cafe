@@ -37,9 +37,9 @@ class InventoryController extends GetxController {
   Stream<QuerySnapshot<Map<String, dynamic>>> drinkofCategory(String c) {
     const field = 'category';
     if (c == 'All' || c == '') {
-      return drinkDb.limit(10).snapshots();
+      return drinkDb.snapshots();
     } else {
-      return drinkDb.where(field, isEqualTo: c).limit(10).snapshots();
+      return drinkDb.where(field, isEqualTo: c).snapshots();
     }
   }
 
@@ -145,12 +145,9 @@ class InventoryController extends GetxController {
             );
         debugPrint('Current Route ${Get.currentRoute}');
         debugPrint('Current Route 2 ${Routes.ALL_DRINK}');
+        Get.back();
 
-        Get.until((route) {
-          debugPrint('Route : ${route.runtimeType}');
-          GetPageRoute<dynamic> r = route;
-          return true;
-        });
+        // Get.until((_) => Get.currentRoute == Routes.ALL_DRINK);
         showSuccessSnackBar(
           title: S.current.success,
           description: 'New drink has been update successfully.',

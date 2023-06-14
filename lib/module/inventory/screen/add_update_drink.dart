@@ -23,7 +23,7 @@ class AddDrinkScreen extends StatefulWidget {
 }
 
 class _AddDrinkScreenState extends State<AddDrinkScreen> {
-  final controller = Get.find<InventoryController>();
+  final controller = Get.put(InventoryController());
   Future<void> _showCategories(BuildContext context) async {
     await showCustomModalBottomSheet(
       ColoredBox(

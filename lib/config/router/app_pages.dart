@@ -47,7 +47,6 @@ class AppPages {
         ),
         GetPage(
           name: _Paths.INVENTORY,
-          binding: InventoryBinding(),
           page: () => const Inventory(),
           children: [
             GetPage(
@@ -68,10 +67,6 @@ class AppPages {
           name: _Paths.USERS,
           page: () => const UsersScreen(),
         ),
-        GetPage(
-          name: _Paths.ADD_DRINK,
-          page: () => const AddDrinkScreen(),
-        ),
       ],
     ),
     GetPage(
@@ -79,11 +74,4 @@ class AppPages {
       page: () => const SplashScreen(),
     ),
   ];
-}
-
-class InventoryBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut(() => InventoryController());
-  }
 }
