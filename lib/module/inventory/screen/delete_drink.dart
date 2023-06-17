@@ -94,7 +94,7 @@ class DeleteDrinkScreen extends GetView<InventoryController> {
                 final name = listData?[index].name;
                 // final img = listData[index].image;
                 final unitPrice = listData?[index].unitPrice;
-                final qty = listData?[index].amount;
+
                 final id = listData?[index].id;
 
                 return GestureDetector(
@@ -106,7 +106,6 @@ class DeleteDrinkScreen extends GetView<InventoryController> {
                     image:
                         'https://cdn.shopify.com/s/files/1/0298/4581/5429/products/ReusableCup_grande.png?v=1578631807',
                     unitPrice: unitPrice,
-                    qty: qty,
                   ),
                 );
               },

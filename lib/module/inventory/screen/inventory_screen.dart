@@ -1,4 +1,3 @@
-import 'package:aklo_cafe/config/router/app_pages.dart';
 import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:aklo_cafe/module/inventory/inventory.dart';
 import 'package:aklo_cafe/module/inventory/screen/add_category.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 
+import '../../../config/router/app_pages.dart';
 import '../../../constant/resources.dart';
 import '../../../util/alerts/app_snackbar.dart';
 import '../../home/components/menu_card.dart';
@@ -17,12 +17,7 @@ class Inventory extends GetView<InventoryController> {
     if (context.mounted) {
       switch (index) {
         case 0:
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const AllCoffeeScreen(),
-            ),
-          );
+          pushSubRoute(Routes.ALL_DRINK);
           break;
         case 1:
           controller.clearFormAddProduct();
@@ -85,7 +80,8 @@ class Inventory extends GetView<InventoryController> {
           ),
           MenuCard(
             onTap: () {
-              Get.toNamed(Routes.EDIT_DRINK);
+              controller.clearFormAddProduct();
+              pushSubRoute(Routes.EDIT_DRINK);
             },
             title: S.current.addDrink,
             icon: PhosphorIcons.list_plus_bold,

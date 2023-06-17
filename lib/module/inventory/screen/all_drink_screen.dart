@@ -164,7 +164,7 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                     // final img = listData[index].image;
                                     final unitPrice =
                                         listData?[index].unitPrice;
-                                    final qty = listData?[index].amount;
+
                                     final id = listData?[index].id;
 
                                     return GestureDetector(
@@ -183,23 +183,16 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                                 children: [
                                                   CustomButton(
                                                     onPressed: () {
-                                                      //TODO : initial Data to Edit
                                                       controller
                                                           .initialDrinkForEdit(
-                                                              listData?[index]);
-                                                      final param =
-                                                          <String, String>{}
-                                                            ..addIf(
-                                                              id != null,
-                                                              'id',
-                                                              id!,
-                                                            );
+                                                              id);
 
+                                                      //remove pop up
                                                       Get.back();
 
-                                                      Get.toNamed(
+                                                      pushSubRoute(
                                                         Routes.EDIT_DRINK,
-                                                        parameters: param,
+                                                        queryParams: {"id": id},
                                                       );
                                                     },
                                                     name: 'Edit',
@@ -259,15 +252,14 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                         image:
                                             'https://cdn.shopify.com/s/files/1/0298/4581/5429/products/ReusableCup_grande.png?v=1578631807',
                                         unitPrice: unitPrice,
-                                        qty: qty,
                                         amount: orderController.getAmount(id),
-                                        onPressedAdd: !GetPlatform.isWeb
+                                        onPressedAdd: GetPlatform.isWeb
                                             ? () {
                                                 orderController
                                                     .addItem(listData?[index]);
                                               }
                                             : null,
-                                        onPressedRemove: !GetPlatform.isWeb
+                                        onPressedRemove: GetPlatform.isWeb
                                             ? () {
                                                 orderController.removeItem(
                                                     listData?[index]);

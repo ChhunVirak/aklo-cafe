@@ -27,11 +27,17 @@ class NotificationHelper {
     _requestNotificationPermission();
     _initLocalNotificationSetting();
     _deviceTokenChange();
+    _subscribeAdminTopic();
     getDeviceToken().then((value) {
       debugPrint('Token : $value');
       // Get.put<AuthController>(AuthController()).storeDeviceToken(value);
     });
     _onListenting();
+  }
+
+  void _subscribeAdminTopic() {
+    if (GetPlatform.isWeb) return;
+    _messaging.subscribeToTopic('admin');
   }
 
   Future<void> _initLocalNotificationSetting() async {

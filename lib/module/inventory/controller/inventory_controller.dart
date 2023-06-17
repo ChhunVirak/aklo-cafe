@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:aklo_cafe/config/languages/lang_font_controller.dart';
 import 'package:aklo_cafe/constant/firebase_storage_path.dart';
 import 'package:aklo_cafe/core/firebase_core/model/file_model.dart';
 import 'package:aklo_cafe/generated/l10n.dart';
@@ -76,33 +77,59 @@ class InventoryController extends GetxController {
   final drinkNameTxTcontroller = TextEditingController();
   final drinkCategoryTxTcontroller = TextEditingController();
   final unitPriceTxTcontroller = TextEditingController();
-  final amountTxTcontroller = TextEditingController();
+  // final amountTxTcontroller = TextEditingController();
 
   void clearFormAddProduct() {
     drinkNameTxTcontroller.clear();
     drinkCategoryTxTcontroller.clear();
     unitPriceTxTcontroller.clear();
-    amountTxTcontroller.clear();
+    // amountTxTcontroller.clear();
   }
 
-  void initialDrinkForEdit(DrinkModel? drinkModel) {
-    if (drinkModel != null) {
-      drinkNameTxTcontroller.text = drinkModel.name;
-      drinkCategoryTxTcontroller.text = drinkModel.category;
-      unitPriceTxTcontroller.text = drinkModel.unitPrice.toString();
-      amountTxTcontroller.text = drinkModel.amount.toString();
-    }
+  final initialLoading = true.obs;
+  void initialDrinkForEdit(String? id) async {
+    if (id == null) return;
+    //start loading
+    initialLoading(true);
+
+    //Get data
+    final data = await drinkDb.doc(id).get().then((value) => value.data());
+
+    if (data == null) return;
+    DrinkModel drinkModel = DrinkModel.fromMap(data);
+
+    final category = await categoryDb
+        .doc(drinkModel.categoryId)
+        .get()
+        .then((value) => value.data());
+
+    CategoryModel categoryModel = CategoryModel.fromMap(category ?? {});
+
+    drinkNameTxTcontroller.text = drinkModel.name;
+    drinkCategoryTxTcontroller.text = Get.locale == Langs.english.locale
+        ? categoryModel.nameEn
+        : categoryModel.nameKh;
+
+    unitPriceTxTcontroller.text = drinkModel.unitPrice.toString();
+    // amountTxTcontroller.text = drinkModel.amount.toString();
+    //remove loading
+    initialLoading(false);
   }
+
+  String? selectedCategoryID;
 
   Future<void> addDrink() async {
+    if (selectedCategoryID == null) return;
     try {
       final newDrink = DrinkModel(
         name: drinkNameTxTcontroller.text,
-        category: drinkCategoryTxTcontroller.text,
+        categoryId: selectedCategoryID!,
         unitPrice: num.tryParse(unitPriceTxTcontroller.text) ?? 0,
-        amount: int.tryParse(amountTxTcontroller.text) ?? 0,
         createdDate: DateTime.now(),
       );
+
+      //remove item no value avoid change value on database
+      newDrink.toMap().removeWhere((key, value) => value == null);
       final result = await db.collection('drink').add(
             newDrink.toMap(),
           );
@@ -111,7 +138,8 @@ class InventoryController extends GetxController {
           'id': result.id,
         },
       );
-      Get.until((route) => Get.currentRoute == Routes.INVENTORY);
+      adminRouter.go(Routes.INVENTORY);
+
       showSuccessSnackBar(
         title: 'Success',
         description: 'New drink has been added successfully.',
@@ -127,13 +155,20 @@ class InventoryController extends GetxController {
   }
 
   Future<void> updateDrink(String? id) async {
+    if (selectedCategoryID == null) {
+      showErrorSnackBar(
+        title: 'No Category found',
+        description: 'Please select category',
+      );
+      return; //end func
+    }
+
     if (id != null) {
       try {
         final newDrink = DrinkModel(
           name: drinkNameTxTcontroller.text,
-          category: drinkCategoryTxTcontroller.text,
+          categoryId: selectedCategoryID!,
           unitPrice: num.tryParse(unitPriceTxTcontroller.text) ?? 0,
-          amount: int.tryParse(amountTxTcontroller.text) ?? 0,
           createdDate: DateTime.now(),
         ).toMap()
           ..removeWhere(

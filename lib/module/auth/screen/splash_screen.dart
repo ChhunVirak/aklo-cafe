@@ -9,7 +9,6 @@ class SplashScreen extends StatelessWidget {
     return const Scaffold(
       body: Center(
         child: CircularProgressIndicator.adaptive(
-          value: 0.5,
           backgroundColor: AppColors.mainColor,
         ),
       ),

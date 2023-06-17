@@ -43,6 +43,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fontController = Get.put(LangsAndFontConfigs());
+    AppBinding().dependencies();
 
     return GetBuilder<LangsAndFontConfigs>(
       init: fontController,
@@ -51,74 +52,79 @@ class MainApp extends StatelessWidget {
           debugPrint('Operating Systemm Version :${v.version.sdkInt}');
         });
         if (!kIsWeb) {
-          final tk = await NotificationHelper.instance.getDeviceToken();
-          debugPrint('Token=>  : $tk');
-          Get.put(AuthController()).storeDeviceToken(tk);
+          final deviceToken =
+              await NotificationHelper.instance.getDeviceToken();
+          debugPrint('Token=>  : $deviceToken');
+          Get.put(AuthController()).storeDeviceToken(deviceToken);
         }
       },
-      builder: (_) => GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Aklo Cafe',
-        initialBinding: AppBinding(),
-        locale: const Locale('en'),
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        initialRoute: AppPages.getInitialRoute,
-        getPages:
-            GetPlatform.isWeb ? AppPages.routesClient : AppPages.routesAdmin,
-        unknownRoute: AppPages.routesClient.first,
-        // onUnknownRoute: (settings) => GetPageRoute(),
-        theme: ThemeData(
-          useMaterial3: true,
-          fontFamily: AppStyle.fontFamily,
+      builder: (_) {
+        debugPrint('Built');
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Aklo Cafe',
+          // initialBinding: AppBinding(),
+          locale: fontController.currentLocale,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
 
-          // fontFamily: Get.put(LangsAndFontConfigs()).fontfamily,
-          scaffoldBackgroundColor: AppColors.txtLightColor,
-          colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.blue,
-          ),
-          floatingActionButtonTheme: const FloatingActionButtonThemeData(
-            backgroundColor: AppColors.mainColor,
-          ),
-          appBarTheme: AppBarTheme(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            titleTextStyle: AppStyle.large.copyWith(
-              fontSize: 20.0,
-              fontWeight: FontWeight.w200,
+          routerConfig: GetPlatform.isWeb ? clientRouter : adminRouter,
+          // getPages:
+          //     GetPlatform.isWeb ? AppPages.routesClient : AppPages.routesAdmin,
+          // unknownRoute: AppPages.routesClient.first,
+          // onUnknownRoute: (settings) => GetPageRoute(),
+          theme: ThemeData(
+            useMaterial3: true,
+            fontFamily: AppStyle.fontFamily,
+            // splashFactory: NoSplash.splashFactory,
+            // fontFamily: Get.put(LangsAndFontConfigs()).fontfamily,
+            scaffoldBackgroundColor: AppColors.txtLightColor,
+            colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: Colors.blue,
             ),
-            iconTheme: const IconThemeData(
-              color: AppColors.txtDarkColor,
+            floatingActionButtonTheme: const FloatingActionButtonThemeData(
+              backgroundColor: AppColors.mainColor,
             ),
-            scrolledUnderElevation: 0,
-          ),
-          bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            selectedLabelStyle:
-                AppStyle.small.copyWith(fontVariations: [AppStyle.weightM]),
-            unselectedLabelStyle:
-                AppStyle.small.copyWith(fontVariations: [AppStyle.weightM]),
-          ),
-          bottomSheetTheme: const BottomSheetThemeData(
-            surfaceTintColor: Colors.transparent,
-            modalBackgroundColor: AppColors.backgroundColor,
-            backgroundColor: AppColors.backgroundColor,
-          ),
-          chipTheme: const ChipThemeData(
-            shape: StadiumBorder(),
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              foregroundColor: AppColors.lightColor,
-              textStyle: AppStyle.medium,
+            appBarTheme: AppBarTheme(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              titleTextStyle: AppStyle.large.copyWith(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w200,
+              ),
+              iconTheme: const IconThemeData(
+                color: AppColors.txtDarkColor,
+              ),
+              scrolledUnderElevation: 0,
+            ),
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              selectedLabelStyle:
+                  AppStyle.small.copyWith(fontVariations: [AppStyle.weightM]),
+              unselectedLabelStyle:
+                  AppStyle.small.copyWith(fontVariations: [AppStyle.weightM]),
+            ),
+            bottomSheetTheme: const BottomSheetThemeData(
+              surfaceTintColor: Colors.transparent,
+              modalBackgroundColor: AppColors.backgroundColor,
+              backgroundColor: AppColors.backgroundColor,
+            ),
+            chipTheme: const ChipThemeData(
+              shape: StadiumBorder(),
+            ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: AppColors.lightColor,
+                textStyle: AppStyle.medium,
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

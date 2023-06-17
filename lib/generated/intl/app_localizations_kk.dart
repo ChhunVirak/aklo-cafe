@@ -117,4 +117,7 @@ class LangsKk extends Langs {
 
   @override
   String get delete_success => 'លុបបានជោគជ័យ';
+
+  @override
+  String get make_order => 'ធ្វើការកម្មង់';
 }

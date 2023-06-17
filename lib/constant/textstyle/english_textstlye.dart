@@ -10,8 +10,6 @@ class EnglishFontStyle extends BaseTextStyle {
   @override
   final Locale locale = const Locale('en', 'EN');
 
-  // @override
-  // final String fontFamily = 'Nunito';
   @override
   final String fontFamily = 'KantumruyPro';
 

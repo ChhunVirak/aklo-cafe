@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languages": MessageLookupByLibrary.simpleMessage("ភាសា"),
         "languagesDes": MessageLookupByLibrary.simpleMessage("រើសភាសា"),
         "login": MessageLookupByLibrary.simpleMessage("ចូល"),
+        "make_order": MessageLookupByLibrary.simpleMessage("ធ្វើការកម្មង់"),
         "orders": MessageLookupByLibrary.simpleMessage("ការកម្ម៉ង់ទាំងអស់"),
         "password": MessageLookupByLibrary.simpleMessage("លេខសំងាត់"),
         "passwordValidateMessage":

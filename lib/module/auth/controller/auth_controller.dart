@@ -54,9 +54,9 @@ class AuthController extends GetxController {
       //   return;
       // }
       //if user already login no change
-      Get.offAllNamed(Routes.DASHBOARD);
+      adminRouter.go(Routes.DASHBOARD);
     } else {
-      Get.offAllNamed(Routes.LOGIN);
+      adminRouter.go(Routes.LOGIN);
     }
   }
 

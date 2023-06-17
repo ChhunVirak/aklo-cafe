@@ -37,5 +37,6 @@
   "category_name_kh_ValidateMessage": "ឈ្មោះប្រភេទភេសជ្ជៈជាភាសាខ្មែរមិនអាចទទេបានទេ",
   "all": "ទាំងអស់",
   "success": "ជោគជ័យ",
-  "delete_success": "លុបបានជោគជ័យ"
+  "delete_success": "លុបបានជោគជ័យ",
+  "make_order": "ធ្វើការកម្មង់"
 }

@@ -65,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesDes":
             MessageLookupByLibrary.simpleMessage("Choose Preference Languages"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "make_order": MessageLookupByLibrary.simpleMessage("Make Order"),
         "orders": MessageLookupByLibrary.simpleMessage("Orders"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordValidateMessage":

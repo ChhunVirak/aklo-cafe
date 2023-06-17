@@ -1,13 +1,14 @@
 import 'package:aklo_cafe/module/home/controller/dashboard_controller.dart';
+import 'package:aklo_cafe/util/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 
 import '../../../config/router/app_pages.dart';
 import '../../../generated/l10n.dart';
+import '../../../util/alerts/app_modal_bottomsheet.dart';
 import '../../../util/alerts/app_snackbar.dart';
 import '../../auth/controller/auth_controller.dart';
-import '../../auth/screen/users_screen.dart';
 import '../../order/screen/orders_screen.dart';
 import '../components/menu_card.dart';
 
@@ -43,15 +44,10 @@ class _DashBoardState extends State<DashBoard> {
         //   );
         //   break;
         case 'Inventory':
-          Get.toNamed(Routes.INVENTORY);
+          pushSubRoute('inventory');
           break;
         case 'Users':
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const UsersScreen(),
-            ),
-          );
+          pushSubRoute(Routes.USER);
           break;
         default:
           showErrorSnackBar(
@@ -67,24 +63,27 @@ class _DashBoardState extends State<DashBoard> {
     //   DeviceOrientation.portraitDown,
     //   DeviceOrientation.portraitUp,
     // ]);
-    Get.toNamed(Routes.CLIENT_ORDER);
-    // showCustomModalBottomSheet(
-    //   Column(
-    //     children: [
-    //       Sizes.defaultPadding.sh,
-    //       Text(
-    //         S.current.scan,
-    //         style: AppStyle.large,
-    //       ),
-    //       Sizes.textPadding.sh,
-    //       Expanded(
-    //         child: Image.network(
-    //           'https://www.bleepstatic.com/images/news/u/1164866/2022/Apr-2022/qr-code-moving/qr-code-moving.gif',
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
+    // Get.toNamed(Routes.CLIENT_ORDER);
+    showCustomModalBottomSheet(
+      Column(
+        children: [
+          Sizes.defaultPadding.sh,
+          Text(
+            S.current.scan,
+            style: AppStyle.large,
+          ),
+          Sizes.textPadding.sh,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(Sizes.defaultPadding),
+              child: Image.network(
+                'https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=http://www.google.com/',
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   int _currentIndex = 0;

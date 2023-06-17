@@ -8,7 +8,7 @@ import '../../../constant/resources.dart';
 class DrinkCard extends StatelessWidget {
   final String? image;
   final String? name;
-  final int? qty;
+  // final int? qty;
   final num? unitPrice;
   final int? amount;
   final GestureTapCallback? onPressedAdd;
@@ -17,7 +17,7 @@ class DrinkCard extends StatelessWidget {
     super.key,
     this.image,
     this.name,
-    this.qty,
+    // this.qty,
     this.unitPrice,
     this.onPressedAdd,
     this.onPressedRemove,
@@ -66,10 +66,9 @@ class DrinkCard extends StatelessWidget {
                             ),
                           ),
                         if (amount != null && amount! > 0)
-                          Container(
-                            child: Text(amount.toString()),
-                          ),
+                          Text(amount.toString()),
                         IconButton(
+                          style: IconButton.styleFrom(),
                           onPressed: () {
                             onPressedAdd?.call();
                           },
@@ -96,13 +95,13 @@ class DrinkCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                if (qty != null)
-                  Expanded(
-                    child: Text(
-                      '${qty?.toString() ?? '0'} Units',
-                      style: AppStyle.small,
-                    ),
-                  ),
+                // if (qty != null)
+                //   Expanded(
+                //     child: Text(
+                //       '${qty?.toString() ?? '0'} Units',
+                //       style: AppStyle.small,
+                //     ),
+                //   ),
                 5.sw,
                 if (unitPrice != null)
                   Text.rich(

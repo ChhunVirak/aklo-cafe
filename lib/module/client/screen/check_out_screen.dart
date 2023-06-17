@@ -1,5 +1,6 @@
 import 'package:aklo_cafe/constant/resources.dart';
 import 'package:aklo_cafe/core/firebase_core/notification_core/firebase_admin_notification.dart';
+import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:aklo_cafe/module/client/controller/client_order_controller.dart';
 import 'package:aklo_cafe/util/alerts/app_snackbar.dart';
 import 'package:aklo_cafe/util/widgets/custom_button.dart';
@@ -43,7 +44,7 @@ class CheckOutScreen extends StatelessWidget {
                     'Please make me a drink',
                     'Total Price \$${orderController.total.toStringAsFixed(2)}');
               },
-              name: 'Make Order',
+              name: S.current.make_order,
             ),
           ),
         ],

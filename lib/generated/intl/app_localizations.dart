@@ -320,6 +320,12 @@ abstract class Langs {
   /// In en, this message translates to:
   /// **'Delete Successfully'**
   String get delete_success;
+
+  /// No description provided for @make_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Make Order'**
+  String get make_order;
 }
 
 class _LangsDelegate extends LocalizationsDelegate<Langs> {

@@ -3,7 +3,9 @@ import 'package:aklo_cafe/constant/resources.dart';
 import 'package:aklo_cafe/module/inventory/controller/inventory_controller.dart';
 import 'package:aklo_cafe/module/inventory/model/category_model.dart';
 import 'package:aklo_cafe/util/alerts/app_modal_bottomsheet.dart';
+import 'package:aklo_cafe/util/widgets/app_circular_loading.dart';
 import 'package:aklo_cafe/util/widgets/custom_button.dart';
+import 'package:aklo_cafe/util/widgets/custom_image_picker_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -70,7 +72,10 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                     itemBuilder: (_, index) => InkWell(
                       onTap: () {
                         controller.drinkCategoryTxTcontroller.text =
-                            cetegoryList[index].nameEn;
+                            Get.locale == Langs.english.locale
+                                ? cetegoryList[index].nameEn
+                                : cetegoryList[index].nameKh;
+                        controller.selectedCategoryID = cetegoryList[index].id;
                         Navigator.pop(context);
                       },
                       child: Ink(
@@ -102,155 +107,120 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
 
   static final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
-  double sugar = 0;
-  double ice = 0;
-
-  int levelCal(double value) => (value * 100).toInt();
+  @override
+  void initState() {
+    super.initState();
+    controller.initialDrinkForEdit(widget.id);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(Strings.addDrink),
-      ),
-      resizeToAvoidBottomInset: true,
-      body: SafeArea(
-        minimum: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.only(top: Sizes.defaultPadding),
-                child: Form(
-                  key: _form,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomTextField(
-                        controller: controller.drinkNameTxTcontroller,
-                        label: S.current.drinkName,
-                        require: true,
-                        textInputAction: TextInputAction.next,
-                        validator: (v) {
-                          if (v == '') {
-                            return S.current.drinkNameValidateMessage;
-                          }
-                          return null;
-                        },
-                      ),
-                      CustomTextField(
-                        onTap: () {
-                          _showCategories(context).then((value) {
-                            FocusScope.of(context).nextFocus();
-                          });
-                        },
-                        enable: false,
-                        controller: controller.drinkCategoryTxTcontroller,
-                        label: S.current.categoryName,
-                        require: true,
-                        textInputAction: TextInputAction.next,
-                        suffixIcon: FocusScope(
-                          canRequestFocus: false,
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.expand_more_rounded,
-                              size: 25,
-                            ),
+    return Obx(
+      () => controller.initialLoading.value
+          ? const Center(
+              child: CustomCircularLoading(),
+            )
+          : Scaffold(
+              appBar: AppBar(
+                title: const Text(Strings.addDrink),
+              ),
+              resizeToAvoidBottomInset: true,
+              body: SafeArea(
+                minimum: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Form(
+                          key: _form,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const ImagePickerBox(),
+                              CustomTextField(
+                                controller: controller.drinkNameTxTcontroller,
+                                label: S.current.drinkName,
+                                require: true,
+                                textInputAction: TextInputAction.next,
+                                validator: (v) {
+                                  if (v == '') {
+                                    return S.current.drinkNameValidateMessage;
+                                  }
+                                  return null;
+                                },
+                              ),
+                              CustomTextField(
+                                onTap: () {
+                                  _showCategories(context).then((value) {
+                                    FocusScope.of(context).nextFocus();
+                                  });
+                                },
+                                enable: false,
+                                controller:
+                                    controller.drinkCategoryTxTcontroller,
+                                label: S.current.categoryName,
+                                require: true,
+                                textInputAction: TextInputAction.next,
+                                suffixIcon: FocusScope(
+                                  canRequestFocus: false,
+                                  child: IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.expand_more_rounded,
+                                      size: 25,
+                                    ),
+                                  ),
+                                ),
+                                validator: (v) {
+                                  if (v == '') {
+                                    return S
+                                        .current.drinkCategoryValidateMessage;
+                                  }
+                                  return null;
+                                },
+                              ),
+                              CustomTextField(
+                                controller: controller.unitPriceTxTcontroller,
+                                label: S.current.unitPrice,
+                                require: true,
+                                textInputType:
+                                    const TextInputType.numberWithOptions(
+                                        decimal: true),
+                                textInputAction: TextInputAction.next,
+                                validator: (v) {
+                                  if (v == '') {
+                                    return S
+                                        .current.drinkUnitPriceValidateMessage;
+                                  }
+
+                                  return null;
+                                },
+                                suffixIcon:
+                                    const Icon(Icons.attach_money_rounded),
+                              ),
+                            ],
                           ),
                         ),
-                        validator: (v) {
-                          if (v == '') {
-                            return S.current.drinkCategoryValidateMessage;
+                      ),
+                    ),
+                    CustomButton(
+                      onPressed: () async {
+                        final noError = _form.currentState?.validate();
+                        if (noError == true) {
+                          if (widget.id == null) {
+                            await controller.addDrink();
+                          } else {
+                            await controller.updateDrink(widget.id);
                           }
-                          return null;
-                        },
-                      ),
-                      CustomTextField(
-                        controller: controller.unitPriceTxTcontroller,
-                        label: S.current.unitPrice,
-                        require: true,
-                        textInputType: const TextInputType.numberWithOptions(
-                            decimal: true),
-                        textInputAction: TextInputAction.next,
-                        validator: (v) {
-                          if (v == '') {
-                            return S.current.drinkUnitPriceValidateMessage;
-                          }
-
-                          return null;
-                        },
-                        suffixIcon: const Icon(Icons.attach_money_rounded),
-                      ),
-                      CustomTextField(
-                        controller: controller.amountTxTcontroller,
-                        label: S.current.amount,
-                        require: true,
-                        textInputType: TextInputType.number,
-                        validator: (v) {
-                          if (v == '') {
-                            return S.current.drinkTotalAmountValidateMessage;
-                          }
-                          return null;
-                        },
-                      ),
-
-                      /*
-                      Text(
-                        'Sugar Level : ${levelCal(sugar)}%',
-                        style: AppStyle.medium,
-                      ),
-                      Slider(
-                        value: sugar,
-                        divisions: 4,
-                        activeColor: AppColors.mainColor,
-                        inactiveColor: AppColors.backgroundColor,
-                        label: 'Sugar ${levelCal(sugar)}%',
-                        onChanged: (_) {
-                          setState(() {
-                            sugar = _;
-                          });
-                        },
-                      ),
-                      Text(
-                        'Ice Level : ${levelCal(ice)}%',
-                        style: AppStyle.medium,
-                      ),
-                      Slider(
-                        value: ice,
-                        divisions: 4,
-                        activeColor: AppColors.mainColor,
-                        inactiveColor: AppColors.backgroundColor,
-                        label: 'Sugar ${levelCal(ice)}%',
-                        onChanged: (_) {
-                          setState(() {
-                            ice = _;
-                          });
-                        },
-                      ),
-                      */
-                      // const Spacer(),
-                    ],
-                  ),
+                        }
+                      },
+                      name:
+                          widget.id == null ? S.current.add : S.current.update,
+                    ),
+                  ],
                 ),
               ),
             ),
-            CustomButton(
-              onPressed: () async {
-                final noError = _form.currentState?.validate();
-                if (noError == true) {
-                  if (widget.id == null) {
-                    await controller.addDrink();
-                  } else {
-                    await controller.updateDrink(widget.id);
-                  }
-                }
-              },
-              name: widget.id == null ? S.current.add : S.current.update,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

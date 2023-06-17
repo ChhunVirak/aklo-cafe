@@ -429,6 +429,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Make Order`
+  String get make_order {
+    return Intl.message(
+      'Make Order',
+      name: 'make_order',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

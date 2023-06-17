@@ -47,6 +47,8 @@ class LangsAndFontConfigs extends GetxController {
 
   Locale _currentLocale = EnglishFontStyle().locale;
 
+  Locale get currentLocale => _currentLocale;
+
   bool get isEnglish => _currentLocale == EnglishFontStyle().locale;
 
   void _checkCurrentLanguage() {
@@ -63,10 +65,9 @@ class LangsAndFontConfigs extends GetxController {
 
   void changeLanguage(Langs lan) async {
     _currentLocale = lan.locale;
+    Get.updateLocale(lan.locale);
+    update();
     debugPrint('Locale Code ${lan.countryCode}');
     await _pref.setString('AppLocale', lan.countryCode);
-    Get.updateLocale(lan.locale);
-
-    update();
   }
 }
