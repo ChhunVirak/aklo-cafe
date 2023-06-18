@@ -1,4 +1,5 @@
 import 'package:aklo_cafe/constant/resources.dart';
+import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:aklo_cafe/module/client/controller/client_order_controller.dart';
 import 'package:aklo_cafe/module/client/screen/check_out_screen.dart';
 import 'package:aklo_cafe/util/alerts/app_snackbar.dart';
@@ -42,8 +43,8 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                     onPressed: () {
                       if (controller.total <= 0) {
                         showErrorSnackBar(
-                            title: "Please add drink",
-                            description: 'a drink is required to make order');
+                            title: S.current.add_drink_message,
+                            description: S.current.add_drink_message_des);
                         return;
                       }
                       Get.to(const CheckOutScreen());

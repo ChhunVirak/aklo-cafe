@@ -29,12 +29,13 @@ class AllCoffeeScreen extends GetView<InventoryController> {
     final orderController = Get.put(ClientOrderController());
     return Scaffold(
       appBar: AppBar(
-        title: const Text(Strings.allCoffeeTitle),
+        title: Text(S.current.allCoffeeTitle),
       ),
       body: GetBuilder(
           init: Get.put(InventoryController()),
           initState: (_) {
             controller.currentCategory.value = 'All';
+            controller.currentCategoryID.value = 'All';
           },
           builder: (_) {
             return Column(
@@ -70,7 +71,7 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                     backgroundColor: _chipBgColor(
                                         controller.currentCategory.value ==
                                             'All'),
-                                    labelStyle: AppStyle.medium.copyWith(
+                                    labelStyle: AppStyle.small.copyWith(
                                         color:
                                             controller.currentCategory.value ==
                                                     'All'
@@ -78,6 +79,8 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                                 : null),
                                     onPressed: () {
                                       controller.currentCategory.value = 'All';
+                                      controller.currentCategoryID.value =
+                                          'All';
                                     },
                                     label: Text(S.current.all),
                                     shape: const StadiumBorder(),
@@ -96,20 +99,21 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                               onPressed: () {
                                                 controller.currentCategory
                                                     .value = e.nameEn;
+                                                if (e.id == null) return; //ends
+                                                controller.currentCategoryID
+                                                    .value = e.id ?? '';
                                               },
                                               label: Text(Get.locale ==
                                                       Langs.english.locale
                                                   ? e.nameEn
                                                   : e.nameKh),
-                                              labelStyle: AppStyle.medium
-                                                  .copyWith(
-                                                      color: controller
-                                                                  .currentCategory
-                                                                  .value ==
-                                                              e.nameEn
-                                                          ? AppColors
-                                                              .txtLightColor
-                                                          : null),
+                                              labelStyle: AppStyle.small.copyWith(
+                                                  color: controller
+                                                              .currentCategory
+                                                              .value ==
+                                                          e.nameEn
+                                                      ? AppColors.txtLightColor
+                                                      : null),
                                             ),
                                           ),
                                         )
@@ -128,7 +132,7 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                   child: Obx(
                     () => StreamBuilder(
                       stream: controller
-                          .drinkofCategory(controller.currentCategory.value),
+                          .drinkofCategory(controller.currentCategoryID.value),
                       builder: (_, snapshot) {
                         debugPrint('Snapshot => ${snapshot.connectionState}');
                         if (snapshot.connectionState ==
@@ -151,6 +155,11 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                           final listData = snapshot.data?.docs
                               .map((e) => DrinkModel.fromMap(e.data()))
                               .toList();
+                          if (listData == null || listData.isEmpty) {
+                            return Center(
+                              child: Text(S.current.no_data),
+                            );
+                          }
                           return GetBuilder(
                               init: orderController,
                               builder: (_) {
@@ -158,14 +167,15 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                   padding: const EdgeInsets.all(Sizes.padding),
                                   physics: const BouncingScrollPhysics(),
                                   gridDelegate: _deligate(context),
-                                  itemCount: listData?.length ?? 0,
+                                  itemCount: listData.length,
                                   itemBuilder: (_, index) {
-                                    final name = listData?[index].name;
+                                    final name = listData[index].name;
                                     // final img = listData[index].image;
-                                    final unitPrice =
-                                        listData?[index].unitPrice;
+                                    final unitPrice = listData[index].unitPrice;
 
-                                    final id = listData?[index].id;
+                                    final id = listData[index].id;
+                                    final available = listData[index].available;
+                                    debugPrint(available.toString());
 
                                     return GestureDetector(
                                       onTap: () {
@@ -210,7 +220,7 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                                                 () async {
                                                               await controller
                                                                   .drinkDb
-                                                                  .doc(listData?[
+                                                                  .doc(listData[
                                                                           index]
                                                                       .id)
                                                                   .delete();
@@ -252,17 +262,18 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                         image:
                                             'https://cdn.shopify.com/s/files/1/0298/4581/5429/products/ReusableCup_grande.png?v=1578631807',
                                         unitPrice: unitPrice,
+                                        available: available,
                                         amount: orderController.getAmount(id),
                                         onPressedAdd: GetPlatform.isWeb
                                             ? () {
                                                 orderController
-                                                    .addItem(listData?[index]);
+                                                    .addItem(listData[index]);
                                               }
                                             : null,
                                         onPressedRemove: GetPlatform.isWeb
                                             ? () {
                                                 orderController.removeItem(
-                                                    listData?[index]);
+                                                    listData[index]);
                                               }
                                             : null,
                                       ),

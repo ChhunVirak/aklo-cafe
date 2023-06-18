@@ -1,4 +1,5 @@
 import 'package:aklo_cafe/constant/resources.dart';
+import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:aklo_cafe/module/inventory/controller/inventory_controller.dart';
 import 'package:aklo_cafe/module/inventory/model/drink_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -34,8 +35,8 @@ class DeleteDrinkScreen extends GetView<InventoryController> {
           fontWeight: FontWeight.w400,
         ),
         // contentPadding: EdgeInsets.zero,
-        title: const Text('Warning'),
-        content: const Text('Do you want to delete this Drink?'),
+        title: Text(S.current.warning),
+        content: Text(S.current.warning_delete),
         actions: [
           TextButton(
             onPressed: () async {
@@ -47,13 +48,13 @@ class DeleteDrinkScreen extends GetView<InventoryController> {
                 Navigator.pop(popContext);
               }
             },
-            child: const Text('Yes'),
+            child: Text(S.current.yes),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(popContext);
             },
-            child: const Text('Cancel'),
+            child: Text(S.current.cancel),
           ),
         ],
       ),

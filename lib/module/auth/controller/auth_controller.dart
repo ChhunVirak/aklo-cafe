@@ -49,10 +49,10 @@ class AuthController extends GetxController {
     debugPrint('USER :  $user');
     if (GetPlatform.isWeb) return; //end function
     if (user != null) {
-      // if (Get.currentRoute != Routes.LOGIN ||
-      //     Get.currentRoute != Routes.SPLASH) {
-      //   return;
-      // }
+      if (!adminRouter.location.contains(Routes.LOGIN) &&
+          !adminRouter.location.contains(Routes.SPLASH)) {
+        return;
+      }
       //if user already login no change
       adminRouter.go(Routes.DASHBOARD);
     } else {

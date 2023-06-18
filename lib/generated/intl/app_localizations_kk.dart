@@ -44,10 +44,10 @@ class LangsKk extends Langs {
   String get addDrink => 'បន្ថែមភេសជ្ជៈ';
 
   @override
-  String get addCategory => 'បន្ថែមស្តុក';
+  String get addCategory => 'បន្ថែមប្រភេទភេសជ្ជៈ';
 
   @override
-  String get category => 'ស្តុកទាំងអស់';
+  String get category => 'ប្រភេទទាំងអស់';
 
   @override
   String get dashboard => 'ផ្ទាំងគ្រប់គ្រង';
@@ -120,4 +120,34 @@ class LangsKk extends Langs {
 
   @override
   String get make_order => 'ធ្វើការកម្មង់';
+
+  @override
+  String get no_data => 'គ្មានទិន្ន័យ';
+
+  @override
+  String get image => 'រូបភាព';
+
+  @override
+  String get noImage => 'គ្មានរូបភាព';
+
+  @override
+  String get gallery => 'រូបភាព';
+
+  @override
+  String get camera => 'កាមេរ៉ា';
+
+  @override
+  String get available => 'មាន';
+
+  @override
+  String get unAvailable => 'មិនមាន';
+
+  @override
+  String get newOrder => 'ថ្មី';
+
+  @override
+  String get accepted => 'បានទទួល';
+
+  @override
+  String get cancelled => 'បានបោះបង់';
 }

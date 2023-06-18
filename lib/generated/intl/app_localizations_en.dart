@@ -41,10 +41,10 @@ class LangsEn extends Langs {
   String get allCoffeeTitle => 'All Drinks';
 
   @override
-  String get addDrink => 'Add New Drink';
+  String get addDrink => 'Add Drink';
 
   @override
-  String get addCategory => 'Add New Category';
+  String get addCategory => 'Add Category';
 
   @override
   String get category => 'All Categories';
@@ -120,4 +120,34 @@ class LangsEn extends Langs {
 
   @override
   String get make_order => 'Make Order';
+
+  @override
+  String get no_data => 'No Data';
+
+  @override
+  String get image => 'Image';
+
+  @override
+  String get noImage => 'No Image';
+
+  @override
+  String get gallery => 'Gallery';
+
+  @override
+  String get camera => 'Camera';
+
+  @override
+  String get available => 'Available';
+
+  @override
+  String get unAvailable => 'Unavailable';
+
+  @override
+  String get newOrder => 'New';
+
+  @override
+  String get accepted => 'Accepted';
+
+  @override
+  String get cancelled => 'Cancelled';
 }

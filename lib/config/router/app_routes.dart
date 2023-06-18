@@ -10,7 +10,10 @@ abstract class Routes {
   static get INVENTORY => path.join(_Paths.DASHBOARD, _Paths.INVENTORY);
   static const ALL_DRINK = _Paths.ALL_DRINKS;
   static const EDIT_DRINK = _Paths.ADD_DRINK;
+  static const ADD_CATEGORY = _Paths.ADD_CATEGORY;
   static const USER = _Paths.USERS;
+  static const CATEGORY = _Paths.CATEGORY;
+  static const ORDERS = _Paths.ORDERS;
 
   ///Client Order
   static const CLIENT_ORDER = _Paths.CLIENT_ORDER;
@@ -18,15 +21,18 @@ abstract class Routes {
 
 abstract class _Paths {
   _Paths._();
-  static const SPLASHSCREEN = '/';
+  static const SPLASHSCREEN = '/splash';
   static const LOGIN = '/login';
-  static const DASHBOARD = '/dashboard';
+  static const DASHBOARD = '/';
 
   static const INVENTORY = 'inventory';
   static const ORDERS = 'orders';
+
   static const USERS = 'users';
   static const ALL_DRINKS = 'all-drink';
   static const ADD_DRINK = 'add-drink';
+  static const CATEGORY = 'category';
+  static const ADD_CATEGORY = 'add-category';
 
   ///Client Order
   static const CLIENT_ORDER = '/make-order';

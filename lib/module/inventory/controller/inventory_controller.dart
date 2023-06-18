@@ -13,7 +13,6 @@ import 'package:get/get.dart';
 import '../../../config/router/app_pages.dart';
 import '../../../util/alerts/app_dialog.dart';
 import '../../../util/alerts/app_snackbar.dart';
-import '../../home/model/coffee_model.dart';
 import '../model/category_model.dart';
 
 import 'package:path/path.dart' as path;
@@ -36,8 +35,9 @@ class InventoryController extends GetxController {
   final drinkDb = FirebaseFirestore.instance.collection('drink');
 
   Stream<QuerySnapshot<Map<String, dynamic>>> drinkofCategory(String c) {
-    const field = 'category';
-    if (c == 'All' || c == '') {
+    const field = 'categoryId';
+    debugPrint('statement $c');
+    if (c == 'All') {
       return drinkDb.snapshots();
     } else {
       return drinkDb.where(field, isEqualTo: c).snapshots();
@@ -48,29 +48,7 @@ class InventoryController extends GetxController {
   final categoryDb = FirebaseFirestore.instance.collection('category');
 
   final currentCategory = 'All'.obs;
-
-  final listInventoryMenu = <DashBoardModel>[
-    DashBoardModel(
-      title: 'Drink',
-      iconData: CupertinoIcons.list_number,
-      bgColor: const Color(0xffd51c4e),
-    ),
-    DashBoardModel(
-      title: 'Add Drink',
-      iconData: CupertinoIcons.add_circled_solid,
-      bgColor: const Color(0xfff56313),
-    ),
-    DashBoardModel(
-      title: 'Category',
-      iconData: CupertinoIcons.square_list_fill,
-      bgColor: const Color(0xff1b67ca),
-    ),
-    DashBoardModel(
-      title: S.current.addCategory,
-      iconData: CupertinoIcons.square_list_fill,
-      bgColor: const Color(0xfff56313),
-    ),
-  ];
+  final currentCategoryID = ''.obs;
 
   final db = FirebaseFirestore.instance;
 
@@ -86,37 +64,45 @@ class InventoryController extends GetxController {
     // amountTxTcontroller.clear();
   }
 
-  final initialLoading = true.obs;
+  final initialLoading = false.obs;
   void initialDrinkForEdit(String? id) async {
     if (id == null) return;
     //start loading
     initialLoading(true);
+    try {
+      //Get data
+      final data = await drinkDb.doc(id).get().then((value) => value.data());
 
-    //Get data
-    final data = await drinkDb.doc(id).get().then((value) => value.data());
+      if (data == null) {
+        initialLoading(false);
+        return;
+      }
 
-    if (data == null) return;
-    DrinkModel drinkModel = DrinkModel.fromMap(data);
+      DrinkModel drinkModel = DrinkModel.fromMap(data);
 
-    final category = await categoryDb
-        .doc(drinkModel.categoryId)
-        .get()
-        .then((value) => value.data());
+      final category = await categoryDb
+          .doc(drinkModel.categoryId)
+          .get()
+          .then((value) => value.data());
 
-    CategoryModel categoryModel = CategoryModel.fromMap(category ?? {});
+      CategoryModel categoryModel = CategoryModel.fromMap(category ?? {});
+      selectedCategoryID = categoryModel.id;
+      drinkNameTxTcontroller.text = drinkModel.name;
+      drinkCategoryTxTcontroller.text = Get.locale == Langs.english.locale
+          ? categoryModel.nameEn
+          : categoryModel.nameKh;
 
-    drinkNameTxTcontroller.text = drinkModel.name;
-    drinkCategoryTxTcontroller.text = Get.locale == Langs.english.locale
-        ? categoryModel.nameEn
-        : categoryModel.nameKh;
-
-    unitPriceTxTcontroller.text = drinkModel.unitPrice.toString();
-    // amountTxTcontroller.text = drinkModel.amount.toString();
-    //remove loading
-    initialLoading(false);
+      unitPriceTxTcontroller.text = drinkModel.unitPrice.toString();
+      available.value = drinkModel.available ?? true;
+    } catch (e) {
+      if (e is FirebaseException) debugPrint('Error ${e.message}');
+    } finally {
+      initialLoading(false);
+    }
   }
 
   String? selectedCategoryID;
+  final RxBool available = true.obs;
 
   Future<void> addDrink() async {
     if (selectedCategoryID == null) return;
@@ -125,6 +111,7 @@ class InventoryController extends GetxController {
         name: drinkNameTxTcontroller.text,
         categoryId: selectedCategoryID!,
         unitPrice: num.tryParse(unitPriceTxTcontroller.text) ?? 0,
+        available: available.value,
         createdDate: DateTime.now(),
       );
 
@@ -166,11 +153,12 @@ class InventoryController extends GetxController {
     if (id != null) {
       try {
         final newDrink = DrinkModel(
-          name: drinkNameTxTcontroller.text,
-          categoryId: selectedCategoryID!,
-          unitPrice: num.tryParse(unitPriceTxTcontroller.text) ?? 0,
-          createdDate: DateTime.now(),
-        ).toMap()
+                name: drinkNameTxTcontroller.text,
+                categoryId: selectedCategoryID!,
+                unitPrice: num.tryParse(unitPriceTxTcontroller.text) ?? 0,
+                createdDate: DateTime.now(),
+                available: available.value)
+            .toMap()
           ..removeWhere(
             (key, value) => value == null,
           );
@@ -199,12 +187,33 @@ class InventoryController extends GetxController {
 
   final categoryEnglishNameTxtcontroller = TextEditingController();
   final categoryKhmerNameTxtcontroller = TextEditingController();
-  final categoryDescriptionTxtcontroller = TextEditingController();
+  // final categoryDescriptionTxtcontroller = TextEditingController();
 
   void clearFormAddCategory() {
     categoryEnglishNameTxtcontroller.clear();
     categoryKhmerNameTxtcontroller.clear();
-    categoryDescriptionTxtcontroller.clear();
+    // categoryDescriptionTxtcontroller.clear();
+  }
+
+  final initialCategoryFormLoading = false.obs;
+  void initialCategoryForm(String? id) async {
+    debugPrint('Category ID = ${id}');
+    if (id == null) return;
+    initialCategoryFormLoading(true);
+
+    try {
+      final data = await categoryDb.doc(id).get().then((value) => value.data());
+      if (data == null) return;
+
+      CategoryModel categoryModel = CategoryModel.fromMap(data);
+      categoryEnglishNameTxtcontroller.text = categoryModel.nameEn;
+      categoryKhmerNameTxtcontroller.text = categoryModel.nameKh;
+    } catch (e) {
+      debugPrint('Category Error $e');
+      if (e is FirebaseException) debugPrint('Category Error ${e.message}');
+    } finally {
+      initialCategoryFormLoading(false);
+    }
   }
 
   File? categoryFile;
@@ -231,10 +240,10 @@ class InventoryController extends GetxController {
         },
       );
       clearFormAddCategory();
-      Get.until((route) => Get.currentRoute == Routes.INVENTORY);
+      adminRouter.go(Routes.INVENTORY);
 
       showSuccessSnackBar(
-        title: 'Success',
+        title: S.current.success,
         description: 'New Category has been added successfully.',
       );
     } catch (_) {
@@ -245,6 +254,23 @@ class InventoryController extends GetxController {
       );
     }
     // return null;
+  }
+
+  Future<void> updateCategory(String? id) async {
+    if (id == null) return;
+    try {
+      Map<String, dynamic> data = CategoryModel(
+              nameEn: categoryEnglishNameTxtcontroller.text,
+              nameKh: categoryKhmerNameTxtcontroller.text)
+          .toMap();
+      data.removeWhere((key, value) => value == null);
+      await categoryDb.doc(id).update(data);
+      adminRouter.go(Routes.CATEGORY);
+      showSuccessSnackBar(
+          title: S.current.success, description: S.current.update);
+    } catch (e) {
+      showErrorSnackBar(title: 'Fail', description: 'Update Fail');
+    }
   }
 
   final ref = FirebaseStorage.instance.ref();

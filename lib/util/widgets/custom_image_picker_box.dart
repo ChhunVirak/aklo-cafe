@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -76,7 +77,7 @@ class _ImagePickerBoxState extends State<ImagePickerBox> {
                       icon: const Icon(Icons.image),
                     ),
                     Text(
-                      'Gallery',
+                      S.current.gallery,
                       style: AppStyle.medium,
                     ),
                   ],
@@ -92,7 +93,7 @@ class _ImagePickerBoxState extends State<ImagePickerBox> {
                       icon: const Icon(Icons.camera),
                     ),
                     Text(
-                      'Camera',
+                      S.current.camera,
                       style: AppStyle.medium,
                     ),
                   ],
@@ -129,9 +130,10 @@ class _ImagePickerBoxState extends State<ImagePickerBox> {
                   fit: BoxFit.cover,
                 ),
               )
-            : const Text(
-                'Image',
-                style: TextStyle(fontVariations: [FontVariation('wght', 900)]),
+            : Text(
+                S.current.image,
+                style: const TextStyle(
+                    fontVariations: [FontVariation('wght', 900)]),
               ),
       ),
     );

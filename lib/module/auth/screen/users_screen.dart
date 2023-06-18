@@ -1,4 +1,5 @@
 import 'package:aklo_cafe/constant/colors.dart';
+import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:aklo_cafe/module/auth/controller/auth_controller.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class UsersScreen extends StatelessWidget {
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
-        title: const Text('Users'),
+        title: Text(S.current.users),
       ),
       body: StreamBuilder(
         stream: controller.userdb.snapshots(),

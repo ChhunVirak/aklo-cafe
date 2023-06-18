@@ -74,6 +74,7 @@ class LoginScreen extends StatelessWidget {
                               label: S.current.password,
                               controller: controller.passwordTxtController,
                               textInputAction: TextInputAction.done,
+                              maxLines: 1,
                               onFieldSubmitted: (_) {
                                 final validated =
                                     formKey.currentState?.validate();

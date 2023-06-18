@@ -168,13 +168,13 @@ abstract class Langs {
   /// No description provided for @addDrink.
   ///
   /// In en, this message translates to:
-  /// **'Add New Drink'**
+  /// **'Add Drink'**
   String get addDrink;
 
   /// No description provided for @addCategory.
   ///
   /// In en, this message translates to:
-  /// **'Add New Category'**
+  /// **'Add Category'**
   String get addCategory;
 
   /// No description provided for @category.
@@ -326,6 +326,66 @@ abstract class Langs {
   /// In en, this message translates to:
   /// **'Make Order'**
   String get make_order;
+
+  /// No description provided for @no_data.
+  ///
+  /// In en, this message translates to:
+  /// **'No Data'**
+  String get no_data;
+
+  /// No description provided for @image.
+  ///
+  /// In en, this message translates to:
+  /// **'Image'**
+  String get image;
+
+  /// No description provided for @noImage.
+  ///
+  /// In en, this message translates to:
+  /// **'No Image'**
+  String get noImage;
+
+  /// No description provided for @gallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery'**
+  String get gallery;
+
+  /// No description provided for @camera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get camera;
+
+  /// No description provided for @available.
+  ///
+  /// In en, this message translates to:
+  /// **'Available'**
+  String get available;
+
+  /// No description provided for @unAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Unavailable'**
+  String get unAvailable;
+
+  /// No description provided for @newOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get newOrder;
+
+  /// No description provided for @accepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted'**
+  String get accepted;
+
+  /// No description provided for @cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get cancelled;
 }
 
 class _LangsDelegate extends LocalizationsDelegate<Langs> {

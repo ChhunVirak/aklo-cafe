@@ -1,3 +1,4 @@
+import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -8,7 +9,7 @@ import '../../../constant/resources.dart';
 class DrinkCard extends StatelessWidget {
   final String? image;
   final String? name;
-  // final int? qty;
+  final bool? available;
   final num? unitPrice;
   final int? amount;
   final GestureTapCallback? onPressedAdd;
@@ -22,10 +23,12 @@ class DrinkCard extends StatelessWidget {
     this.onPressedAdd,
     this.onPressedRemove,
     this.amount = 0,
+    this.available,
   });
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('Available $available');
     return ColoredBox(
       color: Colors.transparent,
       child: Column(
@@ -48,7 +51,7 @@ class DrinkCard extends StatelessWidget {
                         : null,
                   ),
                   alignment: Alignment.center,
-                  child: image == null ? const Text('No Image') : null,
+                  child: image == null ? Text(S.current.noImage) : null,
                 ),
                 if (onPressedAdd != null)
                   Card(
@@ -90,18 +93,22 @@ class DrinkCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
+            padding: const EdgeInsets.only(right: 5),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 // if (qty != null)
-                //   Expanded(
-                //     child: Text(
-                //       '${qty?.toString() ?? '0'} Units',
-                //       style: AppStyle.small,
-                //     ),
-                //   ),
+                if (available != null)
+                  Expanded(
+                    child: Text(
+                      available == true
+                          ? S.current.available
+                          : S.current.unAvailable,
+                      style: AppStyle.small.copyWith(
+                          color: available == true ? Colors.green : Colors.red),
+                    ),
+                  ),
                 5.sw,
                 if (unitPrice != null)
                   Text.rich(

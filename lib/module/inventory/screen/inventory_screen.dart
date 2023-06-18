@@ -1,6 +1,5 @@
 import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:aklo_cafe/module/inventory/inventory.dart';
-import 'package:aklo_cafe/module/inventory/screen/add_category.dart';
 import 'package:aklo_cafe/module/inventory/screen/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -11,16 +10,14 @@ import '../../../constant/resources.dart';
 import '../../../util/alerts/app_snackbar.dart';
 import '../../home/components/menu_card.dart';
 
-class Inventory extends GetView<InventoryController> {
+class Inventory extends StatelessWidget {
   const Inventory({super.key});
   void _handleNavigate(BuildContext context, int index) {
     if (context.mounted) {
       switch (index) {
         case 0:
-          pushSubRoute(Routes.ALL_DRINK);
           break;
         case 1:
-          controller.clearFormAddProduct();
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -37,13 +34,6 @@ class Inventory extends GetView<InventoryController> {
           );
           break;
         case 3:
-          controller.clearFormAddCategory();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const AddCategory(),
-            ),
-          );
           break;
         default:
           showErrorSnackBar(
@@ -56,10 +46,11 @@ class Inventory extends GetView<InventoryController> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(InventoryController());
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          Strings.inventory,
+        title: Text(
+          S.current.inventory,
         ),
       ),
       body: GridView.count(
@@ -72,7 +63,7 @@ class Inventory extends GetView<InventoryController> {
         children: [
           MenuCard(
             onTap: () {
-              _handleNavigate(context, 0);
+              pushSubRoute(Routes.ALL_DRINK);
             },
             title: S.current.allCoffeeTitle,
             icon: PhosphorIcons.list_bold,
@@ -89,7 +80,7 @@ class Inventory extends GetView<InventoryController> {
           ),
           MenuCard(
             onTap: () {
-              _handleNavigate(context, 2);
+              pushSubRoute(Routes.CATEGORY);
             },
             title: S.current.category,
             icon: PhosphorIcons.list_bold,
@@ -97,7 +88,8 @@ class Inventory extends GetView<InventoryController> {
           ),
           MenuCard(
             onTap: () {
-              _handleNavigate(context, 3);
+              controller.clearFormAddCategory();
+              pushSubRoute(Routes.ADD_CATEGORY);
             },
             title: S.current.addCategory,
             icon: PhosphorIcons.list_plus_bold,
@@ -107,6 +99,4 @@ class Inventory extends GetView<InventoryController> {
       ),
     );
   }
-
-  Widget w() => const Text('hello');
 }

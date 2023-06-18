@@ -22,14 +22,24 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accepted": MessageLookupByLibrary.simpleMessage("បានទទួល"),
         "add": MessageLookupByLibrary.simpleMessage("បន្ថែម"),
-        "addCategory": MessageLookupByLibrary.simpleMessage("បន្ថែមស្តុក"),
+        "addCategory":
+            MessageLookupByLibrary.simpleMessage("បន្ថែមប្រភេទភេសជ្ជៈ"),
         "addDrink": MessageLookupByLibrary.simpleMessage("បន្ថែមភេសជ្ជៈ"),
+        "add_drink_message":
+            MessageLookupByLibrary.simpleMessage("សូមជ្រើសភេសជ្ជៈ"),
+        "add_drink_message_des": MessageLookupByLibrary.simpleMessage(
+            "សូមរើសយ៉ាងហោចណាស់មួយដើម្បីកម្មង់"),
         "all": MessageLookupByLibrary.simpleMessage("ទាំងអស់"),
         "allCoffeeTitle":
             MessageLookupByLibrary.simpleMessage("ភេសជ្ជៈទាំងអស់"),
         "amount": MessageLookupByLibrary.simpleMessage("បរិមាណភេសជ្ជៈ"),
-        "category": MessageLookupByLibrary.simpleMessage("ស្តុកទាំងអស់"),
+        "available": MessageLookupByLibrary.simpleMessage("មាន"),
+        "camera": MessageLookupByLibrary.simpleMessage("កាមេរ៉ា"),
+        "cancel": MessageLookupByLibrary.simpleMessage("បោះបង់"),
+        "cancelled": MessageLookupByLibrary.simpleMessage("បានបោះបង់"),
+        "category": MessageLookupByLibrary.simpleMessage("ប្រភេទទាំងអស់"),
         "categoryName": MessageLookupByLibrary.simpleMessage("ប្រភេទភេសជ្ជៈ"),
         "categoryNameAmountValidateMessage":
             MessageLookupByLibrary.simpleMessage("ឈ្មោះប្រភេទមិនអាចទទេបានទេ"),
@@ -58,12 +68,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("អ៊ីម៉ែល"),
         "emailValidateMessage":
             MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលអ៊ីម៉ែល"),
+        "gallery": MessageLookupByLibrary.simpleMessage("រូបភាព"),
         "histories": MessageLookupByLibrary.simpleMessage("ប្រវត្តិ"),
+        "image": MessageLookupByLibrary.simpleMessage("រូបភាព"),
         "inventory": MessageLookupByLibrary.simpleMessage("ស្តុក"),
         "languages": MessageLookupByLibrary.simpleMessage("ភាសា"),
         "languagesDes": MessageLookupByLibrary.simpleMessage("រើសភាសា"),
         "login": MessageLookupByLibrary.simpleMessage("ចូល"),
         "make_order": MessageLookupByLibrary.simpleMessage("ធ្វើការកម្មង់"),
+        "newOrder": MessageLookupByLibrary.simpleMessage("ថ្មី"),
+        "noImage": MessageLookupByLibrary.simpleMessage("គ្មានរូបភាព"),
+        "no_data": MessageLookupByLibrary.simpleMessage("គ្មានទិន្ន័យ"),
         "orders": MessageLookupByLibrary.simpleMessage("ការកម្ម៉ង់ទាំងអស់"),
         "password": MessageLookupByLibrary.simpleMessage("លេខសំងាត់"),
         "passwordValidateMessage":
@@ -73,8 +88,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting": MessageLookupByLibrary.simpleMessage("ការកំណត់"),
         "signout": MessageLookupByLibrary.simpleMessage("ចាកចេញ"),
         "success": MessageLookupByLibrary.simpleMessage("ជោគជ័យ"),
+        "unAvailable": MessageLookupByLibrary.simpleMessage("មិនមាន"),
         "unitPrice": MessageLookupByLibrary.simpleMessage("តម្លៃឯកតាភេសជ្ជៈ"),
         "update": MessageLookupByLibrary.simpleMessage("កែប្រែ"),
-        "users": MessageLookupByLibrary.simpleMessage("អ្នកប្រើប្រាស់")
+        "users": MessageLookupByLibrary.simpleMessage("អ្នកប្រើប្រាស់"),
+        "warning": MessageLookupByLibrary.simpleMessage("សូមបញ្ជាក់"),
+        "warning_delete": MessageLookupByLibrary.simpleMessage(
+            "តើអ្នកចង់លុបភេសជ្ជៈនេះមែនទេ?"),
+        "yes": MessageLookupByLibrary.simpleMessage("យល់ព្រម")
       };
 }

@@ -170,20 +170,20 @@ class S {
     );
   }
 
-  /// `Add New Drink`
+  /// `Add Drink`
   String get addDrink {
     return Intl.message(
-      'Add New Drink',
+      'Add Drink',
       name: 'addDrink',
       desc: '',
       args: [],
     );
   }
 
-  /// `Add New Category`
+  /// `Add Category`
   String get addCategory {
     return Intl.message(
-      'Add New Category',
+      'Add Category',
       name: 'addCategory',
       desc: '',
       args: [],
@@ -435,6 +435,166 @@ class S {
     return Intl.message(
       'Make Order',
       name: 'make_order',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Data`
+  String get no_data {
+    return Intl.message(
+      'No Data',
+      name: 'no_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image`
+  String get image {
+    return Intl.message(
+      'Image',
+      name: 'image',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Image`
+  String get noImage {
+    return Intl.message(
+      'No Image',
+      name: 'noImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gallery`
+  String get gallery {
+    return Intl.message(
+      'Gallery',
+      name: 'gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera`
+  String get camera {
+    return Intl.message(
+      'Camera',
+      name: 'camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available`
+  String get available {
+    return Intl.message(
+      'Available',
+      name: 'available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unavailable`
+  String get unAvailable {
+    return Intl.message(
+      'Unavailable',
+      name: 'unAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New`
+  String get newOrder {
+    return Intl.message(
+      'New',
+      name: 'newOrder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accepted`
+  String get accepted {
+    return Intl.message(
+      'Accepted',
+      name: 'accepted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancelled`
+  String get cancelled {
+    return Intl.message(
+      'Cancelled',
+      name: 'cancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Warning`
+  String get warning {
+    return Intl.message(
+      'Warning',
+      name: 'warning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to delete this Drink?`
+  String get warning_delete {
+    return Intl.message(
+      'Do you want to delete this Drink?',
+      name: 'warning_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please add drink`
+  String get add_drink_message {
+    return Intl.message(
+      'Please add drink',
+      name: 'add_drink_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `a drink is required to make order`
+  String get add_drink_message_des {
+    return Intl.message(
+      'a drink is required to make order',
+      name: 'add_drink_message_des',
       desc: '',
       args: [],
     );

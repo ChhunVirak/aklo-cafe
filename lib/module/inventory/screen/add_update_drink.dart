@@ -3,7 +3,6 @@ import 'package:aklo_cafe/constant/resources.dart';
 import 'package:aklo_cafe/module/inventory/controller/inventory_controller.dart';
 import 'package:aklo_cafe/module/inventory/model/category_model.dart';
 import 'package:aklo_cafe/util/alerts/app_modal_bottomsheet.dart';
-import 'package:aklo_cafe/util/widgets/app_circular_loading.dart';
 import 'package:aklo_cafe/util/widgets/custom_button.dart';
 import 'package:aklo_cafe/util/widgets/custom_image_picker_box.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +11,7 @@ import 'package:get/get.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../util/widgets/custom_textfield.dart';
+import '../components/loading_scaffold.dart';
 
 class AddDrinkScreen extends StatefulWidget {
   final String? id;
@@ -49,10 +49,6 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                 style: AppStyle.large.copyWith(color: AppColors.txtLightColor),
               ),
             ),
-            // const Divider(
-            //   height: 0,
-            //   color: AppColors.txtDarkColor,
-            // ),
             Expanded(
                 child: StreamBuilder(
               stream: controller.categoryDb.snapshots(),
@@ -109,20 +105,18 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
 
   @override
   void initState() {
-    super.initState();
     controller.initialDrinkForEdit(widget.id);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => controller.initialLoading.value
-          ? const Center(
-              child: CustomCircularLoading(),
-            )
+          ? LoadingScaffold()
           : Scaffold(
               appBar: AppBar(
-                title: const Text(Strings.addDrink),
+                title: Text(S.current.addDrink),
               ),
               resizeToAvoidBottomInset: true,
               body: SafeArea(
@@ -156,22 +150,17 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                                   });
                                 },
                                 enable: false,
+                                require: true,
                                 controller:
                                     controller.drinkCategoryTxTcontroller,
                                 label: S.current.categoryName,
-                                require: true,
                                 textInputAction: TextInputAction.next,
-                                suffixIcon: FocusScope(
-                                  canRequestFocus: false,
-                                  child: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.expand_more_rounded,
-                                      size: 25,
-                                    ),
-                                  ),
+                                suffixIcon: const Icon(
+                                  Icons.expand_more_rounded,
+                                  size: 25,
                                 ),
                                 validator: (v) {
+                                  debugPrint('statements $v');
                                   if (v == '') {
                                     return S
                                         .current.drinkCategoryValidateMessage;
@@ -198,6 +187,31 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                                 suffixIcon:
                                     const Icon(Icons.attach_money_rounded),
                               ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      controller.available.value
+                                          ? S.current.available
+                                          : S.current.unAvailable,
+                                      style: AppStyle.medium,
+                                    ),
+                                    Switch(
+                                      value: controller.available.value,
+                                      activeColor: AppColors.txtLightColor,
+                                      inactiveThumbColor: AppColors.mainColor,
+                                      activeTrackColor: AppColors.mainColor,
+                                      inactiveTrackColor:
+                                          AppColors.deepBackgroundColor,
+                                      onChanged: (value) {
+                                        controller.available(value);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              )
                             ],
                           ),
                         ),

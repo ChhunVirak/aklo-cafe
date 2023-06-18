@@ -22,12 +22,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accepted": MessageLookupByLibrary.simpleMessage("Accepted"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
-        "addCategory": MessageLookupByLibrary.simpleMessage("Add New Category"),
-        "addDrink": MessageLookupByLibrary.simpleMessage("Add New Drink"),
+        "addCategory": MessageLookupByLibrary.simpleMessage("Add Category"),
+        "addDrink": MessageLookupByLibrary.simpleMessage("Add Drink"),
+        "add_drink_message":
+            MessageLookupByLibrary.simpleMessage("Please add drink"),
+        "add_drink_message_des": MessageLookupByLibrary.simpleMessage(
+            "a drink is required to make order"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "allCoffeeTitle": MessageLookupByLibrary.simpleMessage("All Drinks"),
         "amount": MessageLookupByLibrary.simpleMessage("Amounts"),
+        "available": MessageLookupByLibrary.simpleMessage("Available"),
+        "camera": MessageLookupByLibrary.simpleMessage("Camera"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
         "category": MessageLookupByLibrary.simpleMessage("All Categories"),
         "categoryName": MessageLookupByLibrary.simpleMessage("Category"),
         "categoryNameAmountValidateMessage":
@@ -59,13 +68,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailValidateMessage":
             MessageLookupByLibrary.simpleMessage("Email is required."),
+        "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "histories": MessageLookupByLibrary.simpleMessage("Histories"),
+        "image": MessageLookupByLibrary.simpleMessage("Image"),
         "inventory": MessageLookupByLibrary.simpleMessage("Inventory"),
         "languages": MessageLookupByLibrary.simpleMessage("Languages"),
         "languagesDes":
             MessageLookupByLibrary.simpleMessage("Choose Preference Languages"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "make_order": MessageLookupByLibrary.simpleMessage("Make Order"),
+        "newOrder": MessageLookupByLibrary.simpleMessage("New"),
+        "noImage": MessageLookupByLibrary.simpleMessage("No Image"),
+        "no_data": MessageLookupByLibrary.simpleMessage("No Data"),
         "orders": MessageLookupByLibrary.simpleMessage("Orders"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordValidateMessage":
@@ -74,8 +88,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "signout": MessageLookupByLibrary.simpleMessage("Sign Out"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
+        "unAvailable": MessageLookupByLibrary.simpleMessage("Unavailable"),
         "unitPrice": MessageLookupByLibrary.simpleMessage("Unit Price"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
-        "users": MessageLookupByLibrary.simpleMessage("Users")
+        "users": MessageLookupByLibrary.simpleMessage("Users"),
+        "warning": MessageLookupByLibrary.simpleMessage("Warning"),
+        "warning_delete": MessageLookupByLibrary.simpleMessage(
+            "Do you want to delete this Drink?"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes")
       };
 }

@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class DrinkModel {
@@ -6,12 +7,14 @@ class DrinkModel {
   final num unitPrice;
   final String? id;
   final DateTime? createdDate;
+  final bool? available;
   DrinkModel({
     required this.name,
     required this.categoryId,
     required this.unitPrice,
     this.id,
     this.createdDate,
+    this.available,
   });
 
   Map<String, dynamic> toMap() {
@@ -21,6 +24,7 @@ class DrinkModel {
       'unitPrice': unitPrice,
       'id': id,
       'createdDate': createdDate?.millisecondsSinceEpoch,
+      'available': available,
     };
   }
 
@@ -33,6 +37,7 @@ class DrinkModel {
       createdDate: map['createdDate'] != null
           ? DateTime.fromMillisecondsSinceEpoch(map['createdDate'] as int)
           : null,
+      available: map['available'] != null ? map['available'] as bool : null,
     );
   }
 

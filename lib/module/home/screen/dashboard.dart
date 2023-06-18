@@ -9,7 +9,6 @@ import '../../../generated/l10n.dart';
 import '../../../util/alerts/app_modal_bottomsheet.dart';
 import '../../../util/alerts/app_snackbar.dart';
 import '../../auth/controller/auth_controller.dart';
-import '../../order/screen/orders_screen.dart';
 import '../components/menu_card.dart';
 
 import 'package:aklo_cafe/constant/resources.dart';
@@ -28,12 +27,6 @@ class _DashBoardState extends State<DashBoard> {
     if (context.mounted) {
       switch (menu) {
         case 'Orders':
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const OrderScreen(),
-            ),
-          );
           break;
         // case 'Histories':
         //   Navigator.push(
@@ -59,11 +52,7 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   void _showQrWebSite(BuildContext context) {
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitDown,
-    //   DeviceOrientation.portraitUp,
-    // ]);
-    // Get.toNamed(Routes.CLIENT_ORDER);
+    const eMenuLink = 'https://aklo-cafe.web.app/';
     showCustomModalBottomSheet(
       Column(
         children: [
@@ -77,7 +66,7 @@ class _DashBoardState extends State<DashBoard> {
             child: Padding(
               padding: const EdgeInsets.all(Sizes.defaultPadding),
               child: Image.network(
-                'https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=http://www.google.com/',
+                'https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=$eMenuLink',
               ),
             ),
           ),
@@ -162,7 +151,7 @@ class _DashBoardState extends State<DashBoard> {
                       Obx(
                         () => Text.rich(
                           TextSpan(
-                            text: 'Today or ders : ',
+                            text: 'Today or orders : ',
                             style: AppStyle.medium
                                 .copyWith(color: AppColors.txtLightColor),
                             children: [
@@ -208,7 +197,7 @@ class _DashBoardState extends State<DashBoard> {
                 children: [
                   MenuCard(
                     onTap: () {
-                      _handleNavigate(context, 'Orders');
+                      pushSubRoute(Routes.ORDERS);
                     },
                     title: S.current.orders,
                     icon: PhosphorIcons.list_numbers_fill,
