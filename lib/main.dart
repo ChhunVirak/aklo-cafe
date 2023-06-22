@@ -1,8 +1,7 @@
+import 'package:aklo_cafe/config/theme/theme_config.dart';
 import 'package:aklo_cafe/firebase_options.dart';
 import 'package:aklo_cafe/generated/l10n.dart';
-import 'package:aklo_cafe/module/auth/controller/auth_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,8 +11,6 @@ import 'config/languages/lang_font_controller.dart';
 import 'config/router/app_pages.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
-
-import 'constant/resources.dart';
 
 import 'package:flutter_web_plugins/url_strategy.dart';
 
@@ -29,9 +26,10 @@ Future<void> main() async {
     // DeviceOrientation.landscapeLeft,
     // DeviceOrientation.landscapeRight,
   ]);
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   NotificationHelper.instance.init();
-  // await AppSetting.instance.init();
   runApp(
     const MainApp(),
   );
@@ -47,23 +45,11 @@ class MainApp extends StatelessWidget {
 
     return GetBuilder<LangsAndFontConfigs>(
       init: fontController,
-      initState: (state) async {
-        await NotificationHelper.instance.android.then((v) {
-          debugPrint('Operating Systemm Version :${v.version.sdkInt}');
-        });
-        if (!kIsWeb) {
-          final deviceToken =
-              await NotificationHelper.instance.getDeviceToken();
-          debugPrint('Token=>  : $deviceToken');
-          Get.put(AuthController()).storeDeviceToken(deviceToken);
-        }
-      },
+      initState: (state) async {},
       builder: (_) {
-        debugPrint('Built');
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           title: 'Aklo Cafe',
-          // initialBinding: AppBinding(),
           locale: fontController.currentLocale,
           localizationsDelegates: const [
             S.delegate,
@@ -72,57 +58,8 @@ class MainApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
-
           routerConfig: GetPlatform.isWeb ? clientRouter : adminRouter,
-          // getPages:
-          //     GetPlatform.isWeb ? AppPages.routesClient : AppPages.routesAdmin,
-          // unknownRoute: AppPages.routesClient.first,
-          // onUnknownRoute: (settings) => GetPageRoute(),
-          theme: ThemeData(
-            useMaterial3: true,
-            fontFamily: AppStyle.fontFamily,
-            // splashFactory: NoSplash.splashFactory,
-            // fontFamily: Get.put(LangsAndFontConfigs()).fontfamily,
-            scaffoldBackgroundColor: AppColors.txtLightColor,
-            colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: Colors.blue,
-            ),
-            floatingActionButtonTheme: const FloatingActionButtonThemeData(
-              backgroundColor: AppColors.mainColor,
-            ),
-            appBarTheme: AppBarTheme(
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              titleTextStyle: AppStyle.large.copyWith(
-                fontSize: 20.0,
-                fontWeight: FontWeight.w200,
-              ),
-              iconTheme: const IconThemeData(
-                color: AppColors.txtDarkColor,
-              ),
-              scrolledUnderElevation: 0,
-            ),
-            bottomNavigationBarTheme: BottomNavigationBarThemeData(
-              selectedLabelStyle:
-                  AppStyle.small.copyWith(fontVariations: [AppStyle.weightM]),
-              unselectedLabelStyle:
-                  AppStyle.small.copyWith(fontVariations: [AppStyle.weightM]),
-            ),
-            bottomSheetTheme: const BottomSheetThemeData(
-              surfaceTintColor: Colors.transparent,
-              modalBackgroundColor: AppColors.backgroundColor,
-              backgroundColor: AppColors.backgroundColor,
-            ),
-            chipTheme: const ChipThemeData(
-              shape: StadiumBorder(),
-            ),
-            elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: AppColors.lightColor,
-                textStyle: AppStyle.medium,
-              ),
-            ),
-          ),
+          theme: ThemeConfig.lightTheme,
         );
       },
     );

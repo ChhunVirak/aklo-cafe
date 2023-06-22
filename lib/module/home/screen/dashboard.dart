@@ -1,4 +1,5 @@
 import 'package:aklo_cafe/module/home/controller/dashboard_controller.dart';
+import 'package:aklo_cafe/module/order/controller/admin_order_controller.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -79,6 +80,7 @@ class _DashBoardState extends State<DashBoard> {
 
   final authController = Get.put(AuthController());
   final controller = Get.put(DashBoardController());
+  final adminOrderController = Get.put(AdminOrderController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,37 +150,44 @@ class _DashBoardState extends State<DashBoard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Obx(
-                        () => Text.rich(
-                          TextSpan(
-                            text: 'Today or orders : ',
-                            style: AppStyle.medium
-                                .copyWith(color: AppColors.txtLightColor),
-                            children: [
+                      StreamBuilder(
+                        stream: adminOrderController.totalOrder,
+                        builder: (_, snapshot) {
+                          if (snapshot.hasData) {
+                            return Text.rich(
                               TextSpan(
-                                text: controller.totalSold.value.toString(),
-                                style: AppStyle.large
+                                text: 'Today Total Order : ',
+                                style: AppStyle.medium
                                     .copyWith(color: AppColors.txtLightColor),
+                                children: [
+                                  TextSpan(
+                                    text: snapshot.data,
+                                    style: AppStyle.large.copyWith(
+                                        color: AppColors.txtLightColor),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Text.rich(
-                        TextSpan(
-                          text: 'Available Coffee : ',
-                          style: AppStyle.medium
-                              .copyWith(color: AppColors.txtLightColor),
-                          children: [
-                            TextSpan(
-                              text: '78 units',
-                              style: AppStyle.large
-                                  .copyWith(color: AppColors.txtLightColor),
-                            ),
-                          ],
-                        ),
-                        textAlign: TextAlign.end,
-                      ),
+                            );
+                          }
+                          return SizedBox.shrink();
+                        },
+                      )
+
+                      //   Text.rich(
+                      //     TextSpan(
+                      //       text: 'Available Coffee : ',
+                      //       style: AppStyle.medium
+                      //           .copyWith(color: AppColors.txtLightColor),
+                      //       children: [
+                      //         TextSpan(
+                      //           text: '78 units',
+                      //           style: AppStyle.large
+                      //               .copyWith(color: AppColors.txtLightColor),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //     textAlign: TextAlign.end,
+                      //   ),
                     ],
                   ),
                 ),

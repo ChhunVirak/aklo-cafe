@@ -53,8 +53,9 @@ class DrinkCard extends StatelessWidget {
                   alignment: Alignment.center,
                   child: image == null ? Text(S.current.noImage) : null,
                 ),
-                if (onPressedAdd != null)
+                if (onPressedAdd != null && available == true)
                   Card(
+                    color: AppColors.deepBackgroundColor,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,

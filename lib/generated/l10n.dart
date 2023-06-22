@@ -530,6 +530,16 @@ class S {
     );
   }
 
+  /// `Accept`
+  String get accept {
+    return Intl.message(
+      'Accept',
+      name: 'accept',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Cancelled`
   String get cancelled {
     return Intl.message(
@@ -595,6 +605,16 @@ class S {
     return Intl.message(
       'a drink is required to make order',
       name: 'add_drink_message_des',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get done {
+    return Intl.message(
+      'Done',
+      name: 'done',
       desc: '',
       args: [],
     );

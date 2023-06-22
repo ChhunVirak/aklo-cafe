@@ -93,7 +93,7 @@ class CategoryScreen extends StatelessWidget {
                                   actions: [
                                     TextButton(
                                       onPressed: () async {
-                                        await controller.drinkDb
+                                        await controller.categoryDb
                                             .doc(listData[index].id)
                                             .delete();
                                         Get.back();
@@ -102,13 +102,13 @@ class CategoryScreen extends StatelessWidget {
                                             title: 'Success',
                                             description: 'Delete successfully');
                                       },
-                                      child: const Text('Yes'),
+                                      child: Text(S.current.yes),
                                     ),
                                     TextButton(
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      child: const Text('No'),
+                                      child: Text(S.current.cancel),
                                     ),
                                   ],
                                 );

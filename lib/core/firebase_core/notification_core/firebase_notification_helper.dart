@@ -1,4 +1,4 @@
-import 'package:aklo_cafe/module/auth/controller/auth_controller.dart';
+import 'package:aklo_cafe/config/router/app_pages.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -26,18 +26,20 @@ class NotificationHelper {
   void init() {
     _requestNotificationPermission();
     _initLocalNotificationSetting();
-    _deviceTokenChange();
-    _subscribeAdminTopic();
-    getDeviceToken().then((value) {
-      debugPrint('Token : $value');
-      // Get.put<AuthController>(AuthController()).storeDeviceToken(value);
-    });
+    subscribeAdminTopic();
+
+    _onClickMessageOpenedApp();
     _onListenting();
   }
 
-  void _subscribeAdminTopic() {
+  void subscribeAdminTopic() {
     if (GetPlatform.isWeb) return;
     _messaging.subscribeToTopic('admin');
+  }
+
+  void unSubscribeAdminTopic() {
+    if (GetPlatform.isWeb) return;
+    _messaging.unsubscribeFromTopic('admin');
   }
 
   Future<void> _initLocalNotificationSetting() async {
@@ -45,21 +47,40 @@ class NotificationHelper {
         InitializationSettings(
       android: _initializationSettingsAndroid,
     );
-    await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    await _flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (details) {
+        String? id = details.payload;
+        if (id != null) {
+          adminRouter.go('/orders/$id');
+          // adminRouter.
+        }
+      },
+      // onDidReceiveBackgroundNotificationResponse: (details) {
+      //   String? id = details.payload;
+      //   if (id != null) {
+      //     adminRouter.go('/orders/$id');
+      //     // adminRouter.
+      //   }
+      // },
+    );
   }
 
   ///Listen to firebase notification when app is on foreground
   void _onListenting() {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      debugPrint('Message Data ${message.notification?.title}');
+    FirebaseMessaging.onMessage.listen(
+      (RemoteMessage message) async {
+        debugPrint('Message Data ${message.notification?.title}');
 
-      if (message.notification != null) {
-        final title = message.notification?.title;
-        final body = message.notification?.body;
+        if (message.notification != null) {
+          final title = message.notification?.title;
+          final body = message.notification?.body;
+          final id = message.data['id'];
 
-        await showNotification(title, body);
-      }
-    });
+          await showNotification(title, body, id: id);
+        }
+      },
+    );
   }
 
   Future<NotificationSettings> _requestNotificationPermission() async {
@@ -79,21 +100,20 @@ class NotificationHelper {
       await _deviceInfoPlugin.androidInfo;
 
   ///Show local notification
-  Future<void> showNotification(
-    String? title,
-    String? body, {
-    Color? color,
-  }) async {
+  Future<void> showNotification(String? title, String? body,
+      {String? id}) async {
     _id++;
 
     NotificationDetails androidNotificationDetail = const NotificationDetails(
       android: AndroidNotificationDetails(
-          'android_notification_plugin', 'channel_name',
-          playSound: true,
-          importance: Importance.max,
-          priority: Priority.high,
-          icon: '',
-          color: Color(0xff4B250F)),
+        'android_notification_plugin',
+        'channel_name',
+        playSound: true,
+        importance: Importance.max,
+        priority: Priority.high,
+        icon: '',
+        color: Color(0xff4B250F),
+      ),
     );
 
     await _flutterLocalNotificationsPlugin.show(
@@ -101,17 +121,18 @@ class NotificationHelper {
       title,
       body,
       androidNotificationDetail,
-      payload: 'order_detail',
+      payload: id,
     );
   }
 
-  Future<String?> getDeviceToken() async => await _messaging.getToken();
-
-  ///device token can refresh
-  void _deviceTokenChange() {
-    _messaging.onTokenRefresh.listen(
-      (token) {
-        Get.find<AuthController>().storeDeviceToken(token);
+  static void _onClickMessageOpenedApp() {
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (message) {
+        debugPrint('Payload onMessageOpenedApp : ${message.data}');
+        String? id = message.data['id'];
+        if (id != null) {
+          adminRouter.go('/orders/$id');
+        }
       },
     );
   }

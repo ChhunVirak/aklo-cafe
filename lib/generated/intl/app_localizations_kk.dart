@@ -149,5 +149,29 @@ class LangsKk extends Langs {
   String get accepted => 'បានទទួល';
 
   @override
+  String get accept => 'ទទួល';
+
+  @override
   String get cancelled => 'បានបោះបង់';
+
+  @override
+  String get warning => 'សូមបញ្ជាក់';
+
+  @override
+  String get warning_delete => 'តើអ្នកចង់លុបភេសជ្ជៈនេះមែនទេ?';
+
+  @override
+  String get yes => 'យល់ព្រម';
+
+  @override
+  String get cancel => 'បោះបង់';
+
+  @override
+  String get add_drink_message => 'សូមជ្រើសភេសជ្ជៈ';
+
+  @override
+  String get add_drink_message_des => 'សូមរើសយ៉ាងហោចណាស់មួយដើម្បីកម្មង់';
+
+  @override
+  String get done => 'រួចរាល់';
 }

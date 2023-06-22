@@ -17,6 +17,7 @@ abstract class Routes {
 
   ///Client Order
   static const CLIENT_ORDER = _Paths.CLIENT_ORDER;
+  static const CLIENT_STATUS = _Paths.CLIENT_STATUS;
 }
 
 abstract class _Paths {
@@ -36,4 +37,5 @@ abstract class _Paths {
 
   ///Client Order
   static const CLIENT_ORDER = '/make-order';
+  static const CLIENT_STATUS = '/done-order';
 }

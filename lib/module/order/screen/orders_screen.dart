@@ -1,9 +1,9 @@
 import 'package:aklo_cafe/generated/l10n.dart';
-import 'package:aklo_cafe/module/order/screen/accepted_order.dart';
 import 'package:aklo_cafe/module/order/screen/all_orders.dart';
-import 'package:aklo_cafe/module/order/screen/cancelled_order.dart';
-import 'package:aklo_cafe/module/order/screen/new_order.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../controller/admin_order_controller.dart';
 
 class OrderScreen extends StatefulWidget {
   const OrderScreen({super.key});
@@ -17,9 +17,11 @@ class _OrderScreenState extends State<OrderScreen>
   late TabController _tabController;
   @override
   void initState() {
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 5, vsync: this);
     super.initState();
   }
+
+  final _adminOrderController = Get.put(AdminOrderController());
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,9 @@ class _OrderScreenState extends State<OrderScreen>
             Tab(
               text: S.current.cancelled,
             ),
+            Tab(
+              text: S.current.done,
+            ),
           ],
         ),
       ),
@@ -50,10 +55,28 @@ class _OrderScreenState extends State<OrderScreen>
         child: TabBarView(
           controller: _tabController,
           children: [
-            AllOrder(),
-            NewOrder(),
-            AcceptedOrder(),
-            CancelledOrder(),
+            AllOrder(
+              stream: _adminOrderController.allOrderToday,
+            ),
+
+            AllOrder(
+              stream: _adminOrderController.orderOf(Status.neworder),
+            ),
+
+            AllOrder(
+              stream: _adminOrderController.orderOf(Status.confirm),
+            ),
+
+            AllOrder(
+              stream: _adminOrderController.orderOf(Status.cancel),
+            ),
+            AllOrder(
+              stream: _adminOrderController.orderOf(Status.done),
+            ),
+
+            // NewOrder(),
+            // AcceptedOrder(),
+            // CancelledOrder(),
           ],
         ),
       ),

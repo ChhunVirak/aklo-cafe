@@ -144,10 +144,7 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                         debugPrint('Error ${snapshot.hasData}');
                         if (!snapshot.hasData) {
                           return Center(
-                            child: Text(
-                              'No Data',
-                              style: AppStyle.large,
-                            ),
+                            child: Text(S.current.no_data),
                           );
                         }
 
@@ -180,8 +177,6 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                     return GestureDetector(
                                       onTap: () {
                                         if (GetPlatform.isWeb) {
-                                          ///Client Order
-                                          debugPrint('Hello');
                                         } else {
                                           showCustomModalBottomSheet(
                                             Container(
@@ -234,16 +229,17 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                                                       .current
                                                                       .delete_success);
                                                             },
-                                                            child: const Text(
-                                                                'Yes'),
+                                                            child: Text(
+                                                                S.current.yes),
                                                           ),
                                                           TextButton(
                                                             onPressed: () {
                                                               Navigator.pop(
                                                                   context);
                                                             },
-                                                            child: const Text(
-                                                                'No'),
+                                                            child: Text(S
+                                                                .current
+                                                                .cancel),
                                                           ),
                                                         ],
                                                       );

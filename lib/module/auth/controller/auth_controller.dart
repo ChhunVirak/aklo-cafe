@@ -1,5 +1,6 @@
 import 'package:aklo_cafe/constant/firebase_storage_path.dart';
 import 'package:aklo_cafe/constant/sizes.dart';
+import 'package:aklo_cafe/core/firebase_core/notification_core/firebase_notification_helper.dart';
 import 'package:aklo_cafe/util/alerts/app_snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,27 +19,6 @@ class AuthController extends GetxController {
 
   String? get userToken => _fAuth.currentUser?.uid;
 
-  ///Store Device token to firebase
-  Future<void> storeDeviceToken(String? token) async {
-    final data = await mobileTokenDB.get();
-    if (data.docs.isEmpty) {
-      await mobileTokenDB.add({'device-token': token});
-      return; //end function after token not found
-    }
-
-    final id = data.docs.first.id;
-    await mobileTokenDB.doc(id).update({'device-token': token});
-  }
-
-  ///Get current Admin Device token from firebase
-  Future<String?> getDeviceToken() async {
-    final data = await mobileTokenDB.get();
-    if (data.docs.isNotEmpty) {
-      return data.docs.first['device-token'];
-    }
-    return null;
-  }
-
   @override
   void onInit() {
     _fAuth.userChanges().listen(_userChange);
@@ -53,9 +33,11 @@ class AuthController extends GetxController {
           !adminRouter.location.contains(Routes.SPLASH)) {
         return;
       }
+      NotificationHelper.instance.subscribeAdminTopic();
       //if user already login no change
       adminRouter.go(Routes.DASHBOARD);
     } else {
+      NotificationHelper.instance.unSubscribeAdminTopic();
       adminRouter.go(Routes.LOGIN);
     }
   }

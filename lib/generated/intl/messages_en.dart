@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accept": MessageLookupByLibrary.simpleMessage("Accept"),
         "accepted": MessageLookupByLibrary.simpleMessage("Accepted"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
         "addCategory": MessageLookupByLibrary.simpleMessage("Add Category"),
@@ -56,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dashboard": MessageLookupByLibrary.simpleMessage("Dashboard"),
         "delete_success":
             MessageLookupByLibrary.simpleMessage("Delete Successfully"),
+        "done": MessageLookupByLibrary.simpleMessage("Done"),
         "drinkCategoryValidateMessage": MessageLookupByLibrary.simpleMessage(
             "Field drink category can\'t be empty."),
         "drinkName": MessageLookupByLibrary.simpleMessage("Drink Name"),

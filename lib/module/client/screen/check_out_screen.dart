@@ -36,13 +36,20 @@ class CheckOutScreen extends StatelessWidget {
           SafeArea(
             minimum: const EdgeInsets.all(Sizes.defaultPadding),
             child: CustomButton(
-              onPressed: () {
+              onPressed: () async {
+                final id = await orderController.submitOrder();
+
+                // clientRouter.go(Routes.CLIENT_STATUS);
+
+                ///Call Save Product to db
                 showSuccessSnackBar(
                     title: 'Order Sent',
                     description: 'Your order has been placed successfully');
                 AdminNotificationManager.instance.sentNotification(
-                    'Please make me a drink',
-                    'Total Price \$${orderController.total.toStringAsFixed(2)}');
+                    title: 'Please make me a drink',
+                    body:
+                        'Total Price \$${orderController.total.toStringAsFixed(2)}',
+                    id: id);
               },
               name: S.current.make_order,
             ),

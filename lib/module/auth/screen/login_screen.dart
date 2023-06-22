@@ -84,6 +84,7 @@ class LoginScreen extends StatelessWidget {
                               },
                               obscureText: controller.hidePasword.value,
                               suffixIcon: IconButton(
+                                autofocus: false,
                                 onPressed: () {
                                   controller.hidePasword.value =
                                       !controller.hidePasword.value;

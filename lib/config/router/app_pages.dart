@@ -1,4 +1,5 @@
 import 'package:aklo_cafe/module/client/screen/client_order.dart';
+import 'package:aklo_cafe/module/client/screen/order_status.dart';
 import 'package:aklo_cafe/module/inventory/screen/category.dart';
 import 'package:aklo_cafe/module/order/screen/view_invoice.dart';
 import 'package:get/get.dart';
@@ -103,6 +104,10 @@ final clientRouter = GoRouter(
     GoRoute(
       path: _Paths.CLIENT_ORDER,
       builder: (_, state) => const ClientOrderScreen(),
+    ),
+    GoRoute(
+      path: _Paths.CLIENT_STATUS,
+      builder: (_, state) => const OrderStatus(),
     ),
   ],
 );

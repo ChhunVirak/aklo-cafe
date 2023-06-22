@@ -48,11 +48,13 @@
   "unAvailable": "មិនមាន",
   "newOrder": "ថ្មី",
   "accepted": "បានទទួល",
+  "accept": "ទទួល",
   "cancelled": "បានបោះបង់",
   "warning": "សូមបញ្ជាក់",
   "warning_delete": "តើអ្នកចង់លុបភេសជ្ជៈនេះមែនទេ?",
   "yes": "យល់ព្រម",
   "cancel": "បោះបង់",
   "add_drink_message": "សូមជ្រើសភេសជ្ជៈ",
-  "add_drink_message_des": "សូមរើសយ៉ាងហោចណាស់មួយដើម្បីកម្មង់"
+  "add_drink_message_des": "សូមរើសយ៉ាងហោចណាស់មួយដើម្បីកម្មង់",
+  "done": "រួចរាល់"
 }

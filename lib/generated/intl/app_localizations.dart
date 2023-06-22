@@ -381,11 +381,59 @@ abstract class Langs {
   /// **'Accepted'**
   String get accepted;
 
+  /// No description provided for @accept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get accept;
+
   /// No description provided for @cancelled.
   ///
   /// In en, this message translates to:
   /// **'Cancelled'**
   String get cancelled;
+
+  /// No description provided for @warning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get warning;
+
+  /// No description provided for @warning_delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to delete this Drink?'**
+  String get warning_delete;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @add_drink_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Please add drink'**
+  String get add_drink_message;
+
+  /// No description provided for @add_drink_message_des.
+  ///
+  /// In en, this message translates to:
+  /// **'a drink is required to make order'**
+  String get add_drink_message_des;
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
 }
 
 class _LangsDelegate extends LocalizationsDelegate<Langs> {

@@ -1,6 +1,5 @@
 // ignore_for_file: constant_identifier_names, unused_element
 
-import 'package:aklo_cafe/module/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,9 +18,11 @@ class AdminNotificationManager extends GetConnect {
   };
 
   ///Sent Notification To Client
-  Future<void> sentNotification(String title, String body) async {
-    final deviceToken = await Get.find<AuthController>().getDeviceToken();
-    debugPrint('TOKEN : $deviceToken');
+  Future<void> sentNotification({
+    required title,
+    required String body,
+    required String id,
+  }) async {
     const priority = 'high';
     try {
       Response res = await post(
@@ -29,14 +30,13 @@ class AdminNotificationManager extends GetConnect {
         {
           "priority": priority,
           "data": {
-            "title": title,
-            "body": body,
+            "id": id,
           },
           "notification": {
             "title": title,
             "body": body,
           },
-          "to": deviceToken
+          "to": "/topics/admin"
         },
         headers: _headers,
       );

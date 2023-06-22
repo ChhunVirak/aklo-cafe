@@ -53,13 +53,15 @@ class LangsAndFontConfigs extends GetxController {
 
   void _checkCurrentLanguage() {
     final currentLanguage = _pref.getString('AppLocale');
-    if (_currentLocale.countryCode != currentLanguage) {
-      if (currentLanguage == Langs.english.countryCode) {
-        changeLanguage(Langs.english);
-      } else if (currentLanguage == Langs.khmer.countryCode) {
-        changeLanguage(Langs.khmer);
-      }
+    if (currentLanguage == Langs.khmer.countryCode) {
+      debugPrint('Workk');
+      _currentLocale = Langs.khmer.locale;
+      changeLanguage(Langs.khmer);
+    } else {
+      _currentLocale = Langs.english.locale;
+      changeLanguage(Langs.english);
     }
+
     update();
   }
 

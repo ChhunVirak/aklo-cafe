@@ -1,14 +1,19 @@
+import 'package:aklo_cafe/module/client/model/order_model.dart';
 import 'package:aklo_cafe/util/extensions/datetime_extension.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
+import 'package:aklo_cafe/util/function/format_function.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constant/resources.dart';
 
 class Invoice extends StatelessWidget {
-  const Invoice({super.key});
+  final OrderModel orderModel;
+  const Invoice({
+    super.key,
+    required this.orderModel,
+  });
   Widget _tableColumn(
     String text,
-    bool control,
   ) =>
       Padding(
         padding: const EdgeInsets.symmetric(
@@ -17,7 +22,7 @@ class Invoice extends StatelessWidget {
         child: Text(
           text,
           style: AppStyle.small.copyWith(
-            color: control ? AppColors.lightColor : AppColors.txtLightColor,
+            color: AppColors.lightColor,
           ),
           textAlign: TextAlign.left,
         ),
@@ -42,11 +47,11 @@ class Invoice extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Chorn Kihong',
+                      'Kihong',
                       style: AppStyle.medium,
                     ),
                     Text(
-                      'y7KJKGeMDPzUA63yiHO9'.toUpperCase(),
+                      orderModel.id.toString().toUpperCase(),
                       style:
                           AppStyle.small.copyWith(color: AppColors.lightColor),
                     ),
@@ -54,7 +59,7 @@ class Invoice extends StatelessWidget {
                 ),
               ),
               Text(
-                DateTime.now().displayDateTime,
+                orderModel.orderDate.displayDateTime,
                 style: AppStyle.small,
                 textAlign: TextAlign.right,
               ),
@@ -87,15 +92,12 @@ class Invoice extends StatelessWidget {
                 ],
               ),
               ...List.generate(
-                5,
+                orderModel.products.length,
                 (index) => TableRow(
-                  decoration: BoxDecoration(
-                      color:
-                          index.isEven ? AppColors.deepBackgroundColor : null),
                   children: [
-                    _tableColumn(' ${index + 1}', index.isOdd),
-                    _tableColumn('Tnol Frappe', index.isOdd),
-                    _tableColumn('12', index.isOdd),
+                    _tableColumn(' ${index + 1}'),
+                    _tableColumn(orderModel.products[index].name),
+                    _tableColumn(orderModel.products[index].amount.toString()),
                   ],
                 ),
               ),
@@ -103,7 +105,7 @@ class Invoice extends StatelessWidget {
           ),
           10.sh,
           Text(
-            'Total : 4\$',
+            'Total : \$${formatCurrency(orderModel.total)}',
             style: AppStyle.medium,
           )
         ],

@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accept": MessageLookupByLibrary.simpleMessage("ទទួល"),
         "accepted": MessageLookupByLibrary.simpleMessage("បានទទួល"),
         "add": MessageLookupByLibrary.simpleMessage("បន្ថែម"),
         "addCategory":
@@ -56,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "ឈ្មោះប្រភេទភេសជ្ជៈជាភាសាខ្មែរមិនអាចទទេបានទេ"),
         "dashboard": MessageLookupByLibrary.simpleMessage("ផ្ទាំងគ្រប់គ្រង"),
         "delete_success": MessageLookupByLibrary.simpleMessage("លុបបានជោគជ័យ"),
+        "done": MessageLookupByLibrary.simpleMessage("រួចរាល់"),
         "drinkCategoryValidateMessage":
             MessageLookupByLibrary.simpleMessage("ប្រភេទភេសជ្ជៈមិនអាចទទេបានទេ"),
         "drinkName": MessageLookupByLibrary.simpleMessage("ឈ្មោះភេសជ្ជៈ"),

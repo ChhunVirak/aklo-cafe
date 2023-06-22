@@ -149,5 +149,29 @@ class LangsEn extends Langs {
   String get accepted => 'Accepted';
 
   @override
+  String get accept => 'Accept';
+
+  @override
   String get cancelled => 'Cancelled';
+
+  @override
+  String get warning => 'Warning';
+
+  @override
+  String get warning_delete => 'Do you want to delete this Drink?';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get add_drink_message => 'Please add drink';
+
+  @override
+  String get add_drink_message_des => 'a drink is required to make order';
+
+  @override
+  String get done => 'Done';
 }
