@@ -89,6 +89,12 @@ class LangsKk extends Langs {
   String get drinkUnitPriceValidateMessage => 'តម្លៃឯកតាភេសជ្ជៈមិនអាចទទេបានទេ';
 
   @override
+  String get drinkUnitPriceValidateMessagesmallthanzero => 'តម្លៃឯកតាភេសជ្ជៈមិនអាច 0\$ បានទេ.';
+
+  @override
+  String get drinkUnitPriceValidateMessagemax => 'តម្លៃឯកតាភេសជ្ជៈមិនអាចខ្ពស់ជាង 20\$ បានទេ.';
+
+  @override
   String get drinkTotalAmountValidateMessage => 'បរិមាណភេសជ្ជៈមិនអាចទទេបានទេ';
 
   @override
@@ -143,7 +149,7 @@ class LangsKk extends Langs {
   String get unAvailable => 'មិនមាន';
 
   @override
-  String get newOrder => 'ថ្មី';
+  String get newOrder => 'កម្មង់ថ្មី';
 
   @override
   String get accepted => 'បានទទួល';
@@ -192,4 +198,19 @@ class LangsKk extends Langs {
 
   @override
   String get new_order => 'កម្មង់ថ្មី';
+
+  @override
+  String get sugar => 'កម្រឹតស្ករ';
+
+  @override
+  String get drink_done => 'ភេសជ្ជៈទាំងអស់បានធ្វើរួចរាល់ លោកអ្នកអាចមកយកបាន';
+
+  @override
+  String get about_us => 'អំពីពួកយើង';
+
+  @override
+  String get add_profile => 'បន្ថែមសមាជិក';
+
+  @override
+  String get fail => 'បរាជ័យ';
 }

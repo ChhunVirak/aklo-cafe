@@ -116,7 +116,7 @@ class DrinkCard extends StatelessWidget {
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: NumberFormat('#.00').format(unitPrice),
+                          text: NumberFormat('#.00', 'en').format(unitPrice),
                           style: AppStyle.large.copyWith(
                             fontSize: 14,
                           ),

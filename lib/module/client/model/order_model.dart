@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class OrderModel {
   final String? id;
   final DateTime orderDate;
@@ -21,7 +23,8 @@ class OrderModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'orderDate': orderDate.millisecondsSinceEpoch,
+      'orderDate': Timestamp.fromDate(orderDate),
+      // 'orderDate': Timestamp.fromDate(orderDate),
       'products': products.map((x) => x.toMap()).toList(),
       'total': total,
       'status': status,
@@ -33,7 +36,8 @@ class OrderModel {
   factory OrderModel.fromMap(Map<String, dynamic> map) {
     return OrderModel(
       id: map['id'] != null ? map['id'] as String : null,
-      orderDate: DateTime.fromMillisecondsSinceEpoch(map['orderDate'] as int),
+      orderDate: (map['orderDate'] as Timestamp).toDate(),
+      // orderDate: (map['orderDate'] as Timestamp).toDate(),
       products: List<Product>.from(
         (map['products']).map<Product>(
           (x) => Product.fromMap(x as Map<String, dynamic>),

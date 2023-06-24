@@ -167,7 +167,7 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                   itemCount: listData.length,
                                   itemBuilder: (_, index) {
                                     final name = listData[index].name;
-                                    // final img = listData[index].image;
+                                    final image = listData[index].image;
                                     final unitPrice = listData[index].unitPrice;
 
                                     final id = listData[index].id;
@@ -255,8 +255,7 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                       },
                                       child: DrinkCard(
                                         name: name,
-                                        image:
-                                            'https://cdn.shopify.com/s/files/1/0298/4581/5429/products/ReusableCup_grande.png?v=1578631807',
+                                        image: image,
                                         unitPrice: unitPrice,
                                         available: available,
                                         amount: orderController.getAmount(id),

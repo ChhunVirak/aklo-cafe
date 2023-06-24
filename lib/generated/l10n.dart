@@ -330,6 +330,26 @@ class S {
     );
   }
 
+  /// `Drink price can't be 0$.`
+  String get drinkUnitPriceValidateMessagesmallthanzero {
+    return Intl.message(
+      'Drink price can\'t be 0\$.',
+      name: 'drinkUnitPriceValidateMessagesmallthanzero',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drink price can't be more than 20$.`
+  String get drinkUnitPriceValidateMessagemax {
+    return Intl.message(
+      'Drink price can\'t be more than 20\$.',
+      name: 'drinkUnitPriceValidateMessagemax',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Field drink amount can't be empty.`
   String get drinkTotalAmountValidateMessage {
     return Intl.message(
@@ -675,6 +695,56 @@ class S {
     return Intl.message(
       'New Order',
       name: 'new_order',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sugar Level`
+  String get sugar {
+    return Intl.message(
+      'Sugar Level',
+      name: 'sugar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drink Done, please go to get your Drinks!`
+  String get drink_done {
+    return Intl.message(
+      'Drink Done, please go to get your Drinks!',
+      name: 'drink_done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About us`
+  String get about_us {
+    return Intl.message(
+      'About us',
+      name: 'about_us',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Member`
+  String get add_profile {
+    return Intl.message(
+      'Add Member',
+      name: 'add_profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fail`
+  String get fail {
+    return Intl.message(
+      'Fail',
+      name: 'fail',
       desc: '',
       args: [],
     );

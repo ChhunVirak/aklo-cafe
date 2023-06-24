@@ -1,13 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class DrinkModel {
   final String name;
   final String categoryId;
   final num unitPrice;
   final String? id;
-  final DateTime? createdDate;
+  final Timestamp? createdDate;
   final bool? available;
+  final String? image;
   DrinkModel({
     required this.name,
     required this.categoryId,
@@ -15,6 +18,7 @@ class DrinkModel {
     this.id,
     this.createdDate,
     this.available,
+    this.image,
   });
 
   Map<String, dynamic> toMap() {
@@ -23,8 +27,9 @@ class DrinkModel {
       'categoryId': categoryId,
       'unitPrice': unitPrice,
       'id': id,
-      'createdDate': createdDate?.millisecondsSinceEpoch,
+      'createdDate': createdDate,
       'available': available,
+      'image': image,
     };
   }
 
@@ -34,10 +39,9 @@ class DrinkModel {
       categoryId: map['categoryId'] as String,
       unitPrice: map['unitPrice'] as num,
       id: map['id'] != null ? map['id'] as String : null,
-      createdDate: map['createdDate'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['createdDate'] as int)
-          : null,
+      createdDate: map['createdDate'] != null ? map['createdDate'] : null,
       available: map['available'] != null ? map['available'] as bool : null,
+      image: map['image'] != null ? map['image'] as String : null,
     );
   }
 

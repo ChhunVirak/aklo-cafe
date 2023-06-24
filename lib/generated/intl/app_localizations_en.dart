@@ -89,6 +89,12 @@ class LangsEn extends Langs {
   String get drinkUnitPriceValidateMessage => 'Field drink unit price can\'t be empty.';
 
   @override
+  String get drinkUnitPriceValidateMessagesmallthanzero => 'Drink price can\'t be 0\$.';
+
+  @override
+  String get drinkUnitPriceValidateMessagemax => 'Drink price can\'t be more than 20\$.';
+
+  @override
   String get drinkTotalAmountValidateMessage => 'Field drink amount can\'t be empty.';
 
   @override
@@ -192,4 +198,19 @@ class LangsEn extends Langs {
 
   @override
   String get new_order => 'New Order';
+
+  @override
+  String get sugar => 'Sugar Level';
+
+  @override
+  String get drink_done => 'Drink Done, please go to get your Drinks!';
+
+  @override
+  String get about_us => 'About us';
+
+  @override
+  String get add_profile => 'Add Member';
+
+  @override
+  String get fail => 'Fail';
 }

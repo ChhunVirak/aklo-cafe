@@ -32,3 +32,33 @@ Future<void> showCustomModalBottomSheet(Widget child) async {
     isScrollControlled: true,
   );
 }
+
+Future<void> showCustomModalBottomSheetNoLimit(Widget child) async {
+  await Get.bottomSheet(
+    Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        GestureDetector(
+          onTap: () {
+            Navigator.of(Get.overlayContext!).pop();
+          },
+          child: Container(
+            height: Get.height,
+            width: Get.width,
+            color: Colors.transparent,
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: Sizes.bottomSheetBorder,
+          ),
+          width: double.infinity,
+          child: child,
+        ),
+      ],
+    ),
+    backgroundColor: Colors.transparent,
+    isScrollControlled: true,
+  );
+}

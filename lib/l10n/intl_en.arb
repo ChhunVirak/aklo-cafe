@@ -28,6 +28,8 @@
   "drinkNameValidateMessage": "Field drink name can't be empty.",
   "drinkCategoryValidateMessage": "Field drink category can't be empty.",
   "drinkUnitPriceValidateMessage": "Field drink unit price can't be empty.",
+  "drinkUnitPriceValidateMessagesmallthanzero": "Drink price can't be 0$.",
+  "drinkUnitPriceValidateMessagemax": "Drink price can't be more than 20$.",
   "drinkTotalAmountValidateMessage": "Field drink amount can't be empty.",
   "categoryNameAmountValidateMessage": "Field category name can't be empty.",
   "category_name_en": "Category English Name",
@@ -62,5 +64,10 @@
   "today_Total_Order": "Today Total Order",
   "edit": "Edit",
   "delete": "Delete",
-  "new_order": "New Order"
+  "new_order": "New Order",
+  "sugar": "Sugar Level",
+  "drink_done": "Drink Done, please go to get your Drinks!",
+  "about_us": "About us",
+  "add_profile": "Add Member",
+  "fail": "Fail"
 }

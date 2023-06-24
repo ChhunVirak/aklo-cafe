@@ -116,7 +116,7 @@ class OrderStatus extends StatelessWidget {
                                   ),
                                   10.sh,
                                   Text(
-                                    'Please go and get your Drinks!',
+                                    S.current.drink_done,
                                     style: AppStyle.medium,
                                   ),
                                 ],

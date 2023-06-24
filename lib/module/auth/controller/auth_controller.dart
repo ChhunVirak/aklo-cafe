@@ -92,4 +92,8 @@ class AuthController extends GetxController {
       FirebaseFirestore.instance.collection(FireBaseStoragePath.users);
   final mobileTokenDB =
       FirebaseFirestore.instance.collection(FireBaseStoragePath.mobileToken);
+
+  Future<void> createUser() async {
+    _fAuth.createUserWithEmailAndPassword(email: 'email', password: 'password');
+  }
 }

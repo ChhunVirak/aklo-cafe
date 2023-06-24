@@ -85,7 +85,7 @@ class ClientDrinkCard extends StatelessWidget {
           5.sh,
           Text(
             name ?? '',
-            style: AppStyle.medium,
+            style: AppStyle.medium.copyWith(fontSize: 14),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -100,12 +100,6 @@ class ClientDrinkCard extends StatelessWidget {
                     child: Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(
-                            text: NumberFormat('#.00', 'en').format(unitPrice),
-                            style: AppStyle.large.copyWith(
-                              fontSize: 18,
-                            ),
-                          ),
                           WidgetSpan(
                             alignment: PlaceholderAlignment.top,
                             child: Text(
@@ -114,6 +108,10 @@ class ClientDrinkCard extends StatelessWidget {
                                 fontSize: 10,
                               ),
                             ),
+                          ),
+                          TextSpan(
+                            text: NumberFormat('#.00', 'en').format(unitPrice),
+                            style: AppStyle.medium.copyWith(fontSize: 16),
                           ),
                         ],
                       ),

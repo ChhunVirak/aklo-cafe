@@ -30,6 +30,7 @@ class ClientOrderController extends GetxController {
     final localDataCurrentOrder = await _pref.getString(CLIENT_ORDERS) ?? '';
     debugPrint('LOCAL ID : $localDataCurrentOrder');
     cureentOrderId = localDataCurrentOrder;
+    update(['Current Order', 'Screen']);
   }
 
   Future<void> storeLocal(String id) async {

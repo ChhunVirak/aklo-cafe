@@ -1,3 +1,5 @@
+import 'package:aklo_cafe/module/about_us/screen/about_us_screen.dart';
+import 'package:aklo_cafe/module/about_us/screen/profile_detail.dart';
 import 'package:aklo_cafe/module/client/screen/client_order.dart';
 import 'package:aklo_cafe/module/client/screen/order_status.dart';
 import 'package:aklo_cafe/module/inventory/screen/category.dart';
@@ -91,6 +93,16 @@ final adminRouter = GoRouter(
         GoRoute(
           path: _Paths.USERS,
           builder: (_, state) => const UsersScreen(),
+        ),
+        GoRoute(
+          path: _Paths.ABOUT_US,
+          builder: (_, state) => const AboutUsScreen(),
+          routes: [
+            GoRoute(
+              path: ':id',
+              builder: (_, state) => const ProfileDetail(),
+            ),
+          ],
         ),
       ],
     ),

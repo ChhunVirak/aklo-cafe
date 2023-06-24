@@ -261,6 +261,18 @@ abstract class Langs {
   /// **'Field drink unit price can\'t be empty.'**
   String get drinkUnitPriceValidateMessage;
 
+  /// No description provided for @drinkUnitPriceValidateMessagesmallthanzero.
+  ///
+  /// In en, this message translates to:
+  /// **'Drink price can\'t be 0\$.'**
+  String get drinkUnitPriceValidateMessagesmallthanzero;
+
+  /// No description provided for @drinkUnitPriceValidateMessagemax.
+  ///
+  /// In en, this message translates to:
+  /// **'Drink price can\'t be more than 20\$.'**
+  String get drinkUnitPriceValidateMessagemax;
+
   /// No description provided for @drinkTotalAmountValidateMessage.
   ///
   /// In en, this message translates to:
@@ -470,6 +482,36 @@ abstract class Langs {
   /// In en, this message translates to:
   /// **'New Order'**
   String get new_order;
+
+  /// No description provided for @sugar.
+  ///
+  /// In en, this message translates to:
+  /// **'Sugar Level'**
+  String get sugar;
+
+  /// No description provided for @drink_done.
+  ///
+  /// In en, this message translates to:
+  /// **'Drink Done, please go to get your Drinks!'**
+  String get drink_done;
+
+  /// No description provided for @about_us.
+  ///
+  /// In en, this message translates to:
+  /// **'About us'**
+  String get about_us;
+
+  /// No description provided for @add_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Member'**
+  String get add_profile;
+
+  /// No description provided for @fail.
+  ///
+  /// In en, this message translates to:
+  /// **'Fail'**
+  String get fail;
 }
 
 class _LangsDelegate extends LocalizationsDelegate<Langs> {

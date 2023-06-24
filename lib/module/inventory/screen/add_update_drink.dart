@@ -131,7 +131,9 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const ImagePickerBox(),
+                              ImagePickerBox(
+                                defaultNetWorkImage: controller.displayImage,
+                              ),
                               CustomTextField(
                                 controller: controller.drinkNameTxTcontroller,
                                 label: S.current.drinkName,
@@ -183,9 +185,21 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                                         decimal: true),
                                 textInputAction: TextInputAction.next,
                                 validator: (v) {
+                                  final price = num.tryParse(v ?? '');
                                   if (v == '') {
                                     return S
                                         .current.drinkUnitPriceValidateMessage;
+                                  }
+                                  if (price == null) {
+                                  } else {
+                                    if (price <= 0) {
+                                      return S.current
+                                          .drinkUnitPriceValidateMessagesmallthanzero;
+                                    }
+                                    if (price > 20) {
+                                      return S.current
+                                          .drinkUnitPriceValidateMessagemax;
+                                    }
                                   }
 
                                   return null;

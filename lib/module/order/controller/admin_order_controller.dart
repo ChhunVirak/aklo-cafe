@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class AdminOrderController extends GetxController {
   final _allordersDb = FirebaseFirestore.instance.collection('orders');
 
-  final today = DateTime(2023);
+  final today = DateTime(2022);
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> orderDataOfId(String? id) =>
       _allordersDb.doc(id).snapshots();
@@ -16,14 +16,16 @@ class AdminOrderController extends GetxController {
   ///ALl Order
   Stream<QuerySnapshot<Map<String, dynamic>>> get allOrderToday => _allordersDb
       .orderBy('orderDate')
-      .where('orderDate', isGreaterThanOrEqualTo: today)
+      .where('orderDate', isGreaterThanOrEqualTo: Timestamp.fromDate(today))
       .snapshots();
 
   Stream<QuerySnapshot<Map<String, dynamic>>> orderOf(String status) =>
       _allordersDb
           .where('status', isEqualTo: status)
-          .where('orderDate',
-              isGreaterThanOrEqualTo: today.millisecondsSinceEpoch)
+          // .where(
+          //   'orderDate',
+          //   isEqualTo: Timestamp.fromDate(today),
+          // )
           .snapshots();
 
   Future<void> onClickAccept(String? id) async {

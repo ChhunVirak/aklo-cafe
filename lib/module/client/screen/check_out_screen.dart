@@ -30,16 +30,18 @@ class CheckOutScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Column(
-              children: orderController.getList.entries
-                  .map(
-                    (e) => ListTile(
-                      title: Text(e.value.drinkModel!.name),
-                      subtitle: const Text('No Sugar'),
-                      trailing: Text('x ${e.value.unit}'),
-                    ),
-                  )
-                  .toList(),
+            child: SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              child: Column(
+                children: orderController.getList.entries
+                    .map(
+                      (e) => ListTile(
+                        title: Text(e.value.drinkModel!.name),
+                        trailing: Text('x ${e.value.unit}'),
+                      ),
+                    )
+                    .toList(),
+              ),
             ),
           ),
           SafeArea(

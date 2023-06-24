@@ -7,10 +7,11 @@ import 'package:aklo_cafe/module/order/controller/admin_order_controller.dart';
 import 'package:aklo_cafe/util/alerts/app_modal_bottomsheet.dart';
 import 'package:aklo_cafe/util/extensions/responsive/responsive_extension.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
-import 'package:aklo_cafe/util/widgets/custom_textfield.dart';
+import 'package:aklo_cafe/util/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../config/languages/lang_font_controller.dart';
 import '../../../util/alerts/app_snackbar.dart';
@@ -171,16 +172,21 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                                       () {
                                                                     debugPrint(
                                                                         'Pressed');
-                                                                    _inventoryController
-                                                                        .currentCategory
-                                                                        .value = 'All';
-                                                                    _inventoryController
-                                                                        .currentCategoryID
-                                                                        .value = 'All';
-                                                                    _inventoryController
-                                                                        .update([
-                                                                      'All Drinks'
-                                                                    ]);
+                                                                    if (_inventoryController
+                                                                            .currentCategory
+                                                                            .value !=
+                                                                        'All') {
+                                                                      _inventoryController
+                                                                          .currentCategory
+                                                                          .value = 'All';
+                                                                      _inventoryController
+                                                                          .currentCategoryID
+                                                                          .value = 'All';
+                                                                      _inventoryController
+                                                                          .update([
+                                                                        'All Drinks'
+                                                                      ]);
+                                                                    }
                                                                   },
                                                                   label: Text(S
                                                                       .current
@@ -201,6 +207,8 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                                                 _chipBgColor(_inventoryController.currentCategory.value == e.nameEn),
                                                                             onPressed:
                                                                                 () {
+                                                                              if (_inventoryController.currentCategory.value == e.nameEn)
+                                                                                return;
                                                                               _inventoryController.currentCategory.value = e.nameEn;
                                                                               if (e.id == null)
                                                                                 return; //ends
@@ -229,6 +237,8 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                       .shrink();
                                                 },
                                               ),
+
+                                              ///All Drink
                                               Expanded(
                                                 child: GetBuilder(
                                                     id: 'All Drinks',
@@ -314,6 +324,9 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                                       final name =
                                                                           listData[index]
                                                                               .name;
+                                                                      final image =
+                                                                          listData[index]
+                                                                              .image;
                                                                       // final img = listData[index].image;
                                                                       final unitPrice =
                                                                           listData[index]
@@ -334,7 +347,9 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                                             () {
                                                                           if (!GetPlatform.isWeb &&
                                                                               available == true) {
-                                                                            showCustomModalBottomSheet(
+                                                                            int unit =
+                                                                                0;
+                                                                            showCustomModalBottomSheetNoLimit(
                                                                               StatefulBuilder(builder: (context, state) {
                                                                                 return Container(
                                                                                   padding: EdgeInsets.all(Sizes.defaultPadding),
@@ -346,9 +361,20 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                                                     ),
                                                                                   ),
                                                                                   child: Column(
+                                                                                    mainAxisSize: MainAxisSize.min,
                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                                     children: [
-                                                                                      Text('Sugar'),
+                                                                                      Text(
+                                                                                        name,
+                                                                                        style: AppStyle.medium,
+                                                                                      ),
+                                                                                      5.sh,
+                                                                                      Text(
+                                                                                        '\$' + NumberFormat('#.00', 'en').format(unitPrice),
+                                                                                        style: AppStyle.medium,
+                                                                                      ),
+                                                                                      10.sh,
+                                                                                      Text(S.current.sugar + ' ${(value * 100).toInt()}%'),
                                                                                       Slider(
                                                                                         value: value,
                                                                                         onChanged: (v) {
@@ -360,10 +386,6 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                                                         activeColor: AppColors.mainColor,
                                                                                         label: (value * 100).toInt().toString() + '%',
                                                                                       ),
-                                                                                      CustomTextField(
-                                                                                        label: 'Comment',
-                                                                                        maxLines: 3,
-                                                                                      ),
                                                                                       Row(
                                                                                         mainAxisAlignment: MainAxisAlignment.center,
                                                                                         children: [
@@ -374,15 +396,25 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                                                             ),
                                                                                           ),
                                                                                           Text(
-                                                                                            '1',
+                                                                                            '$unit',
                                                                                             style: AppStyle.large,
                                                                                           ),
                                                                                           IconButton(
-                                                                                            onPressed: () {},
+                                                                                            onPressed: () {
+                                                                                              state(() {
+                                                                                                unit++;
+                                                                                              });
+                                                                                            },
                                                                                             icon: Icon(
                                                                                               PhosphorIcons.plus_circle,
                                                                                             ),
                                                                                           ),
+                                                                                          Expanded(
+                                                                                            child: CustomButton(
+                                                                                              onPressed: () {},
+                                                                                              name: 'Add to cart',
+                                                                                            ),
+                                                                                          )
                                                                                         ],
                                                                                       ),
                                                                                     ],
@@ -397,7 +429,7 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                                           name:
                                                                               name,
                                                                           image:
-                                                                              'https://cdn.shopify.com/s/files/1/0298/4581/5429/products/ReusableCup_grande.png?v=1578631807',
+                                                                              image,
                                                                           unitPrice:
                                                                               unitPrice,
                                                                           available:

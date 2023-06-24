@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about_us": MessageLookupByLibrary.simpleMessage("អំពីពួកយើង"),
         "accept": MessageLookupByLibrary.simpleMessage("ទទួល"),
         "accepted": MessageLookupByLibrary.simpleMessage("បានទទួល"),
         "add": MessageLookupByLibrary.simpleMessage("បន្ថែម"),
@@ -32,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("សូមជ្រើសភេសជ្ជៈ"),
         "add_drink_message_des": MessageLookupByLibrary.simpleMessage(
             "សូមរើសយ៉ាងហោចណាស់មួយដើម្បីកម្មង់"),
+        "add_profile": MessageLookupByLibrary.simpleMessage("បន្ថែមសមាជិក"),
         "all": MessageLookupByLibrary.simpleMessage("ទាំងអស់"),
         "allCoffeeTitle":
             MessageLookupByLibrary.simpleMessage("ភេសជ្ជៈទាំងអស់"),
@@ -69,10 +71,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("បរិមាណភេសជ្ជៈមិនអាចទទេបានទេ"),
         "drinkUnitPriceValidateMessage": MessageLookupByLibrary.simpleMessage(
             "តម្លៃឯកតាភេសជ្ជៈមិនអាចទទេបានទេ"),
+        "drinkUnitPriceValidateMessagemax":
+            MessageLookupByLibrary.simpleMessage(
+                "តម្លៃឯកតាភេសជ្ជៈមិនអាចខ្ពស់ជាង 20\$ បានទេ."),
+        "drinkUnitPriceValidateMessagesmallthanzero":
+            MessageLookupByLibrary.simpleMessage(
+                "តម្លៃឯកតាភេសជ្ជៈមិនអាច 0\$ បានទេ."),
+        "drink_done": MessageLookupByLibrary.simpleMessage(
+            "ភេសជ្ជៈទាំងអស់បានធ្វើរួចរាល់ លោកអ្នកអាចមកយកបាន"),
         "edit": MessageLookupByLibrary.simpleMessage("កែប្រែ"),
         "email": MessageLookupByLibrary.simpleMessage("អ៊ីម៉ែល"),
         "emailValidateMessage":
             MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលអ៊ីម៉ែល"),
+        "fail": MessageLookupByLibrary.simpleMessage("បរាជ័យ"),
         "gallery": MessageLookupByLibrary.simpleMessage("រូបភាព"),
         "histories": MessageLookupByLibrary.simpleMessage("ប្រវត្តិ"),
         "image": MessageLookupByLibrary.simpleMessage("រូបភាព"),
@@ -81,7 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesDes": MessageLookupByLibrary.simpleMessage("រើសភាសា"),
         "login": MessageLookupByLibrary.simpleMessage("ចូល"),
         "make_order": MessageLookupByLibrary.simpleMessage("ធ្វើការកម្មង់"),
-        "newOrder": MessageLookupByLibrary.simpleMessage("ថ្មី"),
+        "newOrder": MessageLookupByLibrary.simpleMessage("កម្មង់ថ្មី"),
         "new_order": MessageLookupByLibrary.simpleMessage("កម្មង់ថ្មី"),
         "noImage": MessageLookupByLibrary.simpleMessage("គ្មានរូបភាព"),
         "no_data": MessageLookupByLibrary.simpleMessage("គ្មានទិន្ន័យ"),
@@ -94,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting": MessageLookupByLibrary.simpleMessage("ការកំណត់"),
         "signout": MessageLookupByLibrary.simpleMessage("ចាកចេញ"),
         "success": MessageLookupByLibrary.simpleMessage("ជោគជ័យ"),
+        "sugar": MessageLookupByLibrary.simpleMessage("កម្រឹតស្ករ"),
         "today_Total_Order":
             MessageLookupByLibrary.simpleMessage("ការកម្មង់សរុបថ្ងៃនេះ"),
         "total": MessageLookupByLibrary.simpleMessage("សរុប"),

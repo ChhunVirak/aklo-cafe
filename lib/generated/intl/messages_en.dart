@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about_us": MessageLookupByLibrary.simpleMessage("About us"),
         "accept": MessageLookupByLibrary.simpleMessage("Accept"),
         "accepted": MessageLookupByLibrary.simpleMessage("Accepted"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
@@ -31,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please add drink"),
         "add_drink_message_des": MessageLookupByLibrary.simpleMessage(
             "a drink is required to make order"),
+        "add_profile": MessageLookupByLibrary.simpleMessage("Add Member"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "allCoffeeTitle": MessageLookupByLibrary.simpleMessage("All Drinks"),
         "amount": MessageLookupByLibrary.simpleMessage("Amounts"),
@@ -69,10 +71,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Field drink amount can\'t be empty."),
         "drinkUnitPriceValidateMessage": MessageLookupByLibrary.simpleMessage(
             "Field drink unit price can\'t be empty."),
+        "drinkUnitPriceValidateMessagemax":
+            MessageLookupByLibrary.simpleMessage(
+                "Drink price can\'t be more than 20\$."),
+        "drinkUnitPriceValidateMessagesmallthanzero":
+            MessageLookupByLibrary.simpleMessage("Drink price can\'t be 0\$."),
+        "drink_done": MessageLookupByLibrary.simpleMessage(
+            "Drink Done, please go to get your Drinks!"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailValidateMessage":
             MessageLookupByLibrary.simpleMessage("Email is required."),
+        "fail": MessageLookupByLibrary.simpleMessage("Fail"),
         "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "histories": MessageLookupByLibrary.simpleMessage("Histories"),
         "image": MessageLookupByLibrary.simpleMessage("Image"),
@@ -94,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "signout": MessageLookupByLibrary.simpleMessage("Sign Out"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
+        "sugar": MessageLookupByLibrary.simpleMessage("Sugar Level"),
         "today_Total_Order":
             MessageLookupByLibrary.simpleMessage("Today Total Order"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),

@@ -1,7 +1,7 @@
-import 'package:aklo_cafe/module/client/screen/client_order.dart';
 import 'package:aklo_cafe/module/home/controller/dashboard_controller.dart';
 import 'package:aklo_cafe/module/order/controller/admin_order_controller.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
@@ -23,6 +23,12 @@ class DashBoard extends StatefulWidget {
   @override
   State<DashBoard> createState() => _DashBoardState();
 }
+
+final images = [
+  'https://www.dsmenu.com/user-folder/menu/basic/2/big_t_7405-.png',
+  'https://stories.starbucks.com/uploads/2021/02/SBX20200225-SpringBeverages-FeatureHorizontal-1440x700.jpg',
+  'https://hips.hearstapps.com/delish/assets/16/29/1469053477-delish-starbucks-horizontal-index.jpg',
+];
 
 class _DashBoardState extends State<DashBoard> {
   void _handleNavigate(BuildContext context, String menu) {
@@ -88,8 +94,8 @@ class _DashBoardState extends State<DashBoard> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // _showQrWebSite(context);
-          Get.to(() => ClientOrderScreen());
+          _showQrWebSite(context);
+          // Get.to(() => ClientOrderScreen());
         },
         child: const Icon(
           PhosphorIcons.qr_code_bold,
@@ -135,63 +141,64 @@ class _DashBoardState extends State<DashBoard> {
         title: const Text(Strings.appName),
       ),
       body: [
-        Padding(
+        SingleChildScrollView(
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              Expanded(
-                // aspectRatio: 1.3 / 1,
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: Sizes.boxBorderRadius,
+              ClipRRect(
+                borderRadius: Sizes.boxBorderRadius,
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    aspectRatio: 2 / 1,
+                    viewportFraction: 1,
+                    autoPlay: true,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      StreamBuilder(
-                        stream: adminOrderController.totalOrder,
-                        builder: (_, snapshot) {
-                          if (snapshot.hasData) {
-                            return Text.rich(
-                              TextSpan(
-                                text: '${S.current.today_Total_Order} : ',
-                                style: AppStyle.medium
-                                    .copyWith(color: AppColors.txtLightColor),
-                                children: [
-                                  TextSpan(
-                                    text: snapshot.data,
-                                    style: AppStyle.large.copyWith(
-                                        color: AppColors.txtLightColor),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }
-                          return SizedBox.shrink();
-                        },
+                  items: images
+                      .map(
+                        (e) => Image.network(
+                          e,
+                          fit: BoxFit.cover,
+                        ),
                       )
-
-                      //   Text.rich(
-                      //     TextSpan(
-                      //       text: 'Available Coffee : ',
-                      //       style: AppStyle.medium
-                      //           .copyWith(color: AppColors.txtLightColor),
-                      //       children: [
-                      //         TextSpan(
-                      //           text: '78 units',
-                      //           style: AppStyle.large
-                      //               .copyWith(color: AppColors.txtLightColor),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //     textAlign: TextAlign.end,
-                      //   ),
-                    ],
-                  ),
+                      .toList(),
+                ),
+              ),
+              20.sh,
+              Container(
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: Sizes.boxBorderRadius,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    StreamBuilder(
+                      stream: adminOrderController.totalOrder,
+                      builder: (_, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text.rich(
+                            TextSpan(
+                              text: '${S.current.today_Total_Order} : ',
+                              style: AppStyle.medium
+                                  .copyWith(color: AppColors.txtLightColor),
+                              children: [
+                                TextSpan(
+                                  text: snapshot.data,
+                                  style: AppStyle.large
+                                      .copyWith(color: AppColors.txtLightColor),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                        return SizedBox.shrink();
+                      },
+                    )
+                  ],
                 ),
               ),
               GridView.count(
@@ -232,9 +239,9 @@ class _DashBoardState extends State<DashBoard> {
                   ),
                   MenuCard(
                     onTap: () {
-                      _handleNavigate(context, 'Histories');
+                      pushSubRoute(Routes.ABOUT_US);
                     },
-                    title: 'About Us',
+                    title: S.current.about_us,
                     icon: PhosphorIcons.chart_bar_fill,
                     bgColor: const Color(0xfff56313),
                   ),

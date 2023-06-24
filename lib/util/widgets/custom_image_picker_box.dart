@@ -9,9 +9,11 @@ import '../../constant/resources.dart';
 
 class ImagePickerBox extends StatefulWidget {
   final ValueChanged<String?>? onSelectImage;
+  final String? defaultNetWorkImage;
   const ImagePickerBox({
     super.key,
     this.onSelectImage,
+    this.defaultNetWorkImage,
   });
 
   @override
@@ -116,6 +118,7 @@ class _ImagePickerBoxState extends State<ImagePickerBox> {
         margin: const EdgeInsets.all(20),
         width: 100,
         height: 100,
+        clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: AppColors.backgroundColor,
           borderRadius: BorderRadius.circular(10),
@@ -130,11 +133,20 @@ class _ImagePickerBoxState extends State<ImagePickerBox> {
                   fit: BoxFit.cover,
                 ),
               )
-            : Text(
-                S.current.image,
-                style: const TextStyle(
-                    fontVariations: [FontVariation('wght', 900)]),
-              ),
+            : widget.defaultNetWorkImage != null
+                ? SizedBox(
+                    height: double.maxFinite,
+                    width: double.maxFinite,
+                    child: Image.network(
+                      widget.defaultNetWorkImage!,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : Text(
+                    S.current.image,
+                    style: const TextStyle(
+                        fontVariations: [FontVariation('wght', 900)]),
+                  ),
       ),
     );
   }

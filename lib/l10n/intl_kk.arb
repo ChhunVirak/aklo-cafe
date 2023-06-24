@@ -28,6 +28,8 @@
   "drinkNameValidateMessage": "ឈ្មោះភេសជ្ជៈមិនអាចទទេបានទេ",
   "drinkCategoryValidateMessage": "ប្រភេទភេសជ្ជៈមិនអាចទទេបានទេ",
   "drinkUnitPriceValidateMessage": "តម្លៃឯកតាភេសជ្ជៈមិនអាចទទេបានទេ",
+  "drinkUnitPriceValidateMessagesmallthanzero": "តម្លៃឯកតាភេសជ្ជៈមិនអាច 0$ បានទេ.",
+  "drinkUnitPriceValidateMessagemax": "តម្លៃឯកតាភេសជ្ជៈមិនអាចខ្ពស់ជាង 20$ បានទេ.",
   "drinkTotalAmountValidateMessage": "បរិមាណភេសជ្ជៈមិនអាចទទេបានទេ",
   "categoryNameAmountValidateMessage": "ឈ្មោះប្រភេទមិនអាចទទេបានទេ",
   "category_name_en": "ឈ្មោះប្រភេទភេសជ្ជៈជាភាសាអង់គ្លេស",
@@ -46,7 +48,7 @@
   "camera": "កាមេរ៉ា",
   "available": "មាន",
   "unAvailable": "មិនមាន",
-  "newOrder": "ថ្មី",
+  "newOrder": "កម្មង់ថ្មី",
   "accepted": "បានទទួល",
   "accept": "ទទួល",
   "cancelled": "បានបោះបង់",
@@ -62,5 +64,10 @@
   "today_Total_Order": "ការកម្មង់សរុបថ្ងៃនេះ",
   "edit": "កែប្រែ",
   "delete": "លុប",
-  "new_order": "កម្មង់ថ្មី"
+  "new_order": "កម្មង់ថ្មី",
+  "sugar": "កម្រឹតស្ករ",
+  "drink_done": "ភេសជ្ជៈទាំងអស់បានធ្វើរួចរាល់ លោកអ្នកអាចមកយកបាន",
+  "about_us": "អំពីពួកយើង",
+  "add_profile": "បន្ថែមសមាជិក",
+  "fail": "បរាជ័យ"
 }

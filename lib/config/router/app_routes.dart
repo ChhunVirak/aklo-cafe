@@ -12,6 +12,7 @@ abstract class Routes {
   static const EDIT_DRINK = _Paths.ADD_DRINK;
   static const ADD_CATEGORY = _Paths.ADD_CATEGORY;
   static const USER = _Paths.USERS;
+  static const ABOUT_US = _Paths.ABOUT_US;
   static const CATEGORY = _Paths.CATEGORY;
   static const ORDERS = _Paths.ORDERS;
 
@@ -30,6 +31,8 @@ abstract class _Paths {
   static const ORDERS = 'orders';
 
   static const USERS = 'users';
+  static const ABOUT_US = 'about-us';
+  static const PROFILE = 'profile';
   static const ALL_DRINKS = 'all-drink';
   static const ADD_DRINK = 'add-drink';
   static const CATEGORY = 'category';

@@ -55,6 +55,7 @@ class InventoryController extends GetxController {
 
   final db = FirebaseFirestore.instance;
 
+  String? displayImage;
   final drinkNameTxTcontroller = TextEditingController();
   final drinkCategoryTxTcontroller = TextEditingController();
   final unitPriceTxTcontroller = TextEditingController();
@@ -89,6 +90,7 @@ class InventoryController extends GetxController {
           .then((value) => value.data());
 
       CategoryModel categoryModel = CategoryModel.fromMap(category ?? {});
+      displayImage = categoryModel.image;
       selectedCategoryID = categoryModel.id;
       drinkNameTxTcontroller.text = drinkModel.name;
       drinkCategoryTxTcontroller.text = Get.locale == Langs.english.locale
@@ -115,7 +117,7 @@ class InventoryController extends GetxController {
         categoryId: selectedCategoryID!,
         unitPrice: num.tryParse(unitPriceTxTcontroller.text) ?? 0,
         available: available.value,
-        createdDate: DateTime.now(),
+        createdDate: Timestamp.fromDate(DateTime.now()),
       );
 
       //remove item no value avoid change value on database
@@ -159,7 +161,7 @@ class InventoryController extends GetxController {
                 name: drinkNameTxTcontroller.text,
                 categoryId: selectedCategoryID!,
                 unitPrice: num.tryParse(unitPriceTxTcontroller.text) ?? 0,
-                createdDate: DateTime.now(),
+                createdDate: Timestamp.fromDate(DateTime.now()),
                 available: available.value)
             .toMap()
           ..removeWhere(
