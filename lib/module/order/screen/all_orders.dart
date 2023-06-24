@@ -45,6 +45,12 @@ class AllOrder extends StatelessWidget {
             child: CustomCircularLoading(),
           );
 
+        if (!snapshot.hasData) {
+          return Center(
+            child: Text(S.current.no_data),
+          );
+        }
+
         if (snapshot.hasData) {
           debugPrint('Work Here ${snapshot.data?.docs.isEmpty}');
           if (snapshot.data?.docs.isEmpty == true)

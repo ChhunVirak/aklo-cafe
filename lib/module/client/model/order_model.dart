@@ -1,18 +1,21 @@
 import 'dart:convert';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class OrderModel {
   final String? id;
   final DateTime orderDate;
   final List<Product> products;
   final num total;
   final String? status;
+  final String? sugar;
+  final String? comment;
   OrderModel({
     this.id,
     required this.orderDate,
     required this.products,
     required this.total,
     required this.status,
+    this.sugar,
+    this.comment,
   });
 
   Map<String, dynamic> toMap() {
@@ -22,6 +25,8 @@ class OrderModel {
       'products': products.map((x) => x.toMap()).toList(),
       'total': total,
       'status': status,
+      'sugar': sugar,
+      'comment': comment,
     };
   }
 
@@ -35,7 +40,9 @@ class OrderModel {
         ),
       ),
       total: map['total'] as num,
-      status: map['status'] as String?,
+      status: map['status'] != null ? map['status'] as String : null,
+      sugar: map['sugar'] != null ? map['sugar'] as String : null,
+      comment: map['comment'] != null ? map['comment'] as String : null,
     );
   }
 

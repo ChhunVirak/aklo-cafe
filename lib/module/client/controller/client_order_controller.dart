@@ -10,6 +10,12 @@ import '../model/order_model.dart';
 
 const CLIENT_ORDERS = 'client-order-data';
 
+enum Screen {
+  order,
+  checkout,
+  status,
+}
+
 class ClientOrderController extends GetxController {
   late SharedPreferences _pref;
 
@@ -21,20 +27,36 @@ class ClientOrderController extends GetxController {
   }
 
   Future<void> getLocalData() async {
-    final localData = await _pref.getStringList(CLIENT_ORDERS) ?? [];
-    debugPrint('Local Storage : $localData');
+    final localDataCurrentOrder = await _pref.getString(CLIENT_ORDERS) ?? '';
+    debugPrint('LOCAL ID : $localDataCurrentOrder');
+    cureentOrderId = localDataCurrentOrder;
   }
 
-  Future<void> storeLocal(Map<String, ClientOrderModel> data) async {
-    await _pref.setStringList(
-      CLIENT_ORDERS,
-      [],
-    );
+  Future<void> storeLocal(String id) async {
+    await _pref.setString(CLIENT_ORDERS, id); //TODO: Order ID
+  }
+
+  String cureentOrderId = '';
+
+  final screen = Screen.order.obs;
+  final showback = true.obs;
+
+  void newOrder() {
+    storeLocal('');
+    cureentOrderId = '';
+    screen(Screen.order);
+    showback(true);
+    _listOrder.clear();
+    update(['Current Order', 'Screen']);
   }
 
   final _listOrder = <String, ClientOrderModel>{}.obs;
 
   Map<String, ClientOrderModel> get getList => _listOrder;
+
+  num get totalDrinkUnitCount => (_listOrder.isNotEmpty
+      ? _listOrder.entries.map<num>((e) => e.value.unit).reduce((a, b) => a + b)
+      : 0);
 
   int? getAmount(String? id) =>
       _listOrder.containsKey(id) ? _listOrder[id]!.unit : null;
@@ -53,8 +75,7 @@ class ClientOrderController extends GetxController {
         },
       );
     }
-    update();
-    storeLocal(_listOrder);
+    update(['Drinks', 'Total']);
   }
 
   void removeItem(DrinkModel? drink) {
@@ -69,8 +90,7 @@ class ClientOrderController extends GetxController {
       }
       _listOrder.refresh();
     }
-    update();
-    storeLocal(_listOrder);
+    update(['Drinks', 'Total']);
   }
 
   num get total => _listOrder.isNotEmpty
@@ -80,6 +100,11 @@ class ClientOrderController extends GetxController {
       : 0;
 
   final _allordersDb = FirebaseFirestore.instance.collection('orders');
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>>? get currentOrder =>
+      cureentOrderId.isNotEmpty
+          ? _allordersDb.doc(cureentOrderId).snapshots()
+          : null;
 
   Future<String> submitOrder() async {
     final listSelectedDrink = _listOrder.entries
@@ -101,6 +126,9 @@ class ClientOrderController extends GetxController {
     orderData.removeWhere((key, value) => value == null);
     final id = await _allordersDb.add(orderData).then((value) => value.id);
     await _allordersDb.doc(id).update({'id': id});
+    await storeLocal(id);
+    cureentOrderId = id;
+    update(['Current Order']);
     return id;
   }
 }

@@ -56,5 +56,11 @@
   "cancel": "Cancel",
   "add_drink_message": "Please add drink",
   "add_drink_message_des": "a drink is required to make order",
-  "done": "Done"
+  "done": "Done",
+  "total": "Total",
+  "check_out": "Check Out",
+  "today_Total_Order": "Today Total Order",
+  "edit": "Edit",
+  "delete": "Delete",
+  "new_order": "New Order"
 }

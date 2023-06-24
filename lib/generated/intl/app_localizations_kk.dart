@@ -174,4 +174,22 @@ class LangsKk extends Langs {
 
   @override
   String get done => 'រួចរាល់';
+
+  @override
+  String get total => 'សរុប';
+
+  @override
+  String get check_out => 'ពិនិត្យ​';
+
+  @override
+  String get today_Total_Order => 'ការកម្មង់សរុបថ្ងៃនេះ';
+
+  @override
+  String get edit => 'កែប្រែ';
+
+  @override
+  String get delete => 'លុប';
+
+  @override
+  String get new_order => 'កម្មង់ថ្មី';
 }

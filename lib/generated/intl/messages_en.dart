@@ -54,7 +54,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "category_name_kh_ValidateMessage":
             MessageLookupByLibrary.simpleMessage(
                 "Field Category Khmer Name can\'t be empty."),
+        "check_out": MessageLookupByLibrary.simpleMessage("Check Out"),
         "dashboard": MessageLookupByLibrary.simpleMessage("Dashboard"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "delete_success":
             MessageLookupByLibrary.simpleMessage("Delete Successfully"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
@@ -67,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Field drink amount can\'t be empty."),
         "drinkUnitPriceValidateMessage": MessageLookupByLibrary.simpleMessage(
             "Field drink unit price can\'t be empty."),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailValidateMessage":
             MessageLookupByLibrary.simpleMessage("Email is required."),
@@ -80,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "make_order": MessageLookupByLibrary.simpleMessage("Make Order"),
         "newOrder": MessageLookupByLibrary.simpleMessage("New"),
+        "new_order": MessageLookupByLibrary.simpleMessage("New Order"),
         "noImage": MessageLookupByLibrary.simpleMessage("No Image"),
         "no_data": MessageLookupByLibrary.simpleMessage("No Data"),
         "orders": MessageLookupByLibrary.simpleMessage("Orders"),
@@ -90,6 +94,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "signout": MessageLookupByLibrary.simpleMessage("Sign Out"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
+        "today_Total_Order":
+            MessageLookupByLibrary.simpleMessage("Today Total Order"),
+        "total": MessageLookupByLibrary.simpleMessage("Total"),
         "unAvailable": MessageLookupByLibrary.simpleMessage("Unavailable"),
         "unitPrice": MessageLookupByLibrary.simpleMessage("Unit Price"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),

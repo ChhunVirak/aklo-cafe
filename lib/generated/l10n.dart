@@ -619,6 +619,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Total`
+  String get total {
+    return Intl.message(
+      'Total',
+      name: 'total',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check Out`
+  String get check_out {
+    return Intl.message(
+      'Check Out',
+      name: 'check_out',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today Total Order`
+  String get today_Total_Order {
+    return Intl.message(
+      'Today Total Order',
+      name: 'today_Total_Order',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit`
+  String get edit {
+    return Intl.message(
+      'Edit',
+      name: 'edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message(
+      'Delete',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Order`
+  String get new_order {
+    return Intl.message(
+      'New Order',
+      name: 'new_order',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

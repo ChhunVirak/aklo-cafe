@@ -434,6 +434,42 @@ abstract class Langs {
   /// In en, this message translates to:
   /// **'Done'**
   String get done;
+
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @check_out.
+  ///
+  /// In en, this message translates to:
+  /// **'Check Out'**
+  String get check_out;
+
+  /// No description provided for @today_Total_Order.
+  ///
+  /// In en, this message translates to:
+  /// **'Today Total Order'**
+  String get today_Total_Order;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @new_order.
+  ///
+  /// In en, this message translates to:
+  /// **'New Order'**
+  String get new_order;
 }
 
 class _LangsDelegate extends LocalizationsDelegate<Langs> {

@@ -15,6 +15,15 @@ class CheckOutScreen extends StatelessWidget {
     final orderController = Get.put(ClientOrderController());
     return Scaffold(
       appBar: AppBar(
+        leading: orderController.showback.value
+            ? IconButton(
+                onPressed: () {
+                  orderController.screen(Screen.order);
+                  orderController.update(['Screen']);
+                },
+                icon: Icon(Icons.arrow_back_rounded),
+              )
+            : null,
         title: const Text('Orders #3403E2'),
         centerTitle: true,
       ),

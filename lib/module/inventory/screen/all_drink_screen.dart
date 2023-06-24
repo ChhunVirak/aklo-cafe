@@ -200,7 +200,7 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                                         queryParams: {"id": id},
                                                       );
                                                     },
-                                                    name: 'Edit',
+                                                    name: S.current.edit,
                                                   ),
                                                   Sizes.defaultPadding.sh,
                                                   CustomButton(
@@ -245,7 +245,7 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                                       );
                                                     },
                                                     backgroundColor: Colors.red,
-                                                    name: 'Delete',
+                                                    name: S.current.delete,
                                                   ),
                                                 ],
                                               ),

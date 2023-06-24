@@ -1,5 +1,6 @@
 import 'package:aklo_cafe/constant/resources.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
@@ -15,6 +16,7 @@ class CustomTextField extends StatelessWidget {
   final GestureTapCallback? onTap;
   final ValueChanged<String>? onFieldSubmitted;
   final String? Function(String?)? validator;
+  final List<TextInputFormatter>? inputFormatters;
   const CustomTextField({
     super.key,
     required this.label,
@@ -30,6 +32,7 @@ class CustomTextField extends StatelessWidget {
     this.onTap,
     this.onFieldSubmitted,
     this.maxLines,
+    this.inputFormatters,
   });
 
   OutlineInputBorder get _border =>
@@ -46,6 +49,7 @@ class CustomTextField extends StatelessWidget {
         onTap: onTap,
         child: TextFormField(
           obscureText: obscureText ?? false,
+          inputFormatters: inputFormatters,
           enabled: enable,
           controller: controller,
           keyboardType: textInputType,

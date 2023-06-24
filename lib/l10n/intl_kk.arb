@@ -56,5 +56,11 @@
   "cancel": "បោះបង់",
   "add_drink_message": "សូមជ្រើសភេសជ្ជៈ",
   "add_drink_message_des": "សូមរើសយ៉ាងហោចណាស់មួយដើម្បីកម្មង់",
-  "done": "រួចរាល់"
+  "done": "រួចរាល់",
+  "total": "សរុប",
+  "check_out": "ពិនិត្យ​",
+  "today_Total_Order": "ការកម្មង់សរុបថ្ងៃនេះ",
+  "edit": "កែប្រែ",
+  "delete": "លុប",
+  "new_order": "កម្មង់ថ្មី"
 }

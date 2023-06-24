@@ -46,6 +46,9 @@ class InventoryController extends GetxController {
 
   //Firebase Collection
   final categoryDb = FirebaseFirestore.instance.collection('category');
+  void deleteCategory() {
+    categoryDb.doc().delete();
+  }
 
   final currentCategory = 'All'.obs;
   final currentCategoryID = ''.obs;

@@ -1,3 +1,4 @@
+import 'package:aklo_cafe/module/client/screen/client_order.dart';
 import 'package:aklo_cafe/module/home/controller/dashboard_controller.dart';
 import 'package:aklo_cafe/module/order/controller/admin_order_controller.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
@@ -87,7 +88,8 @@ class _DashBoardState extends State<DashBoard> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _showQrWebSite(context);
+          // _showQrWebSite(context);
+          Get.to(() => ClientOrderScreen());
         },
         child: const Icon(
           PhosphorIcons.qr_code_bold,
@@ -156,7 +158,7 @@ class _DashBoardState extends State<DashBoard> {
                           if (snapshot.hasData) {
                             return Text.rich(
                               TextSpan(
-                                text: 'Today Total Order : ',
+                                text: '${S.current.today_Total_Order} : ',
                                 style: AppStyle.medium
                                     .copyWith(color: AppColors.txtLightColor),
                                 children: [
@@ -214,14 +216,6 @@ class _DashBoardState extends State<DashBoard> {
                   ),
                   MenuCard(
                     onTap: () {
-                      _handleNavigate(context, 'Histories');
-                    },
-                    title: S.current.histories,
-                    icon: PhosphorIcons.chart_bar_fill,
-                    bgColor: const Color(0xfff56313),
-                  ),
-                  MenuCard(
-                    onTap: () {
                       _handleNavigate(context, 'Inventory');
                     },
                     title: S.current.inventory,
@@ -235,6 +229,14 @@ class _DashBoardState extends State<DashBoard> {
                     title: S.current.users,
                     icon: PhosphorIcons.users_three_fill,
                     bgColor: const Color(0xff257881),
+                  ),
+                  MenuCard(
+                    onTap: () {
+                      _handleNavigate(context, 'Histories');
+                    },
+                    title: 'About Us',
+                    icon: PhosphorIcons.chart_bar_fill,
+                    bgColor: const Color(0xfff56313),
                   ),
                 ],
               ),

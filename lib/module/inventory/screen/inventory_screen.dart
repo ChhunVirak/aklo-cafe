@@ -93,6 +93,20 @@ class Inventory extends StatelessWidget {
             },
             title: S.current.addCategory,
             icon: PhosphorIcons.list_plus_bold,
+            bgColor: Colors.teal,
+          ),
+          MenuCard(
+            onTap: () {},
+            title: 'Clear Drink',
+            icon: PhosphorIcons.list_plus_bold,
+            bgColor: Colors.red,
+          ),
+          MenuCard(
+            onTap: () {
+              controller.deleteCategory();
+            },
+            title: 'Clear Category',
+            icon: PhosphorIcons.list_plus_bold,
             bgColor: Colors.red,
           ),
         ],

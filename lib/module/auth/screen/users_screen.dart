@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../util/widgets/app_circular_loading.dart';
+import 'user_setting.dart';
 
 class UsersScreen extends StatelessWidget {
   const UsersScreen({super.key});
@@ -31,14 +32,16 @@ class UsersScreen extends StatelessWidget {
               child: CustomCircularLoading(),
             );
           }
-          if (snapshot.connectionState == ConnectionState.active) {
+          if (snapshot.hasData) {
             return ListView.separated(
               itemCount: data?.length ?? 0,
               separatorBuilder: (_, __) => 5.sh,
               itemBuilder: (_, index) => ListTile(
                 title: Text(data?[index]['name'].toString() ?? ''),
                 subtitle: Text(data?[index]['role'].toString() ?? ''),
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => UserSetting());
+                },
                 tileColor: AppColors.backgroundColor,
               ),
             );

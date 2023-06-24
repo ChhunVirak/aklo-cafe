@@ -62,7 +62,7 @@ class ViewInvoice extends StatelessWidget {
                       onPressed: () {
                         adminOrderController.onClickConfirm(id);
                       },
-                      name: 'Confirm',
+                      name: S.current.done,
                       backgroundColor: Colors.green,
                     ),
                   if (orderModel.status == Status.neworder)

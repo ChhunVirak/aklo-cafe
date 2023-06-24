@@ -55,7 +55,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "category_name_kh_ValidateMessage":
             MessageLookupByLibrary.simpleMessage(
                 "ឈ្មោះប្រភេទភេសជ្ជៈជាភាសាខ្មែរមិនអាចទទេបានទេ"),
+        "check_out": MessageLookupByLibrary.simpleMessage("ពិនិត្យ​"),
         "dashboard": MessageLookupByLibrary.simpleMessage("ផ្ទាំងគ្រប់គ្រង"),
+        "delete": MessageLookupByLibrary.simpleMessage("លុប"),
         "delete_success": MessageLookupByLibrary.simpleMessage("លុបបានជោគជ័យ"),
         "done": MessageLookupByLibrary.simpleMessage("រួចរាល់"),
         "drinkCategoryValidateMessage":
@@ -67,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("បរិមាណភេសជ្ជៈមិនអាចទទេបានទេ"),
         "drinkUnitPriceValidateMessage": MessageLookupByLibrary.simpleMessage(
             "តម្លៃឯកតាភេសជ្ជៈមិនអាចទទេបានទេ"),
+        "edit": MessageLookupByLibrary.simpleMessage("កែប្រែ"),
         "email": MessageLookupByLibrary.simpleMessage("អ៊ីម៉ែល"),
         "emailValidateMessage":
             MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលអ៊ីម៉ែល"),
@@ -79,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("ចូល"),
         "make_order": MessageLookupByLibrary.simpleMessage("ធ្វើការកម្មង់"),
         "newOrder": MessageLookupByLibrary.simpleMessage("ថ្មី"),
+        "new_order": MessageLookupByLibrary.simpleMessage("កម្មង់ថ្មី"),
         "noImage": MessageLookupByLibrary.simpleMessage("គ្មានរូបភាព"),
         "no_data": MessageLookupByLibrary.simpleMessage("គ្មានទិន្ន័យ"),
         "orders": MessageLookupByLibrary.simpleMessage("ការកម្ម៉ង់ទាំងអស់"),
@@ -90,6 +94,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting": MessageLookupByLibrary.simpleMessage("ការកំណត់"),
         "signout": MessageLookupByLibrary.simpleMessage("ចាកចេញ"),
         "success": MessageLookupByLibrary.simpleMessage("ជោគជ័យ"),
+        "today_Total_Order":
+            MessageLookupByLibrary.simpleMessage("ការកម្មង់សរុបថ្ងៃនេះ"),
+        "total": MessageLookupByLibrary.simpleMessage("សរុប"),
         "unAvailable": MessageLookupByLibrary.simpleMessage("មិនមាន"),
         "unitPrice": MessageLookupByLibrary.simpleMessage("តម្លៃឯកតាភេសជ្ជៈ"),
         "update": MessageLookupByLibrary.simpleMessage("កែប្រែ"),

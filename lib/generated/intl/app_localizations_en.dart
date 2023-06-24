@@ -174,4 +174,22 @@ class LangsEn extends Langs {
 
   @override
   String get done => 'Done';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get check_out => 'Check Out';
+
+  @override
+  String get today_Total_Order => 'Today Total Order';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get new_order => 'New Order';
 }

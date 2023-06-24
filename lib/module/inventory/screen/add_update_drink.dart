@@ -7,6 +7,7 @@ import 'package:aklo_cafe/util/widgets/custom_button.dart';
 import 'package:aklo_cafe/util/widgets/custom_image_picker_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../generated/l10n.dart';
@@ -172,6 +173,11 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                                 controller: controller.unitPriceTxTcontroller,
                                 label: S.current.unitPrice,
                                 require: true,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp(r'^\d+\.?\d{0,2}'),
+                                  )
+                                ],
                                 textInputType:
                                     const TextInputType.numberWithOptions(
                                         decimal: true),

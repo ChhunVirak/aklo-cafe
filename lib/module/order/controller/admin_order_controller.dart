@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class AdminOrderController extends GetxController {
   final _allordersDb = FirebaseFirestore.instance.collection('orders');
 
-  final today = DateTime.now();
+  final today = DateTime(2023);
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> orderDataOfId(String? id) =>
       _allordersDb.doc(id).snapshots();
@@ -16,15 +16,15 @@ class AdminOrderController extends GetxController {
   ///ALl Order
   Stream<QuerySnapshot<Map<String, dynamic>>> get allOrderToday => _allordersDb
       .orderBy('orderDate')
-      // .where('orderDate', isGreaterThanOrEqualTo: today.millisecondsSinceEpoch)
+      .where('orderDate', isGreaterThanOrEqualTo: today)
       .snapshots();
 
-  Stream<
-      QuerySnapshot<
-          Map<String, dynamic>>> orderOf(String status) => _allordersDb
-      .where('status', isEqualTo: status)
-      // .where('orderDate', isGreaterThanOrEqualTo: today.millisecondsSinceEpoch)
-      .snapshots();
+  Stream<QuerySnapshot<Map<String, dynamic>>> orderOf(String status) =>
+      _allordersDb
+          .where('status', isEqualTo: status)
+          .where('orderDate',
+              isGreaterThanOrEqualTo: today.millisecondsSinceEpoch)
+          .snapshots();
 
   Future<void> onClickAccept(String? id) async {
     if (id == null) return;
@@ -61,6 +61,7 @@ class Status {
   static const confirm = 'CONFIRM';
   static const cancel = 'CANCEL';
   static const done = 'DONE';
+  static const finish = 'FINISH';
 }
 
 extension Coloors on Status {

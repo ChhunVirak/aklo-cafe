@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../constant/resources.dart';
 import '../../constant/textstyle/english_textstlye.dart';
 import '../../constant/textstyle/khmer_textstlye.dart';
+import '../../generated/l10n.dart';
+import '../../util/alerts/app_modal_bottomsheet.dart';
+import '../../util/widgets/custom_listtile.dart';
 
 enum Langs {
   english,
@@ -71,5 +75,59 @@ class LangsAndFontConfigs extends GetxController {
     update();
     debugPrint('Locale Code ${lan.countryCode}');
     await _pref.setString('AppLocale', lan.countryCode);
+  }
+
+  void chooseLangauge() {
+    showCustomModalBottomSheet(
+      Material(
+        clipBehavior: Clip.antiAlias,
+        borderRadius: BorderRadius.only(
+          topLeft: Sizes.bottomSheetRadius,
+          topRight: Sizes.bottomSheetRadius,
+        ),
+        color: AppColors.txtLightColor,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 15.0,
+                left: 15.0,
+              ),
+              child: Text(
+                S.current.languagesDes,
+                style: AppStyle.large,
+              ),
+            ),
+            CustomListtile(
+              title: 'ភាសាខ្មែរ',
+              subtitle: 'នេះជាឧទាហរណ៍នៃភាសាខ្មែរ',
+              textStyle: KhmerFontStyle().styleL(),
+              trailing: !isEnglish ? const Icon(Icons.done_rounded) : null,
+              onTap: () {
+                changeLanguage(Langs.khmer);
+                if (Get.overlayContext == null) return;
+                Navigator.pop(Get.overlayContext!);
+              },
+            ),
+            SafeArea(
+              top: false,
+              minimum: const EdgeInsets.only(bottom: 20),
+              child: CustomListtile(
+                title: 'English',
+                subtitle: 'This is an example of English language',
+                trailing: isEnglish ? const Icon(Icons.done_rounded) : null,
+                onTap: () {
+                  changeLanguage(Langs.english);
+                  if (Get.overlayContext == null) return;
+                  Navigator.pop(Get.overlayContext!);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

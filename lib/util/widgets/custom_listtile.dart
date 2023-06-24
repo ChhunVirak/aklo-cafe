@@ -39,7 +39,7 @@ class CustomListtile extends StatelessWidget {
         title,
         style: textStyle ?? AppStyle.large,
       ),
-      subtitle: Text(subtitle ?? ''),
+      // subtitle: Text(subtitle ?? ''),
       onTap: () {
         onTap?.call();
         // _logOut(context);
