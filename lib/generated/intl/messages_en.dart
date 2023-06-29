@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_drink_message_des": MessageLookupByLibrary.simpleMessage(
             "a drink is required to make order"),
         "add_profile": MessageLookupByLibrary.simpleMessage("Add Member"),
+        "add_success": MessageLookupByLibrary.simpleMessage("Add Successfully"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "allCoffeeTitle": MessageLookupByLibrary.simpleMessage("All Drinks"),
         "amount": MessageLookupByLibrary.simpleMessage("Amounts"),

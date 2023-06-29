@@ -8,13 +8,22 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const DASHBOARD = _Paths.DASHBOARD;
   static get INVENTORY => path.join(_Paths.DASHBOARD, _Paths.INVENTORY);
+  static get ALL_DRINK_FULL =>
+      path.join(_Paths.DASHBOARD, _Paths.INVENTORY, _Paths.ALL_DRINKS);
   static const ALL_DRINK = _Paths.ALL_DRINKS;
   static const EDIT_DRINK = _Paths.ADD_DRINK;
   static const ADD_CATEGORY = _Paths.ADD_CATEGORY;
   static const USER = _Paths.USERS;
   static const ABOUT_US = _Paths.ABOUT_US;
   static const CATEGORY = _Paths.CATEGORY;
+  static get CATEGORY_FULL =>
+      path.join(_Paths.DASHBOARD, _Paths.INVENTORY, _Paths.CATEGORY);
   static const ORDERS = _Paths.ORDERS;
+
+  ///About us
+  static const ADD_MEMBER = _Paths.ADD_MEMBER;
+
+  static get ABOUT_US_FULL => path.join(_Paths.DASHBOARD, ABOUT_US);
 
   ///Client Order
   static const CLIENT_ORDER = _Paths.CLIENT_ORDER;
@@ -37,6 +46,7 @@ abstract class _Paths {
   static const ADD_DRINK = 'add-drink';
   static const CATEGORY = 'category';
   static const ADD_CATEGORY = 'add-category';
+  static const ADD_MEMBER = 'add-member';
 
   ///Client Order
   static const CLIENT_ORDER = '/make-order';

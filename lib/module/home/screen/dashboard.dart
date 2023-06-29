@@ -242,7 +242,7 @@ class _DashBoardState extends State<DashBoard> {
                       pushSubRoute(Routes.ABOUT_US);
                     },
                     title: S.current.about_us,
-                    icon: PhosphorIcons.chart_bar_fill,
+                    icon: PhosphorIcons.user_square_bold,
                     bgColor: const Color(0xfff56313),
                   ),
                 ],

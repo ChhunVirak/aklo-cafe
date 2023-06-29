@@ -125,6 +125,9 @@ class LangsKk extends Langs {
   String get delete_success => 'លុបបានជោគជ័យ';
 
   @override
+  String get add_success => 'ការបន្ថែមបានជោគជ័យ';
+
+  @override
   String get make_order => 'ធ្វើការកម្មង់';
 
   @override

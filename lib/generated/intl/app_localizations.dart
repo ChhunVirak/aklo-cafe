@@ -333,6 +333,12 @@ abstract class Langs {
   /// **'Delete Successfully'**
   String get delete_success;
 
+  /// No description provided for @add_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Successfully'**
+  String get add_success;
+
   /// No description provided for @make_order.
   ///
   /// In en, this message translates to:

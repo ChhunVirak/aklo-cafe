@@ -345,7 +345,7 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                                       return GestureDetector(
                                                                         onTap:
                                                                             () {
-                                                                          if (!GetPlatform.isWeb &&
+                                                                          if (GetPlatform.isWeb &&
                                                                               available == true) {
                                                                             int unit =
                                                                                 0;
@@ -436,12 +436,12 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                                               available,
                                                                           amount:
                                                                               controller.getAmount(id),
-                                                                          onPressedAdd: !GetPlatform.isWeb
+                                                                          onPressedAdd: GetPlatform.isWeb
                                                                               ? () {
                                                                                   controller.addItem(listData[index]);
                                                                                 }
                                                                               : null,
-                                                                          onPressedRemove: !GetPlatform.isWeb
+                                                                          onPressedRemove: GetPlatform.isWeb
                                                                               ? () {
                                                                                   controller.removeItem(listData[index]);
                                                                                 }

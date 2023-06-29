@@ -1,9 +1,11 @@
 import 'package:aklo_cafe/module/about_us/screen/about_us_screen.dart';
+import 'package:aklo_cafe/module/about_us/screen/add_profile.dart';
 import 'package:aklo_cafe/module/about_us/screen/profile_detail.dart';
 import 'package:aklo_cafe/module/client/screen/client_order.dart';
 import 'package:aklo_cafe/module/client/screen/order_status.dart';
 import 'package:aklo_cafe/module/inventory/screen/category.dart';
 import 'package:aklo_cafe/module/order/screen/view_invoice.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:path/path.dart' as path;
@@ -99,8 +101,21 @@ final adminRouter = GoRouter(
           builder: (_, state) => const AboutUsScreen(),
           routes: [
             GoRoute(
-              path: ':id',
-              builder: (_, state) => const ProfileDetail(),
+                path: 'profile/:id',
+                builder: (_, state) => ProfileDetail(
+                      id: state.pathParameters['id'],
+                    ),
+                routes: [
+                  GoRoute(
+                    path: _Paths.ADD_MEMBER,
+                    builder: (_, state) => AddProfile(
+                      id: state.queryParameters['id'],
+                    ),
+                  ),
+                ]),
+            GoRoute(
+              path: _Paths.ADD_MEMBER,
+              builder: (_, state) => const AddProfile(),
             ),
           ],
         ),
@@ -140,5 +155,6 @@ Future<void> pushSubRoute(
   if (destination.isEmpty) return;
   String route =
       Uri(path: destination, queryParameters: queryParams).toString();
+  debugPrint('Location ${path.join(adminRouter.location, route)}}');
   await adminRouter.push(path.join(adminRouter.location, route));
 }

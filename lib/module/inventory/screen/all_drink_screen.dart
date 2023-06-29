@@ -214,11 +214,9 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                                             onPressed:
                                                                 () async {
                                                               await controller
-                                                                  .drinkDb
-                                                                  .doc(listData[
-                                                                          index]
-                                                                      .id)
-                                                                  .delete();
+                                                                  .deleteDrink(
+                                                                      id,
+                                                                      image);
                                                               Get.back();
                                                               Get.back();
                                                               showErrorSnackBar(

@@ -30,6 +30,13 @@ class _AddCategoryState extends State<AddCategory> {
   }
 
   @override
+  void dispose() {
+    controller.tempCategoryImage = null;
+    controller.categoryFile = null;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Obx(
       () => controller.initialCategoryFormLoading.value
@@ -58,6 +65,8 @@ class _AddCategoryState extends State<AddCategory> {
                                     },
                                     builder: (_) {
                                       return ImagePickerBox(
+                                        defaultNetWorkImage:
+                                            controller.tempCategoryImage,
                                         onSelectImage: (value) async {
                                           if (value != null) {
                                             controller.categoryFile =

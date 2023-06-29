@@ -40,6 +40,7 @@
   "all": "All",
   "success": "Success",
   "delete_success": "Delete Successfully",
+  "add_success": "Add Successfully",
   "make_order": "Make Order",
   "no_data": "No Data",
   "image": "Image",

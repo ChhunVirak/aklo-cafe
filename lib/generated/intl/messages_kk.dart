@@ -34,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_drink_message_des": MessageLookupByLibrary.simpleMessage(
             "សូមរើសយ៉ាងហោចណាស់មួយដើម្បីកម្មង់"),
         "add_profile": MessageLookupByLibrary.simpleMessage("បន្ថែមសមាជិក"),
+        "add_success":
+            MessageLookupByLibrary.simpleMessage("ការបន្ថែមបានជោគជ័យ"),
         "all": MessageLookupByLibrary.simpleMessage("ទាំងអស់"),
         "allCoffeeTitle":
             MessageLookupByLibrary.simpleMessage("ភេសជ្ជៈទាំងអស់"),

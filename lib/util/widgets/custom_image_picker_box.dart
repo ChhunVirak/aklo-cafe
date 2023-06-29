@@ -110,6 +110,7 @@ class _ImagePickerBoxState extends State<ImagePickerBox> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("Default : ${widget.defaultNetWorkImage}");
     return GestureDetector(
       onTap: () {
         _showAndroidPopUp();

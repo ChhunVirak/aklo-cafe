@@ -111,13 +111,22 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
   }
 
   @override
+  void dispose() {
+    controller.clearDisplayImage();
+    super.dispose();
+  }
+
+  String? imagePath;
+
+  @override
   Widget build(BuildContext context) {
     return Obx(
       () => controller.initialLoading.value
           ? LoadingScaffold()
           : Scaffold(
               appBar: AppBar(
-                title: Text(S.current.addDrink),
+                title: Text(
+                    widget.id == null ? S.current.addDrink : S.current.edit),
               ),
               resizeToAvoidBottomInset: true,
               body: SafeArea(
@@ -133,6 +142,9 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                             children: [
                               ImagePickerBox(
                                 defaultNetWorkImage: controller.displayImage,
+                                onSelectImage: (value) {
+                                  imagePath = value;
+                                },
                               ),
                               CustomTextField(
                                 controller: controller.drinkNameTxTcontroller,
@@ -242,9 +254,9 @@ class _AddDrinkScreenState extends State<AddDrinkScreen> {
                         final noError = _form.currentState?.validate();
                         if (noError == true) {
                           if (widget.id == null) {
-                            await controller.addDrink();
+                            await controller.addDrink(imagePath);
                           } else {
-                            await controller.updateDrink(widget.id);
+                            await controller.updateDrink(widget.id, imagePath);
                           }
                         }
                       },

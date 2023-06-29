@@ -125,6 +125,9 @@ class LangsEn extends Langs {
   String get delete_success => 'Delete Successfully';
 
   @override
+  String get add_success => 'Add Successfully';
+
+  @override
   String get make_order => 'Make Order';
 
   @override

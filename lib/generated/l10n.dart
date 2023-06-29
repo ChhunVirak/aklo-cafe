@@ -450,6 +450,16 @@ class S {
     );
   }
 
+  /// `Add Successfully`
+  String get add_success {
+    return Intl.message(
+      'Add Successfully',
+      name: 'add_success',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Make Order`
   String get make_order {
     return Intl.message(

@@ -28,12 +28,12 @@ class SettingScreen extends StatelessWidget {
           },
         ),
         // const Spacer(),
-        // CustomListtile(
-        //   title: 'About us',
-        //   subtitle: '${S.current.signout} of virak',
-        //   leading: TileIcon.iconData(PhosphorIcons.info),
-        //   onTap: () {},
-        // ),
+        CustomListtile(
+          title: 'Slider',
+          // subtitle: 'Edit Slider',
+          leading: TileIcon.iconData(PhosphorIcons.sliders),
+          onTap: () {},
+        ),
         CustomListtile(
           title: S.current.signout,
           // subtitle: '${S.current.signout} of virak',

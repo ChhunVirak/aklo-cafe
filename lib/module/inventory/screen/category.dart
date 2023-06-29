@@ -96,6 +96,9 @@ class CategoryScreen extends StatelessWidget {
                                         await controller.categoryDb
                                             .doc(listData[index].id)
                                             .delete();
+
+                                        await controller
+                                            .deleteCategory(listData[index]);
                                         Get.back();
                                         Get.back();
                                         showErrorSnackBar(

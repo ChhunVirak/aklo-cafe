@@ -46,3 +46,9 @@ void showLoadingDialog() {
     ),
   );
 }
+
+void removeDialog() {
+  if (Get.overlayContext != null) {
+    Navigator.of(Get.overlayContext!).pop();
+  }
+}
