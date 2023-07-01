@@ -6,7 +6,6 @@ import 'package:aklo_cafe/util/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 
 import '../../order/controller/admin_order_controller.dart';
 import '../controller/client_order_controller.dart';
@@ -58,8 +57,8 @@ class OrderStatus extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              LottieBuilder.asset(
-                                'assets/client/making_coffee.json',
+                              Image.network(
+                                'https://i.pinimg.com/originals/38/02/60/380260044b77f19a930844aafc917a49.gif',
                                 width: context.width * 0.8,
                               ),
                               10.sh,

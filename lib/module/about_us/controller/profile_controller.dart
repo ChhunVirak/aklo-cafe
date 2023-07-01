@@ -31,6 +31,35 @@ class ProfileController extends GetxController {
       .map((document) => document.data())
       .map((data) => data != null ? ProfileModel.fromMap(data) : null);
 
+  final loading = false.obs;
+  void initialProfileFormForEdit(String? id) async {
+    if (id.isNuull) return;
+    loading(true);
+    final profile = await _db
+        .doc(id)
+        .get()
+        .then((doc) => doc.data())
+        .then((map) => map != null ? ProfileModel.fromMap(map) : null);
+    if (profile != null) {
+      defaultImageNetwork = profile.image;
+      name.text = profile.name;
+      email.text = profile.email;
+      department.text = profile.department;
+      bio.text = profile.bio ?? "";
+    }
+
+    loading(false);
+  }
+
+  void clearForm() {
+    loading(false);
+    selectedProfile = null;
+    name.clear();
+    email.clear();
+    department.clear();
+    bio.clear();
+  }
+
   final name = TextEditingController();
   final email = TextEditingController();
   final department = TextEditingController();
@@ -76,18 +105,37 @@ class ProfileController extends GetxController {
   }
 
   Future<void> updateMember(String id) async {
+    showLoadingDialog();
+
+    final getDownloadURL = selectedProfile != null
+        ? await Get.put(InventoryController()).uploadFile(
+            id: id,
+            type: FireBaseStoragePath.member,
+            file: File(selectedProfile!))
+        : null;
     final data = ProfileModel(
-            name: name.text,
-            email: email.text,
-            department: department.text,
-            bio: bio.text)
-        .toMap();
+      image: getDownloadURL,
+      name: name.text,
+      email: email.text,
+      department: department.text,
+      bio: bio.text,
+    ).toMap();
     data.removeWhere((key, value) => value == null);
     try {
       await _db.doc(id).update(data);
+      removeDialog();
+      adminRouter.go(Routes.ABOUT_US_FULL);
+      showSuccessSnackBar(
+          title: S.current.success, description: S.current.success);
     } catch (e) {
+      removeDialog();
       if (e is FirebaseException)
         showErrorSnackBar(title: S.current.fail, description: e.message ?? '');
     }
+  }
+
+  Future<void> deleteProfile(String id, String? imageUrl) async {
+    await _db.doc(id).delete();
+    await Get.put(InventoryController()).deleteFile(url: imageUrl);
   }
 }

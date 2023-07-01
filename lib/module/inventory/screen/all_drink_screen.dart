@@ -158,122 +158,119 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                             );
                           }
                           return GetBuilder(
-                              init: orderController,
-                              builder: (_) {
-                                return GridView.builder(
-                                  padding: const EdgeInsets.all(Sizes.padding),
-                                  physics: const BouncingScrollPhysics(),
-                                  gridDelegate: _deligate(context),
-                                  itemCount: listData.length,
-                                  itemBuilder: (_, index) {
-                                    final name = listData[index].name;
-                                    final image = listData[index].image;
-                                    final unitPrice = listData[index].unitPrice;
+                            init: orderController,
+                            builder: (_) {
+                              return GridView.builder(
+                                padding: const EdgeInsets.all(Sizes.padding),
+                                physics: const BouncingScrollPhysics(),
+                                gridDelegate: _deligate(context),
+                                itemCount: listData.length,
+                                itemBuilder: (_, index) {
+                                  final name = listData[index].name;
+                                  final image = listData[index].image;
+                                  final unitPrice = listData[index].unitPrice;
 
-                                    final id = listData[index].id;
-                                    final available = listData[index].available;
-                                    debugPrint(available.toString());
+                                  final id = listData[index].id;
+                                  final available = listData[index].available;
+                                  debugPrint(available.toString());
 
-                                    return GestureDetector(
-                                      onTap: () {
-                                        if (GetPlatform.isWeb) {
-                                        } else {
-                                          showCustomModalBottomSheet(
-                                            Container(
-                                              padding: const EdgeInsets.all(
-                                                  Sizes.defaultPadding),
-                                              // color: Colors.white,
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  CustomButton(
-                                                    onPressed: () {
-                                                      controller
-                                                          .initialDrinkForEdit(
-                                                              id);
+                                  return GestureDetector(
+                                    onTap: () {
+                                      if (GetPlatform.isWeb) {
+                                      } else {
+                                        showCustomModalBottomSheet(
+                                          Container(
+                                            padding: const EdgeInsets.all(
+                                                Sizes.defaultPadding),
+                                            // color: Colors.white,
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                CustomButton(
+                                                  onPressed: () {
+                                                    controller
+                                                        .initialDrinkForEdit(
+                                                            id);
 
-                                                      //remove pop up
-                                                      Get.back();
+                                                    //remove pop up
+                                                    Get.back();
 
-                                                      pushSubRoute(
-                                                        Routes.EDIT_DRINK,
-                                                        queryParams: {"id": id},
-                                                      );
-                                                    },
-                                                    name: S.current.edit,
-                                                  ),
-                                                  Sizes.defaultPadding.sh,
-                                                  CustomButton(
-                                                    onPressed: () {
-                                                      showCustomDialog(
-                                                        title: 'Confirm!',
-                                                        description:
-                                                            'Are you sure want to delete $name',
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed:
-                                                                () async {
-                                                              await controller
-                                                                  .deleteDrink(
-                                                                      id,
-                                                                      image);
-                                                              Get.back();
-                                                              Get.back();
-                                                              showErrorSnackBar(
-                                                                  title: S
-                                                                      .current
-                                                                      .success,
-                                                                  description: S
-                                                                      .current
-                                                                      .delete_success);
-                                                            },
-                                                            child: Text(
-                                                                S.current.yes),
-                                                          ),
-                                                          TextButton(
-                                                            onPressed: () {
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            child: Text(S
-                                                                .current
-                                                                .cancel),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                    backgroundColor: Colors.red,
-                                                    name: S.current.delete,
-                                                  ),
-                                                ],
-                                              ),
+                                                    pushSubRoute(
+                                                      Routes.EDIT_DRINK,
+                                                      queryParams: {"id": id},
+                                                    );
+                                                  },
+                                                  name: S.current.edit,
+                                                ),
+                                                Sizes.defaultPadding.sh,
+                                                CustomButton(
+                                                  onPressed: () {
+                                                    showCustomDialog(
+                                                      title: 'Confirm!',
+                                                      description:
+                                                          'Are you sure want to delete $name',
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () async {
+                                                            await controller
+                                                                .deleteDrink(
+                                                                    id, image);
+                                                            Get.back();
+                                                            Get.back();
+                                                            showErrorSnackBar(
+                                                                title: S.current
+                                                                    .success,
+                                                                description: S
+                                                                    .current
+                                                                    .delete_success);
+                                                          },
+                                                          child: Text(
+                                                              S.current.yes),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text(
+                                                              S.current.cancel),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                  backgroundColor: Colors.red,
+                                                  name: S.current.delete,
+                                                ),
+                                              ],
                                             ),
-                                          );
-                                        }
-                                      },
-                                      child: DrinkCard(
-                                        name: name,
-                                        image: image,
-                                        unitPrice: unitPrice,
-                                        available: available,
-                                        amount: orderController.getAmount(id),
-                                        onPressedAdd: GetPlatform.isWeb
-                                            ? () {
-                                                orderController
-                                                    .addItem(listData[index]);
-                                              }
-                                            : null,
-                                        onPressedRemove: GetPlatform.isWeb
-                                            ? () {
-                                                orderController.removeItem(
-                                                    listData[index]);
-                                              }
-                                            : null,
-                                      ),
-                                    );
-                                  },
-                                );
-                              });
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    child: DrinkCard(
+                                      name: name,
+                                      image: image,
+                                      unitPrice: unitPrice,
+                                      available: available,
+                                      amount: orderController.getAmount(id),
+                                      onPressedAdd: GetPlatform.isWeb
+                                          ? () {
+                                              orderController
+                                                  .addItem(listData[index]);
+                                            }
+                                          : null,
+                                      onPressedRemove: GetPlatform.isWeb
+                                          ? () {
+                                              orderController
+                                                  .removeItem(listData[index]);
+                                            }
+                                          : null,
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          );
                         }
 
                         return const Center(

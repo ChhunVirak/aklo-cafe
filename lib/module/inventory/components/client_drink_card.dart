@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -59,7 +62,11 @@ class ClientDrinkCard extends StatelessWidget {
                     borderRadius: Sizes.boxBorderRadius,
                     image: image != null
                         ? DecorationImage(
-                            image: NetworkImage(image!),
+                            image: CachedNetworkImageProvider(
+                              image!,
+                              // imageRenderMethodForWeb:
+                              // ImageRenderMethodForWeb.HttpGet,
+                            ),
                             fit: BoxFit.cover,
                           )
                         : null,
@@ -97,24 +104,28 @@ class ClientDrinkCard extends StatelessWidget {
               children: [
                 if (unitPrice != null)
                   Expanded(
-                    child: Text.rich(
-                      TextSpan(
-                        children: [
-                          WidgetSpan(
-                            alignment: PlaceholderAlignment.top,
-                            child: Text(
-                              '\$',
-                              style: AppStyle.large.copyWith(
-                                fontSize: 10,
-                              ),
-                            ),
+                    child: Row(
+                      children: [
+                        Text(
+                          '\$',
+                          style: AppStyle.large.copyWith(
+                            fontSize: 10,
+                            height: 0,
+                            fontFeatures: const [
+                              FontFeature.proportionalFigures()
+                            ],
                           ),
-                          TextSpan(
-                            text: NumberFormat('#.00', 'en').format(unitPrice),
-                            style: AppStyle.medium.copyWith(fontSize: 16),
+                        ),
+                        Text(
+                          NumberFormat('#.00', 'en').format(unitPrice),
+                          style: AppStyle.medium.copyWith(
+                            fontSize: 16,
+                            fontFeatures: const [
+                              FontFeature.proportionalFigures()
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 if (available == true)

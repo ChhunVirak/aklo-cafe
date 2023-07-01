@@ -101,21 +101,16 @@ final adminRouter = GoRouter(
           builder: (_, state) => const AboutUsScreen(),
           routes: [
             GoRoute(
-                path: 'profile/:id',
-                builder: (_, state) => ProfileDetail(
-                      id: state.pathParameters['id'],
-                    ),
-                routes: [
-                  GoRoute(
-                    path: _Paths.ADD_MEMBER,
-                    builder: (_, state) => AddProfile(
-                      id: state.queryParameters['id'],
-                    ),
-                  ),
-                ]),
+              path: 'profile/:id',
+              builder: (_, state) => ProfileDetail(
+                id: state.pathParameters['id'],
+              ),
+            ),
             GoRoute(
               path: _Paths.ADD_MEMBER,
-              builder: (_, state) => const AddProfile(),
+              builder: (_, state) => AddProfile(
+                id: state.queryParameters['id'],
+              ),
             ),
           ],
         ),

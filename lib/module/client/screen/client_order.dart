@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:aklo_cafe/constant/resources.dart';
 import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:aklo_cafe/module/client/controller/client_order_controller.dart';
@@ -507,6 +509,10 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                               '${S.current.total}: ',
                                               style: AppStyle.small.copyWith(
                                                 color: AppColors.txtLightColor,
+                                                fontFeatures: const [
+                                                  FontFeature
+                                                      .proportionalFigures()
+                                                ],
                                               ),
                                             ),
                                             Expanded(
@@ -554,6 +560,10 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                           .copyWith(
                                                         color: AppColors
                                                             .txtLightColor,
+                                                        fontFeatures: const [
+                                                          FontFeature
+                                                              .proportionalFigures()
+                                                        ],
                                                       ),
                                                     ),
                                                   ),
