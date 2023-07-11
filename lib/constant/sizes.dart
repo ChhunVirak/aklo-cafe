@@ -1,7 +1,10 @@
 import 'dart:ui';
 
 import 'package:aklo_cafe/util/extensions/fontweight_extension.dart';
+import 'package:aklo_cafe/util/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
+
+import 'colors.dart';
 
 class Sizes {
   Sizes._();
@@ -11,6 +14,24 @@ class Sizes {
   static const double defaultPadding = 20.0;
   static const double textPadding = 10.0;
   static const double tablePadding = 5.0;
+
+  ///Gap
+  static final textSpaceH = textPadding.sh;
+  static final textSpaceW = textPadding.sw;
+
+  ///Decoration
+  static BoxDecoration containerDecoration = BoxDecoration(
+    color: AppColors.backgroundColor,
+    borderRadius: Sizes.boxBorderRadius,
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.deepBackgroundColor,
+        spreadRadius: 0.1,
+        blurRadius: 6,
+        offset: Offset(1, 1),
+      ),
+    ],
+  );
 
   ///Radius
   static BorderRadius boxBorderRadius = BorderRadius.circular(10);

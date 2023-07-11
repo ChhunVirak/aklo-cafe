@@ -1,8 +1,9 @@
-import 'package:aklo_cafe/constant/colors.dart';
+import 'package:aklo_cafe/constant/resources.dart';
 import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:aklo_cafe/module/auth/controller/auth_controller.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 
 import '../../../util/widgets/app_circular_loading.dart';
@@ -34,15 +35,19 @@ class UsersScreen extends StatelessWidget {
           }
           if (snapshot.hasData) {
             return ListView.separated(
+              padding: EdgeInsets.symmetric(horizontal: Sizes.defaultPadding),
               itemCount: data?.length ?? 0,
-              separatorBuilder: (_, __) => 5.sh,
+              separatorBuilder: (_, __) => 10.sh,
               itemBuilder: (_, index) => ListTile(
+                leading: Icon(PhosphorIcons.user_bold),
                 title: Text(data?[index]['name'].toString() ?? ''),
                 subtitle: Text(data?[index]['role'].toString() ?? ''),
                 onTap: () {
                   Get.to(() => UserSetting());
                 },
                 tileColor: AppColors.backgroundColor,
+                shape:
+                    RoundedRectangleBorder(borderRadius: Sizes.boxBorderRadius),
               ),
             );
           }

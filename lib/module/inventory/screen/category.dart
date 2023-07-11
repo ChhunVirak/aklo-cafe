@@ -87,7 +87,7 @@ class CategoryScreen extends StatelessWidget {
                             CustomButton(
                               onPressed: () {
                                 showCustomDialog(
-                                  title: 'Confirm!',
+                                  title: S.current.confirm,
                                   description:
                                       'Are you sure want to delete $name',
                                   actions: [

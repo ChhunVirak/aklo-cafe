@@ -60,8 +60,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "ឈ្មោះប្រភេទភេសជ្ជៈជាភាសាខ្មែរមិនអាចទទេបានទេ"),
         "check_out": MessageLookupByLibrary.simpleMessage("ពិនិត្យ​"),
+        "confirm": MessageLookupByLibrary.simpleMessage("សូមបញ្ជាក់"),
         "dashboard": MessageLookupByLibrary.simpleMessage("ផ្ទាំងគ្រប់គ្រង"),
         "delete": MessageLookupByLibrary.simpleMessage("លុប"),
+        "delete_img_message":
+            MessageLookupByLibrary.simpleMessage("តើអ្នកចង់លុបរូបភាពនេះមែនទេ?"),
         "delete_success": MessageLookupByLibrary.simpleMessage("លុបបានជោគជ័យ"),
         "done": MessageLookupByLibrary.simpleMessage("រួចរាល់"),
         "drinkCategoryValidateMessage":
@@ -82,6 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "drink_done": MessageLookupByLibrary.simpleMessage(
             "ភេសជ្ជៈទាំងអស់បានធ្វើរួចរាល់ លោកអ្នកអាចមកយកបាន"),
         "edit": MessageLookupByLibrary.simpleMessage("កែប្រែ"),
+        "edit_slide": MessageLookupByLibrary.simpleMessage("កែប្រែស្លាយ"),
         "email": MessageLookupByLibrary.simpleMessage("អ៊ីម៉ែល"),
         "emailValidateMessage":
             MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលអ៊ីម៉ែល"),
@@ -92,7 +96,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "inventory": MessageLookupByLibrary.simpleMessage("ស្តុក"),
         "languages": MessageLookupByLibrary.simpleMessage("ភាសា"),
         "languagesDes": MessageLookupByLibrary.simpleMessage("រើសភាសា"),
+        "link": MessageLookupByLibrary.simpleMessage("តំណភ្ជាប់"),
         "login": MessageLookupByLibrary.simpleMessage("ចូល"),
+        "logout_message": MessageLookupByLibrary.simpleMessage(
+            "តើអ្នកចង់ចាកចេញពីគណនេយ្យនេះមែនទេ?"),
         "make_order": MessageLookupByLibrary.simpleMessage("ធ្វើការកម្មង់"),
         "newOrder": MessageLookupByLibrary.simpleMessage("កម្មង់ថ្មី"),
         "new_order": MessageLookupByLibrary.simpleMessage("កម្មង់ថ្មី"),

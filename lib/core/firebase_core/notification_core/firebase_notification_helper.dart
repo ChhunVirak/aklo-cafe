@@ -1,5 +1,4 @@
 import 'package:aklo_cafe/config/router/app_pages.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -94,10 +93,6 @@ class NotificationHelper {
       sound: true,
     );
   }
-
-  final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
-  Future<AndroidDeviceInfo> get android async =>
-      await _deviceInfoPlugin.androidInfo;
 
   ///Show local notification
   Future<void> showNotification(String? title, String? body,

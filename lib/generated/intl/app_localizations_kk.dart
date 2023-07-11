@@ -216,4 +216,19 @@ class LangsKk extends Langs {
 
   @override
   String get fail => 'បរាជ័យ';
+
+  @override
+  String get edit_slide => 'កែប្រែស្លាយ';
+
+  @override
+  String get link => 'តំណភ្ជាប់';
+
+  @override
+  String get confirm => 'សូមបញ្ជាក់';
+
+  @override
+  String get delete_img_message => 'តើអ្នកចង់លុបរូបភាពនេះមែនទេ?';
+
+  @override
+  String get logout_message => 'តើអ្នកចង់ចាកចេញពីគណនេយ្យនេះមែនទេ?';
 }

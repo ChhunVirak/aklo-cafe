@@ -518,6 +518,36 @@ abstract class Langs {
   /// In en, this message translates to:
   /// **'Fail'**
   String get fail;
+
+  /// No description provided for @edit_slide.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Slides'**
+  String get edit_slide;
+
+  /// No description provided for @link.
+  ///
+  /// In en, this message translates to:
+  /// **'Link'**
+  String get link;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @delete_img_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure want to delete this image?'**
+  String get delete_img_message;
+
+  /// No description provided for @logout_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure want to sign out?'**
+  String get logout_message;
 }
 
 class _LangsDelegate extends LocalizationsDelegate<Langs> {

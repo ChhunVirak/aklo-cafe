@@ -58,8 +58,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Field Category Khmer Name can\'t be empty."),
         "check_out": MessageLookupByLibrary.simpleMessage("Check Out"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "dashboard": MessageLookupByLibrary.simpleMessage("Dashboard"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "delete_img_message": MessageLookupByLibrary.simpleMessage(
+            "Are you sure want to delete this image?"),
         "delete_success":
             MessageLookupByLibrary.simpleMessage("Delete Successfully"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
@@ -80,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "drink_done": MessageLookupByLibrary.simpleMessage(
             "Drink Done, please go to get your Drinks!"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "edit_slide": MessageLookupByLibrary.simpleMessage("Edit Slides"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailValidateMessage":
             MessageLookupByLibrary.simpleMessage("Email is required."),
@@ -91,7 +95,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "languages": MessageLookupByLibrary.simpleMessage("Languages"),
         "languagesDes":
             MessageLookupByLibrary.simpleMessage("Choose Preference Languages"),
+        "link": MessageLookupByLibrary.simpleMessage("Link"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "logout_message": MessageLookupByLibrary.simpleMessage(
+            "Are you sure want to sign out?"),
         "make_order": MessageLookupByLibrary.simpleMessage("Make Order"),
         "newOrder": MessageLookupByLibrary.simpleMessage("New"),
         "new_order": MessageLookupByLibrary.simpleMessage("New Order"),

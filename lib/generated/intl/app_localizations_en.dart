@@ -216,4 +216,19 @@ class LangsEn extends Langs {
 
   @override
   String get fail => 'Fail';
+
+  @override
+  String get edit_slide => 'Edit Slides';
+
+  @override
+  String get link => 'Link';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get delete_img_message => 'Are you sure want to delete this image?';
+
+  @override
+  String get logout_message => 'Are you sure want to sign out?';
 }

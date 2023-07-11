@@ -95,18 +95,18 @@ class Inventory extends StatelessWidget {
             icon: PhosphorIcons.list_plus_bold,
             bgColor: Colors.teal,
           ),
-          MenuCard(
-            onTap: () {},
-            title: 'Clear Drink',
-            icon: PhosphorIcons.list_plus_bold,
-            bgColor: Colors.red,
-          ),
-          MenuCard(
-            onTap: () {},
-            title: 'Clear Category',
-            icon: PhosphorIcons.list_plus_bold,
-            bgColor: Colors.red,
-          ),
+          // MenuCard(
+          //   onTap: () {},
+          //   title: 'Clear Drink',
+          //   icon: PhosphorIcons.list_plus_bold,
+          //   bgColor: Colors.red,
+          // ),
+          // MenuCard(
+          //   onTap: () {},
+          //   title: 'Clear Category',
+          //   icon: PhosphorIcons.list_plus_bold,
+          //   bgColor: Colors.red,
+          // ),
         ],
       ),
     );

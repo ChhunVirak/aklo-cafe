@@ -70,5 +70,10 @@
   "drink_done": "Drink Done, please go to get your Drinks!",
   "about_us": "About us",
   "add_profile": "Add Member",
-  "fail": "Fail"
+  "fail": "Fail",
+  "edit_slide": "Edit Slides",
+  "link": "Link",
+  "confirm": "Confirm",
+  "delete_img_message": "Are you sure want to delete this image?",
+  "logout_message": "Are you sure want to sign out?"
 }
