@@ -110,6 +110,16 @@ class S {
     );
   }
 
+  /// `Username is required.`
+  String get userNameValidateMessage {
+    return Intl.message(
+      'Username is required.',
+      name: 'userNameValidateMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Login`
   String get login {
     return Intl.message(
@@ -805,6 +815,26 @@ class S {
     return Intl.message(
       'Are you sure want to sign out?',
       name: 'logout_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invoice saved to Gallery.`
+  String get save_img_msg {
+    return Intl.message(
+      'Invoice saved to Gallery.',
+      name: 'save_img_msg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data`
+  String get data {
+    return Intl.message(
+      'Data',
+      name: 'data',
       desc: '',
       args: [],
     );

@@ -26,7 +26,7 @@ class OrderHeader extends StatelessWidget {
           ),
         ],
       ),
-      margin: const EdgeInsets.all(20.0),
+      // margin: const EdgeInsets.all(20.0),
       padding: const EdgeInsets.all(20.0),
       child: Row(
         children: [

@@ -6,6 +6,7 @@
   "emailValidateMessage": "សូមបញ្ចូលអ៊ីម៉ែល",
   "password": "លេខសំងាត់",
   "passwordValidateMessage": "សូមបញ្ចូលលេខសំងាត់",
+  "userNameValidateMessage": "សូមបញ្ចូលឈ្មោះអ្នកចូលប្រើ",
   "login": "ចូល",
   "orders": "ការកម្ម៉ង់ទាំងអស់",
   "histories": "ប្រវត្តិ",
@@ -75,5 +76,7 @@
   "link": "តំណភ្ជាប់",
   "confirm": "សូមបញ្ជាក់",
   "delete_img_message": "តើអ្នកចង់លុបរូបភាពនេះមែនទេ?",
-  "logout_message": "តើអ្នកចង់ចាកចេញពីគណនេយ្យនេះមែនទេ?"
+  "logout_message": "តើអ្នកចង់ចាកចេញពីគណនេយ្យនេះមែនទេ?",
+  "save_img_msg": "វិក័យប័ត្របានរក្សាទុកក្នុងរុបភាព",
+  "data": "ទិន្នន័យ"
 }

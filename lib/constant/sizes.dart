@@ -23,7 +23,7 @@ class Sizes {
   static BoxDecoration containerDecoration = BoxDecoration(
     color: AppColors.backgroundColor,
     borderRadius: Sizes.boxBorderRadius,
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
         color: AppColors.deepBackgroundColor,
         spreadRadius: 0.1,

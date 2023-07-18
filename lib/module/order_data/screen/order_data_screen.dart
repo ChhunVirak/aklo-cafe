@@ -14,11 +14,38 @@ class OrderDataScreen extends StatefulWidget {
 class _OrderDataScreenState extends State<OrderDataScreen> {
   final adminOrderController = Get.put(AdminOrderController());
 
+  DateTime _date = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data'),
+        title: Text(S.current.data),
+        // actions: [
+        //   TextButton(
+        //     onPressed: () async {
+        //       final selectedDate = await showDatePicker(
+        //         context: context,
+        //         initialDate: _date,
+        //         firstDate: DateTime(DateTime.now().year - 5),
+        //         lastDate: DateTime(DateTime.now().year + 5),
+        //       );
+        //       if (selectedDate != null) {
+        //         _date = selectedDate;
+        //         setState(() {});
+        //       }
+        //     },
+        //     // icon: Icon(PhosphorIcons.calendar),
+        //     child: Row(
+        //       children: [
+        //         Text(_date.displayDate),
+        //         4.sw,
+        //         Icon(PhosphorIcons.caret_down)
+        //       ],
+        //     ),
+        //   ),
+        //   10.sw,
+        // ],
       ),
       body: Column(
         children: [
@@ -45,16 +72,72 @@ class _OrderDataScreenState extends State<OrderDataScreen> {
                     )
                   ],
                 ),
-                Sizes.textSpaceH,
                 Row(
                   children: [
-                    Text(S.current.today_Total_Order),
+                    Text(S.current.newOrder + ' :'),
+                    Sizes.textSpaceW,
+                    StreamBuilder(
+                      stream: adminOrderController.orderOf(Status.neworder),
+                      builder: (_, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                              snapshot.data?.docs.length.toString() ?? '',
+                              style: AppStyle.large);
+                        }
+                        return SizedBox.shrink();
+                      },
+                    )
                   ],
                 ),
-                Sizes.textSpaceH,
                 Row(
                   children: [
-                    Text(S.current.today_Total_Order),
+                    Text(S.current.accept + ' :'),
+                    Sizes.textSpaceW,
+                    StreamBuilder(
+                      stream: adminOrderController.orderOf(Status.confirm),
+                      builder: (_, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                              snapshot.data?.docs.length.toString() ?? '',
+                              style: AppStyle.large);
+                        }
+                        return SizedBox.shrink();
+                      },
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(S.current.cancelled + ' :'),
+                    Sizes.textSpaceW,
+                    StreamBuilder(
+                      stream: adminOrderController.orderOf(Status.cancel),
+                      builder: (_, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                              snapshot.data?.docs.length.toString() ?? '',
+                              style: AppStyle.large);
+                        }
+                        return SizedBox.shrink();
+                      },
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(S.current.done + ' :'),
+                    Sizes.textSpaceW,
+                    StreamBuilder(
+                      stream: adminOrderController.orderOf(Status.done),
+                      builder: (_, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                              snapshot.data?.docs.length.toString() ?? '',
+                              style: AppStyle.large);
+                        }
+                        return SizedBox.shrink();
+                      },
+                    )
                   ],
                 ),
               ],

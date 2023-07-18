@@ -6,6 +6,7 @@
   "emailValidateMessage": "Email is required.",
   "password": "Password",
   "passwordValidateMessage": "Password is required.",
+  "userNameValidateMessage": "Username is required.",
   "login": "Login",
   "orders": "Orders",
   "histories": "Histories",
@@ -75,5 +76,7 @@
   "link": "Link",
   "confirm": "Confirm",
   "delete_img_message": "Are you sure want to delete this image?",
-  "logout_message": "Are you sure want to sign out?"
+  "logout_message": "Are you sure want to sign out?",
+  "save_img_msg": "Invoice saved to Gallery.",
+  "data": "Data"
 }

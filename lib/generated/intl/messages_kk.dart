@@ -62,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "check_out": MessageLookupByLibrary.simpleMessage("ពិនិត្យ​"),
         "confirm": MessageLookupByLibrary.simpleMessage("សូមបញ្ជាក់"),
         "dashboard": MessageLookupByLibrary.simpleMessage("ផ្ទាំងគ្រប់គ្រង"),
+        "data": MessageLookupByLibrary.simpleMessage("ទិន្នន័យ"),
         "delete": MessageLookupByLibrary.simpleMessage("លុប"),
         "delete_img_message":
             MessageLookupByLibrary.simpleMessage("តើអ្នកចង់លុបរូបភាពនេះមែនទេ?"),
@@ -109,6 +110,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("លេខសំងាត់"),
         "passwordValidateMessage":
             MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលលេខសំងាត់"),
+        "save_img_msg": MessageLookupByLibrary.simpleMessage(
+            "វិក័យប័ត្របានរក្សាទុកក្នុងរុបភាព"),
         "scan": MessageLookupByLibrary.simpleMessage(
             "ស្គែនទៅកាន់ មីនុយអេឡិចត្រូនិច"),
         "setting": MessageLookupByLibrary.simpleMessage("ការកំណត់"),
@@ -121,6 +124,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "unAvailable": MessageLookupByLibrary.simpleMessage("មិនមាន"),
         "unitPrice": MessageLookupByLibrary.simpleMessage("តម្លៃឯកតាភេសជ្ជៈ"),
         "update": MessageLookupByLibrary.simpleMessage("កែប្រែ"),
+        "userNameValidateMessage":
+            MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលឈ្មោះអ្នកចូលប្រើ"),
         "users": MessageLookupByLibrary.simpleMessage("អ្នកប្រើប្រាស់"),
         "warning": MessageLookupByLibrary.simpleMessage("សូមបញ្ជាក់"),
         "warning_delete": MessageLookupByLibrary.simpleMessage(

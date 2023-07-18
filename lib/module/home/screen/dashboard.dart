@@ -2,7 +2,6 @@ import 'package:aklo_cafe/module/home/controller/dashboard_controller.dart';
 import 'package:aklo_cafe/module/order/controller/admin_order_controller.dart';
 import 'package:aklo_cafe/module/order_data/screen/order_data_screen.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
@@ -12,12 +11,12 @@ import '../../../generated/l10n.dart';
 import '../../../util/alerts/app_modal_bottomsheet.dart';
 import '../../../util/alerts/app_snackbar.dart';
 import '../../auth/controller/auth_controller.dart';
+import '../../client/screen/client_order.dart';
+import '../components/image_slider.dart';
 import '../components/menu_card.dart';
 
 import 'package:aklo_cafe/constant/resources.dart';
 
-import '../controller/edit_slide_controller.dart';
-import '../model/slide_model.dart';
 import 'setting_screen.dart';
 
 class DashBoard extends StatefulWidget {
@@ -26,12 +25,6 @@ class DashBoard extends StatefulWidget {
   @override
   State<DashBoard> createState() => _DashBoardState();
 }
-
-final images = [
-  'https://www.dsmenu.com/user-folder/menu/basic/2/big_t_7405-.png',
-  'https://stories.starbucks.com/uploads/2021/02/SBX20200225-SpringBeverages-FeatureHorizontal-1440x700.jpg',
-  'https://hips.hearstapps.com/delish/assets/16/29/1469053477-delish-starbucks-horizontal-index.jpg',
-];
 
 class _DashBoardState extends State<DashBoard> {
   void _handleNavigate(BuildContext context, String menu) {
@@ -91,15 +84,15 @@ class _DashBoardState extends State<DashBoard> {
   final authController = Get.put(AuthController());
   final controller = Get.put(DashBoardController());
   final adminOrderController = Get.put(AdminOrderController());
-  final slideController = Get.put(EditSlideController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _showQrWebSite(context);
-          // Get.to(() => ClientOrderScreen());
+          // _showQrWebSite(context);
+          Get.to(() => ClientOrderScreen());
         },
         child: const Icon(
           PhosphorIcons.qr_code_bold,
@@ -148,50 +141,7 @@ class _DashBoardState extends State<DashBoard> {
         SingleChildScrollView(
           child: Column(
             children: [
-              StreamBuilder<List<SlideModel>>(
-                stream: slideController.sliderSnapShot,
-                builder: (context, snapshot) {
-                  final imgs = snapshot.data;
-                  if (snapshot.hasData && imgs != null) {
-                    return CarouselSlider(
-                      options: CarouselOptions(
-                        aspectRatio: 2 / 1,
-                        viewportFraction: 0.8,
-                        enlargeFactor: 0.2,
-                        enlargeCenterPage: true,
-                        autoPlay: true,
-                        // enableInfiniteScroll: false,
-                        onPageChanged: (index, reason) {},
-                      ),
-                      items: imgs
-                          .map(
-                            (e) => e.image != null
-                                ? SizedBox(
-                                    width: double.infinity,
-                                    child: ClipRRect(
-                                      borderRadius: Sizes.boxBorderRadius,
-                                      child: Image.network(
-                                        e.image!,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  )
-                                : Container(
-                                    decoration: BoxDecoration(
-                                      color: AppColors.backgroundColor,
-                                      borderRadius: Sizes.boxBorderRadius,
-                                    ),
-                                    child: Center(
-                                      child: Text(S.current.noImage),
-                                    ),
-                                  ),
-                          )
-                          .toList(),
-                    );
-                  }
-                  return SizedBox.shrink();
-                },
-              ),
+              ImageSlider(),
               20.sh,
               // Container(
               //   width: double.infinity,
@@ -261,7 +211,7 @@ class _DashBoardState extends State<DashBoard> {
                     onTap: () {
                       Get.to(() => OrderDataScreen());
                     },
-                    title: 'Info',
+                    title: S.current.data,
                     icon: PhosphorIcons.hard_drive_bold,
                     bgColor: Color(0xFF7F1CD5),
                   ),

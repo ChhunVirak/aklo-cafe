@@ -23,6 +23,9 @@ class LangsEn extends Langs {
   String get passwordValidateMessage => 'Password is required.';
 
   @override
+  String get userNameValidateMessage => 'Username is required.';
+
+  @override
   String get login => 'Login';
 
   @override
@@ -231,4 +234,10 @@ class LangsEn extends Langs {
 
   @override
   String get logout_message => 'Are you sure want to sign out?';
+
+  @override
+  String get save_img_msg => 'Invoice saved to Gallery.';
+
+  @override
+  String get data => 'Data';
 }

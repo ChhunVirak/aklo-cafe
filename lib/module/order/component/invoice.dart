@@ -37,35 +37,44 @@ class Invoice extends StatelessWidget {
         borderRadius: Sizes.boxBorderRadius,
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Kihong',
-                      style: AppStyle.medium,
-                    ),
-                    Text(
-                      orderModel.id.toString().toUpperCase(),
-                      style:
-                          AppStyle.small.copyWith(color: AppColors.lightColor),
-                    ),
-                  ],
-                ),
-              ),
-              Text(
-                orderModel.orderDate.displayDateTime,
-                style: AppStyle.small,
-                textAlign: TextAlign.right,
-              ),
-            ],
+          Text(
+            'Aklo Coffe and Tea',
+            style: AppStyle.large,
           ),
-          Sizes.defaultPadding.sh,
+          Text(
+            'Takeo',
+            style: AppStyle.small,
+          ),
+          Text(
+            'RECEIPT',
+            style: AppStyle.medium,
+          ),
+          Sizes.textPadding.sh,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Text(
+                //   'Kihong',
+                //   style: AppStyle.medium,
+                // ),
+                Text(
+                  'Receipt ID : ' + orderModel.id.toString().toUpperCase(),
+                  style: AppStyle.small.copyWith(color: AppColors.lightColor),
+                ),
+                Text(
+                  'Order Date : ' + orderModel.orderDate.displayDateTime,
+                  style: AppStyle.small,
+                  textAlign: TextAlign.right,
+                ),
+              ],
+            ),
+          ),
+          Sizes.textPadding.sh,
+          Divider(color: AppColors.txtDarkColor, thickness: 0.7),
           Table(
             columnWidths: const {
               0: FlexColumnWidth(0.2),
@@ -103,13 +112,63 @@ class Invoice extends StatelessWidget {
               ),
             ],
           ),
-          10.sh,
-          Text(
-            'Total : \$${formatCurrency(orderModel.total)}',
-            style: AppStyle.medium,
-          )
+          Divider(color: AppColors.txtDarkColor, thickness: 0.7),
+          Sizes.tablePadding.sh,
+          TotalTitle(
+            title: 'Total-QTY : ',
+            value: orderModel.products.isNotEmpty
+                ? '${orderModel.products.fold<num>(0, (a, b) => a + b.amount)}'
+                : '',
+          ),
+          TotalTitle(
+            title: 'Grand-Total(USD) : ',
+            value: '\$' + formatCurrency(orderModel.total),
+          ),
+          30.sh,
+          Text('សូមអរគុណសម្រាប់ការអញ្ជើញមក'),
+          Sizes.tablePadding.sh,
+          Text('Thank You.'),
+          15.sh,
+          Text('Wifi Password : aklo9999'),
         ],
       ),
+    );
+  }
+}
+
+class TotalTitle extends StatelessWidget {
+  const TotalTitle({
+    super.key,
+    required this.title,
+    required this.value,
+  });
+
+  final String title;
+  final String? value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              title,
+              style: AppStyle.small,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              value ?? '',
+              style: AppStyle.medium,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

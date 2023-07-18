@@ -129,6 +129,12 @@ abstract class Langs {
   /// **'Password is required.'**
   String get passwordValidateMessage;
 
+  /// No description provided for @userNameValidateMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Username is required.'**
+  String get userNameValidateMessage;
+
   /// No description provided for @login.
   ///
   /// In en, this message translates to:
@@ -548,6 +554,18 @@ abstract class Langs {
   /// In en, this message translates to:
   /// **'Are you sure want to sign out?'**
   String get logout_message;
+
+  /// No description provided for @save_img_msg.
+  ///
+  /// In en, this message translates to:
+  /// **'Invoice saved to Gallery.'**
+  String get save_img_msg;
+
+  /// No description provided for @data.
+  ///
+  /// In en, this message translates to:
+  /// **'Data'**
+  String get data;
 }
 
 class _LangsDelegate extends LocalizationsDelegate<Langs> {

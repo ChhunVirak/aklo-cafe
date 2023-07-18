@@ -60,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "check_out": MessageLookupByLibrary.simpleMessage("Check Out"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "dashboard": MessageLookupByLibrary.simpleMessage("Dashboard"),
+        "data": MessageLookupByLibrary.simpleMessage("Data"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "delete_img_message": MessageLookupByLibrary.simpleMessage(
             "Are you sure want to delete this image?"),
@@ -108,6 +109,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordValidateMessage":
             MessageLookupByLibrary.simpleMessage("Password is required."),
+        "save_img_msg":
+            MessageLookupByLibrary.simpleMessage("Invoice saved to Gallery."),
         "scan": MessageLookupByLibrary.simpleMessage("Scan to E-Menu"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "signout": MessageLookupByLibrary.simpleMessage("Sign Out"),
@@ -119,6 +122,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "unAvailable": MessageLookupByLibrary.simpleMessage("Unavailable"),
         "unitPrice": MessageLookupByLibrary.simpleMessage("Unit Price"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
+        "userNameValidateMessage":
+            MessageLookupByLibrary.simpleMessage("Username is required."),
         "users": MessageLookupByLibrary.simpleMessage("Users"),
         "warning": MessageLookupByLibrary.simpleMessage("Warning"),
         "warning_delete": MessageLookupByLibrary.simpleMessage(

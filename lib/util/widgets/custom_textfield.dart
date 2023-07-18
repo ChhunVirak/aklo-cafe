@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
+  final Widget? prefixIcon;
   final String label;
   final bool require;
   final bool? enable;
@@ -33,6 +34,7 @@ class CustomTextField extends StatelessWidget {
     this.onFieldSubmitted,
     this.maxLines,
     this.inputFormatters,
+    this.prefixIcon,
   });
 
   OutlineInputBorder get _border =>
@@ -65,6 +67,7 @@ class CustomTextField extends StatelessWidget {
             FocusScope.of(context).unfocus();
           },
           decoration: InputDecoration(
+            prefixIcon: prefixIcon,
             alignLabelWithHint: true,
             labelStyle: AppStyle.medium,
             // hintStyle: AppStyle.medium,

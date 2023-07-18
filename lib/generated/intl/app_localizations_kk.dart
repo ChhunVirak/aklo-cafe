@@ -23,6 +23,9 @@ class LangsKk extends Langs {
   String get passwordValidateMessage => 'សូមបញ្ចូលលេខសំងាត់';
 
   @override
+  String get userNameValidateMessage => 'សូមបញ្ចូលឈ្មោះអ្នកចូលប្រើ';
+
+  @override
   String get login => 'ចូល';
 
   @override
@@ -231,4 +234,10 @@ class LangsKk extends Langs {
 
   @override
   String get logout_message => 'តើអ្នកចង់ចាកចេញពីគណនេយ្យនេះមែនទេ?';
+
+  @override
+  String get save_img_msg => 'វិក័យប័ត្របានរក្សាទុកក្នុងរុបភាព';
+
+  @override
+  String get data => 'ទិន្នន័យ';
 }

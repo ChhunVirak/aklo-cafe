@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                             controller: controller.emailTxtController,
                             textInputAction: TextInputAction.next,
                             validator: (v) =>
-                                v == '' ? Strings.emailValidateMessage : null,
+                                v == '' ? S.current.emailValidateMessage : null,
                           ),
                           Obx(
                             () => CustomTextField(
@@ -94,7 +94,7 @@ class LoginScreen extends StatelessWidget {
                                     : Icons.visibility_off_rounded),
                               ),
                               validator: (v) => v == ''
-                                  ? Strings.passwordValidateMessage
+                                  ? S.current.passwordValidateMessage
                                   : null,
                             ),
                           )

@@ -54,7 +54,7 @@ class ThemeConfig {
         ),
         iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(
-            visualDensity: VisualDensity(
+            visualDensity: const VisualDensity(
               vertical: -2,
               horizontal: -2,
             ),

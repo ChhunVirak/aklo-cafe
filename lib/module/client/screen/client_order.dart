@@ -1,10 +1,9 @@
-import 'dart:ui';
-
 import 'package:aklo_cafe/constant/resources.dart';
 import 'package:aklo_cafe/generated/l10n.dart';
 import 'package:aklo_cafe/module/client/controller/client_order_controller.dart';
 import 'package:aklo_cafe/module/client/model/order_model.dart';
 import 'package:aklo_cafe/module/client/screen/order_status.dart';
+import 'package:aklo_cafe/module/home/components/image_slider.dart';
 import 'package:aklo_cafe/module/order/controller/admin_order_controller.dart';
 import 'package:aklo_cafe/util/alerts/app_modal_bottomsheet.dart';
 import 'package:aklo_cafe/util/extensions/responsive/responsive_extension.dart';
@@ -16,14 +15,12 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../config/languages/lang_font_controller.dart';
-import '../../../util/alerts/app_snackbar.dart';
-import '../../../util/function/format_function.dart';
 import '../../../util/widgets/app_circular_loading.dart';
 import '../../inventory/components/client_drink_card.dart';
 import '../../inventory/inventory.dart';
 import '../../inventory/model/category_model.dart';
+import '../widgets/order_infor_and_checkout_button.dart';
 import 'check_out_screen.dart';
-import 'order_header.dart';
 
 class ClientOrderScreen extends StatefulWidget {
   const ClientOrderScreen({super.key});
@@ -94,13 +91,65 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                   : controller.screen.value == Screen.status
                       ? OrderStatus()
                       : Scaffold(
-                          body: Stack(
-                            children: [
-                              Column(
-                                children: [
-                                  OrderHeader(),
-                                  Expanded(
-                                    child: GetBuilder(
+                          body: NestedScrollView(
+                            headerSliverBuilder:
+                                (context, innerBoxIsScrolled) => [
+                              SliverAppBar(
+                                automaticallyImplyLeading: false,
+                                title: Padding(
+                                  padding: EdgeInsets.only(top: 20),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Image.asset(
+                                        'assets/logo/aklo-cafe-logo.png',
+                                        width: 50,
+                                      ),
+                                      10.sw,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Aklo Cafe',
+                                            style: AppStyle.medium,
+                                          ),
+                                          Text("E-Menu"),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                actions: [
+                                  ElevatedButton.icon(
+                                    onPressed: () {
+                                      languageController.chooseLangauge();
+                                    },
+                                    icon: Icon(PhosphorIcons.translate),
+                                    label: Text(
+                                      languageController.isEnglish
+                                          ? "English"
+                                          : 'ខ្មែរ',
+                                    ),
+                                  ),
+                                  10.sw,
+                                ],
+                              ),
+                              SliverAppBar(
+                                automaticallyImplyLeading: false,
+                                expandedHeight: 250,
+                                flexibleSpace: FlexibleSpaceBar(
+                                  background: ImageSlider(),
+                                ),
+                              )
+                            ],
+                            body: Stack(
+                              children: [
+                                Column(
+                                  children: [
+                                    // ImageSlider(),
+                                    Expanded(
+                                      child: GetBuilder(
                                         id: 'Drink Display',
                                         init: _inventoryController,
                                         initState: (_) {
@@ -122,18 +171,20 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                           .connectionState ==
                                                       ConnectionState.waiting) {
                                                     return const Center(
-                                                      child:
-                                                          CustomCircularLoading(),
-                                                    );
+                                                        child:
+                                                            CustomCircularLoading());
                                                   }
                                                   if (snapshot.hasData) {
-                                                    final listData = snapshot
-                                                        .data?.docs
-                                                        .map((e) =>
-                                                            CategoryModel
-                                                                .fromMap(
-                                                                    e.data()))
-                                                        .toList();
+                                                    final listData =
+                                                        snapshot.data?.docs
+                                                            .map(
+                                                              (e) =>
+                                                                  CategoryModel
+                                                                      .fromMap(
+                                                                e.data(),
+                                                              ),
+                                                            )
+                                                            .toList();
                                                     return Obx(
                                                       () => SizedBox(
                                                         width: context.width,
@@ -243,116 +294,114 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                               ///All Drink
                                               Expanded(
                                                 child: GetBuilder(
-                                                    id: 'All Drinks',
-                                                    init: _inventoryController,
-                                                    builder: (_) {
-                                                      return StreamBuilder(
-                                                        stream: _inventoryController
-                                                            .drinkofCategory(
-                                                                _inventoryController
-                                                                    .currentCategoryID
-                                                                    .value),
-                                                        builder: (_, snapshot) {
-                                                          debugPrint(
-                                                              'Snapshot => ${snapshot.connectionState}');
-                                                          if (snapshot
-                                                                  .connectionState ==
-                                                              ConnectionState
-                                                                  .waiting) {
-                                                            return const Center(
-                                                              child:
-                                                                  CircularProgressIndicator(),
-                                                            );
-                                                          }
-                                                          debugPrint(
-                                                              'Error ${snapshot.hasData}');
-                                                          if (!snapshot
-                                                              .hasData) {
+                                                  id: 'All Drinks',
+                                                  init: _inventoryController,
+                                                  builder: (_) {
+                                                    return StreamBuilder(
+                                                      stream: _inventoryController
+                                                          .drinkofCategory(
+                                                              _inventoryController
+                                                                  .currentCategoryID
+                                                                  .value),
+                                                      builder: (_, snapshot) {
+                                                        debugPrint(
+                                                            'Snapshot => ${snapshot.connectionState}');
+                                                        if (snapshot
+                                                                .connectionState ==
+                                                            ConnectionState
+                                                                .waiting) {
+                                                          return const Center(
+                                                            child:
+                                                                CircularProgressIndicator(),
+                                                          );
+                                                        }
+                                                        debugPrint(
+                                                            'Error ${snapshot.hasData}');
+                                                        if (!snapshot.hasData) {
+                                                          return Center(
+                                                            child: Text(S
+                                                                .current
+                                                                .no_data),
+                                                          );
+                                                        }
+
+                                                        if (snapshot.hasData) {
+                                                          final listData = snapshot
+                                                              .data?.docs
+                                                              .map((e) =>
+                                                                  DrinkModel
+                                                                      .fromMap(e
+                                                                          .data()))
+                                                              .toList();
+                                                          if (listData ==
+                                                                  null ||
+                                                              listData
+                                                                  .isEmpty) {
                                                             return Center(
                                                               child: Text(S
                                                                   .current
                                                                   .no_data),
                                                             );
                                                           }
+                                                          return GetBuilder(
+                                                              id: 'Drinks',
+                                                              init: controller,
+                                                              builder: (_) {
+                                                                return GridView
+                                                                    .builder(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                    top: Sizes
+                                                                        .padding,
+                                                                    left: Sizes
+                                                                        .padding,
+                                                                    right: Sizes
+                                                                        .padding,
+                                                                    bottom: 90,
+                                                                  ),
+                                                                  physics:
+                                                                      const BouncingScrollPhysics(),
+                                                                  gridDelegate:
+                                                                      _deligate(
+                                                                          context),
+                                                                  itemCount:
+                                                                      listData
+                                                                          .length,
+                                                                  itemBuilder:
+                                                                      (_, index) {
+                                                                    final name =
+                                                                        listData[index]
+                                                                            .name;
+                                                                    final image =
+                                                                        listData[index]
+                                                                            .image;
+                                                                    // final img = listData[index].image;
+                                                                    final unitPrice =
+                                                                        listData[index]
+                                                                            .unitPrice;
 
-                                                          if (snapshot
-                                                              .hasData) {
-                                                            final listData = snapshot
-                                                                .data?.docs
-                                                                .map((e) =>
-                                                                    DrinkModel
-                                                                        .fromMap(
-                                                                            e.data()))
-                                                                .toList();
-                                                            if (listData ==
-                                                                    null ||
-                                                                listData
-                                                                    .isEmpty) {
-                                                              return Center(
-                                                                child: Text(S
-                                                                    .current
-                                                                    .no_data),
-                                                              );
-                                                            }
-                                                            return GetBuilder(
-                                                                id: 'Drinks',
-                                                                init:
-                                                                    controller,
-                                                                builder: (_) {
-                                                                  return GridView
-                                                                      .builder(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .only(
-                                                                      top: Sizes
-                                                                          .padding,
-                                                                      left: Sizes
-                                                                          .padding,
-                                                                      right: Sizes
-                                                                          .padding,
-                                                                      bottom:
-                                                                          90,
-                                                                    ),
-                                                                    physics:
-                                                                        const BouncingScrollPhysics(),
-                                                                    gridDelegate:
-                                                                        _deligate(
-                                                                            context),
-                                                                    itemCount:
-                                                                        listData
-                                                                            .length,
-                                                                    itemBuilder:
-                                                                        (_, index) {
-                                                                      final name =
-                                                                          listData[index]
-                                                                              .name;
-                                                                      final image =
-                                                                          listData[index]
-                                                                              .image;
-                                                                      // final img = listData[index].image;
-                                                                      final unitPrice =
-                                                                          listData[index]
-                                                                              .unitPrice;
+                                                                    final id =
+                                                                        listData[index]
+                                                                            .id;
+                                                                    final available =
+                                                                        listData[index]
+                                                                            .available;
+                                                                    debugPrint(
+                                                                        available
+                                                                            .toString());
 
-                                                                      final id =
-                                                                          listData[index]
-                                                                              .id;
-                                                                      final available =
-                                                                          listData[index]
-                                                                              .available;
-                                                                      debugPrint(
-                                                                          available
-                                                                              .toString());
-
-                                                                      return GestureDetector(
-                                                                        onTap:
-                                                                            () {
-                                                                          if (GetPlatform.isWeb &&
-                                                                              available == true) {
-                                                                            int unit =
-                                                                                0;
-                                                                            showCustomModalBottomSheetNoLimit(
-                                                                              StatefulBuilder(builder: (context, state) {
+                                                                    return GestureDetector(
+                                                                      onTap:
+                                                                          () {
+                                                                        if (GetPlatform.isWeb &&
+                                                                            available ==
+                                                                                true) {
+                                                                          int unit =
+                                                                              0;
+                                                                          showCustomModalBottomSheetNoLimit(
+                                                                            StatefulBuilder(
+                                                                              builder: (context, state) {
                                                                                 return Container(
                                                                                   padding: EdgeInsets.all(Sizes.defaultPadding),
                                                                                   decoration: BoxDecoration(
@@ -422,160 +471,72 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                                                     ],
                                                                                   ),
                                                                                 );
-                                                                              }),
-                                                                            );
-                                                                          }
-                                                                        },
-                                                                        child:
-                                                                            ClientDrinkCard(
-                                                                          name:
-                                                                              name,
-                                                                          image:
-                                                                              image,
-                                                                          unitPrice:
-                                                                              unitPrice,
-                                                                          available:
-                                                                              available,
-                                                                          amount:
-                                                                              controller.getAmount(id),
-                                                                          onPressedAdd: GetPlatform.isWeb
-                                                                              ? () {
-                                                                                  controller.addItem(listData[index]);
-                                                                                }
-                                                                              : null,
-                                                                          onPressedRemove: GetPlatform.isWeb
-                                                                              ? () {
-                                                                                  controller.removeItem(listData[index]);
-                                                                                }
-                                                                              : null,
-                                                                        ),
-                                                                      );
-                                                                    },
-                                                                  );
-                                                                });
-                                                          }
+                                                                              },
+                                                                            ),
+                                                                          );
+                                                                        }
+                                                                      },
+                                                                      child:
+                                                                          ClientDrinkCard(
+                                                                        name:
+                                                                            name,
+                                                                        image:
+                                                                            image,
+                                                                        unitPrice:
+                                                                            unitPrice,
+                                                                        available:
+                                                                            available,
+                                                                        amount:
+                                                                            controller.getAmount(id),
+                                                                        onPressedAdd: GetPlatform.isWeb &&
+                                                                                available == true
+                                                                            ? () {
+                                                                                controller.addItem(listData[index]);
+                                                                              }
+                                                                            : null,
+                                                                        onPressedRemove: GetPlatform.isWeb &&
+                                                                                available == true
+                                                                            ? () {
+                                                                                controller.removeItem(listData[index]);
+                                                                              }
+                                                                            : null,
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                );
+                                                              });
+                                                        }
 
-                                                          return const Center(
-                                                            child: Text(
-                                                                'Something went wrong'),
-                                                          );
-                                                        },
-                                                      );
-                                                    }),
+                                                        return const Center(
+                                                          child: Text(
+                                                              'Something went wrong'),
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                ),
                                               ),
                                             ],
                                           );
-                                        }),
-                                  ),
-                                ],
-                              ),
-                              Positioned(
-                                left: 0,
-                                right: 0,
-                                bottom: 20,
-                                child: GetBuilder(
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Positioned(
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 20,
+                                  child: GetBuilder(
                                     id: 'Total',
                                     init: controller,
                                     builder: (_) {
-                                      return Container(
-                                        padding: EdgeInsets.only(
-                                            left: Sizes.textPadding),
-                                        margin: EdgeInsets.only(
-                                            left: Sizes.textPadding,
-                                            right: Sizes.textPadding),
-                                        decoration: BoxDecoration(
-                                          color: AppColors.mainColor,
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                        clipBehavior: Clip.antiAlias,
-                                        child: Row(
-                                          children: [
-                                            Badge(
-                                              label: Text(controller
-                                                  .totalDrinkUnitCount
-                                                  .toString()),
-                                              child: IconButton(
-                                                onPressed: () {},
-                                                icon: const Icon(
-                                                  PhosphorIcons.shopping_cart,
-                                                  color:
-                                                      AppColors.txtLightColor,
-                                                ),
-                                              ),
-                                            ),
-                                            10.sw,
-                                            Text(
-                                              '${S.current.total}: ',
-                                              style: AppStyle.small.copyWith(
-                                                color: AppColors.txtLightColor,
-                                                fontFeatures: const [
-                                                  FontFeature
-                                                      .proportionalFigures()
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                '\$${formatCurrency(controller.total)}',
-                                                style: AppStyle.medium.copyWith(
-                                                  color:
-                                                      AppColors.txtLightColor,
-                                                ),
-                                              ),
-                                            ),
-                                            Material(
-                                              borderRadius:
-                                                  BorderRadius.circular(50),
-                                              child: InkWell(
-                                                onTap: () {
-                                                  if (controller.total <= 0) {
-                                                    showErrorSnackBar(
-                                                        title: S.current
-                                                            .add_drink_message,
-                                                        description: S.current
-                                                            .add_drink_message_des);
-                                                    return;
-                                                  }
-                                                  controller
-                                                      .screen(Screen.checkout);
-                                                  controller.update(['Screen']);
-                                                },
-                                                child: Ink(
-                                                  height: 50,
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal:
-                                                          Sizes.defaultPadding),
-                                                  decoration: BoxDecoration(
-                                                    color: controller
-                                                                .totalDrinkUnitCount >
-                                                            0
-                                                        ? Colors.red
-                                                        : Colors.grey,
-                                                  ),
-                                                  child: Center(
-                                                    child: Text(
-                                                      S.current.check_out,
-                                                      style: AppStyle.large
-                                                          .copyWith(
-                                                        color: AppColors
-                                                            .txtLightColor,
-                                                        fontFeatures: const [
-                                                          FontFeature
-                                                              .proportionalFigures()
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    }),
-                              ),
-                            ],
+                                      return OrderInfoAndCheckOut();
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
             );

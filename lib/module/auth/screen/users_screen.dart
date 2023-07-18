@@ -16,10 +16,16 @@ class UsersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(AuthController());
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: Obx(
+      //   () => controller.isAdmin.value
+      //       ? FloatingActionButton(
+      //           onPressed: () {
+      //             Get.to(() => AddUserScreen());
+      //           },
+      //           child: const Icon(Icons.add),
+      //         )
+      //       : SizedBox.shrink(),
+      // ),
       appBar: AppBar(
         title: Text(S.current.users),
       ),
@@ -40,7 +46,7 @@ class UsersScreen extends StatelessWidget {
               separatorBuilder: (_, __) => 10.sh,
               itemBuilder: (_, index) => ListTile(
                 leading: Icon(PhosphorIcons.user_bold),
-                title: Text(data?[index]['name'].toString() ?? ''),
+                title: Text(data?[index]['username'].toString() ?? ''),
                 subtitle: Text(data?[index]['role'].toString() ?? ''),
                 onTap: () {
                   Get.to(() => UserSetting());
@@ -48,6 +54,12 @@ class UsersScreen extends StatelessWidget {
                 tileColor: AppColors.backgroundColor,
                 shape:
                     RoundedRectangleBorder(borderRadius: Sizes.boxBorderRadius),
+                trailing: controller.userId == data?[index]['id']
+                    ? Icon(
+                        PhosphorIcons.globe_hemisphere_east,
+                        color: Colors.green,
+                      )
+                    : null,
               ),
             );
           }
