@@ -125,7 +125,9 @@ final clientRouter = GoRouter(
   routes: <GoRoute>[
     GoRoute(
       path: _Paths.CLIENT_ORDER,
-      builder: (_, state) => const ClientOrderScreen(),
+      builder: (_, state) => ClientOrderScreen(
+        tableId: state.queryParameters['id'],
+      ),
     ),
     GoRoute(
       path: _Paths.CLIENT_STATUS,

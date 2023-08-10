@@ -4,11 +4,12 @@ import 'package:aklo_cafe/module/client/controller/client_order_controller.dart'
 import 'package:aklo_cafe/module/client/model/order_model.dart';
 import 'package:aklo_cafe/module/client/screen/order_status.dart';
 import 'package:aklo_cafe/module/home/components/image_slider.dart';
+import 'package:aklo_cafe/module/manage_table/model/table_model.dart';
 import 'package:aklo_cafe/module/order/controller/admin_order_controller.dart';
-import 'package:aklo_cafe/util/alerts/app_modal_bottomsheet.dart';
 import 'package:aklo_cafe/util/extensions/responsive/responsive_extension.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
-import 'package:aklo_cafe/util/widgets/custom_button.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,11 @@ import '../widgets/order_infor_and_checkout_button.dart';
 import 'check_out_screen.dart';
 
 class ClientOrderScreen extends StatefulWidget {
-  const ClientOrderScreen({super.key});
+  final String? tableId;
+  const ClientOrderScreen({
+    super.key,
+    this.tableId,
+  });
 
   @override
   State<ClientOrderScreen> createState() => _ClientOrderScreenState();
@@ -45,6 +50,23 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
         crossAxisSpacing: Sizes.padding,
       );
   double value = 0;
+
+  Future<TableModel?> get getTable async => await FirebaseFirestore.instance
+      .collection('tables')
+      .doc(widget.tableId)
+      .get()
+      .then(
+        (value) =>
+            value.data() != null ? TableModel.fromMap(value.data()!) : null,
+      );
+
+  @override
+  void initState() {
+    print('Table Id ${widget.tableId}');
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return
@@ -87,7 +109,7 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
               id: 'Screen',
               init: controller,
               builder: (_) => controller.screen.value == Screen.checkout
-                  ? CheckOutScreen()
+                  ? CheckOutScreen(tableId: widget.tableId)
                   : controller.screen.value == Screen.status
                       ? OrderStatus()
                       : Scaffold(
@@ -95,15 +117,19 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                             headerSliverBuilder:
                                 (context, innerBoxIsScrolled) => [
                               SliverAppBar(
+                                // backgroundColor: Colors.w,
                                 automaticallyImplyLeading: false,
+                                toolbarHeight: 90,
+                                elevation: 0,
                                 title: Padding(
-                                  padding: EdgeInsets.only(top: 20),
+                                  padding: EdgeInsets.symmetric(vertical: 10),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Image.asset(
-                                        'assets/logo/aklo-cafe-logo.png',
-                                        width: 50,
+                                      CachedNetworkImage(
+                                        imageUrl:
+                                            'assets/logo/aklo-cafe-logo.png',
+                                        width: 40,
                                       ),
                                       10.sw,
                                       Column(
@@ -111,10 +137,28 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Aklo Cafe',
+                                            Strings.appName,
                                             style: AppStyle.medium,
                                           ),
-                                          Text("E-Menu"),
+                                          FutureBuilder(
+                                            future: getTable,
+                                            builder: (_, snapshot) {
+                                              final data = snapshot.data;
+                                              if (snapshot.hasData &&
+                                                  data != null) {
+                                                return Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 10),
+                                                  child: Text(
+                                                    'Table No: ${NumberFormat('00', 'en').format(data.number)}',
+                                                    style: AppStyle.medium,
+                                                  ),
+                                                );
+                                              }
+                                              return SizedBox.shrink();
+                                            },
+                                          ),
                                         ],
                                       ),
                                     ],
@@ -128,7 +172,7 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                     icon: Icon(PhosphorIcons.translate),
                                     label: Text(
                                       languageController.isEnglish
-                                          ? "English"
+                                          ? "En"
                                           : 'ខ្មែរ',
                                     ),
                                   ),
@@ -141,6 +185,7 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                 flexibleSpace: FlexibleSpaceBar(
                                   background: ImageSlider(),
                                 ),
+                                elevation: 0,
                               )
                             ],
                             body: Stack(
@@ -392,90 +437,90 @@ class _ClientOrderScreenState extends State<ClientOrderScreen> {
                                                                             .toString());
 
                                                                     return GestureDetector(
-                                                                      onTap:
-                                                                          () {
-                                                                        if (GetPlatform.isWeb &&
-                                                                            available ==
-                                                                                true) {
-                                                                          int unit =
-                                                                              0;
-                                                                          showCustomModalBottomSheetNoLimit(
-                                                                            StatefulBuilder(
-                                                                              builder: (context, state) {
-                                                                                return Container(
-                                                                                  padding: EdgeInsets.all(Sizes.defaultPadding),
-                                                                                  decoration: BoxDecoration(
-                                                                                    color: AppColors.txtLightColor,
-                                                                                    borderRadius: BorderRadius.only(
-                                                                                      topLeft: Radius.circular(Sizes.defaultPadding),
-                                                                                      topRight: Radius.circular(Sizes.defaultPadding),
-                                                                                    ),
-                                                                                  ),
-                                                                                  child: Column(
-                                                                                    mainAxisSize: MainAxisSize.min,
-                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                    children: [
-                                                                                      Text(
-                                                                                        name,
-                                                                                        style: AppStyle.medium,
-                                                                                      ),
-                                                                                      5.sh,
-                                                                                      Text(
-                                                                                        '\$' + NumberFormat('#.00', 'en').format(unitPrice),
-                                                                                        style: AppStyle.medium,
-                                                                                      ),
-                                                                                      10.sh,
-                                                                                      Text(S.current.sugar + ' ${(value * 100).toInt()}%'),
-                                                                                      Slider(
-                                                                                        value: value,
-                                                                                        onChanged: (v) {
-                                                                                          state(() {
-                                                                                            value = v;
-                                                                                          });
-                                                                                        },
-                                                                                        divisions: 10,
-                                                                                        activeColor: AppColors.mainColor,
-                                                                                        label: (value * 100).toInt().toString() + '%',
-                                                                                      ),
-                                                                                      Row(
-                                                                                        mainAxisAlignment: MainAxisAlignment.center,
-                                                                                        children: [
-                                                                                          IconButton(
-                                                                                            onPressed: () {},
-                                                                                            icon: Icon(
-                                                                                              PhosphorIcons.minus_circle,
-                                                                                            ),
-                                                                                          ),
-                                                                                          Text(
-                                                                                            '$unit',
-                                                                                            style: AppStyle.large,
-                                                                                          ),
-                                                                                          IconButton(
-                                                                                            onPressed: () {
-                                                                                              state(() {
-                                                                                                unit++;
-                                                                                              });
-                                                                                            },
-                                                                                            icon: Icon(
-                                                                                              PhosphorIcons.plus_circle,
-                                                                                            ),
-                                                                                          ),
-                                                                                          Expanded(
-                                                                                            child: CustomButton(
-                                                                                              onPressed: () {},
-                                                                                              name: 'Add to cart',
-                                                                                            ),
-                                                                                          )
-                                                                                        ],
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                );
-                                                                              },
-                                                                            ),
-                                                                          );
-                                                                        }
-                                                                      },
+                                                                      // onTap:
+                                                                      //     () {
+                                                                      //   if (GetPlatform.isWeb &&
+                                                                      //       available ==
+                                                                      //           true) {
+                                                                      //     int unit =
+                                                                      //         0;
+                                                                      //     showCustomModalBottomSheetNoLimit(
+                                                                      //       StatefulBuilder(
+                                                                      //         builder: (context, state) {
+                                                                      //           return Container(
+                                                                      //             padding: EdgeInsets.all(Sizes.defaultPadding),
+                                                                      //             decoration: BoxDecoration(
+                                                                      //               color: AppColors.txtLightColor,
+                                                                      //               borderRadius: BorderRadius.only(
+                                                                      //                 topLeft: Radius.circular(Sizes.defaultPadding),
+                                                                      //                 topRight: Radius.circular(Sizes.defaultPadding),
+                                                                      //               ),
+                                                                      //             ),
+                                                                      //             child: Column(
+                                                                      //               mainAxisSize: MainAxisSize.min,
+                                                                      //               crossAxisAlignment: CrossAxisAlignment.start,
+                                                                      //               children: [
+                                                                      //                 Text(
+                                                                      //                   name,
+                                                                      //                   style: AppStyle.medium,
+                                                                      //                 ),
+                                                                      //                 5.sh,
+                                                                      //                 Text(
+                                                                      //                   '\$' + NumberFormat('#.00', 'en').format(unitPrice),
+                                                                      //                   style: AppStyle.medium,
+                                                                      //                 ),
+                                                                      //                 10.sh,
+                                                                      //                 Text(S.current.sugar + ' ${(value * 100).toInt()}%'),
+                                                                      //                 Slider(
+                                                                      //                   value: value,
+                                                                      //                   onChanged: (v) {
+                                                                      //                     state(() {
+                                                                      //                       value = v;
+                                                                      //                     });
+                                                                      //                   },
+                                                                      //                   divisions: 10,
+                                                                      //                   activeColor: AppColors.mainColor,
+                                                                      //                   label: (value * 100).toInt().toString() + '%',
+                                                                      //                 ),
+                                                                      //                 Row(
+                                                                      //                   mainAxisAlignment: MainAxisAlignment.center,
+                                                                      //                   children: [
+                                                                      //                     IconButton(
+                                                                      //                       onPressed: () {},
+                                                                      //                       icon: Icon(
+                                                                      //                         PhosphorIcons.minus_circle,
+                                                                      //                       ),
+                                                                      //                     ),
+                                                                      //                     Text(
+                                                                      //                       '$unit',
+                                                                      //                       style: AppStyle.large,
+                                                                      //                     ),
+                                                                      //                     IconButton(
+                                                                      //                       onPressed: () {
+                                                                      //                         state(() {
+                                                                      //                           unit++;
+                                                                      //                         });
+                                                                      //                       },
+                                                                      //                       icon: Icon(
+                                                                      //                         PhosphorIcons.plus_circle,
+                                                                      //                       ),
+                                                                      //                     ),
+                                                                      //                     Expanded(
+                                                                      //                       child: CustomButton(
+                                                                      //                         onPressed: () {},
+                                                                      //                         name: 'Add to cart',
+                                                                      //                       ),
+                                                                      //                     )
+                                                                      //                   ],
+                                                                      //                 ),
+                                                                      //               ],
+                                                                      //             ),
+                                                                      //           );
+                                                                      //         },
+                                                                      //       ),
+                                                                      //     );
+                                                                      //   }
+                                                                      // },
                                                                       child:
                                                                           ClientDrinkCard(
                                                                         name:

@@ -3,6 +3,7 @@ import 'package:aklo_cafe/util/extensions/datetime_extension.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
 import 'package:aklo_cafe/util/function/format_function.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../constant/resources.dart';
 
@@ -65,6 +66,13 @@ class Invoice extends StatelessWidget {
                   'Receipt ID : ' + orderModel.id.toString().toUpperCase(),
                   style: AppStyle.small.copyWith(color: AppColors.lightColor),
                 ),
+                if (orderModel.tableNumber != null)
+                  Text(
+                    'Table Number : ' +
+                        NumberFormat('00', 'en').format(orderModel.tableNumber),
+                    style: AppStyle.small.copyWith(color: AppColors.lightColor),
+                  ),
+
                 Text(
                   'Order Date : ' + orderModel.orderDate.displayDateTime,
                   style: AppStyle.small,

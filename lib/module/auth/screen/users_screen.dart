@@ -7,6 +7,7 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 
 import '../../../util/widgets/app_circular_loading.dart';
+import 'add_user.dart';
 import 'user_setting.dart';
 
 class UsersScreen extends StatelessWidget {
@@ -16,16 +17,16 @@ class UsersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(AuthController());
     return Scaffold(
-      // floatingActionButton: Obx(
-      //   () => controller.isAdmin.value
-      //       ? FloatingActionButton(
-      //           onPressed: () {
-      //             Get.to(() => AddUserScreen());
-      //           },
-      //           child: const Icon(Icons.add),
-      //         )
-      //       : SizedBox.shrink(),
-      // ),
+      floatingActionButton: Obx(
+        () => controller.isAdmin.value
+            ? FloatingActionButton(
+                onPressed: () {
+                  Get.to(() => AddUserScreen());
+                },
+                child: const Icon(Icons.add),
+              )
+            : SizedBox.shrink(),
+      ),
       appBar: AppBar(
         title: Text(S.current.users),
       ),
@@ -44,23 +45,26 @@ class UsersScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: Sizes.defaultPadding),
               itemCount: data?.length ?? 0,
               separatorBuilder: (_, __) => 10.sh,
-              itemBuilder: (_, index) => ListTile(
-                leading: Icon(PhosphorIcons.user_bold),
-                title: Text(data?[index]['username'].toString() ?? ''),
-                subtitle: Text(data?[index]['role'].toString() ?? ''),
-                onTap: () {
-                  Get.to(() => UserSetting());
-                },
-                tileColor: AppColors.backgroundColor,
-                shape:
-                    RoundedRectangleBorder(borderRadius: Sizes.boxBorderRadius),
-                trailing: controller.userId == data?[index]['id']
-                    ? Icon(
-                        PhosphorIcons.globe_hemisphere_east,
-                        color: Colors.green,
-                      )
-                    : null,
-              ),
+              itemBuilder: (_, index) {
+                final user = data?[index].data();
+                return ListTile(
+                  leading: Icon(PhosphorIcons.user_bold),
+                  title: Text(user?['username'] ?? '--'),
+                  subtitle: Text(user?['role'] ?? '--'),
+                  onTap: () {
+                    Get.to(() => UserSetting());
+                  },
+                  tileColor: AppColors.backgroundColor,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: Sizes.boxBorderRadius),
+                  trailing: controller.userId == user?['id']
+                      ? Icon(
+                          PhosphorIcons.globe_hemisphere_east,
+                          color: Colors.green,
+                        )
+                      : null,
+                );
+              },
             );
           }
           return const Text('Error');

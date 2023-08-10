@@ -85,8 +85,11 @@ class AllOrder extends StatelessWidget {
                   subtitle:
                       Text(listOrderData[index].orderDate.displayDateTime),
                   title: Text(
-                    '#' + NumberFormat('000').format(index + 1).toString(),
+                    '#' +
+                        NumberFormat('000').format(index + 1).toString() +
+                        ' | Table No. ${listOrderData[index].tableNumber != null ? NumberFormat('00', 'en').format(listOrderData[index].tableNumber) : '--'}',
                   ),
+
                   // title: Text(listOrderData[index].id?.toUpperCase() ?? ''),
                   trailing: Text(
                     '\$' + formatCurrency(listOrderData[index].total),

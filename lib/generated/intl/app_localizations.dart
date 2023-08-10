@@ -174,13 +174,13 @@ abstract class Langs {
   /// No description provided for @addDrink.
   ///
   /// In en, this message translates to:
-  /// **'Add Drink'**
+  /// **'Add New Drink'**
   String get addDrink;
 
   /// No description provided for @addCategory.
   ///
   /// In en, this message translates to:
-  /// **'Add Category'**
+  /// **'Add New Category'**
   String get addCategory;
 
   /// No description provided for @category.
@@ -344,6 +344,12 @@ abstract class Langs {
   /// In en, this message translates to:
   /// **'Add Successfully'**
   String get add_success;
+
+  /// No description provided for @update_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Successfully'**
+  String get update_success;
 
   /// No description provided for @make_order.
   ///
@@ -561,11 +567,41 @@ abstract class Langs {
   /// **'Invoice saved to Gallery.'**
   String get save_img_msg;
 
+  /// No description provided for @save_qr_msg.
+  ///
+  /// In en, this message translates to:
+  /// **'Qr saved to Gallery.'**
+  String get save_qr_msg;
+
   /// No description provided for @data.
   ///
   /// In en, this message translates to:
   /// **'Data'**
   String get data;
+
+  /// No description provided for @manageTable.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Table'**
+  String get manageTable;
+
+  /// No description provided for @print.
+  ///
+  /// In en, this message translates to:
+  /// **'Print'**
+  String get print;
+
+  /// No description provided for @required.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get required;
+
+  /// No description provided for @tableNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Table Number'**
+  String get tableNumber;
 }
 
 class _LangsDelegate extends LocalizationsDelegate<Langs> {

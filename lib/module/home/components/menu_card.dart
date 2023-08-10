@@ -5,6 +5,7 @@ import 'package:aklo_cafe/constant/resources.dart';
 
 class MenuCard extends StatelessWidget {
   final String? title;
+  final String? imagePath;
   final IconData? icon;
   final Color? bgColor;
   final GestureTapCallback? onTap;
@@ -14,6 +15,7 @@ class MenuCard extends StatelessWidget {
     required this.icon,
     this.bgColor,
     this.onTap,
+    this.imagePath,
   });
 
   @override
@@ -22,6 +24,8 @@ class MenuCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       borderRadius: Sizes.boxBorderRadius,
       child: InkWell(
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
         onTap: onTap,
         child: Ink(
           decoration: BoxDecoration(
@@ -36,16 +40,25 @@ class MenuCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
-                child: Icon(
-                  icon,
-                  color: AppColors.txtLightColor,
-                  size: 50,
-                ),
+                child: imagePath != null
+                    ? Image.asset(
+                        imagePath!,
+                        width: 50,
+                        fit: BoxFit.cover,
+                      )
+                    : Icon(
+                        icon,
+                        color: AppColors.txtLightColor,
+                        size: 50,
+                      ),
               ),
               5.sh,
               Text(
                 title ?? '',
-                style: AppStyle.medium.copyWith(color: AppColors.txtLightColor),
+                style: AppStyle.medium.copyWith(
+                    color: bgColor == Colors.white
+                        ? AppColors.txtDarkColor
+                        : AppColors.txtLightColor),
               ),
             ],
           ),

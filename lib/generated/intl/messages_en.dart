@@ -26,8 +26,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accept": MessageLookupByLibrary.simpleMessage("Accept"),
         "accepted": MessageLookupByLibrary.simpleMessage("Accepted"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
-        "addCategory": MessageLookupByLibrary.simpleMessage("Add Category"),
-        "addDrink": MessageLookupByLibrary.simpleMessage("Add Drink"),
+        "addCategory": MessageLookupByLibrary.simpleMessage("Add New Category"),
+        "addDrink": MessageLookupByLibrary.simpleMessage("Add New Drink"),
         "add_drink_message":
             MessageLookupByLibrary.simpleMessage("Please add drink"),
         "add_drink_message_des": MessageLookupByLibrary.simpleMessage(
@@ -101,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "logout_message": MessageLookupByLibrary.simpleMessage(
             "Are you sure want to sign out?"),
         "make_order": MessageLookupByLibrary.simpleMessage("Make Order"),
+        "manageTable": MessageLookupByLibrary.simpleMessage("Manage Table"),
         "newOrder": MessageLookupByLibrary.simpleMessage("New"),
         "new_order": MessageLookupByLibrary.simpleMessage("New Order"),
         "noImage": MessageLookupByLibrary.simpleMessage("No Image"),
@@ -109,19 +110,26 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordValidateMessage":
             MessageLookupByLibrary.simpleMessage("Password is required."),
+        "print": MessageLookupByLibrary.simpleMessage("Print"),
+        "required": MessageLookupByLibrary.simpleMessage("Required"),
         "save_img_msg":
             MessageLookupByLibrary.simpleMessage("Invoice saved to Gallery."),
+        "save_qr_msg":
+            MessageLookupByLibrary.simpleMessage("Qr saved to Gallery."),
         "scan": MessageLookupByLibrary.simpleMessage("Scan to E-Menu"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "signout": MessageLookupByLibrary.simpleMessage("Sign Out"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
         "sugar": MessageLookupByLibrary.simpleMessage("Sugar Level"),
+        "tableNumber": MessageLookupByLibrary.simpleMessage("Table Number"),
         "today_Total_Order":
             MessageLookupByLibrary.simpleMessage("Today Total Order"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "unAvailable": MessageLookupByLibrary.simpleMessage("Unavailable"),
         "unitPrice": MessageLookupByLibrary.simpleMessage("Unit Price"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
+        "update_success":
+            MessageLookupByLibrary.simpleMessage("Update Successfully"),
         "userNameValidateMessage":
             MessageLookupByLibrary.simpleMessage("Username is required."),
         "users": MessageLookupByLibrary.simpleMessage("Users"),

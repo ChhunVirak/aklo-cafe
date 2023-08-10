@@ -24,7 +24,7 @@ class AdminOrderController extends GetxController {
 
   ///ALl Order
   Stream<QuerySnapshot<Map<String, dynamic>>> get allOrderToday => _allordersDb
-      .orderBy('orderDate')
+      .orderBy('orderDate', descending: true)
       // .where(
       //   'orderDate',
       //   isGreaterThanOrEqualTo: Timestamp.fromDate(

@@ -136,6 +136,9 @@ class AuthController extends GetxController {
       final userCredential = await _fAuth.createUserWithEmailAndPassword(
           email: email, password: password);
 
+      await _fAuth.signInWithEmailAndPassword(
+          email: 'virak@gmail.com', password: '123456');
+
       final user = userCredential.user;
       if (user != null) {
         await userdb.doc(user.uid).set(

@@ -1,4 +1,6 @@
+import 'package:aklo_cafe/config/menu/dashboard_config.dart';
 import 'package:aklo_cafe/module/home/controller/dashboard_controller.dart';
+import 'package:aklo_cafe/module/manage_table/screen/screen_manage_table.dart';
 import 'package:aklo_cafe/module/order/controller/admin_order_controller.dart';
 import 'package:aklo_cafe/module/order_data/screen/order_data_screen.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
@@ -11,7 +13,6 @@ import '../../../generated/l10n.dart';
 import '../../../util/alerts/app_modal_bottomsheet.dart';
 import '../../../util/alerts/app_snackbar.dart';
 import '../../auth/controller/auth_controller.dart';
-import '../../client/screen/client_order.dart';
 import '../components/image_slider.dart';
 import '../components/menu_card.dart';
 
@@ -59,6 +60,7 @@ class _DashBoardState extends State<DashBoard> {
     const eMenuLink = 'https://aklo-cafe.web.app/';
     showCustomModalBottomSheet(
       Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Sizes.defaultPadding.sh,
           Text(
@@ -66,12 +68,10 @@ class _DashBoardState extends State<DashBoard> {
             style: AppStyle.large,
           ),
           Sizes.textPadding.sh,
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(Sizes.defaultPadding),
-              child: Image.network(
-                'https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=$eMenuLink',
-              ),
+          Padding(
+            padding: const EdgeInsets.all(Sizes.defaultPadding),
+            child: Image.network(
+              'https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=$eMenuLink',
             ),
           ),
         ],
@@ -91,8 +91,8 @@ class _DashBoardState extends State<DashBoard> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // _showQrWebSite(context);
-          Get.to(() => ClientOrderScreen());
+          _showQrWebSite(context);
+          // Get.to(() => ClientOrderScreen());
         },
         child: const Icon(
           PhosphorIcons.qr_code_bold,
@@ -188,7 +188,7 @@ class _DashBoardState extends State<DashBoard> {
                 padding: const EdgeInsets.only(
                   left: Sizes.defaultPadding,
                   right: Sizes.defaultPadding,
-                  bottom: Sizes.padding,
+                  bottom: Sizes.padding + 20,
                   top: Sizes.textPadding,
                 ),
                 // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -205,6 +205,7 @@ class _DashBoardState extends State<DashBoard> {
                     },
                     title: S.current.orders,
                     icon: PhosphorIcons.list_numbers_fill,
+                    imagePath: DashBoardConfig.orders,
                     bgColor: const Color(0xffd51c4e),
                   ),
                   MenuCard(
@@ -221,11 +222,17 @@ class _DashBoardState extends State<DashBoard> {
                     },
                     title: S.current.inventory,
                     icon: PhosphorIcons.database_fill,
+                    // imagePath: DashBoardConfig.inventory,
                     bgColor: const Color(0xff1b67ca),
                   ),
                   MenuCard(
                     onTap: () {
-                      _handleNavigate(context, 'Users');
+                      if (authController.isAdmin.value) {
+                        _handleNavigate(context, 'Users');
+                      } else {
+                        showErrorSnackBar(
+                            title: "No Permission", description: '....');
+                      }
                     },
                     title: S.current.users,
                     icon: PhosphorIcons.users_three_fill,
@@ -238,6 +245,19 @@ class _DashBoardState extends State<DashBoard> {
                     title: S.current.about_us,
                     icon: PhosphorIcons.user_square_bold,
                     bgColor: const Color(0xfff56313),
+                  ),
+                  MenuCard(
+                    onTap: () {
+                      if (authController.isAdmin.value) {
+                        Get.to(() => ScreenManageTable());
+                      } else {
+                        showErrorSnackBar(
+                            title: "No Permission", description: '....');
+                      }
+                    },
+                    title: S.current.manageTable,
+                    icon: PhosphorIcons.storefront_bold,
+                    bgColor: Color(0xFF00BAA5),
                   ),
                 ],
               ),

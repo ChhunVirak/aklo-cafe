@@ -131,6 +131,9 @@ class LangsKk extends Langs {
   String get add_success => 'ការបន្ថែមបានជោគជ័យ';
 
   @override
+  String get update_success => 'ការកែប្រែបានជោគជ័យ';
+
+  @override
   String get make_order => 'ធ្វើការកម្មង់';
 
   @override
@@ -239,5 +242,20 @@ class LangsKk extends Langs {
   String get save_img_msg => 'វិក័យប័ត្របានរក្សាទុកក្នុងរុបភាព';
 
   @override
+  String get save_qr_msg => 'Qr បានរក្សាទុកក្នុងរុបភាព';
+
+  @override
   String get data => 'ទិន្នន័យ';
+
+  @override
+  String get manageTable => 'គ្រប់គ្រងតុ';
+
+  @override
+  String get print => 'ព្រីន';
+
+  @override
+  String get required => 'ត្រូវបញ្ចូល';
+
+  @override
+  String get tableNumber => 'លេខតុ';
 }

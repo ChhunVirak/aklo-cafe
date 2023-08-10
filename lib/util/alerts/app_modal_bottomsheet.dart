@@ -23,7 +23,7 @@ Future<void> showCustomModalBottomSheet(Widget child) async {
             borderRadius: Sizes.bottomSheetBorder,
           ),
           width: double.infinity,
-          constraints: BoxConstraints(maxHeight: Get.height * 0.5),
+          // constraints: BoxConstraints(minHeight: Get.height * 0.5),
           child: child,
         ),
       ],

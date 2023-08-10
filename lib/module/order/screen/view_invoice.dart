@@ -39,7 +39,7 @@ class _ViewInvoiceState extends State<ViewInvoice> {
     ByteData? byteData =
         await (image.toByteData(format: ui.ImageByteFormat.png));
     if (byteData != null) {
-      final result = await ImageGallerySaver.saveImage(
+      await ImageGallerySaver.saveImage(
         byteData.buffer.asUint8List(),
         quality: 100,
       );

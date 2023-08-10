@@ -102,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "logout_message": MessageLookupByLibrary.simpleMessage(
             "តើអ្នកចង់ចាកចេញពីគណនេយ្យនេះមែនទេ?"),
         "make_order": MessageLookupByLibrary.simpleMessage("ធ្វើការកម្មង់"),
+        "manageTable": MessageLookupByLibrary.simpleMessage("គ្រប់គ្រងតុ"),
         "newOrder": MessageLookupByLibrary.simpleMessage("កម្មង់ថ្មី"),
         "new_order": MessageLookupByLibrary.simpleMessage("កម្មង់ថ្មី"),
         "noImage": MessageLookupByLibrary.simpleMessage("គ្មានរូបភាព"),
@@ -110,20 +111,27 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("លេខសំងាត់"),
         "passwordValidateMessage":
             MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលលេខសំងាត់"),
+        "print": MessageLookupByLibrary.simpleMessage("ព្រីន"),
+        "required": MessageLookupByLibrary.simpleMessage("ត្រូវបញ្ចូល"),
         "save_img_msg": MessageLookupByLibrary.simpleMessage(
             "វិក័យប័ត្របានរក្សាទុកក្នុងរុបភាព"),
+        "save_qr_msg":
+            MessageLookupByLibrary.simpleMessage("Qr បានរក្សាទុកក្នុងរុបភាព"),
         "scan": MessageLookupByLibrary.simpleMessage(
             "ស្គែនទៅកាន់ មីនុយអេឡិចត្រូនិច"),
         "setting": MessageLookupByLibrary.simpleMessage("ការកំណត់"),
         "signout": MessageLookupByLibrary.simpleMessage("ចាកចេញ"),
         "success": MessageLookupByLibrary.simpleMessage("ជោគជ័យ"),
         "sugar": MessageLookupByLibrary.simpleMessage("កម្រឹតស្ករ"),
+        "tableNumber": MessageLookupByLibrary.simpleMessage("លេខតុ"),
         "today_Total_Order":
             MessageLookupByLibrary.simpleMessage("ការកម្មង់សរុបថ្ងៃនេះ"),
         "total": MessageLookupByLibrary.simpleMessage("សរុប"),
         "unAvailable": MessageLookupByLibrary.simpleMessage("មិនមាន"),
         "unitPrice": MessageLookupByLibrary.simpleMessage("តម្លៃឯកតាភេសជ្ជៈ"),
         "update": MessageLookupByLibrary.simpleMessage("កែប្រែ"),
+        "update_success":
+            MessageLookupByLibrary.simpleMessage("ការកែប្រែបានជោគជ័យ"),
         "userNameValidateMessage":
             MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលឈ្មោះអ្នកចូលប្រើ"),
         "users": MessageLookupByLibrary.simpleMessage("អ្នកប្រើប្រាស់"),

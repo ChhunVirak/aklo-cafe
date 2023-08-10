@@ -180,20 +180,20 @@ class S {
     );
   }
 
-  /// `Add Drink`
+  /// `Add New Drink`
   String get addDrink {
     return Intl.message(
-      'Add Drink',
+      'Add New Drink',
       name: 'addDrink',
       desc: '',
       args: [],
     );
   }
 
-  /// `Add Category`
+  /// `Add New Category`
   String get addCategory {
     return Intl.message(
-      'Add Category',
+      'Add New Category',
       name: 'addCategory',
       desc: '',
       args: [],
@@ -465,6 +465,16 @@ class S {
     return Intl.message(
       'Add Successfully',
       name: 'add_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Successfully`
+  String get update_success {
+    return Intl.message(
+      'Update Successfully',
+      name: 'update_success',
       desc: '',
       args: [],
     );
@@ -830,11 +840,61 @@ class S {
     );
   }
 
+  /// `Qr saved to Gallery.`
+  String get save_qr_msg {
+    return Intl.message(
+      'Qr saved to Gallery.',
+      name: 'save_qr_msg',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Data`
   String get data {
     return Intl.message(
       'Data',
       name: 'data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manage Table`
+  String get manageTable {
+    return Intl.message(
+      'Manage Table',
+      name: 'manageTable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Print`
+  String get print {
+    return Intl.message(
+      'Print',
+      name: 'print',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Required`
+  String get required {
+    return Intl.message(
+      'Required',
+      name: 'required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Table Number`
+  String get tableNumber {
+    return Intl.message(
+      'Table Number',
+      name: 'tableNumber',
       desc: '',
       args: [],
     );

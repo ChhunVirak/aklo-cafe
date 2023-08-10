@@ -48,6 +48,7 @@ class Inventory extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(InventoryController());
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         title: Text(
           S.current.inventory,
@@ -66,8 +67,10 @@ class Inventory extends StatelessWidget {
               pushSubRoute(Routes.ALL_DRINK);
             },
             title: S.current.allCoffeeTitle,
+            imagePath: 'assets/menu/all_coffee.png',
             icon: PhosphorIcons.list_bold,
-            bgColor: Colors.blue,
+            // bgColor: Colors.blue,
+            bgColor: Colors.white,
           ),
           MenuCard(
             onTap: () {
@@ -75,25 +78,30 @@ class Inventory extends StatelessWidget {
               pushSubRoute(Routes.EDIT_DRINK);
             },
             title: S.current.addDrink,
+            imagePath: 'assets/menu/add.png',
             icon: PhosphorIcons.list_plus_bold,
-            bgColor: Colors.green,
+            // bgColor: Colors.green,
+            bgColor: Colors.white,
           ),
           MenuCard(
             onTap: () {
               pushSubRoute(Routes.CATEGORY);
             },
             title: S.current.category,
+            imagePath: 'assets/menu/drink_category.png',
             icon: PhosphorIcons.list_bold,
-            bgColor: Colors.deepPurple,
+            // bgColor: Colors.deepPurple,
+            bgColor: Colors.white,
           ),
           MenuCard(
             onTap: () {
               controller.clearFormAddCategory();
               pushSubRoute(Routes.ADD_CATEGORY);
             },
+            imagePath: 'assets/menu/add_category.png',
             title: S.current.addCategory,
             icon: PhosphorIcons.list_plus_bold,
-            bgColor: Colors.teal,
+            bgColor: Colors.white,
           ),
           // MenuCard(
           //   onTap: () {},

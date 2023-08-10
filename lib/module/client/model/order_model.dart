@@ -1,9 +1,9 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OrderModel {
   final String? id;
+  final int? tableNumber;
+
   final DateTime orderDate;
   final List<Product> products;
   final num total;
@@ -12,6 +12,7 @@ class OrderModel {
   final String? comment;
   OrderModel({
     this.id,
+    this.tableNumber,
     required this.orderDate,
     required this.products,
     required this.total,
@@ -30,12 +31,15 @@ class OrderModel {
       'status': status,
       'sugar': sugar,
       'comment': comment,
+      'tableNumber': tableNumber,
     };
   }
 
   factory OrderModel.fromMap(Map<String, dynamic> map) {
     return OrderModel(
       id: map['id'] != null ? map['id'] as String : null,
+      tableNumber:
+          map['tableNumber'] != null ? map['tableNumber'] as int : null,
       orderDate: (map['orderDate'] as Timestamp).toDate(),
       // orderDate: (map['orderDate'] as Timestamp).toDate(),
       products: List<Product>.from(
@@ -49,11 +53,6 @@ class OrderModel {
       comment: map['comment'] != null ? map['comment'] as String : null,
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory OrderModel.fromJson(String source) =>
-      OrderModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }
 
 class Product {

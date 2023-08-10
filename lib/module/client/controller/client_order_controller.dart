@@ -1,3 +1,4 @@
+import 'package:aklo_cafe/module/manage_table/model/table_model.dart';
 import 'package:aklo_cafe/module/order/controller/admin_order_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -107,7 +108,9 @@ class ClientOrderController extends GetxController {
           ? _allordersDb.doc(cureentOrderId).snapshots()
           : null;
 
-  Future<String> submitOrder() async {
+  final _tableDb = FirebaseFirestore.instance.collection('tables');
+
+  Future<String> submitOrder({required String? tableId}) async {
     final listSelectedDrink = _listOrder.entries
         .map(
           (e) => Product(
@@ -117,8 +120,16 @@ class ClientOrderController extends GetxController {
           ),
         )
         .toList();
+    int? tableNumber;
+    if (tableId != null) {
+      tableNumber = await _tableDb.doc(tableId).get().then((value) =>
+          value.data() != null
+              ? TableModel.fromMap(value.data()!).number
+              : null);
+    }
     final orderData = OrderModel(
       status: Status.neworder,
+      tableNumber: tableNumber,
       orderDate: DateTime.now(),
       products: listSelectedDrink,
       total: total,

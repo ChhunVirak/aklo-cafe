@@ -13,8 +13,8 @@
   "inventory": "Inventory",
   "users": "Users",
   "allCoffeeTitle": "All Drinks",
-  "addDrink": "Add Drink",
-  "addCategory": "Add Category",
+  "addDrink": "Add New Drink",
+  "addCategory": "Add New Category",
   "category": "All Categories",
   "dashboard": "Dashboard",
   "setting": "Setting",
@@ -42,6 +42,7 @@
   "success": "Success",
   "delete_success": "Delete Successfully",
   "add_success": "Add Successfully",
+  "update_success": "Update Successfully",
   "make_order": "Make Order",
   "no_data": "No Data",
   "image": "Image",
@@ -78,5 +79,10 @@
   "delete_img_message": "Are you sure want to delete this image?",
   "logout_message": "Are you sure want to sign out?",
   "save_img_msg": "Invoice saved to Gallery.",
-  "data": "Data"
+  "save_qr_msg": "Qr saved to Gallery.",
+  "data": "Data",
+  "manageTable": "Manage Table",
+  "print": "Print",
+  "required": "Required",
+  "tableNumber": "Table Number"
 }

@@ -8,7 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CheckOutScreen extends StatelessWidget {
-  const CheckOutScreen({super.key});
+  final String? tableId;
+  const CheckOutScreen({
+    super.key,
+    this.tableId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +52,7 @@ class CheckOutScreen extends StatelessWidget {
             minimum: const EdgeInsets.all(Sizes.defaultPadding),
             child: CustomButton(
               onPressed: () async {
-                final id = await orderController.submitOrder();
+                final id = await orderController.submitOrder(tableId: tableId);
 
                 // clientRouter.go(Routes.CLIENT_STATUS);
 
@@ -57,7 +61,7 @@ class CheckOutScreen extends StatelessWidget {
                     title: 'Order Sent',
                     description: 'Your order has been placed successfully');
                 AdminNotificationManager.instance.sentNotification(
-                    title: 'Please make me a drink',
+                    title: 'New order $id',
                     body:
                         'Total Price \$${orderController.total.toStringAsFixed(2)}',
                     id: id);

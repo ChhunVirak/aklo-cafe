@@ -29,6 +29,49 @@
             {
               "client_id": "327791600118-uttcobeat1lprlj3ln7vtvkba9r07jvf.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "327791600118-kk2k4ffvpnq4iqh90h7sm39rvmgf8mjr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aklocafe.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:327791600118:android:890c1ceed5eda1d44ca7d7",
+        "android_client_info": {
+          "package_name": "com.virak.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "327791600118-uttcobeat1lprlj3ln7vtvkba9r07jvf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPoK6e3Tqytn94OACk6ZzgEaLAw0sKm04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "327791600118-uttcobeat1lprlj3ln7vtvkba9r07jvf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "327791600118-kk2k4ffvpnq4iqh90h7sm39rvmgf8mjr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aklocafe.app"
+              }
             }
           ]
         }

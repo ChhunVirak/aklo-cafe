@@ -118,6 +118,12 @@ class OrderStatus extends StatelessWidget {
                                     S.current.drink_done,
                                     style: AppStyle.medium,
                                   ),
+                                  20.sh,
+                                  Text(
+                                    '#' +
+                                        controller.cureentOrderId.toUpperCase(),
+                                    style: AppStyle.medium,
+                                  ),
                                 ],
                               ),
                             ),

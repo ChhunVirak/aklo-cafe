@@ -44,10 +44,10 @@ class LangsEn extends Langs {
   String get allCoffeeTitle => 'All Drinks';
 
   @override
-  String get addDrink => 'Add Drink';
+  String get addDrink => 'Add New Drink';
 
   @override
-  String get addCategory => 'Add Category';
+  String get addCategory => 'Add New Category';
 
   @override
   String get category => 'All Categories';
@@ -129,6 +129,9 @@ class LangsEn extends Langs {
 
   @override
   String get add_success => 'Add Successfully';
+
+  @override
+  String get update_success => 'Update Successfully';
 
   @override
   String get make_order => 'Make Order';
@@ -239,5 +242,20 @@ class LangsEn extends Langs {
   String get save_img_msg => 'Invoice saved to Gallery.';
 
   @override
+  String get save_qr_msg => 'Qr saved to Gallery.';
+
+  @override
   String get data => 'Data';
+
+  @override
+  String get manageTable => 'Manage Table';
+
+  @override
+  String get print => 'Print';
+
+  @override
+  String get required => 'Required';
+
+  @override
+  String get tableNumber => 'Table Number';
 }
