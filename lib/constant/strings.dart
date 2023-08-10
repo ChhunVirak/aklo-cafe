@@ -2,7 +2,7 @@ class Strings {
   Strings._();
   static const String cafeName = 'Aklo Cafe';
   static const String cafeDescription = 'System Management in your Hand';
-  static const String appName = 'Aklo Cafe and Tea';
+  static const String appName = 'Aklo Coffee and Tea';
 
   ///Auth
   static const String email = 'Email';
