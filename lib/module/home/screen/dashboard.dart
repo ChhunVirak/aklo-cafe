@@ -1,6 +1,5 @@
 import 'package:aklo_cafe/config/menu/dashboard_config.dart';
 import 'package:aklo_cafe/module/home/controller/dashboard_controller.dart';
-import 'package:aklo_cafe/module/manage_table/screen/screen_manage_table.dart';
 import 'package:aklo_cafe/module/order/controller/admin_order_controller.dart';
 import 'package:aklo_cafe/module/order_data/screen/order_data_screen.dart';
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
@@ -13,6 +12,8 @@ import '../../../generated/l10n.dart';
 import '../../../util/alerts/app_modal_bottomsheet.dart';
 import '../../../util/alerts/app_snackbar.dart';
 import '../../auth/controller/auth_controller.dart';
+import '../../auth/controller/user_setting_controller.dart';
+import '../../manage_table/screen/screen_manage_table.dart';
 import '../components/image_slider.dart';
 import '../components/menu_card.dart';
 
@@ -84,7 +85,7 @@ class _DashBoardState extends State<DashBoard> {
   final authController = Get.put(AuthController());
   final controller = Get.put(DashBoardController());
   final adminOrderController = Get.put(AdminOrderController());
-
+  final userSettingController = Get.put(UserSettingController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -248,11 +249,10 @@ class _DashBoardState extends State<DashBoard> {
                   ),
                   MenuCard(
                     onTap: () {
-                      if (authController.isAdmin.value) {
+                      if (authController.userModel?.allowSeeUser == true) {
                         Get.to(() => ScreenManageTable());
                       } else {
-                        showErrorSnackBar(
-                            title: "No Permission", description: '....');
+                        showNoPermission();
                       }
                     },
                     title: S.current.manageTable,

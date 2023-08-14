@@ -29,3 +29,4 @@ void showSuccessSnackBar({required String title, required String description}) {
     margin: const EdgeInsets.all(Sizes.defaultPadding),
   );
 }
+

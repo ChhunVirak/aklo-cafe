@@ -1,4 +1,5 @@
 import 'package:aklo_cafe/generated/l10n.dart';
+import 'package:aklo_cafe/module/auth/controller/auth_controller.dart';
 import 'package:aklo_cafe/module/inventory/inventory.dart';
 import 'package:aklo_cafe/module/inventory/screen/category.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,8 @@ class Inventory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(InventoryController());
+
+    final authController = Get.put(AuthController());
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
@@ -74,8 +77,13 @@ class Inventory extends StatelessWidget {
           ),
           MenuCard(
             onTap: () {
-              controller.clearFormAddProduct();
-              pushSubRoute(Routes.EDIT_DRINK);
+              if (authController.userModel?.addProduct == true) {
+                controller.clearFormAddProduct();
+                pushSubRoute(Routes.EDIT_DRINK);
+              } else {
+                showErrorSnackBar(
+                    title: S.current.fail, description: 'No Permission');
+              }
             },
             title: S.current.addDrink,
             imagePath: 'assets/menu/add.png',
@@ -95,8 +103,13 @@ class Inventory extends StatelessWidget {
           ),
           MenuCard(
             onTap: () {
-              controller.clearFormAddCategory();
-              pushSubRoute(Routes.ADD_CATEGORY);
+              if (authController.userModel?.addCategory == true) {
+                controller.clearFormAddCategory();
+                pushSubRoute(Routes.ADD_CATEGORY);
+              } else {
+                showErrorSnackBar(
+                    title: S.current.fail, description: 'No Permission');
+              }
             },
             imagePath: 'assets/menu/add_category.png',
             title: S.current.addCategory,

@@ -84,5 +84,7 @@
   "manageTable": "Manage Table",
   "print": "Print",
   "required": "Required",
-  "tableNumber": "Table Number"
+  "tableNumber": "Table Number",
+  "alert": "Alert",
+  "noPermission": "No Permission!"
 }

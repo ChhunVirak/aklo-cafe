@@ -258,4 +258,10 @@ class LangsEn extends Langs {
 
   @override
   String get tableNumber => 'Table Number';
+
+  @override
+  String get alert => 'Alert';
+
+  @override
+  String get noPermission => 'No Permission!';
 }

@@ -258,4 +258,10 @@ class LangsKk extends Langs {
 
   @override
   String get tableNumber => 'លេខតុ';
+
+  @override
+  String get alert => 'ដំណឹង';
+
+  @override
+  String get noPermission => 'គ្មានការអនុញ្ញាត';
 }

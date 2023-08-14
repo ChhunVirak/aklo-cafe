@@ -2,11 +2,13 @@ import 'package:aklo_cafe/constant/firebase_storage_path.dart';
 import 'package:aklo_cafe/constant/sizes.dart';
 import 'package:aklo_cafe/core/firebase_core/notification_core/firebase_notification_helper.dart';
 import 'package:aklo_cafe/generated/l10n.dart';
+import 'package:aklo_cafe/module/auth/model/user_model.dart';
 import 'package:aklo_cafe/util/alerts/app_snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../config/router/app_pages.dart';
 import '../../../util/widgets/app_circular_loading.dart';
@@ -23,12 +25,15 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     _fAuth.authStateChanges().listen(_userChange);
+    getUserCredential();
     super.onInit();
   }
 
   String? get userId => _fAuth.currentUser?.uid;
 
   RxBool isAdmin = false.obs;
+
+  UserModel? userModel;
 
   void checkRole(User user) async {
     isAdmin(false);
@@ -43,6 +48,7 @@ class AuthController extends GetxController {
           .then(
         (data) {
           if (data != null) {
+            userModel = UserModel.fromMap(data);
             debugPrint('isadmin ${data['role']}');
             isAdmin.value = data['role'] == 'admin';
           }
@@ -78,6 +84,32 @@ class AuthController extends GetxController {
 
   void signOut() {
     _fAuth.signOut();
+    removeUserCredential();
+  }
+
+  String? em;
+  String? pw;
+
+  void saveUserCredential() async {
+    final _pref = await SharedPreferences.getInstance();
+    em = emailTxtController.text;
+    pw = emailTxtController.text;
+    await _pref.setString('em', emailTxtController.text);
+    await _pref.setString('pw', emailTxtController.text);
+  }
+
+  void removeUserCredential() async {
+    final _pref = await SharedPreferences.getInstance();
+    em = null;
+    pw = null;
+    await _pref.remove('em');
+    await _pref.remove('pw');
+  }
+
+  void getUserCredential() async {
+    final _pref = await SharedPreferences.getInstance();
+    em = await _pref.getString('em');
+    pw = await _pref.getString('pw');
   }
 
   void onLogin() async {
@@ -89,6 +121,8 @@ class AuthController extends GetxController {
           email: emailTxtController.text,
           password: passwordTxtController.text,
         );
+        saveUserCredential();
+
         // _removeLoading();
       } catch (error) {
         _removeLoading();
@@ -136,18 +170,24 @@ class AuthController extends GetxController {
       final userCredential = await _fAuth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      await _fAuth.signInWithEmailAndPassword(
-          email: 'virak@gmail.com', password: '123456');
+      if (em != null && pw != null) {
+        await _fAuth.signInWithEmailAndPassword(email: em!, password: pw!);
+      }
 
       final user = userCredential.user;
       if (user != null) {
+        final newUser = UserModel(
+          id: user.uid,
+          email: email,
+          username: username,
+          role: 'assistant',
+        ).toMap()
+          ..removeWhere(
+            (key, value) => value == null,
+          );
         await userdb.doc(user.uid).set(
-          {
-            'id': user.uid,
-            'username': username,
-            'role': 'assistant',
-          },
-        );
+              newUser,
+            );
         showSuccessSnackBar(
             title: S.current.success,
             description: 'User created successfully.');

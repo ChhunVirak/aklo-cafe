@@ -13,6 +13,8 @@ import '../../../util/alerts/app_dialog.dart';
 import '../../../util/alerts/app_snackbar.dart';
 import '../../../util/widgets/app_circular_loading.dart';
 import '../../../util/widgets/custom_button.dart';
+import '../../auth/controller/auth_controller.dart';
+import '../../auth/controller/user_setting_controller.dart';
 import '../components/drink_card.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -21,6 +23,7 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(InventoryController());
+    final authController = Get.put(AuthController());
     return Scaffold(
       appBar: AppBar(
         title: Text(S.current.category),
@@ -72,49 +75,60 @@ class CategoryScreen extends StatelessWidget {
                           children: [
                             CustomButton(
                               onPressed: () {
-                                Get.back();
+                                if (authController.userModel?.updateCategory ==
+                                    true) {
+                                  Get.back();
 
-                                debugPrint('ID: $id');
+                                  debugPrint('ID: $id');
 
-                                pushSubRoute(
-                                  Routes.ADD_CATEGORY,
-                                  queryParams: {'id': id},
-                                );
+                                  pushSubRoute(
+                                    Routes.ADD_CATEGORY,
+                                    queryParams: {'id': id},
+                                  );
+                                } else {
+                                  showNoPermission();
+                                }
                               },
                               name: 'Edit',
                             ),
                             Sizes.defaultPadding.sh,
                             CustomButton(
                               onPressed: () {
-                                showCustomDialog(
-                                  title: S.current.confirm,
-                                  description:
-                                      'Are you sure want to delete $name',
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () async {
-                                        await controller.categoryDb
-                                            .doc(listData[index].id)
-                                            .delete();
+                                if (authController.userModel?.deleteCategory ==
+                                    true) {
+                                  showCustomDialog(
+                                    title: S.current.confirm,
+                                    description:
+                                        'Are you sure want to delete $name',
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () async {
+                                          await controller.categoryDb
+                                              .doc(listData[index].id)
+                                              .delete();
 
-                                        await controller
-                                            .deleteCategory(listData[index]);
-                                        Get.back();
-                                        Get.back();
-                                        showErrorSnackBar(
-                                            title: 'Success',
-                                            description: 'Delete successfully');
-                                      },
-                                      child: Text(S.current.yes),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text(S.current.cancel),
-                                    ),
-                                  ],
-                                );
+                                          await controller
+                                              .deleteCategory(listData[index]);
+                                          Get.back();
+                                          Get.back();
+                                          showErrorSnackBar(
+                                              title: 'Success',
+                                              description:
+                                                  'Delete successfully');
+                                        },
+                                        child: Text(S.current.yes),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(S.current.cancel),
+                                      ),
+                                    ],
+                                  );
+                                } else {
+                                  showNoPermission();
+                                }
                               },
                               backgroundColor: Colors.red,
                               name: 'Delete',

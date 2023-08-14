@@ -52,7 +52,9 @@ class UsersScreen extends StatelessWidget {
                   title: Text(user?['username'] ?? '--'),
                   subtitle: Text(user?['role'] ?? '--'),
                   onTap: () {
-                    Get.to(() => UserSetting());
+                    Get.to(() => UserSetting(
+                          userId: user?['id'],
+                        ));
                   },
                   tileColor: AppColors.backgroundColor,
                   shape: RoundedRectangleBorder(

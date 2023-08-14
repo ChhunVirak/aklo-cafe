@@ -84,5 +84,7 @@
   "manageTable": "គ្រប់គ្រងតុ",
   "print": "ព្រីន",
   "required": "ត្រូវបញ្ចូល",
-  "tableNumber": "លេខតុ"
+  "tableNumber": "លេខតុ",
+  "alert": "ដំណឹង",
+  "noPermission": "គ្មានការអនុញ្ញាត"
 }

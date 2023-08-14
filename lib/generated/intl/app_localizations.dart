@@ -602,6 +602,18 @@ abstract class Langs {
   /// In en, this message translates to:
   /// **'Table Number'**
   String get tableNumber;
+
+  /// No description provided for @alert.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert'**
+  String get alert;
+
+  /// No description provided for @noPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'No Permission!'**
+  String get noPermission;
 }
 
 class _LangsDelegate extends LocalizationsDelegate<Langs> {

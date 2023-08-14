@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_profile": MessageLookupByLibrary.simpleMessage("បន្ថែមសមាជិក"),
         "add_success":
             MessageLookupByLibrary.simpleMessage("ការបន្ថែមបានជោគជ័យ"),
+        "alert": MessageLookupByLibrary.simpleMessage("ដំណឹង"),
         "all": MessageLookupByLibrary.simpleMessage("ទាំងអស់"),
         "allCoffeeTitle":
             MessageLookupByLibrary.simpleMessage("ភេសជ្ជៈទាំងអស់"),
@@ -106,6 +107,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "newOrder": MessageLookupByLibrary.simpleMessage("កម្មង់ថ្មី"),
         "new_order": MessageLookupByLibrary.simpleMessage("កម្មង់ថ្មី"),
         "noImage": MessageLookupByLibrary.simpleMessage("គ្មានរូបភាព"),
+        "noPermission":
+            MessageLookupByLibrary.simpleMessage("គ្មានការអនុញ្ញាត"),
         "no_data": MessageLookupByLibrary.simpleMessage("គ្មានទិន្ន័យ"),
         "orders": MessageLookupByLibrary.simpleMessage("ការកម្ម៉ង់ទាំងអស់"),
         "password": MessageLookupByLibrary.simpleMessage("លេខសំងាត់"),

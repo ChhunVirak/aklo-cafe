@@ -899,6 +899,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Alert`
+  String get alert {
+    return Intl.message(
+      'Alert',
+      name: 'alert',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Permission!`
+  String get noPermission {
+    return Intl.message(
+      'No Permission!',
+      name: 'noPermission',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

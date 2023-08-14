@@ -16,6 +16,23 @@ class ThemeConfig {
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: AppColors.mainColor,
         ),
+        switchTheme: SwitchThemeData(
+          thumbColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+            // if (states.contains(MaterialState.selected)) {
+            //   return Colors.orange.withOpacity(.48);
+            // }
+            return Colors.white;
+          }),
+          trackColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+            if (!states.contains(MaterialState.selected)) {
+              return Colors.red;
+            }
+            return AppColors.mainColor;
+          }),
+          // inactiveTrackColor: Colors.red,
+        ),
         appBarTheme: AppBarTheme(
           elevation: 0,
           backgroundColor: Colors.transparent,
