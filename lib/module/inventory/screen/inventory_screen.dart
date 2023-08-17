@@ -77,13 +77,12 @@ class Inventory extends StatelessWidget {
           ),
           MenuCard(
             onTap: () {
-              if (authController.userModel?.addProduct == true) {
-                controller.clearFormAddProduct();
-                pushSubRoute(Routes.EDIT_DRINK);
-              } else {
-                showErrorSnackBar(
-                    title: S.current.fail, description: 'No Permission');
-              }
+              authController.checkRolePermission(
+                authController.userModel?.addProduct == true,
+                () {
+                  pushSubRoute(Routes.EDIT_DRINK);
+                },
+              );
             },
             title: S.current.addDrink,
             imagePath: 'assets/menu/add.png',
@@ -103,13 +102,12 @@ class Inventory extends StatelessWidget {
           ),
           MenuCard(
             onTap: () {
-              if (authController.userModel?.addCategory == true) {
-                controller.clearFormAddCategory();
-                pushSubRoute(Routes.ADD_CATEGORY);
-              } else {
-                showErrorSnackBar(
-                    title: S.current.fail, description: 'No Permission');
-              }
+              authController.checkRolePermission(
+                authController.userModel?.addCategory,
+                () {
+                  pushSubRoute(Routes.ADD_CATEGORY);
+                },
+              );
             },
             imagePath: 'assets/menu/add_category.png',
             title: S.current.addCategory,

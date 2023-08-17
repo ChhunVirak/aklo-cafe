@@ -62,4 +62,6 @@ class UserModel {
           map['allowSeeUser'] != null ? map['allowSeeUser'] as bool : null,
     );
   }
+
+  bool get isAdmin => role?.toLowerCase() == 'admin';
 }

@@ -16,7 +16,6 @@ import '../../../config/router/app_pages.dart';
 import '../../../generated/l10n.dart';
 import '../../../util/widgets/app_circular_loading.dart';
 import '../../auth/controller/auth_controller.dart';
-import '../../auth/controller/user_setting_controller.dart';
 import '../components/drink_card.dart';
 import '../model/category_model.dart';
 
@@ -191,71 +190,77 @@ class AllCoffeeScreen extends GetView<InventoryController> {
                                               children: [
                                                 CustomButton(
                                                   onPressed: () {
-                                                    if (authController.userModel
-                                                            ?.updateProduct ==
-                                                        true) {
-                                                      controller
-                                                          .initialDrinkForEdit(
-                                                              id);
+                                                    authController
+                                                        .checkRolePermission(
+                                                      authController.userModel
+                                                              ?.updateProduct ==
+                                                          true,
+                                                      () {
+                                                        controller
+                                                            .initialDrinkForEdit(
+                                                                id);
 
-                                                      //remove pop up
-                                                      Get.back();
+                                                        //remove pop up
+                                                        Get.back();
 
-                                                      pushSubRoute(
-                                                        Routes.EDIT_DRINK,
-                                                        queryParams: {"id": id},
-                                                      );
-                                                    } else {
-                                                      showNoPermission();
-                                                    }
+                                                        pushSubRoute(
+                                                          Routes.EDIT_DRINK,
+                                                          queryParams: {
+                                                            "id": id
+                                                          },
+                                                        );
+                                                      },
+                                                    );
                                                   },
                                                   name: S.current.edit,
                                                 ),
                                                 Sizes.defaultPadding.sh,
                                                 CustomButton(
                                                   onPressed: () {
-                                                    if (authController.userModel
-                                                            ?.deleteProduct ==
-                                                        true) {
-                                                      showCustomDialog(
-                                                        title: 'Confirm!',
-                                                        description:
-                                                            'Are you sure want to delete $name',
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed:
-                                                                () async {
-                                                              await controller
-                                                                  .deleteDrink(
-                                                                      id,
-                                                                      image);
-                                                              Get.back();
-                                                              Get.back();
-                                                              showErrorSnackBar(
-                                                                  title: S
-                                                                      .current
-                                                                      .success,
-                                                                  description: S
-                                                                      .current
-                                                                      .delete_success);
-                                                            },
-                                                            child: Text(
-                                                                S.current.yes),
-                                                          ),
-                                                          TextButton(
-                                                            onPressed: () {
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            child: Text(S
-                                                                .current
-                                                                .cancel),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    } else {
-                                                      showNoPermission();
-                                                    }
+                                                    authController
+                                                        .checkRolePermission(
+                                                      authController.userModel
+                                                              ?.deleteProduct ==
+                                                          true,
+                                                      () {
+                                                        showCustomDialog(
+                                                          title: 'Confirm!',
+                                                          description:
+                                                              'Are you sure want to delete $name',
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed:
+                                                                  () async {
+                                                                await controller
+                                                                    .deleteDrink(
+                                                                        id,
+                                                                        image);
+                                                                Get.back();
+                                                                Get.back();
+                                                                showErrorSnackBar(
+                                                                    title: S
+                                                                        .current
+                                                                        .success,
+                                                                    description: S
+                                                                        .current
+                                                                        .delete_success);
+                                                              },
+                                                              child: Text(S
+                                                                  .current.yes),
+                                                            ),
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Text(S
+                                                                  .current
+                                                                  .cancel),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
                                                   },
                                                   backgroundColor: Colors.red,
                                                   name: S.current.delete,

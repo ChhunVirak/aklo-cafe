@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:aklo_cafe/constant/firebase_storage_path.dart';
 import 'package:aklo_cafe/constant/sizes.dart';
 import 'package:aklo_cafe/core/firebase_core/notification_core/firebase_notification_helper.dart';
 import 'package:aklo_cafe/generated/l10n.dart';
+import 'package:aklo_cafe/module/auth/controller/user_setting_controller.dart';
 import 'package:aklo_cafe/module/auth/model/user_model.dart';
 import 'package:aklo_cafe/util/alerts/app_snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,18 +38,29 @@ class AuthController extends GetxController {
 
   UserModel? userModel;
 
-  void checkRole(User user) async {
+  bool checkRolePermission(bool? condition, [void Function()? onAllowed]) {
+    if (userModel?.isAdmin == true || (condition ?? false)) {
+      onAllowed?.call();
+      return true;
+    }
+    showNoPermission();
+    return false;
+  }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>>? strUser;
+
+  void _checkRole(User user) async {
+    strUser = null;
+
     isAdmin(false);
     try {
       final id = user.uid;
-      await userdb
-          .doc(id)
-          .get()
-          .then(
-            (doc) => doc.data(),
-          )
-          .then(
-        (data) {
+
+      strUser = userdb.doc(id).snapshots();
+
+      strUser?.map(
+        (doc) {
+          final data = doc.data();
           if (data != null) {
             userModel = UserModel.fromMap(data);
             debugPrint('isadmin ${data['role']}');
@@ -55,6 +69,7 @@ class AuthController extends GetxController {
         },
       );
     } catch (_) {
+      debugPrint('Error Aug $_');
       isAdmin(false);
     }
   }
@@ -67,7 +82,7 @@ class AuthController extends GetxController {
       return;
     } //end function
     if (user != null) {
-      checkRole(user);
+      _checkRole(user);
       if (!adminRouter.location.contains(Routes.LOGIN) &&
           !adminRouter.location.contains(Routes.SPLASH)) {
         return;
@@ -121,6 +136,7 @@ class AuthController extends GetxController {
           email: emailTxtController.text,
           password: passwordTxtController.text,
         );
+
         saveUserCredential();
 
         // _removeLoading();

@@ -29,7 +29,7 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
-  void _handleNavigate(BuildContext context, String menu) {
+  void _handleNavigate(String menu) {
     if (context.mounted) {
       switch (menu) {
         case 'Orders':
@@ -219,7 +219,7 @@ class _DashBoardState extends State<DashBoard> {
                   ),
                   MenuCard(
                     onTap: () {
-                      _handleNavigate(context, 'Inventory');
+                      _handleNavigate('Inventory');
                     },
                     title: S.current.inventory,
                     icon: PhosphorIcons.database_fill,
@@ -228,12 +228,12 @@ class _DashBoardState extends State<DashBoard> {
                   ),
                   MenuCard(
                     onTap: () {
-                      if (authController.isAdmin.value) {
-                        _handleNavigate(context, 'Users');
-                      } else {
-                        showErrorSnackBar(
-                            title: "No Permission", description: '....');
-                      }
+                      authController.checkRolePermission(
+                        authController.userModel?.allowSeeUser == true,
+                        () {
+                          _handleNavigate('Users');
+                        },
+                      );
                     },
                     title: S.current.users,
                     icon: PhosphorIcons.users_three_fill,
@@ -249,11 +249,12 @@ class _DashBoardState extends State<DashBoard> {
                   ),
                   MenuCard(
                     onTap: () {
-                      if (authController.userModel?.allowSeeUser == true) {
-                        Get.to(() => ScreenManageTable());
-                      } else {
-                        showNoPermission();
-                      }
+                      // if (authController.userModel?.allowSeeUser == true ||
+                      //     authController.isAdmin.value) {
+                      Get.to(() => ScreenManageTable());
+                      // } else {
+                      //   showNoPermission();
+                      // }
                     },
                     title: S.current.manageTable,
                     icon: PhosphorIcons.storefront_bold,

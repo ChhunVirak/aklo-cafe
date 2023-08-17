@@ -14,7 +14,6 @@ import '../../../util/alerts/app_snackbar.dart';
 import '../../../util/widgets/app_circular_loading.dart';
 import '../../../util/widgets/custom_button.dart';
 import '../../auth/controller/auth_controller.dart';
-import '../../auth/controller/user_setting_controller.dart';
 import '../components/drink_card.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -75,27 +74,29 @@ class CategoryScreen extends StatelessWidget {
                           children: [
                             CustomButton(
                               onPressed: () {
-                                if (authController.userModel?.updateCategory ==
-                                    true) {
-                                  Get.back();
+                                authController.checkRolePermission(
+                                  authController.userModel?.updateCategory ==
+                                      true,
+                                  () {
+                                    Get.back();
 
-                                  debugPrint('ID: $id');
+                                    debugPrint('ID: $id');
 
-                                  pushSubRoute(
-                                    Routes.ADD_CATEGORY,
-                                    queryParams: {'id': id},
-                                  );
-                                } else {
-                                  showNoPermission();
-                                }
+                                    pushSubRoute(
+                                      Routes.ADD_CATEGORY,
+                                      queryParams: {'id': id},
+                                    );
+                                  },
+                                );
                               },
-                              name: 'Edit',
+                              name: S.current.edit,
                             ),
                             Sizes.defaultPadding.sh,
                             CustomButton(
                               onPressed: () {
-                                if (authController.userModel?.deleteCategory ==
-                                    true) {
+                                authController.checkRolePermission(
+                                    authController.userModel?.deleteCategory ==
+                                        true, () {
                                   showCustomDialog(
                                     title: S.current.confirm,
                                     description:
@@ -112,9 +113,9 @@ class CategoryScreen extends StatelessWidget {
                                           Get.back();
                                           Get.back();
                                           showErrorSnackBar(
-                                              title: 'Success',
+                                              title: S.current.success,
                                               description:
-                                                  'Delete successfully');
+                                                  S.current.delete_success);
                                         },
                                         child: Text(S.current.yes),
                                       ),
@@ -126,12 +127,10 @@ class CategoryScreen extends StatelessWidget {
                                       ),
                                     ],
                                   );
-                                } else {
-                                  showNoPermission();
-                                }
+                                });
                               },
                               backgroundColor: Colors.red,
-                              name: 'Delete',
+                              name: S.current.delete,
                             ),
                           ],
                         ),
