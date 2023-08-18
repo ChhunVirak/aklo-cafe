@@ -144,45 +144,6 @@ class _DashBoardState extends State<DashBoard> {
             children: [
               ImageSlider(),
               20.sh,
-              // Container(
-              //   width: double.infinity,
-              //   margin:
-              //       const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 0),
-              //   padding:
-              //       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              //   decoration: BoxDecoration(
-              //     color: Colors.green,
-              //     borderRadius: Sizes.boxBorderRadius,
-              //   ),
-              //   child: Column(
-              //     crossAxisAlignment: CrossAxisAlignment.start,
-              //     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       StreamBuilder(
-              //         stream: adminOrderController.totalOrder,
-              //         builder: (_, snapshot) {
-              //           if (snapshot.hasData) {
-              //             return Text.rich(
-              //               TextSpan(
-              //                 text: '${S.current.today_Total_Order} : ',
-              //                 style: AppStyle.medium
-              //                     .copyWith(color: AppColors.txtLightColor),
-              //                 children: [
-              //                   TextSpan(
-              //                     text: snapshot.data,
-              //                     style: AppStyle.large
-              //                         .copyWith(color: AppColors.txtLightColor),
-              //                   ),
-              //                 ],
-              //               ),
-              //             );
-              //           }
-              //           return SizedBox.shrink();
-              //         },
-              //       )
-              //     ],
-              //   ),
-              // ),
               GridView.count(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -229,7 +190,7 @@ class _DashBoardState extends State<DashBoard> {
                   MenuCard(
                     onTap: () {
                       authController.checkRolePermission(
-                        authController.userModel?.allowSeeUser == true,
+                        authController.userModel.allowSeeUser == true,
                         () {
                           _handleNavigate('Users');
                         },

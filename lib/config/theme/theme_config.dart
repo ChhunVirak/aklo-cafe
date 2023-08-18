@@ -35,7 +35,7 @@ class ThemeConfig {
         ),
         appBarTheme: AppBarTheme(
           elevation: 0,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           titleTextStyle: AppStyle.large.copyWith(
             fontSize: 20.0,
             fontWeight: FontWeight.w200,

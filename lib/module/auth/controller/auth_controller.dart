@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../config/router/app_pages.dart';
+import '../../../util/alerts/app_dialog.dart';
 import '../../../util/widgets/app_circular_loading.dart';
 
 class AuthController extends GetxController {
@@ -27,19 +28,26 @@ class AuthController extends GetxController {
 
   @override
   void onInit() {
+    initPref();
     _fAuth.authStateChanges().listen(_userChange);
-    getUserCredential();
     super.onInit();
+  }
+
+  late final SharedPreferences _pref;
+  void initPref() async {
+    _pref = await SharedPreferences.getInstance();
+    getUserCredential();
   }
 
   String? get userId => _fAuth.currentUser?.uid;
 
-  RxBool isAdmin = false.obs;
+  // RxBool isAdmin = false.obs;
 
-  UserModel? userModel;
+  UserModel get userModel => _userModel.value;
+  Rx<UserModel> _userModel = Rx<UserModel>(UserModel());
 
   bool checkRolePermission(bool? condition, [void Function()? onAllowed]) {
-    if (userModel?.isAdmin == true || (condition ?? false)) {
+    if (userModel.isAdmin == true || (condition ?? false)) {
       onAllowed?.call();
       return true;
     }
@@ -47,30 +55,25 @@ class AuthController extends GetxController {
     return false;
   }
 
-  Stream<DocumentSnapshot<Map<String, dynamic>>>? strUser;
-
   void _checkRole(User user) async {
-    strUser = null;
-
-    isAdmin(false);
     try {
       final id = user.uid;
 
-      strUser = userdb.doc(id).snapshots();
-
-      strUser?.map(
+      final userStream = userdb.doc(id).snapshots().map(
         (doc) {
           final data = doc.data();
+          UserModel user = UserModel();
           if (data != null) {
-            userModel = UserModel.fromMap(data);
-            debugPrint('isadmin ${data['role']}');
-            isAdmin.value = data['role'] == 'admin';
+            user = UserModel.fromMap(data);
           }
+          return user;
         },
       );
+      // _userModel.bindStream(userStream);
+      _userModel.close();
+      _userModel = Rx<UserModel>(UserModel())..bindStream(userStream);
     } catch (_) {
-      debugPrint('Error Aug $_');
-      isAdmin(false);
+      debugPrint('Error $_');
     }
   }
 
@@ -78,20 +81,20 @@ class AuthController extends GetxController {
     debugPrint('USER :  $user');
 
     if (GetPlatform.isWeb) {
-      isAdmin(false);
       return;
     } //end function
     if (user != null) {
       _checkRole(user);
       if (!adminRouter.location.contains(Routes.LOGIN) &&
-          !adminRouter.location.contains(Routes.SPLASH)) {
+          !adminRouter.location.contains(Routes.SPLASH) &&
+          em == user.email) {
         return;
       }
       NotificationHelper.instance.subscribeAdminTopic();
       //if user already login no change
       adminRouter.go(Routes.DASHBOARD);
     } else {
-      isAdmin(false);
+      _userModel(UserModel());
       NotificationHelper.instance.unSubscribeAdminTopic();
       adminRouter.go(Routes.LOGIN);
     }
@@ -106,15 +109,13 @@ class AuthController extends GetxController {
   String? pw;
 
   void saveUserCredential() async {
-    final _pref = await SharedPreferences.getInstance();
     em = emailTxtController.text;
-    pw = emailTxtController.text;
+    pw = passwordTxtController.text;
     await _pref.setString('em', emailTxtController.text);
-    await _pref.setString('pw', emailTxtController.text);
+    await _pref.setString('pw', passwordTxtController.text);
   }
 
   void removeUserCredential() async {
-    final _pref = await SharedPreferences.getInstance();
     em = null;
     pw = null;
     await _pref.remove('em');
@@ -122,7 +123,6 @@ class AuthController extends GetxController {
   }
 
   void getUserCredential() async {
-    final _pref = await SharedPreferences.getInstance();
     em = await _pref.getString('em');
     pw = await _pref.getString('pw');
   }
@@ -183,6 +183,8 @@ class AuthController extends GetxController {
     required String password,
   }) async {
     try {
+      showLoadingDialog();
+      debugPrint('Email: $em PW: $pw');
       final userCredential = await _fAuth.createUserWithEmailAndPassword(
           email: email, password: password);
 
@@ -201,15 +203,15 @@ class AuthController extends GetxController {
           ..removeWhere(
             (key, value) => value == null,
           );
-        await userdb.doc(user.uid).set(
-              newUser,
-            );
+        await userdb.doc(user.uid).set(newUser);
+
+        adminRouter.go('/' + Routes.USER);
         showSuccessSnackBar(
             title: S.current.success,
             description: 'User created successfully.');
-        adminRouter.go('/' + Routes.USER);
       }
     } catch (e) {
+      removeDialog();
       if (e is FirebaseException) {
         showErrorSnackBar(title: S.current.fail, description: e.message ?? "");
       }
