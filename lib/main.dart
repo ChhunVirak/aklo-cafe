@@ -15,6 +15,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'core/firebase_core/notification_core/firebase_notification_helper.dart';
+import 'module/home/controller/dashboard_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +46,9 @@ class MainApp extends StatelessWidget {
 
     return GetBuilder<LangsAndFontConfigs>(
       init: fontController,
-      initState: (state) async {},
+      initState: (state) async {
+        Get.put(DashBoardController()).getMenuIcon();
+      },
       builder: (_) {
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,

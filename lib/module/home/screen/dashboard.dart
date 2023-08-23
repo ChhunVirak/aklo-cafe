@@ -1,4 +1,3 @@
-import 'package:aklo_cafe/config/menu/dashboard_config.dart';
 import 'package:aklo_cafe/module/home/controller/dashboard_controller.dart';
 import 'package:aklo_cafe/module/order/controller/admin_order_controller.dart';
 import 'package:aklo_cafe/module/order_data/screen/order_data_screen.dart';
@@ -167,7 +166,7 @@ class _DashBoardState extends State<DashBoard> {
                     },
                     title: S.current.orders,
                     icon: PhosphorIcons.list_numbers_fill,
-                    imagePath: DashBoardConfig.orders,
+                    imagePath: controller.menuIcon["order"],
                     bgColor: const Color(0xffd51c4e),
                   ),
                   MenuCard(
@@ -175,6 +174,7 @@ class _DashBoardState extends State<DashBoard> {
                       Get.to(() => OrderDataScreen());
                     },
                     title: S.current.data,
+                    imagePath: controller.menuIcon["data"],
                     icon: PhosphorIcons.hard_drive_bold,
                     bgColor: Color(0xFF7F1CD5),
                   ),
@@ -184,7 +184,7 @@ class _DashBoardState extends State<DashBoard> {
                     },
                     title: S.current.inventory,
                     icon: PhosphorIcons.database_fill,
-                    // imagePath: DashBoardConfig.inventory,
+                    imagePath: controller.menuIcon["inventory"],
                     bgColor: const Color(0xff1b67ca),
                   ),
                   MenuCard(
@@ -197,6 +197,7 @@ class _DashBoardState extends State<DashBoard> {
                       );
                     },
                     title: S.current.users,
+                    imagePath: controller.menuIcon["user"],
                     icon: PhosphorIcons.users_three_fill,
                     bgColor: const Color(0xff257881),
                   ),
@@ -205,6 +206,7 @@ class _DashBoardState extends State<DashBoard> {
                       pushSubRoute(Routes.ABOUT_US);
                     },
                     title: S.current.about_us,
+                    imagePath: controller.menuIcon["about_us"],
                     icon: PhosphorIcons.user_square_bold,
                     bgColor: const Color(0xfff56313),
                   ),
@@ -217,6 +219,7 @@ class _DashBoardState extends State<DashBoard> {
                       //   showNoPermission();
                       // }
                     },
+                    imagePath: controller.menuIcon["table"],
                     title: S.current.manageTable,
                     icon: PhosphorIcons.storefront_bold,
                     bgColor: Color(0xFF00BAA5),

@@ -1,4 +1,5 @@
 import 'package:aklo_cafe/util/extensions/widget_extension.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:aklo_cafe/constant/resources.dart';
@@ -41,11 +42,17 @@ class MenuCard extends StatelessWidget {
             children: [
               Center(
                 child: imagePath != null
-                    ? Image.asset(
-                        imagePath!,
-                        width: 50,
-                        fit: BoxFit.cover,
-                      )
+                    ? imagePath?.contains('http') == false
+                        ? Image.asset(
+                            imagePath!,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          )
+                        : CachedNetworkImage(
+                            imageUrl: imagePath!,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          )
                     : Icon(
                         icon,
                         color: AppColors.txtLightColor,

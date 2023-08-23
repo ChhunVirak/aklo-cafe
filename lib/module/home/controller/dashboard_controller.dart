@@ -27,6 +27,16 @@ class DashBoardController extends GetxController {
   //   )
   // ];
 
+  final menuDb = FirebaseFirestore.instance.collection('setting');
+  final menuIcon = <String, dynamic>{};
+  Future<void> getMenuIcon() async {
+    final menuData = await menuDb
+        .doc('menu')
+        .get()
+        .then((document) => document.data() ?? <String, String>{});
+    menuIcon.assignAll(menuData);
+  }
+
   final totalSold = 0.obs;
   final s = DashBoardModel(
     title: 'Users',
